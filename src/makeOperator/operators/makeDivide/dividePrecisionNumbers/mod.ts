@@ -1,0 +1,32 @@
+import { TypeOfTruncation } from '../../../../types/enums.ts'
+import type { Injector } from '../../../../types/operations.ts'
+import type {
+	NumberValue,
+	PrecisionNumberValue,
+} from '../../../../types/values.ts'
+import convertToPrecisionNumber from '../../../utilities/convertToPrecisionNumber/mod.ts'
+import truncate from '../../../utilities/truncate/mod.ts'
+
+export default function dividePrecisionNumbers(
+	dividend: Injector,
+	divisor: Injector,
+	decimalPlaces = 0,
+	truncationType = TypeOfTruncation.ROUND,
+): PrecisionNumberValue {
+	const left = convertToPrecisionNumber(
+		dividend() as NumberValue | number,
+		decimalPlaces,
+		truncationType,
+	)
+	const right = convertToPrecisionNumber(
+		divisor() as NumberValue | number,
+		decimalPlaces,
+		truncationType,
+	)
+
+	return {
+		datatype: 'precision',
+		decimalPlaces,
+		value: truncate(left.value / right.value, truncationType, decimalPlaces),
+	} as PrecisionNumberValue
+}

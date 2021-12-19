@@ -1,0 +1,10 @@
+export default function localeCompareSupportsLocales() {
+    try {
+        'foo'.localeCompare('bar', 'i');
+    }
+    catch (e) {
+        return e.name === 'RangeError';
+    }
+    return false;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFVBQVUsNEJBQTRCO0lBQ25ELElBQUk7UUFDSCxLQUFLLENBQUMsYUFBYSxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUMsQ0FBQTtLQUMvQjtJQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ1gsT0FBUSxDQUFXLENBQUMsSUFBSSxLQUFLLFlBQVksQ0FBQTtLQUN6QztJQUdELE9BQU8sS0FBSyxDQUFBO0FBQ2IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGxvY2FsZUNvbXBhcmVTdXBwb3J0c0xvY2FsZXMoKTogYm9vbGVhbiB7XG5cdHRyeSB7XG5cdFx0J2ZvbycubG9jYWxlQ29tcGFyZSgnYmFyJywgJ2knKVxuXHR9IGNhdGNoIChlKSB7XG5cdFx0cmV0dXJuIChlIGFzIEVycm9yKS5uYW1lID09PSAnUmFuZ2VFcnJvcidcblx0fVxuXG5cdC8qIGlzdGFuYnVsIGlnbm9yZSBuZXh0ICovXG5cdHJldHVybiBmYWxzZVxufVxuIl19

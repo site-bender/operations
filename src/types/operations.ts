@@ -1,4 +1,4 @@
-import type { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
 import {
 	TypeOfMatch,
 	TypeOfOperator,
@@ -6,7 +6,7 @@ import {
 	TypeOfSource,
 	TypeOfTrim,
 	TypeOfTruncation,
-} from './enums'
+} from './enums.ts'
 import {
 	Arrays,
 	DurationValue,
@@ -17,7 +17,7 @@ import {
 	StringValue,
 	Value,
 	ValueType,
-} from './values'
+} from './values.ts'
 
 export type Injector = () => Value
 
@@ -127,7 +127,7 @@ export type IdentityOperation = {
 export type IfOperation = {
 	condition: Operation
 	else?: ElseOperation
-	elsifs?: Array<ElseIfOperation>
+	elseIfs?: Array<ElseIfOperation>
 	operatorType: TypeOfOperator.IF
 	result: Operation
 }

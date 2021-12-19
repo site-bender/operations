@@ -1,0 +1,15 @@
+import getInstant from '../../../utilities/getInstant/mod.ts';
+import makeError from '../../../utilities/makeError/mod.ts';
+export default function makeIsInstant(constraint) {
+    return function isInstant(validation) {
+        const value = validation.value;
+        try {
+            getInstant(value);
+            return validation;
+        }
+        catch (e) {
+            return makeError(validation, constraint, e.toString());
+        }
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUtBLE9BQU8sVUFBVSxNQUFNLHNDQUFzQyxDQUFBO0FBQzdELE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFBO0FBRzNELE1BQU0sQ0FBQyxPQUFPLFVBQVUsYUFBYSxDQUNwQyxVQUFpQztJQUVqQyxPQUFPLFNBQVMsU0FBUyxDQUFDLFVBQXNCO1FBQy9DLE1BQU0sS0FBSyxHQUFHLFVBQVUsQ0FBQyxLQUFLLENBQUE7UUFFOUIsSUFBSTtZQUNILFVBQVUsQ0FBQyxLQUF5QyxDQUFDLENBQUE7WUFFckQsT0FBTyxVQUFVLENBQUE7U0FDakI7UUFBQyxPQUFPLENBQUMsRUFBRTtZQUNYLE9BQU8sU0FBUyxDQUFDLFVBQVUsRUFBRSxVQUFVLEVBQUcsQ0FBVyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUE7U0FDakU7SUFDRixDQUFDLENBQUE7QUFDRixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVGVtcG9yYWwgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi9AanMtdGVtcG9yYWwvcG9seWZpbGw/ZHRzJ1xuaW1wb3J0IHR5cGUge1xuXHRJbnN0YW50VHlwZUNvbnN0cmFpbnQsXG5cdFZhbGlkYXRpb24sXG59IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2NvbnN0cmFpbnRzLnRzJ1xuaW1wb3J0IGdldEluc3RhbnQgZnJvbSAnLi4vLi4vLi4vdXRpbGl0aWVzL2dldEluc3RhbnQvbW9kLnRzJ1xuaW1wb3J0IG1ha2VFcnJvciBmcm9tICcuLi8uLi8uLi91dGlsaXRpZXMvbWFrZUVycm9yL21vZC50cydcblxuLy8gRklYTUVcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIG1ha2VJc0luc3RhbnQoXG5cdGNvbnN0cmFpbnQ6IEluc3RhbnRUeXBlQ29uc3RyYWludCxcbik6ICh2YWxpZGF0aW9uOiBWYWxpZGF0aW9uKSA9PiBWYWxpZGF0aW9uIHtcblx0cmV0dXJuIGZ1bmN0aW9uIGlzSW5zdGFudCh2YWxpZGF0aW9uOiBWYWxpZGF0aW9uKTogVmFsaWRhdGlvbiB7XG5cdFx0Y29uc3QgdmFsdWUgPSB2YWxpZGF0aW9uLnZhbHVlXG5cblx0XHR0cnkge1xuXHRcdFx0Z2V0SW5zdGFudCh2YWx1ZSBhcyBUZW1wb3JhbC5JbnN0YW50IHwgRGF0ZSB8IHN0cmluZylcblxuXHRcdFx0cmV0dXJuIHZhbGlkYXRpb25cblx0XHR9IGNhdGNoIChlKSB7XG5cdFx0XHRyZXR1cm4gbWFrZUVycm9yKHZhbGlkYXRpb24sIGNvbnN0cmFpbnQsIChlIGFzIEVycm9yKS50b1N0cmluZygpKVxuXHRcdH1cblx0fVxufVxuIl19

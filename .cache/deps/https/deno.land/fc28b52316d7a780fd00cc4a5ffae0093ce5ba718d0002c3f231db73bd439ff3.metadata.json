@@ -1,0 +1,14 @@
+{
+  "headers": {
+    "server": "deploy/australia-southeast1-b",
+    "date": "Sun, 19 Dec 2021 03:47:12 GMT",
+    "location": "/x/dnt@0.8.0/mod.ts",
+    "content-length": "0",
+    "x-deno-warning": "Implicitly using latest version (0.8.0) for https://deno.land/x/dnt/mod.ts"
+  },
+  "url": "https://deno.land/x/dnt/mod.ts",
+  "now": {
+    "secs_since_epoch": 1639885632,
+    "nanos_since_epoch": 961332000
+  }
+}

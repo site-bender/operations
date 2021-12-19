@@ -1,4 +1,4 @@
-import type { Constraint, ValidationError } from './constraints'
+import type { Constraint, ValidationError } from './constraints.ts'
 import type {
 	ButtonLayout,
 	DateFormat,
@@ -15,9 +15,9 @@ import type {
 	TypeOfTrigger,
 	TypeOfTruncation,
 	TypeOfUpdate,
-} from './enums'
-import type { Action, EventProps } from './events'
-import { Operation } from './operations'
+} from './enums.ts'
+import type { Action, EventProps } from './events.ts'
+import { Operation } from './operations.ts'
 import type {
 	BooleanValue,
 	IntegerValue,
@@ -30,7 +30,7 @@ import type {
 	RealNumberValue,
 	SetValue,
 	StringValue,
-} from './values'
+} from './values.ts'
 
 export type AriaAttributes = {
 	ariaDescribedby?: string

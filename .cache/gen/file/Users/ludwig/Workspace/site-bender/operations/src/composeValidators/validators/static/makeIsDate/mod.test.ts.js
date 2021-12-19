@@ -1,0 +1,31 @@
+import makeIsDate from './mod.ts';
+import { TypeOfConstraint } from '../../../../types/enums.ts';
+import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts';
+const constraint = {
+    constraintType: TypeOfConstraint.IS_DATE,
+};
+Deno.test('[makeIsDate] returns correct validation when value is a date', () => {
+    const validation = {
+        datatype: 'plainDate',
+        value: '2000-01-01',
+    };
+    assertEquals(makeIsDate(constraint)(validation), validation);
+});
+Deno.test('[makeIsDate] returns error when value is not a date', () => {
+    const validation = {
+        datatype: 'plainDate',
+        value: 666,
+    };
+    assertEquals(makeIsDate(constraint)(validation), {
+        ...validation,
+        isInvalid: true,
+        errors: [
+            {
+                error: TypeOfConstraint.IS_DATE,
+                constraint,
+                errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+            },
+        ],
+    });
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtb2QudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFVBQVUsTUFBTSxVQUFVLENBQUE7QUFLakMsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sNEJBQTRCLENBQUE7QUFFN0QsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGtEQUFrRCxDQUFBO0FBRS9FLE1BQU0sVUFBVSxHQUF1QjtJQUN0QyxjQUFjLEVBQUUsZ0JBQWdCLENBQUMsT0FBTztDQUN4QyxDQUFBO0FBRUQsSUFBSSxDQUFDLElBQUksQ0FDUiw4REFBOEQsRUFDOUQsR0FBRyxFQUFFO0lBQ0osTUFBTSxVQUFVLEdBQWU7UUFDOUIsUUFBUSxFQUFFLFdBQVc7UUFDckIsS0FBSyxFQUFFLFlBQVk7S0FDbkIsQ0FBQTtJQUVELFlBQVksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLEVBQUUsVUFBVSxDQUFDLENBQUE7QUFDN0QsQ0FBQyxDQUNELENBQUE7QUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDLHFEQUFxRCxFQUFFLEdBQUcsRUFBRTtJQUNyRSxNQUFNLFVBQVUsR0FBZ0M7UUFDL0MsUUFBUSxFQUFFLFdBQVc7UUFFckIsS0FBSyxFQUFFLEdBQUc7S0FDVixDQUFBO0lBRUQsWUFBWSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQyxVQUFVLENBQUMsRUFBRTtRQUNoRCxHQUFHLFVBQVU7UUFDYixTQUFTLEVBQUUsSUFBSTtRQUNmLE1BQU0sRUFBRTtZQUNQO2dCQUNDLEtBQUssRUFBRSxnQkFBZ0IsQ0FBQyxPQUFPO2dCQUMvQixVQUFVO2dCQUNWLFlBQVksRUFBRSwwQ0FBMEM7YUFDeEQ7U0FDRDtLQUNELENBQUMsQ0FBQTtBQUNILENBQUMsQ0FBQyxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG1ha2VJc0RhdGUgZnJvbSAnLi9tb2QudHMnXG5pbXBvcnQge1xuXHREYXRlVHlwZUNvbnN0cmFpbnQsXG5cdFZhbGlkYXRpb24sXG59IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2NvbnN0cmFpbnRzLnRzJ1xuaW1wb3J0IHsgVHlwZU9mQ29uc3RyYWludCB9IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2VudW1zLnRzJ1xuaW1wb3J0IHR5cGUgeyBQbGFpbkRhdGVWYWx1ZSB9IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL3ZhbHVlcy50cydcbmltcG9ydCB7IGFzc2VydEVxdWFscyB9IGZyb20gJ2h0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjExOC4wL3Rlc3RpbmcvYXNzZXJ0cy50cydcblxuY29uc3QgY29uc3RyYWludDogRGF0ZVR5cGVDb25zdHJhaW50ID0ge1xuXHRjb25zdHJhaW50VHlwZTogVHlwZU9mQ29uc3RyYWludC5JU19EQVRFLFxufVxuXG5EZW5vLnRlc3QoXG5cdCdbbWFrZUlzRGF0ZV0gcmV0dXJucyBjb3JyZWN0IHZhbGlkYXRpb24gd2hlbiB2YWx1ZSBpcyBhIGRhdGUnLFxuXHQoKSA9PiB7XG5cdFx0Y29uc3QgdmFsaWRhdGlvbjogVmFsaWRhdGlvbiA9IHtcblx0XHRcdGRhdGF0eXBlOiAncGxhaW5EYXRlJyxcblx0XHRcdHZhbHVlOiAnMjAwMC0wMS0wMScsXG5cdFx0fVxuXG5cdFx0YXNzZXJ0RXF1YWxzKG1ha2VJc0RhdGUoY29uc3RyYWludCkodmFsaWRhdGlvbiksIHZhbGlkYXRpb24pXG5cdH0sXG4pXG5cbkRlbm8udGVzdCgnW21ha2VJc0RhdGVdIHJldHVybnMgZXJyb3Igd2hlbiB2YWx1ZSBpcyBub3QgYSBkYXRlJywgKCkgPT4ge1xuXHRjb25zdCB2YWxpZGF0aW9uOiBWYWxpZGF0aW9uICYgUGxhaW5EYXRlVmFsdWUgPSB7XG5cdFx0ZGF0YXR5cGU6ICdwbGFpbkRhdGUnLFxuXHRcdC8vIEB0cy1pZ25vcmU6IGZvciB0ZXN0aW5nIHB1cnBvc2VzXG5cdFx0dmFsdWU6IDY2Nixcblx0fVxuXG5cdGFzc2VydEVxdWFscyhtYWtlSXNEYXRlKGNvbnN0cmFpbnQpKHZhbGlkYXRpb24pLCB7XG5cdFx0Li4udmFsaWRhdGlvbixcblx0XHRpc0ludmFsaWQ6IHRydWUsXG5cdFx0ZXJyb3JzOiBbXG5cdFx0XHR7XG5cdFx0XHRcdGVycm9yOiBUeXBlT2ZDb25zdHJhaW50LklTX0RBVEUsXG5cdFx0XHRcdGNvbnN0cmFpbnQsXG5cdFx0XHRcdGVycm9yTWVzc2FnZTogJ1JhbmdlRXJyb3I6IGludmFsaWQgSVNPIDg2MDEgc3RyaW5nOiA2NjYnLFxuXHRcdFx0fSxcblx0XHRdLFxuXHR9KVxufSlcbiJdfQ==

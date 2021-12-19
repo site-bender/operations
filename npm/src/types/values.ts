@@ -1,0 +1,313 @@
+import { Temporal } from '@js-temporal/polyfill'
+export type Arrays =
+	| Array<Arrays>
+	| Array<Maps>
+	| Array<number>
+	| Array<Records>
+	| Array<Sets>
+	| Array<string>
+	| Array<Temporal.Calendar>
+	| Array<Temporal.Duration>
+	| Array<Temporal.PlainDate>
+	| Array<Temporal.PlainDateTime>
+	| Array<Temporal.ZonedDateTime>
+
+export type Maps =
+	| Map<string, Arrays>
+	| Map<string, Maps>
+	| Map<string, number>
+	| Map<string, Records>
+	| Map<string, Sets>
+	| Map<string, string>
+	| Map<string, Temporal.Calendar>
+	| Map<string, Temporal.Duration>
+	| Map<string, Temporal.PlainDate>
+	| Map<string, Temporal.PlainDateTime>
+	| Map<string, Temporal.ZonedDateTime>
+
+export type Records =
+	| Record<string, { [key: string]: string | Records }>
+	| Record<string, Arrays>
+	| Record<string, Maps>
+	| Record<string, number>
+	| Record<string, Sets>
+	| Record<string, string>
+	| Record<string, Temporal.Calendar>
+	| Record<string, Temporal.Duration>
+	| Record<string, Temporal.PlainDate>
+	| Record<string, Temporal.PlainDateTime>
+	| Record<string, Temporal.ZonedDateTime>
+
+export type Sets =
+	| Set<Arrays>
+	| Set<Maps>
+	| Set<number>
+	| Set<Records>
+	| Set<Sets>
+	| Set<string>
+	| Set<Temporal.Calendar>
+	| Set<Temporal.Duration>
+	| Set<Temporal.PlainDate>
+	| Set<Temporal.PlainDateTime>
+	| Set<Temporal.ZonedDateTime>
+
+export type State = Record<
+	string,
+	{
+		name: string
+		path?: Array<string>
+		value?: Value
+	}
+>
+
+export type FormState = Record<
+	string,
+	{
+		name: string
+		path?: Array<string>
+		value?: Value
+		touched: boolean
+		dirty: boolean
+	}
+>
+
+/*
+	===== String sorting =====
+*/
+export type LanguageType = 'en' | 'fr'
+
+export type LocaleCompareOptions = {
+	language?: LanguageType | Array<LanguageType>
+	options?: {
+		ignorePunctuation?: boolean
+		usage?: 'search' | 'sort'
+		sensitivity?: 'base' | 'accent' | 'case' | 'variant'
+		numeric?: boolean
+		caseFirst?: 'upper' | 'lower' | 'false'
+	}
+}
+
+export type Fraction = {
+	denominator: number
+	numerator: number
+}
+
+export type NumberDatatype = 'integer' | 'floatingPoint' | 'precision'
+
+export type NumberFormat = typeof Intl.NumberFormat
+
+export type DurationOptions = {
+	years?: number
+	months?: number
+	weeks?: number
+	days?: number
+	hours?: number
+	minutes?: number
+	seconds?: number
+	milliseconds?: number
+	microseconds?: number
+	nanoseconds?: number
+}
+
+/*
+	===== Value types =====
+*/
+export type ArrayValue = {
+	readonly datatype: 'array'
+	value: Arrays | string
+	separator?: string | RegExp
+}
+
+export type BooleanValue = {
+	readonly datatype: 'boolean'
+	value: boolean
+	permitIndeterminate?: boolean
+}
+
+export type CalendarValue = {
+	readonly datatype: 'calendar'
+	value: Temporal.Calendar | string
+}
+
+export type DurationValue = {
+	readonly datatype: 'duration'
+	value: Temporal.Duration | Temporal.DurationOptions | string
+}
+
+export type EmptyValue = {
+	readonly datatype: 'empty'
+	value: []
+}
+
+export type FractionValue = {
+	readonly datatype: 'fraction'
+	value: Fraction
+	numberType?: 'integer' | 'bigint'
+}
+
+export type InstantValue = {
+	readonly datatype: 'instant'
+	value: Temporal.Instant | Date | string
+}
+
+export type IntegerValue = {
+	readonly datatype: 'integer'
+	value: number
+	numberType?: 'integer' | 'bigint'
+	format?: NumberFormat
+}
+
+export type ListValue = {
+	readonly datatype: 'list'
+	value: Arrays | string
+	separator?: string | RegExp
+}
+
+export type MemberValue = {
+	readonly datatype: 'member'
+	value: unknown
+}
+
+export type MapValue = {
+	readonly datatype: 'map'
+	value: Maps | Records | string
+	keyValueSeparator?: string | RegExp
+	separator?: string | RegExp
+}
+
+export type MonthDayValue = {
+	readonly datatype: 'monthDay'
+	value: Temporal.PlainMonthDay | string
+}
+
+export type PlainDateValue = {
+	readonly datatype: 'plainDate'
+	value: Temporal.PlainDate | string | Date
+}
+
+export type PlainDateTimeValue = {
+	readonly datatype: 'plainDateTime'
+	value: Temporal.PlainDateTime | string | Date
+}
+
+export type PrecisionNumberValue = {
+	readonly datatype: 'precision'
+	value: number
+	decimalPlaces: number
+	format?: NumberFormat
+}
+
+export type RadianValue = {
+	readonly datatype: 'radian'
+	value: number
+}
+
+export type RealNumberValue = {
+	readonly datatype: 'real'
+	value: number
+	format?: NumberFormat
+	decimalPlaces?: number
+}
+
+export type RecordValue = {
+	readonly datatype: 'map'
+	value: Records | string
+	keyValueSeparator?: string | RegExp
+	separator?: string | RegExp
+}
+
+export type RegularExpressionValue = {
+	readonly datatype: 'string'
+	value: string
+	flags?: string
+	message?: string
+}
+
+export type SetValue = {
+	readonly datatype: 'set'
+	value: Sets | Arrays | string
+	separator?: string | RegExp
+}
+
+export type StringValue = {
+	readonly datatype: 'string'
+	value: string
+	matches?: RegExp
+}
+
+export type TimeZoneValue = {
+	readonly datatype: 'timeZone'
+	value: Temporal.TimeZone | string
+}
+
+export type YearMonthValue = {
+	readonly datatype: 'yearMonth'
+	value: Temporal.PlainYearMonth | string
+}
+
+export type ZonedDateTimeValue = {
+	readonly datatype: 'zonedDateTime'
+	value: Temporal.ZonedDateTime | string | Date
+	timeZone?: Temporal.TimeZone | string
+}
+
+export type NonFractionValue =
+	| PrecisionNumberValue
+	| RealNumberValue
+	| IntegerValue
+
+export type NumberValue = NonFractionValue | FractionValue
+
+export type DateTimeValue =
+	| InstantValue
+	| PlainDateTimeValue
+	| PlainDateValue
+	| ZonedDateTimeValue
+
+export type Value =
+	| ArrayValue
+	| BooleanValue
+	| CalendarValue
+	| DateTimeValue
+	| DurationValue
+	| EmptyValue
+	| ListValue
+	| MapValue
+	| MemberValue
+	| NumberValue
+	| RadianValue
+	| RecordValue
+	| RegularExpressionValue
+	| SetValue
+	| StringValue
+	| TimeZoneValue
+
+export type DateType = PlainDateValue | Date | string
+
+export type DateTimeType = PlainDateTimeValue | Date | string
+
+export type DateTimeWithTimeZoneType =
+	| ZonedDateTimeValue
+	| InstantValue
+	| Date
+	| string
+
+export type AnyDateTimeValue = DateTimeType | DateTimeWithTimeZoneType
+export type AnyDateValue = DateType | AnyDateTimeValue
+
+export type ValueType =
+	| string
+	| boolean
+	| number
+	| Date
+	| Temporal.PlainDate
+	| Temporal.PlainDateTime
+	| Temporal.PlainTime
+	| Temporal.PlainYearMonth
+	| Temporal.Instant
+	| Temporal.Duration
+	| Temporal.Calendar
+	| Records
+	| Arrays
+	| Sets
+	| Maps

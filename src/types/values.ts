@@ -1,5 +1,4 @@
-import type { Temporal } from '@js-temporal/polyfill'
-
+import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
 export type Arrays =
 	| Array<Arrays>
 	| Array<Maps>
@@ -241,6 +240,11 @@ export type TimeZoneValue = {
 	value: Temporal.TimeZone | string
 }
 
+export type UndefinedValue = {
+	readonly datatype: 'undefined'
+	value: undefined
+}
+
 export type YearMonthValue = {
 	readonly datatype: 'yearMonth'
 	value: Temporal.PlainYearMonth | string
@@ -261,8 +265,10 @@ export type NumberValue = NonFractionValue | FractionValue
 
 export type DateTimeValue =
 	| InstantValue
+	| MonthDayValue
 	| PlainDateTimeValue
 	| PlainDateValue
+	| YearMonthValue
 	| ZonedDateTimeValue
 
 export type Value =
@@ -282,6 +288,7 @@ export type Value =
 	| SetValue
 	| StringValue
 	| TimeZoneValue
+	| UndefinedValue
 
 export type DateType = PlainDateValue | Date | string
 

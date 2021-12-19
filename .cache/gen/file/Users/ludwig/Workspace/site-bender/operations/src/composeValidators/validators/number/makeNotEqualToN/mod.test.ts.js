@@ -1,0 +1,31 @@
+import notEqualToN from './mod.ts';
+import { TypeOfConstraint } from '../../../../types/enums.ts';
+import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts';
+const constraint = {
+    constraintType: TypeOfConstraint.NOT_EQUAL_TO_N,
+    operand: 42,
+};
+Deno.test('[moreThanN] returns correct validation if integer more than constraint value', () => {
+    const validation = {
+        datatype: 'integer',
+        value: 43,
+    };
+    assertEquals(notEqualToN(constraint)(validation), validation);
+});
+Deno.test('[notEqualToN] returns error if integer less than constraint value', () => {
+    const validation = {
+        datatype: 'integer',
+        value: 41,
+    };
+    assertEquals(notEqualToN(constraint)(validation), {
+        ...validation,
+        errors: [
+            {
+                constraint,
+                error: TypeOfConstraint.NOT_EQUAL_TO_N,
+            },
+        ],
+        isInvalid: true,
+    });
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtb2QudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxVQUFVLENBQUE7QUFLbEMsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sNEJBQTRCLENBQUE7QUFDN0QsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGtEQUFrRCxDQUFBO0FBRS9FLE1BQU0sVUFBVSxHQUEwQjtJQUN6QyxjQUFjLEVBQUUsZ0JBQWdCLENBQUMsY0FBYztJQUMvQyxPQUFPLEVBQUUsRUFBRTtDQUNYLENBQUE7QUFFRCxJQUFJLENBQUMsSUFBSSxDQUNSLDhFQUE4RSxFQUM5RSxHQUFHLEVBQUU7SUFDSixNQUFNLFVBQVUsR0FBZTtRQUM5QixRQUFRLEVBQUUsU0FBUztRQUNuQixLQUFLLEVBQUUsRUFBRTtLQUNULENBQUE7SUFFRCxZQUFZLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxFQUFFLFVBQVUsQ0FBQyxDQUFBO0FBQzlELENBQUMsQ0FDRCxDQUFBO0FBRUQsSUFBSSxDQUFDLElBQUksQ0FDUixtRUFBbUUsRUFDbkUsR0FBRyxFQUFFO0lBQ0osTUFBTSxVQUFVLEdBQWU7UUFDOUIsUUFBUSxFQUFFLFNBQVM7UUFDbkIsS0FBSyxFQUFFLEVBQUU7S0FDVCxDQUFBO0lBRUQsWUFBWSxDQUFDLFdBQVcsQ0FBQyxVQUFVLENBQUMsQ0FBQyxVQUFVLENBQUMsRUFBRTtRQUNqRCxHQUFHLFVBQVU7UUFDYixNQUFNLEVBQUU7WUFDUDtnQkFDQyxVQUFVO2dCQUNWLEtBQUssRUFBRSxnQkFBZ0IsQ0FBQyxjQUFjO2FBQ3RDO1NBQ0Q7UUFDRCxTQUFTLEVBQUUsSUFBSTtLQUNmLENBQUMsQ0FBQTtBQUNILENBQUMsQ0FDRCxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG5vdEVxdWFsVG9OIGZyb20gJy4vbW9kLnRzJ1xuaW1wb3J0IHtcblx0Tm90RXF1YWxUb05Db25zdHJhaW50LFxuXHRWYWxpZGF0aW9uLFxufSBmcm9tICcuLi8uLi8uLi8uLi90eXBlcy9jb25zdHJhaW50cy50cydcbmltcG9ydCB7IFR5cGVPZkNvbnN0cmFpbnQgfSBmcm9tICcuLi8uLi8uLi8uLi90eXBlcy9lbnVtcy50cydcbmltcG9ydCB7IGFzc2VydEVxdWFscyB9IGZyb20gJ2h0dHBzOi8vZGVuby5sYW5kL3N0ZEAwLjExOC4wL3Rlc3RpbmcvYXNzZXJ0cy50cydcblxuY29uc3QgY29uc3RyYWludDogTm90RXF1YWxUb05Db25zdHJhaW50ID0ge1xuXHRjb25zdHJhaW50VHlwZTogVHlwZU9mQ29uc3RyYWludC5OT1RfRVFVQUxfVE9fTixcblx0b3BlcmFuZDogNDIsXG59XG5cbkRlbm8udGVzdChcblx0J1ttb3JlVGhhbk5dIHJldHVybnMgY29ycmVjdCB2YWxpZGF0aW9uIGlmIGludGVnZXIgbW9yZSB0aGFuIGNvbnN0cmFpbnQgdmFsdWUnLFxuXHQoKSA9PiB7XG5cdFx0Y29uc3QgdmFsaWRhdGlvbjogVmFsaWRhdGlvbiA9IHtcblx0XHRcdGRhdGF0eXBlOiAnaW50ZWdlcicsXG5cdFx0XHR2YWx1ZTogNDMsXG5cdFx0fVxuXG5cdFx0YXNzZXJ0RXF1YWxzKG5vdEVxdWFsVG9OKGNvbnN0cmFpbnQpKHZhbGlkYXRpb24pLCB2YWxpZGF0aW9uKVxuXHR9LFxuKVxuXG5EZW5vLnRlc3QoXG5cdCdbbm90RXF1YWxUb05dIHJldHVybnMgZXJyb3IgaWYgaW50ZWdlciBsZXNzIHRoYW4gY29uc3RyYWludCB2YWx1ZScsXG5cdCgpID0+IHtcblx0XHRjb25zdCB2YWxpZGF0aW9uOiBWYWxpZGF0aW9uID0ge1xuXHRcdFx0ZGF0YXR5cGU6ICdpbnRlZ2VyJyxcblx0XHRcdHZhbHVlOiA0MSxcblx0XHR9XG5cblx0XHRhc3NlcnRFcXVhbHMobm90RXF1YWxUb04oY29uc3RyYWludCkodmFsaWRhdGlvbiksIHtcblx0XHRcdC4uLnZhbGlkYXRpb24sXG5cdFx0XHRlcnJvcnM6IFtcblx0XHRcdFx0e1xuXHRcdFx0XHRcdGNvbnN0cmFpbnQsXG5cdFx0XHRcdFx0ZXJyb3I6IFR5cGVPZkNvbnN0cmFpbnQuTk9UX0VRVUFMX1RPX04sXG5cdFx0XHRcdH0sXG5cdFx0XHRdLFxuXHRcdFx0aXNJbnZhbGlkOiB0cnVlLFxuXHRcdH0pXG5cdH0sXG4pXG4iXX0=

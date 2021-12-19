@@ -1,0 +1,22 @@
+import { TypeOfTruncation } from '../../../../types/enums.ts';
+import convertToFraction from '../../../utilities/convertToFraction/mod.ts';
+import reduceToLowestForm from '../../../utilities/reduceToLowestForm/mod.ts';
+export default function multiplyFractions(multiplicands, decimalPlaces = 0, truncationType = TypeOfTruncation.ROUND) {
+    return multiplicands.reduce((acc, multiplicand) => {
+        const value = convertToFraction(multiplicand(), decimalPlaces, truncationType);
+        return reduceToLowestForm({
+            datatype: 'fraction',
+            value: {
+                denominator: acc.value.denominator * value.value.denominator,
+                numerator: acc.value.numerator * value.value.numerator,
+            },
+        });
+    }, {
+        datatype: 'fraction',
+        value: {
+            denominator: 1,
+            numerator: 1,
+        },
+    });
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLDRCQUE0QixDQUFBO0FBRzdELE9BQU8saUJBQWlCLE1BQU0sNkNBQTZDLENBQUE7QUFDM0UsT0FBTyxrQkFBa0IsTUFBTSw4Q0FBOEMsQ0FBQTtBQUU3RSxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUN4QyxhQUE4QixFQUM5QixhQUFhLEdBQUcsQ0FBQyxFQUNqQixjQUFjLEdBQUcsZ0JBQWdCLENBQUMsS0FBSztJQUV2QyxPQUFPLGFBQWEsQ0FBQyxNQUFNLENBQzFCLENBQUMsR0FBa0IsRUFBRSxZQUFzQixFQUFFLEVBQUU7UUFDOUMsTUFBTSxLQUFLLEdBQUcsaUJBQWlCLENBQzlCLFlBQVksRUFBMEIsRUFDdEMsYUFBYSxFQUNiLGNBQWMsQ0FDRyxDQUFBO1FBRWxCLE9BQU8sa0JBQWtCLENBQUM7WUFDekIsUUFBUSxFQUFFLFVBQVU7WUFDcEIsS0FBSyxFQUFFO2dCQUNOLFdBQVcsRUFBRSxHQUFHLENBQUMsS0FBSyxDQUFDLFdBQVcsR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLFdBQVc7Z0JBQzVELFNBQVMsRUFBRSxHQUFHLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLFNBQVM7YUFDdEQ7U0FDRCxDQUFDLENBQUE7SUFDSCxDQUFDLEVBQ0Q7UUFDQyxRQUFRLEVBQUUsVUFBVTtRQUNwQixLQUFLLEVBQUU7WUFDTixXQUFXLEVBQUUsQ0FBQztZQUNkLFNBQVMsRUFBRSxDQUFDO1NBQ1o7S0FDRCxDQUNELENBQUE7QUFDRixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVHlwZU9mVHJ1bmNhdGlvbiB9IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2VudW1zLnRzJ1xuaW1wb3J0IHR5cGUgeyBJbmplY3RvciB9IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL29wZXJhdGlvbnMudHMnXG5pbXBvcnQgdHlwZSB7IEZyYWN0aW9uVmFsdWUsIE51bWJlclZhbHVlIH0gZnJvbSAnLi4vLi4vLi4vLi4vdHlwZXMvdmFsdWVzLnRzJ1xuaW1wb3J0IGNvbnZlcnRUb0ZyYWN0aW9uIGZyb20gJy4uLy4uLy4uL3V0aWxpdGllcy9jb252ZXJ0VG9GcmFjdGlvbi9tb2QudHMnXG5pbXBvcnQgcmVkdWNlVG9Mb3dlc3RGb3JtIGZyb20gJy4uLy4uLy4uL3V0aWxpdGllcy9yZWR1Y2VUb0xvd2VzdEZvcm0vbW9kLnRzJ1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBtdWx0aXBseUZyYWN0aW9ucyhcblx0bXVsdGlwbGljYW5kczogQXJyYXk8SW5qZWN0b3I+LFxuXHRkZWNpbWFsUGxhY2VzID0gMCxcblx0dHJ1bmNhdGlvblR5cGUgPSBUeXBlT2ZUcnVuY2F0aW9uLlJPVU5ELFxuKTogRnJhY3Rpb25WYWx1ZSB7XG5cdHJldHVybiBtdWx0aXBsaWNhbmRzLnJlZHVjZTxGcmFjdGlvblZhbHVlPihcblx0XHQoYWNjOiBGcmFjdGlvblZhbHVlLCBtdWx0aXBsaWNhbmQ6IEluamVjdG9yKSA9PiB7XG5cdFx0XHRjb25zdCB2YWx1ZSA9IGNvbnZlcnRUb0ZyYWN0aW9uKFxuXHRcdFx0XHRtdWx0aXBsaWNhbmQoKSBhcyBOdW1iZXJWYWx1ZSB8IG51bWJlcixcblx0XHRcdFx0ZGVjaW1hbFBsYWNlcyxcblx0XHRcdFx0dHJ1bmNhdGlvblR5cGUsXG5cdFx0XHQpIGFzIEZyYWN0aW9uVmFsdWVcblxuXHRcdFx0cmV0dXJuIHJlZHVjZVRvTG93ZXN0Rm9ybSh7XG5cdFx0XHRcdGRhdGF0eXBlOiAnZnJhY3Rpb24nLFxuXHRcdFx0XHR2YWx1ZToge1xuXHRcdFx0XHRcdGRlbm9taW5hdG9yOiBhY2MudmFsdWUuZGVub21pbmF0b3IgKiB2YWx1ZS52YWx1ZS5kZW5vbWluYXRvcixcblx0XHRcdFx0XHRudW1lcmF0b3I6IGFjYy52YWx1ZS5udW1lcmF0b3IgKiB2YWx1ZS52YWx1ZS5udW1lcmF0b3IsXG5cdFx0XHRcdH0sXG5cdFx0XHR9KVxuXHRcdH0sXG5cdFx0e1xuXHRcdFx0ZGF0YXR5cGU6ICdmcmFjdGlvbicsXG5cdFx0XHR2YWx1ZToge1xuXHRcdFx0XHRkZW5vbWluYXRvcjogMSxcblx0XHRcdFx0bnVtZXJhdG9yOiAxLFxuXHRcdFx0fSxcblx0XHR9LFxuXHQpXG59XG4iXX0=

@@ -1,0 +1,20 @@
+{
+  "headers": {
+    "server": "deploy/australia-southeast1-b",
+    "date": "Sun, 19 Dec 2021 03:57:31 GMT",
+    "x-amz-id-2": "A6Bf+Xbl6geE2Cxeur+88/0Ddrlp4dm86jWlgjqkF513B+8LnMQpR0Q2s7VsBKh32+dk8T1OIfw=",
+    "x-amz-request-id": "4SSXNM4GE3B5GZMC",
+    "x-amz-version-id": "7eqv_p28W8H8SQi.jJLdAqf73XqoFoGM",
+    "etag": "\"c54231ea5533d821ff3a5663af22f2a9\"",
+    "content-type": "application/typescript; charset=utf-8",
+    "cache-control": "public, max-age=31536000, immutable",
+    "content-length": "11804",
+    "last-modified": "Thu, 16 Dec 2021 16:30:40 GMT",
+    "access-control-allow-origin": "*"
+  },
+  "url": "https://deno.land/std@0.118.0/fmt/colors.ts",
+  "now": {
+    "secs_since_epoch": 1639886260,
+    "nanos_since_epoch": 541854000
+  }
+}

@@ -15,7 +15,7 @@ import type {
 	TypeOfTrigger,
 	WindowFocusTrigger,
 	WindowLoadingTrigger,
-} from './enums'
+} from './enums.ts'
 
 export type Action = {
 	action: TypeOfAction
@@ -24,7 +24,7 @@ export type Action = {
 
 export type AjaxEvent = Partial<Record<keyof typeof AjaxTrigger, Action>>
 
-export interface CustomEvent<T = any> extends Event {
+export interface CustomEvent<T = unknown> extends Event {
 	detail: T
 }
 

@@ -1,5 +1,5 @@
-import { TypeOfConstraint, TypeOfSource } from './enums'
-import { Operation } from './operations'
+import { TypeOfConstraint, TypeOfSource } from './enums.ts'
+import { Operation } from './operations.ts'
 import {
 	AnyDateTimeValue,
 	AnyDateValue,
@@ -13,7 +13,7 @@ import {
 	SetValue,
 	StringValue,
 	Value,
-} from './values'
+} from './values.ts'
 
 export type TestValues<T> = {
 	valueToTest: {
@@ -313,6 +313,7 @@ export type StaticConstraint =
 	| TypeOfBooleanConstraint
 	| DateTimeTypeConstraint
 	| DateTypeConstraint
+	| DurationTypeConstraint
 	| FractionTypeConstraint
 	| InstantTypeConstraint
 	| IntegerTypeConstraint
@@ -363,17 +364,17 @@ export type RelationalConstraint =
 export type LeafConstraint = RelationalConstraint | StaticConstraint
 
 export type AndConstraint = {
-	readonly constraintType: TypeOfConstraint.and
+	readonly constraintType: TypeOfConstraint.AND
 	tests: Array<Constraint>
 }
 
 export type OrConstraint = {
-	readonly constraintType: TypeOfConstraint.or
+	readonly constraintType: TypeOfConstraint.OR
 	tests: Array<Constraint>
 }
 
 export type XorConstraint = {
-	readonly constraintType: TypeOfConstraint.xor
+	readonly constraintType: TypeOfConstraint.XOR
 	tests: Array<Constraint>
 }
 

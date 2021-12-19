@@ -1,0 +1,48 @@
+import beforeDate from './mod.ts';
+import { TypeOfConstraint } from '../../../../types/enums.ts';
+import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts';
+const constraint = {
+    constraintType: TypeOfConstraint.BEFORE_DATE,
+    operand: '2001-01-01',
+};
+Deno.test('[beforeDate] returns correct validation if date before constraint value', () => {
+    const validation = {
+        datatype: 'plainDate',
+        value: '1999-01-01',
+    };
+    assertEquals(beforeDate(constraint)(validation), validation);
+});
+Deno.test('[beforeDate] returns error if date after constraint value', () => {
+    const validation = {
+        datatype: 'plainDate',
+        value: '2001-09-11',
+    };
+    assertEquals(beforeDate(constraint)(validation), {
+        ...validation,
+        errors: [
+            {
+                constraint,
+                error: TypeOfConstraint.BEFORE_DATE,
+            },
+        ],
+        isInvalid: true,
+    });
+});
+Deno.test('[beforeDate] returns error if bad date', () => {
+    const validation = {
+        datatype: 'plainDate',
+        value: '2001-09-31',
+    };
+    assertEquals(beforeDate(constraint)(validation), {
+        ...validation,
+        errors: [
+            {
+                constraint,
+                error: TypeOfConstraint.BEFORE_DATE,
+                errorMessage: 'RangeError: value out of range: 1 <= 31 <= 30',
+            },
+        ],
+        isInvalid: true,
+    });
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtb2QudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFVBQVUsTUFBTSxVQUFVLENBQUE7QUFLakMsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sNEJBQTRCLENBQUE7QUFDN0QsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGtEQUFrRCxDQUFBO0FBRS9FLE1BQU0sVUFBVSxHQUF5QjtJQUN4QyxjQUFjLEVBQUUsZ0JBQWdCLENBQUMsV0FBVztJQUM1QyxPQUFPLEVBQUUsWUFBWTtDQUNyQixDQUFBO0FBRUQsSUFBSSxDQUFDLElBQUksQ0FDUix5RUFBeUUsRUFDekUsR0FBRyxFQUFFO0lBQ0osTUFBTSxVQUFVLEdBQWU7UUFDOUIsUUFBUSxFQUFFLFdBQVc7UUFDckIsS0FBSyxFQUFFLFlBQVk7S0FDbkIsQ0FBQTtJQUVELFlBQVksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLEVBQUUsVUFBVSxDQUFDLENBQUE7QUFDN0QsQ0FBQyxDQUNELENBQUE7QUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDLDJEQUEyRCxFQUFFLEdBQUcsRUFBRTtJQUMzRSxNQUFNLFVBQVUsR0FBZTtRQUM5QixRQUFRLEVBQUUsV0FBVztRQUNyQixLQUFLLEVBQUUsWUFBWTtLQUNuQixDQUFBO0lBRUQsWUFBWSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQyxVQUFVLENBQUMsRUFBRTtRQUNoRCxHQUFHLFVBQVU7UUFDYixNQUFNLEVBQUU7WUFDUDtnQkFDQyxVQUFVO2dCQUNWLEtBQUssRUFBRSxnQkFBZ0IsQ0FBQyxXQUFXO2FBQ25DO1NBQ0Q7UUFDRCxTQUFTLEVBQUUsSUFBSTtLQUNmLENBQUMsQ0FBQTtBQUNILENBQUMsQ0FBQyxDQUFBO0FBRUYsSUFBSSxDQUFDLElBQUksQ0FBQyx3Q0FBd0MsRUFBRSxHQUFHLEVBQUU7SUFDeEQsTUFBTSxVQUFVLEdBQWU7UUFDOUIsUUFBUSxFQUFFLFdBQVc7UUFDckIsS0FBSyxFQUFFLFlBQVk7S0FDbkIsQ0FBQTtJQUVELFlBQVksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsVUFBVSxDQUFDLEVBQUU7UUFDaEQsR0FBRyxVQUFVO1FBQ2IsTUFBTSxFQUFFO1lBQ1A7Z0JBQ0MsVUFBVTtnQkFDVixLQUFLLEVBQUUsZ0JBQWdCLENBQUMsV0FBVztnQkFDbkMsWUFBWSxFQUFFLCtDQUErQzthQUM3RDtTQUNEO1FBQ0QsU0FBUyxFQUFFLElBQUk7S0FDZixDQUFDLENBQUE7QUFDSCxDQUFDLENBQUMsQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBiZWZvcmVEYXRlIGZyb20gJy4vbW9kLnRzJ1xuaW1wb3J0IHtcblx0QmVmb3JlRGF0ZUNvbnN0cmFpbnQsXG5cdFZhbGlkYXRpb24sXG59IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2NvbnN0cmFpbnRzLnRzJ1xuaW1wb3J0IHsgVHlwZU9mQ29uc3RyYWludCB9IGZyb20gJy4uLy4uLy4uLy4uL3R5cGVzL2VudW1zLnRzJ1xuaW1wb3J0IHsgYXNzZXJ0RXF1YWxzIH0gZnJvbSAnaHR0cHM6Ly9kZW5vLmxhbmQvc3RkQDAuMTE4LjAvdGVzdGluZy9hc3NlcnRzLnRzJ1xuXG5jb25zdCBjb25zdHJhaW50OiBCZWZvcmVEYXRlQ29uc3RyYWludCA9IHtcblx0Y29uc3RyYWludFR5cGU6IFR5cGVPZkNvbnN0cmFpbnQuQkVGT1JFX0RBVEUsXG5cdG9wZXJhbmQ6ICcyMDAxLTAxLTAxJyxcbn1cblxuRGVuby50ZXN0KFxuXHQnW2JlZm9yZURhdGVdIHJldHVybnMgY29ycmVjdCB2YWxpZGF0aW9uIGlmIGRhdGUgYmVmb3JlIGNvbnN0cmFpbnQgdmFsdWUnLFxuXHQoKSA9PiB7XG5cdFx0Y29uc3QgdmFsaWRhdGlvbjogVmFsaWRhdGlvbiA9IHtcblx0XHRcdGRhdGF0eXBlOiAncGxhaW5EYXRlJyxcblx0XHRcdHZhbHVlOiAnMTk5OS0wMS0wMScsXG5cdFx0fVxuXG5cdFx0YXNzZXJ0RXF1YWxzKGJlZm9yZURhdGUoY29uc3RyYWludCkodmFsaWRhdGlvbiksIHZhbGlkYXRpb24pXG5cdH0sXG4pXG5cbkRlbm8udGVzdCgnW2JlZm9yZURhdGVdIHJldHVybnMgZXJyb3IgaWYgZGF0ZSBhZnRlciBjb25zdHJhaW50IHZhbHVlJywgKCkgPT4ge1xuXHRjb25zdCB2YWxpZGF0aW9uOiBWYWxpZGF0aW9uID0ge1xuXHRcdGRhdGF0eXBlOiAncGxhaW5EYXRlJyxcblx0XHR2YWx1ZTogJzIwMDEtMDktMTEnLFxuXHR9XG5cblx0YXNzZXJ0RXF1YWxzKGJlZm9yZURhdGUoY29uc3RyYWludCkodmFsaWRhdGlvbiksIHtcblx0XHQuLi52YWxpZGF0aW9uLFxuXHRcdGVycm9yczogW1xuXHRcdFx0e1xuXHRcdFx0XHRjb25zdHJhaW50LFxuXHRcdFx0XHRlcnJvcjogVHlwZU9mQ29uc3RyYWludC5CRUZPUkVfREFURSxcblx0XHRcdH0sXG5cdFx0XSxcblx0XHRpc0ludmFsaWQ6IHRydWUsXG5cdH0pXG59KVxuXG5EZW5vLnRlc3QoJ1tiZWZvcmVEYXRlXSByZXR1cm5zIGVycm9yIGlmIGJhZCBkYXRlJywgKCkgPT4ge1xuXHRjb25zdCB2YWxpZGF0aW9uOiBWYWxpZGF0aW9uID0ge1xuXHRcdGRhdGF0eXBlOiAncGxhaW5EYXRlJyxcblx0XHR2YWx1ZTogJzIwMDEtMDktMzEnLFxuXHR9XG5cblx0YXNzZXJ0RXF1YWxzKGJlZm9yZURhdGUoY29uc3RyYWludCkodmFsaWRhdGlvbiksIHtcblx0XHQuLi52YWxpZGF0aW9uLFxuXHRcdGVycm9yczogW1xuXHRcdFx0e1xuXHRcdFx0XHRjb25zdHJhaW50LFxuXHRcdFx0XHRlcnJvcjogVHlwZU9mQ29uc3RyYWludC5CRUZPUkVfREFURSxcblx0XHRcdFx0ZXJyb3JNZXNzYWdlOiAnUmFuZ2VFcnJvcjogdmFsdWUgb3V0IG9mIHJhbmdlOiAxIDw9IDMxIDw9IDMwJyxcblx0XHRcdH0sXG5cdFx0XSxcblx0XHRpc0ludmFsaWQ6IHRydWUsXG5cdH0pXG59KVxuIl19

@@ -1,0 +1,35 @@
+import confirmed from './mod.js'
+import type {
+	ConfirmationConstraint,
+	Validation,
+} from '../../../../types/constraints.js'
+import { TypeOfConstraint } from '../../../../types/enums.js'
+
+const constraint: ConfirmationConstraint = {
+	constraintType: TypeOfConstraint.CONFIRMED,
+}
+
+test('[confirmed] returns correct validation when the value is true', () => {
+	const validation: Validation = {
+		datatype: 'boolean',
+		value: true,
+	}
+	expect(confirmed(constraint)(validation)).toEqual(validation)
+})
+
+test('[confirmed] returns error when the value is not true', () => {
+	const validation: Validation = {
+		datatype: 'boolean',
+		value: false,
+	}
+	expect(confirmed(constraint)(validation)).toEqual({
+		...validation,
+		isInvalid: true,
+		errors: [
+			{
+				error: TypeOfConstraint.CONFIRMED,
+				constraint,
+			},
+		],
+	})
+})
