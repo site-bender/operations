@@ -16,7 +16,7 @@ Deno.test(
 	() => {
 		const validation: Validation = {
 			datatype: 'plainDateTime',
-			value: '2000-01-01T00:00:00Z',
+			value: '2000-01-01T00:00:00',
 		}
 
 		assertEquals(makeIsDateTime(constraint)(validation), validation)

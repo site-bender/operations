@@ -8,7 +8,15 @@ export default function getPlainDateTime(
 	}
 
 	return (
-		(d instanceof Date && Temporal.PlainDateTime.from(d.toISOString())) ||
-		Temporal.PlainDateTime.from(d as string)
+		(d instanceof Date &&
+			Temporal.PlainDateTime.from({
+				year: d.getFullYear(),
+				month: d.getMonth() + 1,
+				day: d.getDate(),
+				hour: d.getHours(),
+				minute: d.getMinutes(),
+				second: d.getSeconds(),
+			})) ||
+		Temporal.PlainDateTime.from((d as string).replace('Z', ''))
 	)
 }

@@ -6,9 +6,14 @@ export default function getPlainDate(
 	if (d instanceof Temporal.PlainDate) {
 		return d
 	}
-
+	console.log('date?', d instanceof Date)
 	return (
-		(d instanceof Date && Temporal.PlainDate.from(d.toISOString())) ||
+		(d instanceof Date &&
+			Temporal.PlainDate.from({
+				year: d.getFullYear(),
+				month: d.getMonth() + 1,
+				day: d.getDate(),
+			})) ||
 		Temporal.PlainDate.from(d as string)
 	)
 }

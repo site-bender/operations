@@ -9,8 +9,8 @@ Deno.test(
 	'[getPlainDateTime] returns correct Temporal PlainDateTime for string input',
 	() => {
 		assertEquals(
-			getPlainDateTime('2021-01-01T00:00:00Z'),
-			Temporal.PlainDateTime.from('2021-01-01T00:00:00Z'),
+			getPlainDateTime('2021-01-01T00:00:00'),
+			Temporal.PlainDateTime.from('2021-01-01T00:00:00'),
 		)
 	},
 )
@@ -19,7 +19,7 @@ Deno.test(
 	'[getPlainDateTime] returns correct Temporal PlainDateTime for Date input',
 	() => {
 		assertEquals(
-			getPlainDateTime(new Date('2021-01-01T00:00:00Z')),
+			getPlainDateTime(new Date('2021-01-01T00:00:00')),
 			Temporal.PlainDateTime.from('2021-01-01'),
 		)
 	},
@@ -29,15 +29,15 @@ Deno.test(
 	'[getPlainDateTime] returns correct Temporal PlainDate for Temporal PlainDate input',
 	() => {
 		assertEquals(
-			getPlainDateTime(Temporal.PlainDateTime.from('2021-01-01T00:00:00Z')),
-			Temporal.PlainDateTime.from('2021-01-01T00:00:00Z'),
+			getPlainDateTime(Temporal.PlainDateTime.from('2021-01-01T00:00:00')),
+			Temporal.PlainDateTime.from('2021-01-01T00:00:00'),
 		)
 	},
 )
 
 Deno.test('[getPlainDateTime] throws error for bad input', () => {
 	assertThrows(
-		() => getPlainDateTime('2021-01-011T00:00:00Z'),
+		() => getPlainDateTime('2021-01-011T00:00:00'),
 		Error,
 		'invalid ISO 8601 string: 2021-01-011',
 	)

@@ -9,8 +9,8 @@ Deno.test(
 	'[getZonedDateTime] returns correct Temporal ZonedDateTime for string input',
 	() => {
 		assertEquals(
-			getZonedDateTime('2021-01-01T00:00:00Z'),
-			Temporal.ZonedDateTime.from('2021-01-01T00:00:00Z'),
+			getZonedDateTime('2021-01-01T00:00:00'),
+			Temporal.ZonedDateTime.from('2021-01-01T00:00:00'),
 		)
 	},
 )
@@ -19,7 +19,7 @@ Deno.test(
 	'[getZonedDateTime] returns correct Temporal ZonedDateTime for Date input',
 	() => {
 		assertEquals(
-			getZonedDateTime(new Date('2021-01-01T00:00:00Z')),
+			getZonedDateTime(new Date('2021-01-01T00:00:00')),
 			Temporal.ZonedDateTime.from('2021-01-01'),
 		)
 	},
@@ -29,15 +29,15 @@ Deno.test(
 	'[getZonedDateTime] returns correct Temporal PlainDate for Temporal PlainDate input',
 	() => {
 		assertEquals(
-			getZonedDateTime(Temporal.ZonedDateTime.from('2021-01-01T00:00:00Z')),
-			Temporal.ZonedDateTime.from('2021-01-01T00:00:00Z'),
+			getZonedDateTime(Temporal.ZonedDateTime.from('2021-01-01T00:00:00')),
+			Temporal.ZonedDateTime.from('2021-01-01T00:00:00'),
 		)
 	},
 )
 
 Deno.test('[getZonedDateTime] throws error for bad input', () => {
 	assertThrows(
-		() => getZonedDateTime('2021-01-011T00:00:00Z'),
+		() => getZonedDateTime('2021-01-011T00:00:00'),
 		Error,
 		'invalid ISO 8601 string: 2021-01-011',
 	)
