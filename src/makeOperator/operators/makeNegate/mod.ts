@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import type {
 	Injector,
 	NegateOperation,
 	Operation,
-} from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import doNegation from './doNegation/mod.ts'
+} from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import doNegation from "./doNegation/mod.ts"
 
 export default function makeNegate(operation: NegateOperation): Injector {
 	const { operand } = operation as NegateOperation

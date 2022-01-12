@@ -1,6 +1,6 @@
-import type { Injector } from '../../../../types/operations.ts'
-import type { NumberValue, RealNumberValue } from '../../../../types/values.ts'
-import convertToRealNumber from '../../../utilities/convertToRealNumber/mod.ts'
+import type { Injector } from "../../../../types/operations.ts"
+import type { NumberValue, RealNumberValue } from "../../../../types/values.ts"
+import convertToRealNumber from "../../../utilities/convertToRealNumber/mod.ts"
 
 export default function addRealNumbers(
 	addends: Array<Injector>,
@@ -12,12 +12,12 @@ export default function addRealNumbers(
 			) as RealNumberValue
 
 			return {
-				datatype: 'real',
+				datatype: "real",
 				value: acc.value + value.value,
 			} as RealNumberValue
 		},
 		{
-			datatype: 'real',
+			datatype: "real",
 			value: 0,
 		} as RealNumberValue,
 	) as RealNumberValue

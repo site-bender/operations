@@ -1,56 +1,56 @@
-import disjointSet from './mod.js'
 import {
 	DisjointSetConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import disjointSet from "./mod.js"
 
 const constraint: DisjointSetConstraint = {
 	constraintType: TypeOfConstraint.DISJOINT_SET,
-	operand: 'red,blue,green',
+	operand: "red,blue,green",
 }
 
-test('[disjointSet] returns correct validation if value set and constraint set share no members', () => {
+test("[disjointSet] returns correct validation if value set and constraint set share no members", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,magenta,yellow,black',
+		datatype: "set",
+		value: "cyan,magenta,yellow,black",
 	}
 
 	expect(disjointSet(constraint)(validation)).toEqual(validation)
 })
 
-test('[disjointSet] returns correct validation with arrays', () => {
+test("[disjointSet] returns correct validation with arrays", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: ['cyan', 'magenta', 'yellow', 'black'],
+		datatype: "set",
+		value: ["cyan", "magenta", "yellow", "black"],
 	}
 
 	expect(
 		disjointSet({
 			...constraint,
-			operand: ['red', 'green', 'blue'],
+			operand: ["red", "green", "blue"],
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[disjointSet] returns correct validation with sets', () => {
+test("[disjointSet] returns correct validation with sets", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: new Set(['cyan', 'magenta', 'yellow', 'black']),
+		datatype: "set",
+		value: new Set(["cyan", "magenta", "yellow", "black"]),
 	}
 
 	expect(
 		disjointSet({
 			...constraint,
-			operand: new Set(['red', 'green', 'blue']),
+			operand: new Set(["red", "green", "blue"]),
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[disjointSet] returns error if value set and constraint set share members', () => {
+test("[disjointSet] returns error if value set and constraint set share members", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'red,yellow,black',
+		datatype: "set",
+		value: "red,yellow,black",
 	}
 
 	expect(disjointSet(constraint)(validation)).toEqual({

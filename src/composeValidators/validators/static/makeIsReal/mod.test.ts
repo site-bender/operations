@@ -1,21 +1,21 @@
-import makeIsReal from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import type {
 	RealTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import type { RealNumberValue } from '../../../../types/values.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import type { RealNumberValue } from "../../../../types/values.ts"
+import makeIsReal from "./mod.ts"
 
 const constraint: RealTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_REAL,
 }
 
 Deno.test(
-	'[makeIsReal] returns correct validation when value is a real number',
+	"[makeIsReal] returns correct validation when value is a real number",
 	() => {
 		const validation: Validation = {
-			datatype: 'real',
+			datatype: "real",
 			value: 3.1415,
 		}
 
@@ -23,11 +23,11 @@ Deno.test(
 	},
 )
 
-Deno.test('[makeIsReal] returns error when value is not a real number', () => {
+Deno.test("[makeIsReal] returns error when value is not a real number", () => {
 	const validation: Validation & RealNumberValue = {
-		datatype: 'real',
+		datatype: "real",
 		// @ts-ignore: for testing purposes
-		value: '7.7',
+		value: "7.7",
 	}
 
 	assertEquals(makeIsReal(constraint)(validation), {

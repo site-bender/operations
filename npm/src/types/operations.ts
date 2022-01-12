@@ -1,4 +1,4 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 import {
 	TypeOfMatch,
 	TypeOfOperator,
@@ -6,7 +6,7 @@ import {
 	TypeOfSource,
 	TypeOfTrim,
 	TypeOfTruncation,
-} from './enums.js'
+} from "./enums.js"
 import {
 	Arrays,
 	DurationValue,
@@ -17,7 +17,7 @@ import {
 	StringValue,
 	Value,
 	ValueType,
-} from './values.js'
+} from "./values.js"
 
 export type Injector = () => Value
 

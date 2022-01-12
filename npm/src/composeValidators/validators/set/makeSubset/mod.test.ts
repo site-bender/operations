@@ -1,62 +1,62 @@
-import subset from './mod.js'
-import { SubsetConstraint, Validation } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { SubsetConstraint, Validation } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import subset from "./mod.js"
 
 const constraint: SubsetConstraint = {
 	constraintType: TypeOfConstraint.SUBSET,
-	operand: 'red,yellow,green,cyan,blue,magenta',
+	operand: "red,yellow,green,cyan,blue,magenta",
 }
 
-test('[subset] returns correct validation if value set is a subset of the constraint set', () => {
+test("[subset] returns correct validation if value set is a subset of the constraint set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,red,yellow,blue',
+		datatype: "set",
+		value: "cyan,red,yellow,blue",
 	}
 
 	expect(subset(constraint)(validation)).toEqual(validation)
 })
 
-test('[subset] returns correct validation with arrays', () => {
+test("[subset] returns correct validation with arrays", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: ['red', 'yellow', 'blue'],
+		datatype: "set",
+		value: ["red", "yellow", "blue"],
 	}
 
 	expect(
 		subset({
 			...constraint,
-			operand: ['cyan', 'red', 'yellow', 'blue'],
+			operand: ["cyan", "red", "yellow", "blue"],
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[subset] returns correct validation with sets', () => {
+test("[subset] returns correct validation with sets", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: new Set(['cyan', 'magenta', 'blue']),
+		datatype: "set",
+		value: new Set(["cyan", "magenta", "blue"]),
 	}
 
 	expect(
 		subset({
 			...constraint,
-			operand: new Set(['cyan', 'magenta', 'yellow', 'blue']),
+			operand: new Set(["cyan", "magenta", "yellow", "blue"]),
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[subset] returns correct validation if value set has no members (is empty)', () => {
+test("[subset] returns correct validation if value set has no members (is empty)", () => {
 	const validation: Validation = {
-		datatype: 'set',
+		datatype: "set",
 		value: [],
 	}
 
 	expect(subset(constraint)(validation)).toEqual(validation)
 })
 
-test('[subset] returns error if value set has members not in constraint set', () => {
+test("[subset] returns error if value set has members not in constraint set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,magenta,yellow,black',
+		datatype: "set",
+		value: "cyan,magenta,yellow,black",
 	}
 
 	expect(subset(constraint)(validation)).toEqual({
@@ -71,10 +71,10 @@ test('[subset] returns error if value set has members not in constraint set', ()
 	})
 })
 
-test('[subset] returns error if value set is identical to constraint set', () => {
+test("[subset] returns error if value set is identical to constraint set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,blue,magenta,red,yellow,green',
+		datatype: "set",
+		value: "cyan,blue,magenta,red,yellow,green",
 	}
 
 	expect(subset(constraint)(validation)).toEqual({

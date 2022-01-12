@@ -1,21 +1,21 @@
-import makeIsList from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	ListTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import type { ListValue } from '../../../../types/values.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import type { ListValue } from "../../../../types/values.ts"
+import makeIsList from "./mod.ts"
 
 const constraint: ListTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_LIST,
 }
 
 Deno.test(
-	'[makeIsList] returns correct validation when value is a list',
+	"[makeIsList] returns correct validation when value is a list",
 	() => {
 		const validation: Validation = {
-			datatype: 'list',
+			datatype: "list",
 			value: [],
 		}
 
@@ -23,9 +23,9 @@ Deno.test(
 	},
 )
 
-Deno.test('[makeIsList] returns error when value is not a list', () => {
+Deno.test("[makeIsList] returns error when value is not a list", () => {
 	const validation: Validation & ListValue = {
-		datatype: 'list',
+		datatype: "list",
 		// @ts-ignore: for testing purposes
 		value: 666,
 	}

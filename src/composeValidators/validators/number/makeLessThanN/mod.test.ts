@@ -1,10 +1,10 @@
-import lessThanN from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	LessThanNConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import lessThanN from "./mod.ts"
 
 const constraint: LessThanNConstraint = {
 	constraintType: TypeOfConstraint.LESS_THAN_N,
@@ -12,10 +12,10 @@ const constraint: LessThanNConstraint = {
 }
 
 Deno.test(
-	'[lessThanN] returns correct validation if integer less than constraint value',
+	"[lessThanN] returns correct validation if integer less than constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 41,
 		}
 
@@ -24,10 +24,10 @@ Deno.test(
 )
 
 Deno.test(
-	'[lessThanN] returns error if integer more than constraint value',
+	"[lessThanN] returns error if integer more than constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 43,
 		}
 

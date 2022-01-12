@@ -1,12 +1,13 @@
-import type { Formatter, MakeInsertParameters } from '../../types.js'
+import type { Formatter, MakeInsertParameters } from "../../types.js"
 
 export default function makeInsert({
 	pattern,
-	insert = '-',
-	flags = '',
+	insert = "-",
+	flags = "",
 }: MakeInsertParameters): Formatter {
-	const matcher =
-		typeof pattern === 'string' ? new RegExp(pattern, flags) : pattern
+	const matcher = typeof pattern === "string"
+		? new RegExp(pattern, flags)
+		: pattern
 
 	return (value: string) => {
 		const [, ...matches] = value.match(matcher) || []

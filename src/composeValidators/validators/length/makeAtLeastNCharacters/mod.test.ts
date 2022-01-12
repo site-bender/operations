@@ -1,18 +1,18 @@
-import atLeastNCharacters from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	AtLeastNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import atLeastNCharacters from "./mod.ts"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
 Deno.test(
-	'[atLeastNCharacters] returns correct validation if string length more than constraint value',
+	"[atLeastNCharacters] returns correct validation if string length more than constraint value",
 	() => {
 		const constraint: AtLeastNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
@@ -24,7 +24,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atLeastNCharacters] returns correct validation if string length equals constraint value',
+	"[atLeastNCharacters] returns correct validation if string length equals constraint value",
 	() => {
 		const constraint: AtLeastNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
@@ -36,7 +36,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atLeastNCharacters] returns error if string length less than constraint value',
+	"[atLeastNCharacters] returns error if string length less than constraint value",
 	() => {
 		const constraint: AtLeastNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
@@ -49,6 +49,7 @@ Deno.test(
 				{
 					constraint,
 					error: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
+					errorMessage: `include at least ${constraint.operand} characters`,
 				},
 			],
 			isInvalid: true,
@@ -57,7 +58,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atLeastNCharacters] returns correct validation if string length equals constraint value using match',
+	"[atLeastNCharacters] returns correct validation if string length equals constraint value using match",
 	() => {
 		const constraint: AtLeastNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
@@ -70,7 +71,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atLeastNCharacters] returns correct response when match returns null',
+	"[atLeastNCharacters] returns correct response when match returns null",
 	() => {
 		const constraint: AtLeastNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
@@ -84,6 +85,7 @@ Deno.test(
 				{
 					constraint,
 					error: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
+					errorMessage: `include at least ${constraint.operand} characters`,
 				},
 			],
 			isInvalid: true,

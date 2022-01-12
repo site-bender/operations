@@ -1,6 +1,6 @@
-import type { InjectValueOperation } from '../../../types/operations.ts'
-import type { Value } from '../../../types/values.ts'
-import parseValue from '../../utilities/parseValue/mod.ts'
+import type { InjectValueOperation } from "../../../types/operations.ts"
+import type { Value } from "../../../types/values.ts"
+import parseValue from "../../utilities/parseValue/mod.ts"
 
 export default function getFromCookieStorage(
 	operation: InjectValueOperation,

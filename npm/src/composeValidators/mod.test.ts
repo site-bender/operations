@@ -1,6 +1,6 @@
-import composeValidators from './mod.js'
-import { Constraint, Validation } from '../types/constraints.js'
-import { TypeOfConstraint } from '../types/enums.js'
+import { Constraint, Validation } from "../types/constraints.js"
+import { TypeOfConstraint } from "../types/enums.js"
+import composeValidators from "./mod.js"
 
 const constraint: Constraint = {
 	constraintType: TypeOfConstraint.AND,
@@ -42,7 +42,7 @@ const constraint: Constraint = {
 	],
 }
 
-test('[composeValidators] returns correct validation if value validates against constraint', () => {
+test("[composeValidators] returns correct validation if value validates against constraint", () => {
 	const validate = composeValidators(constraint)
 
 	const validation: Validation = {
@@ -52,7 +52,7 @@ test('[composeValidators] returns correct validation if value validates against 
 	expect(validate(validation)).toEqual(validation)
 })
 
-test('[composeValidators] returns error validation if given invalid value', () => {
+test("[composeValidators] returns error validation if given invalid value", () => {
 	const validate = composeValidators(constraint)
 
 	const validation: Validation = {

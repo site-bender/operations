@@ -1,4 +1,4 @@
-import not from '../../../utilities/not/mod.ts'
+import not from "../../../utilities/not/mod.ts"
 
 export default function compareIntegers(left: number, right: number): number {
 	if (not(Number.isInteger(left))) {

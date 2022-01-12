@@ -1,21 +1,21 @@
-import makeIsBoolean from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	TypeOfBooleanConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import type { BooleanValue } from '../../../../types/values.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import type { BooleanValue } from "../../../../types/values.ts"
+import makeIsBoolean from "./mod.ts"
 
 const constraint: TypeOfBooleanConstraint = {
 	constraintType: TypeOfConstraint.IS_BOOLEAN,
 }
 
 Deno.test(
-	'[makeIsBoolean] returns correct validation when value is an boolean',
+	"[makeIsBoolean] returns correct validation when value is an boolean",
 	() => {
 		const validation: Validation = {
-			datatype: 'boolean',
+			datatype: "boolean",
 			value: true,
 		}
 
@@ -23,9 +23,9 @@ Deno.test(
 	},
 )
 
-Deno.test('[makeIsBoolean] returns error when value is not an boolean', () => {
+Deno.test("[makeIsBoolean] returns error when value is not an boolean", () => {
 	const validation: Validation & BooleanValue = {
-		datatype: 'boolean',
+		datatype: "boolean",
 		// @ts-ignore: for testing purposes
 		value: undefined,
 	}

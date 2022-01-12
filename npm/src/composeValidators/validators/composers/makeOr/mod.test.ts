@@ -1,50 +1,50 @@
-import or from './mod.js'
-import { OrConstraint, Validation } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { OrConstraint, Validation } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import or from "./mod.js"
 
 const constraint: OrConstraint = {
-	constraintType: 'or',
+	constraintType: "or",
 	tests: [
 		{
 			constraintType: TypeOfConstraint.MEMBER,
-			operand: ['red', 'green', 'blue'],
+			operand: ["red", "green", "blue"],
 		},
 		{
 			constraintType: TypeOfConstraint.MEMBER,
-			operand: ['cyan', 'magenta', 'yellow', 'blue'],
+			operand: ["cyan", "magenta", "yellow", "blue"],
 		},
 	],
 }
 
 const validate = or(constraint)
 
-test('[or] passes when both or either constraint check passes', () => {
+test("[or] passes when both or either constraint check passes", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'blue',
+		datatype: "member",
+		value: "blue",
 	}
 
 	expect(validate(validation)).toEqual(validation)
 
 	const validation2: Validation = {
-		datatype: 'member',
-		value: 'red',
+		datatype: "member",
+		value: "red",
 	}
 
 	expect(validate(validation2)).toEqual(validation2)
 
 	const validation3: Validation = {
-		datatype: 'member',
-		value: 'yellow',
+		datatype: "member",
+		value: "yellow",
 	}
 
 	expect(validate(validation3)).toEqual(validation3)
 })
 
-test('[or] fails when both constraint checks fail', () => {
+test("[or] fails when both constraint checks fail", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'orange',
+		datatype: "member",
+		value: "orange",
 	}
 
 	expect(validate(validation)).toEqual({
@@ -53,36 +53,36 @@ test('[or] fails when both constraint checks fail', () => {
 		errors: [
 			{
 				constraint: {
-					constraintType: 'or',
+					constraintType: "or",
 					tests: [
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							datatype: 'set',
-							value: ['red', 'green', 'blue'],
+							datatype: "set",
+							value: ["red", "green", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							datatype: 'set',
-							value: ['cyan', 'magenta', 'yellow', 'blue'],
+							datatype: "set",
+							value: ["cyan", "magenta", "yellow", "blue"],
 						},
 					],
 				},
-				error: 'or',
+				error: "or",
 				errors: [
 					{
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							datatype: 'set',
-							value: ['red', 'green', 'blue'],
+							datatype: "set",
+							value: ["red", "green", "blue"],
 						},
 					},
 					{
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							datatype: 'set',
-							value: ['cyan', 'magenta', 'yellow', 'blue'],
+							datatype: "set",
+							value: ["cyan", "magenta", "yellow", "blue"],
 						},
 					},
 				],

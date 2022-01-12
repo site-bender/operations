@@ -1,0 +1,15 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_MODULES_BREAKING_CHANGE",
+    "modulesPath": "/Users/ludwig/node_modules",
+    "err": {
+      "name": "pnpm",
+      "message": "The node_modules structure at \"/Users/ludwig/node_modules\" is not compatible with the current pnpm version. Run \"pnpm install --force\" to recreate node_modules.",
+      "code": "ERR_PNPM_MODULES_BREAKING_CHANGE",
+      "stack": "pnpm: The node_modules structure at \"/Users/ludwig/node_modules\" is not compatible with the current pnpm version. Run \"pnpm install --force\" to recreate node_modules.\n    at checkCompatibility (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:91048:15)\n    at /Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:91575:44\n    at Array.map (<anonymous>)\n    at validateModules (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:91573:34)\n    at getContext (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:91471:34)\n    at async mutateModules (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:116264:19)\n    at async handler (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:118510:35)\n    at async /Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:183649:21\n    at async run (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:183623:34)\n    at async runPnpm (/Users/ludwig/pnpm-global/5/node_modules/.pnpm/pnpm@6.24.1/node_modules/pnpm/dist/pnpm.cjs:183835:5)"
+    }
+  }
+}

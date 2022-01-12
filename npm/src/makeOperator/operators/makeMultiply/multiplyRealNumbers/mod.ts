@@ -1,6 +1,6 @@
-import { Injector } from '../../../../types/operations.js'
-import { NumberValue, RealNumberValue } from '../../../../types/values.js'
-import convertToRealNumber from '../../../utilities/convertToRealNumber/mod.js'
+import { Injector } from "../../../../types/operations.js"
+import { NumberValue, RealNumberValue } from "../../../../types/values.js"
+import convertToRealNumber from "../../../utilities/convertToRealNumber/mod.js"
 
 export default function multiplyRealNumbers(
 	multiplicands: Array<Injector>,
@@ -12,12 +12,12 @@ export default function multiplyRealNumbers(
 			) as RealNumberValue
 
 			return {
-				datatype: 'real',
+				datatype: "real",
 				value: acc.value * value.value,
 			} as RealNumberValue
 		},
 		{
-			datatype: 'real',
+			datatype: "real",
 			value: 1,
 		} as RealNumberValue,
 	) as RealNumberValue

@@ -1,10 +1,10 @@
-import makeIsPrecision from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	PrecisionTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import makeIsPrecision from "./mod.ts"
 
 const constraint: PrecisionTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_PRECISION,
@@ -12,19 +12,19 @@ const constraint: PrecisionTypeConstraint = {
 }
 
 const validation: Validation = {
-	datatype: 'precision',
+	datatype: "precision",
 	value: 3.1415,
 	decimalPlaces: 4,
 }
 
 Deno.test(
-	'[makeIsPrecision] returns correct validation when value is a correct precision number',
+	"[makeIsPrecision] returns correct validation when value is a correct precision number",
 	() => {
 		assertEquals(makeIsPrecision(constraint)(validation), validation)
 	},
 )
 
-Deno.test('[makeIsPrecision] defaults precision to zero', () => {
+Deno.test("[makeIsPrecision] defaults precision to zero", () => {
 	assertEquals(
 		makeIsPrecision({
 			...constraint,
@@ -48,14 +48,14 @@ Deno.test('[makeIsPrecision] defaults precision to zero', () => {
 })
 
 Deno.test(
-	'[makeIsPrecision] returns correct validation when value is a correct precision number',
+	"[makeIsPrecision] returns correct validation when value is a correct precision number",
 	() => {
 		assertEquals(makeIsPrecision(constraint)(validation), validation)
 	},
 )
 
 Deno.test(
-	'[makeIsPrecision] returns error when value is not a precision number but should be',
+	"[makeIsPrecision] returns error when value is not a precision number but should be",
 	() => {
 		assertEquals(
 			makeIsPrecision({

@@ -1,10 +1,10 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 import type {
 	MonthDayConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import getMonthDay from '../../../utilities/getMonthDay/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import getMonthDay from "../../../utilities/getMonthDay/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 // FIXME
 export default function makeIsMonthDay(

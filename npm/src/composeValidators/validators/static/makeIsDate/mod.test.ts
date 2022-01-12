@@ -1,27 +1,27 @@
-import makeIsDate from './mod.js'
 import {
 	DateTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { PlainDateValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { PlainDateValue } from "../../../../types/values.js"
+import makeIsDate from "./mod.js"
 
 const constraint: DateTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_DATE,
 }
 
-test('[makeIsDate] returns correct validation when value is a date', () => {
+test("[makeIsDate] returns correct validation when value is a date", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2000-01-01',
+		datatype: "plainDate",
+		value: "2000-01-01",
 	}
 
 	expect(makeIsDate(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsDate] returns error when value is not a date', () => {
+test("[makeIsDate] returns error when value is not a date", () => {
 	const validation: Validation & PlainDateValue = {
-		datatype: 'plainDate',
+		datatype: "plainDate",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -33,7 +33,7 @@ test('[makeIsDate] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_DATE,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

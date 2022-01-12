@@ -1,16 +1,16 @@
-import composeValidators from '../../../mod.ts'
 import type {
 	Constraint,
 	OrConstraint,
 	Validation,
 	ValidationError,
-} from '../../../../types/constraints.ts'
-import pipe from '../../../../utilities/pipe/mod.ts'
-import ListFormat from 'https://cdn.skypack.dev/@formatjs/intl-listformat?dts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import pipe from "../../../../utilities/pipe/mod.ts"
+import composeValidators from "../../../mod.ts"
 
-const orFormatter = new ListFormat('en', {
-	style: 'long',
-	type: 'disjunction',
+const orFormatter = new Intl.ListFormat("en", {
+	style: "long",
+	type: "disjunction",
 })
 
 export default function makeOr(
@@ -27,7 +27,7 @@ export default function makeOr(
 			validated.errors || ([] as Array<ValidationError>)
 		).reduce(
 			(acc, error) =>
-				error.error === 'OR_ERROR'
+				error.error === TypeOfConstraint.OR
 					? { ...acc, ors: [...acc.ors, error] }
 					: { ...acc, others: [...acc.others, error] },
 			{ ors: [], others: [] } as OrSplitter,
@@ -35,30 +35,30 @@ export default function makeOr(
 
 		const output = validated.isInvalid
 			? {
-					isInvalid: true,
-					errors: [
-						...ors,
-						{
-							constraint,
-							error: 'OR_ERROR',
-							errors: others,
-							errorMessage: orFormatter.format(
-								others
-									.map(({ errorMessage }) => errorMessage)
-									.filter(value => value) as Array<string>,
-							),
-						} as ValidationError,
-					],
-			  }
+				isInvalid: true,
+				errors: [
+					...ors,
+					{
+						constraint,
+						error: TypeOfConstraint.OR,
+						errors: others,
+						errorMessage: orFormatter.format(
+							others
+								.map(({ errorMessage }) => errorMessage)
+								.filter((value) => value) as Array<string>,
+						),
+					} as ValidationError,
+				],
+			}
 			: { isInvalid: validated.isInvalid, errors: validated.errors }
 
 		return ((validated.errors || []) as Array<ValidationError>).length <
-			constraint.tests.length
+				constraint.tests.length
 			? validation
 			: {
-					...validation,
-					...output,
-			  }
+				...validation,
+				...output,
+			}
 	}
 }
 

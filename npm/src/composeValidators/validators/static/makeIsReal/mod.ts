@@ -1,9 +1,9 @@
 import type {
 	RealTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import not from '../../../../utilities/not/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import not from "../../../../utilities/not/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeIsReal(
 	constraint: RealTypeConstraint,
@@ -11,7 +11,7 @@ export default function makeIsReal(
 	return function isReal(validation: Validation): Validation {
 		const value = validation.value
 
-		return typeof value === 'number' && not(Number.isNaN(value))
+		return typeof value === "number" && not(Number.isNaN(value))
 			? validation
 			: makeError(validation, constraint)
 	}

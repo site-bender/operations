@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	Injector,
 	Operation,
 	ReciprocalOperation,
-} from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import getReciprocal from './getReciprocal/mod.ts'
+} from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import getReciprocal from "./getReciprocal/mod.ts"
 
 export default function makeReciprocal(
 	operation: ReciprocalOperation,

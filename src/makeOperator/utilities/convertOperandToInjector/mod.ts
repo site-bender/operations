@@ -1,18 +1,18 @@
-import { TypeOfTruncation } from './../../../types/enums.ts'
-import type { Injector, Operation } from './../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import makeOperator from '../../mod.ts'
-import truncate from '../truncate/mod.ts'
+import { TypeOfTruncation } from "./../../../types/enums.ts"
+import type { Injector, Operation } from "./../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import truncate from "../truncate/mod.ts"
 
 export default function convertOperandToInjector(
 	operand: number | Operation | NumberValue,
 	decimalPlaces?: number,
 ): Injector {
-	if (typeof operand === 'number') {
+	if (typeof operand === "number") {
 		return () => {
-			if (typeof decimalPlaces === 'number') {
+			if (typeof decimalPlaces === "number") {
 				return {
-					datatype: 'precision',
+					datatype: "precision",
 					decimalPlaces,
 					value: truncate(
 						Number(operand),
@@ -24,13 +24,13 @@ export default function convertOperandToInjector(
 
 			if (Number.isInteger(operand)) {
 				return {
-					datatype: 'integer',
+					datatype: "integer",
 					value: operand,
 				}
 			}
 
 			return {
-				datatype: 'real',
+				datatype: "real",
 				value: Number(operand),
 			}
 		}

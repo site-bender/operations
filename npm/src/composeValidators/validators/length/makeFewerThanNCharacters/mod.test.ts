@@ -1,16 +1,16 @@
-import fewerThanNCharacters from './mod.js'
 import {
 	FewerThanNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import fewerThanNCharacters from "./mod.js"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
-test('[fewerThanNCharacters] returns correct validation if string length less than constraint value', () => {
+test("[fewerThanNCharacters] returns correct validation if string length less than constraint value", () => {
 	const constraint: FewerThanNCharactersConstraint = {
 		constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
 		operand: 46,
@@ -19,7 +19,7 @@ test('[fewerThanNCharacters] returns correct validation if string length less th
 	expect(fewerThanNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[fewerThanNCharacters] returns error if string length equals constraint value', () => {
+test("[fewerThanNCharacters] returns error if string length equals constraint value", () => {
 	const constraint: FewerThanNCharactersConstraint = {
 		constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
 		operand: 45,
@@ -37,7 +37,7 @@ test('[fewerThanNCharacters] returns error if string length equals constraint va
 	})
 })
 
-test('[fewerThanNCharacters] returns error if string length more than constraint value', () => {
+test("[fewerThanNCharacters] returns error if string length more than constraint value", () => {
 	const constraint: FewerThanNCharactersConstraint = {
 		constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
 		operand: 44,
@@ -55,7 +55,7 @@ test('[fewerThanNCharacters] returns error if string length more than constraint
 	})
 })
 
-test('[fewerThanNCharacters] returns correct validation if string length less than constraint value using match', () => {
+test("[fewerThanNCharacters] returns correct validation if string length less than constraint value using match", () => {
 	const constraint: FewerThanNCharactersConstraint = {
 		constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
 		operand: 13,
@@ -65,7 +65,7 @@ test('[fewerThanNCharacters] returns correct validation if string length less th
 	expect(fewerThanNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[fewerThanNCharacters] returns correct response when match returns null', () => {
+test("[fewerThanNCharacters] returns correct response when match returns null", () => {
 	const constraint: FewerThanNCharactersConstraint = {
 		constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
 		operand: 13,

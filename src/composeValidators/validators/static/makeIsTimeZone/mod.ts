@@ -1,10 +1,10 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 import type {
 	TimeZoneTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import getTimeZone from '../../../utilities/getTimeZone/mod.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import getTimeZone from "../../../utilities/getTimeZone/mod.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 // FIXME
 export default function makeIsTimeZone(

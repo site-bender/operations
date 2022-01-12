@@ -1,4 +1,4 @@
-import { TypeOfTruncation } from '../../../types/enums.js'
+import { TypeOfTruncation } from "../../../types/enums.js"
 
 export default function truncate(
 	value: string | number,
@@ -7,17 +7,17 @@ export default function truncate(
 ): string | number {
 	switch (truncationType) {
 		case TypeOfTruncation.CHARACTERS:
-			return typeof decimalPlaces === 'number'
-				? (value as string).replace(/\n/g, ' ').slice(0, decimalPlaces)
+			return typeof decimalPlaces === "number"
+				? (value as string).replace(/\n/g, " ").slice(0, decimalPlaces)
 				: value
 		case TypeOfTruncation.LINES:
-			return typeof decimalPlaces === 'number'
+			return typeof decimalPlaces === "number"
 				? (value as string).split(/\n/).slice(0, decimalPlaces).join(`
 `)
 				: value
 		case TypeOfTruncation.WORDS:
-			return typeof decimalPlaces === 'number'
-				? (value as string).split(/[ \n]/).slice(0, decimalPlaces).join(' ')
+			return typeof decimalPlaces === "number"
+				? (value as string).split(/[ \n]/).slice(0, decimalPlaces).join(" ")
 				: value
 		case TypeOfTruncation.ROUND:
 			return (

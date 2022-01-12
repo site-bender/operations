@@ -1,15 +1,15 @@
-import composeValidators from '../../../mod.js'
 import type {
 	AndConstraint,
 	Constraint,
 	Validation,
 	ValidationError,
-} from '../../../../types/constraints.js'
-import pipe from '../../../../utilities/pipe/mod.js'
+} from "../../../../types/constraints.js"
+import pipe from "../../../../utilities/pipe/mod.js"
+import composeValidators from "../../../mod.js"
 
-const andFormatter = new Intl.ListFormat('en', {
-	style: 'long',
-	type: 'conjunction',
+const andFormatter = new Intl.ListFormat("en", {
+	style: "long",
+	type: "conjunction",
 })
 
 export default function makeAnd(
@@ -26,7 +26,7 @@ export default function makeAnd(
 			validated.errors || ([] as Array<ValidationError>)
 		).reduce(
 			(acc, error) => {
-				return error.error === 'AND_ERROR'
+				return error.error === "AND_ERROR"
 					? { ...acc, ands: [...acc.ands, error] }
 					: { ...acc, others: [...acc.others, error] }
 			},
@@ -34,21 +34,21 @@ export default function makeAnd(
 		)
 		const output = validated.isInvalid
 			? {
-					isInvalid: true,
-					errors: [
-						...ands,
-						{
-							constraint,
-							error: 'AND_ERROR',
-							errors: others,
-							errorMessage: andFormatter.format(
-								others
-									.map(({ errorMessage }) => errorMessage)
-									.filter(value => value) as Array<string>,
-							),
-						} as ValidationError,
-					],
-			  }
+				isInvalid: true,
+				errors: [
+					...ands,
+					{
+						constraint,
+						error: "AND_ERROR",
+						errors: others,
+						errorMessage: andFormatter.format(
+							others
+								.map(({ errorMessage }) => errorMessage)
+								.filter((value) => value) as Array<string>,
+						),
+					} as ValidationError,
+				],
+			}
 			: { isInvalid: validated.isInvalid, errors: validated.errors }
 
 		return {

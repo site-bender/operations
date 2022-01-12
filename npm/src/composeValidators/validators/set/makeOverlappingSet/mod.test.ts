@@ -1,56 +1,56 @@
-import overlappingSet from './mod.js'
 import {
 	OverlappingSetConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import overlappingSet from "./mod.js"
 
 const constraint: OverlappingSetConstraint = {
 	constraintType: TypeOfConstraint.OVERLAPPING_SET,
-	operand: 'red,blue,green',
+	operand: "red,blue,green",
 }
 
-test('[overlappingSet] returns correct validation if value set and constraint set share some but not all members', () => {
+test("[overlappingSet] returns correct validation if value set and constraint set share some but not all members", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,red,yellow,blue',
+		datatype: "set",
+		value: "cyan,red,yellow,blue",
 	}
 
 	expect(overlappingSet(constraint)(validation)).toEqual(validation)
 })
 
-test('[overlappingSet] returns correct validation with arrays', () => {
+test("[overlappingSet] returns correct validation with arrays", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: ['cyan', 'red', 'yellow', 'black'],
+		datatype: "set",
+		value: ["cyan", "red", "yellow", "black"],
 	}
 
 	expect(
 		overlappingSet({
 			...constraint,
-			operand: ['red', 'green', 'blue'],
+			operand: ["red", "green", "blue"],
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[overlappingSet] returns correct validation with sets', () => {
+test("[overlappingSet] returns correct validation with sets", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: new Set(['cyan', 'magenta', 'yellow', 'blue']),
+		datatype: "set",
+		value: new Set(["cyan", "magenta", "yellow", "blue"]),
 	}
 
 	expect(
 		overlappingSet({
 			...constraint,
-			operand: new Set(['red', 'green', 'blue']),
+			operand: new Set(["red", "green", "blue"]),
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[overlappingSet] returns error if value set and constraint set share no members', () => {
+test("[overlappingSet] returns error if value set and constraint set share no members", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,magenta,yellow,black',
+		datatype: "set",
+		value: "cyan,magenta,yellow,black",
 	}
 
 	expect(overlappingSet(constraint)(validation)).toEqual({
@@ -65,10 +65,10 @@ test('[overlappingSet] returns error if value set and constraint set share no me
 	})
 })
 
-test('[overlappingSet] returns error if value set and constraint set share all members', () => {
+test("[overlappingSet] returns error if value set and constraint set share all members", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'red,blue,green',
+		datatype: "set",
+		value: "red,blue,green",
 	}
 
 	expect(overlappingSet(constraint)(validation)).toEqual({

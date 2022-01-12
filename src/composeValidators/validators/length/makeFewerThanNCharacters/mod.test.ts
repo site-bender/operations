@@ -1,18 +1,18 @@
-import fewerThanNCharacters from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	FewerThanNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import fewerThanNCharacters from "./mod.ts"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
 Deno.test(
-	'[fewerThanNCharacters] returns correct validation if string length less than constraint value',
+	"[fewerThanNCharacters] returns correct validation if string length less than constraint value",
 	() => {
 		const constraint: FewerThanNCharactersConstraint = {
 			constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
@@ -24,7 +24,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[fewerThanNCharacters] returns error if string length equals constraint value',
+	"[fewerThanNCharacters] returns error if string length equals constraint value",
 	() => {
 		const constraint: FewerThanNCharactersConstraint = {
 			constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
@@ -45,7 +45,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[fewerThanNCharacters] returns error if string length more than constraint value',
+	"[fewerThanNCharacters] returns error if string length more than constraint value",
 	() => {
 		const constraint: FewerThanNCharactersConstraint = {
 			constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
@@ -66,7 +66,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[fewerThanNCharacters] returns correct validation if string length less than constraint value using match',
+	"[fewerThanNCharacters] returns correct validation if string length less than constraint value using match",
 	() => {
 		const constraint: FewerThanNCharactersConstraint = {
 			constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,
@@ -79,7 +79,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[fewerThanNCharacters] returns correct response when match returns null',
+	"[fewerThanNCharacters] returns correct response when match returns null",
 	() => {
 		const constraint: FewerThanNCharactersConstraint = {
 			constraintType: TypeOfConstraint.FEWER_THAN_N_CHARACTERS,

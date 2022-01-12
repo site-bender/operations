@@ -1,53 +1,53 @@
-import member from './mod.js'
-import { MemberConstraint, Validation } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { MemberConstraint, Validation } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import member from "./mod.js"
 
 const constraint: MemberConstraint = {
 	constraintType: TypeOfConstraint.MEMBER,
-	operand: ['red', 'green', 'blue'],
+	operand: ["red", "green", "blue"],
 }
 
-test('[member] returns correct validation when value is a member of constraint set', () => {
+test("[member] returns correct validation when value is a member of constraint set", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'green',
+		datatype: "member",
+		value: "green",
 	}
 
 	expect(member(constraint)(validation)).toEqual(validation)
 })
 
-test('[member] works when constraint set is a string', () => {
+test("[member] works when constraint set is a string", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'green',
+		datatype: "member",
+		value: "green",
 	}
 
 	expect(
 		member({
 			...constraint,
-			operand: 'red,green,blue',
+			operand: "red,green,blue",
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[member] works when constraint set is a Set', () => {
+test("[member] works when constraint set is a Set", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'green',
+		datatype: "member",
+		value: "green",
 	}
 
 	expect(
 		member({
 			...constraint,
-			operand: new Set(['red', 'green', 'blue']),
+			operand: new Set(["red", "green", "blue"]),
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[disjointSet] returns error if value is not a member of the constraint set', () => {
+test("[disjointSet] returns error if value is not a member of the constraint set", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'orange',
+		datatype: "member",
+		value: "orange",
 	}
 
 	expect(member(constraint)(validation)).toEqual({

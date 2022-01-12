@@ -1,9 +1,9 @@
-import and from './mod.js'
-import { AndConstraint, Validation } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { AndConstraint, Validation } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import and from "./mod.js"
 
 const constraint: AndConstraint = {
-	constraintType: 'and',
+	constraintType: "and",
 	tests: [
 		{
 			constraintType: TypeOfConstraint.AT_LEAST_N,
@@ -18,20 +18,20 @@ const constraint: AndConstraint = {
 
 const validate = and(constraint)
 
-test('[and] passes when all constraint checks pass', () => {
+test("[and] passes when all constraint checks pass", () => {
 	const validation: Validation = {
-		numberType: 'integer',
-		datatype: 'integer',
+		numberType: "integer",
+		datatype: "integer",
 		value: 50,
 	}
 
 	expect(validate(validation)).toEqual(validation)
 })
 
-test('[and] fails when any constraint checks fails', () => {
+test("[and] fails when any constraint checks fails", () => {
 	const validation: Validation = {
-		numberType: 'integer',
-		datatype: 'integer',
+		numberType: "integer",
+		datatype: "integer",
 		value: 0,
 	}
 
@@ -41,27 +41,27 @@ test('[and] fails when any constraint checks fails', () => {
 		errors: [
 			{
 				constraint: {
-					constraintType: 'and',
+					constraintType: "and",
 					tests: [
 						{
 							constraintType: TypeOfConstraint.AT_LEAST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 25,
 						},
 						{
 							constraintType: TypeOfConstraint.AT_MOST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 75,
 						},
 					],
 				},
-				error: 'and',
+				error: "and",
 				errors: [
 					{
 						error: TypeOfConstraint.AT_LEAST_N,
 						constraint: {
 							constraintType: TypeOfConstraint.AT_LEAST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 25,
 						},
 					},
@@ -71,8 +71,8 @@ test('[and] fails when any constraint checks fails', () => {
 	})
 
 	const validation2: Validation = {
-		numberType: 'integer',
-		datatype: 'integer',
+		numberType: "integer",
+		datatype: "integer",
 		value: 100,
 	}
 
@@ -82,27 +82,27 @@ test('[and] fails when any constraint checks fails', () => {
 		errors: [
 			{
 				constraint: {
-					constraintType: 'and',
+					constraintType: "and",
 					tests: [
 						{
 							constraintType: TypeOfConstraint.AT_LEAST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 25,
 						},
 						{
 							constraintType: TypeOfConstraint.AT_MOST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 75,
 						},
 					],
 				},
-				error: 'and',
+				error: "and",
 				errors: [
 					{
 						error: TypeOfConstraint.AT_MOST_N,
 						constraint: {
 							constraintType: TypeOfConstraint.AT_MOST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 75,
 						},
 					},
@@ -112,9 +112,9 @@ test('[and] fails when any constraint checks fails', () => {
 	})
 })
 
-test('[and] fails when both constraint checks fail', () => {
+test("[and] fails when both constraint checks fail", () => {
 	const validate = and({
-		constraintType: 'and',
+		constraintType: "and",
 		tests: [
 			{
 				constraintType: TypeOfConstraint.AT_LEAST_N,
@@ -128,8 +128,8 @@ test('[and] fails when both constraint checks fail', () => {
 	})
 
 	const validation: Validation = {
-		numberType: 'integer',
-		datatype: 'integer',
+		numberType: "integer",
+		datatype: "integer",
 		value: 50,
 	}
 
@@ -139,27 +139,27 @@ test('[and] fails when both constraint checks fail', () => {
 		errors: [
 			{
 				constraint: {
-					constraintType: 'and',
+					constraintType: "and",
 					tests: [
 						{
 							constraintType: TypeOfConstraint.AT_LEAST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 75,
 						},
 						{
 							constraintType: TypeOfConstraint.AT_MOST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 25,
 						},
 					],
 				},
-				error: 'and',
+				error: "and",
 				errors: [
 					{
 						error: TypeOfConstraint.AT_LEAST_N,
 						constraint: {
 							constraintType: TypeOfConstraint.AT_LEAST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 75,
 						},
 					},
@@ -167,7 +167,7 @@ test('[and] fails when both constraint checks fail', () => {
 						error: TypeOfConstraint.AT_MOST_N,
 						constraint: {
 							constraintType: TypeOfConstraint.AT_MOST_N,
-							datatype: 'integer',
+							datatype: "integer",
 							operand: 25,
 						},
 					},

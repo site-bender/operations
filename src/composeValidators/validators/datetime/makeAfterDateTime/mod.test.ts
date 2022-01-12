@@ -1,16 +1,16 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
-import afterDateTime from './mod.ts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	AfterDateTimeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import afterDateTime from "./mod.ts"
 
 const constraint: AfterDateTimeConstraint = {
 	constraintType: TypeOfConstraint.AFTER_DATE_TIME,
 	operand: {
-		datatype: 'plainDateTime',
+		datatype: "plainDateTime",
 		value: Temporal.PlainDateTime.from({
 			year: 2021,
 			month: 1,
@@ -21,11 +21,11 @@ const constraint: AfterDateTimeConstraint = {
 }
 
 Deno.test(
-	'[afterDateTime] returns correct validation if date-time after constraint value',
+	"[afterDateTime] returns correct validation if date-time after constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'plainDateTime',
-			value: '2021-01-01T12:01:01',
+			datatype: "plainDateTime",
+			value: "2021-01-01T12:01:01",
 		}
 
 		assertEquals(afterDateTime(constraint)(validation), validation)
@@ -33,11 +33,11 @@ Deno.test(
 )
 
 Deno.test(
-	'[afterDateTime] returns error if date-time before constraint value',
+	"[afterDateTime] returns error if date-time before constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'plainDateTime',
-			value: '2021-01-01T11:59:59',
+			datatype: "plainDateTime",
+			value: "2021-01-01T11:59:59",
 		}
 
 		assertEquals(afterDateTime(constraint)(validation), {
@@ -53,10 +53,10 @@ Deno.test(
 	},
 )
 
-Deno.test('[afterDateTime] returns error if bad date', () => {
+Deno.test("[afterDateTime] returns error if bad date", () => {
 	const validation: Validation = {
-		datatype: 'plainDateTime',
-		value: '2001-09-31',
+		datatype: "plainDateTime",
+		value: "2001-09-31",
 	}
 
 	assertEquals(afterDateTime(constraint)(validation), {
@@ -65,7 +65,7 @@ Deno.test('[afterDateTime] returns error if bad date', () => {
 			{
 				constraint,
 				error: TypeOfConstraint.AFTER_DATE_TIME,
-				errorMessage: 'RangeError: value out of range: 1 <= 31 <= 30',
+				errorMessage: "RangeError: value out of range: 1 <= 31 <= 30",
 			},
 		],
 		isInvalid: true,

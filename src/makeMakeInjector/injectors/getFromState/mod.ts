@@ -1,10 +1,10 @@
 import type {
 	Injector,
 	InjectValueOperation,
-} from '../../../types/operations.ts'
-import type { EmptyValue, Value } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
-import parseValue from '../../utilities/parseValue/mod.ts'
+} from "../../../types/operations.ts"
+import type { EmptyValue, Value } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
+import parseValue from "../../utilities/parseValue/mod.ts"
 
 export default function getFromState(
 	operation: InjectValueOperation,
@@ -17,9 +17,9 @@ export default function getFromState(
 	}
 
 	return function injectValueFromState(): Value {
-		const value = 'TODO'
+		const value = "TODO"
 
-		return typeof value === 'undefined'
+		return typeof value === "undefined"
 			? ({} as EmptyValue)
 			: parseValue(value as string, operation)
 	}

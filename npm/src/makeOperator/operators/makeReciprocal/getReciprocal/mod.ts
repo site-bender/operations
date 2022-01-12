@@ -2,14 +2,14 @@ import {
 	FractionValue,
 	NonFractionValue,
 	NumberValue,
-} from '../../../../types/values.js'
+} from "../../../../types/values.js"
 
 export default function getReciprocal(
 	value: NumberValue | number,
 ): NumberValue {
-	if (typeof value === 'number') {
+	if (typeof value === "number") {
 		return {
-			datatype: 'fraction',
+			datatype: "fraction",
 			value: {
 				denominator: value,
 				numerator: 1,
@@ -17,9 +17,9 @@ export default function getReciprocal(
 		}
 	}
 
-	if ((value as NumberValue).datatype === 'fraction') {
+	if ((value as NumberValue).datatype === "fraction") {
 		return {
-			datatype: 'fraction',
+			datatype: "fraction",
 			value: {
 				denominator: (value as FractionValue).value.numerator,
 				numerator: (value as FractionValue).value.denominator,
@@ -28,7 +28,7 @@ export default function getReciprocal(
 	}
 
 	return {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			denominator: (value as NonFractionValue).value,
 			numerator: 1,

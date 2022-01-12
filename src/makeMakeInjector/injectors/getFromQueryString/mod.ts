@@ -1,11 +1,11 @@
 import type {
 	Injector,
 	InjectValueOperation,
-} from '../../../types/operations.ts'
-import type { Value } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
-import parseValue from '../../utilities/parseValue/mod.ts'
-import stringToMap from '../../utilities/stringToMap/mod.ts'
+} from "../../../types/operations.ts"
+import type { Value } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
+import parseValue from "../../utilities/parseValue/mod.ts"
+import stringToMap from "../../utilities/stringToMap/mod.ts"
 
 export default function getFromQueryString(
 	operation: InjectValueOperation,
@@ -16,11 +16,11 @@ export default function getFromQueryString(
 	const [name] = path
 
 	if (not(name)) {
-		return () => ({})
+		return () => ({ datatype: "undefined", value: undefined })
 	}
 
 	return function injectValueFromQueryString(): Value {
-		const queryValue = stringToMap(router.location.queryString, '&', '=').get(
+		const queryValue = stringToMap(router.location.queryString, "&", "=").get(
 			name,
 		)
 

@@ -1,4 +1,4 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 
 export default function getPlainDateTime(
 	d: string | Date | Temporal.PlainDateTime,
@@ -17,6 +17,6 @@ export default function getPlainDateTime(
 				minute: d.getMinutes(),
 				second: d.getSeconds(),
 			})) ||
-		Temporal.PlainDateTime.from((d as string).replace('Z', ''))
+		Temporal.PlainDateTime.from(String(d).replace("Z", ""))
 	)
 }

@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	Injector,
 	ModuloOperation,
 	Operation,
-} from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import convertToInteger from '../../utilities/convertToInteger/mod.ts'
+} from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import convertToInteger from "../../utilities/convertToInteger/mod.ts"
 
 export default function makeModulo(operation: ModuloOperation): Injector {
 	const { dividend, modulus } = operation as ModuloOperation
@@ -23,7 +23,7 @@ export default function makeModulo(operation: ModuloOperation): Injector {
 		const right = convertToInteger(second() as NumberValue | number)
 
 		return {
-			datatype: 'integer',
+			datatype: "integer",
 			value: (left.value % right.value) * (left.value / left.value),
 		}
 	}

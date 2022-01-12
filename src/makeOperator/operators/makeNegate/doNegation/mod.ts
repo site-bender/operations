@@ -2,24 +2,24 @@ import {
 	FractionValue,
 	NonFractionValue,
 	NumberValue,
-} from '../../../../types/values.ts'
+} from "../../../../types/values.ts"
 
 export default function doNegation(value: NumberValue | number): NumberValue {
-	if (typeof value === 'number') {
+	if (typeof value === "number") {
 		return Number.isInteger(value)
 			? {
-					datatype: 'integer',
-					value: value * -1,
-			  }
+				datatype: "integer",
+				value: value * -1,
+			}
 			: {
-					datatype: 'real',
-					value: value * -1,
-			  }
+				datatype: "real",
+				value: value * -1,
+			}
 	}
 
-	if ((value as NumberValue).datatype === 'fraction') {
+	if ((value as NumberValue).datatype === "fraction") {
 		return {
-			datatype: 'fraction',
+			datatype: "fraction",
 			value: {
 				denominator: (value as FractionValue).value.denominator * -1,
 				numerator: (value as FractionValue).value.numerator,

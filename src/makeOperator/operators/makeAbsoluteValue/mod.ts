@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	AbsoluteValueOperation,
 	Injector,
 	Operation,
-} from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import calculateAbsoluteValue from './calculateAbsoluteValue/mod.ts'
+} from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import calculateAbsoluteValue from "./calculateAbsoluteValue/mod.ts"
 
 export default function makeAbsoluteValue(
 	operation: AbsoluteValueOperation,

@@ -1,12 +1,12 @@
-import makeOperator from '../../../../makeOperator/mod.js'
+import makeOperator from "../../../../makeOperator/mod.js"
 import type {
 	MemberConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Operation } from '../../../../types/operations.js'
-import { Arrays, Sets, SetValue } from '../../../../types/values.js'
-import convertToSet from '../../../utilities/convertToSet/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Operation } from "../../../../types/operations.js"
+import { Arrays, Sets, SetValue } from "../../../../types/values.js"
+import convertToSet from "../../../utilities/convertToSet/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeMember(
 	constraint: MemberConstraint,

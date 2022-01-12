@@ -1,10 +1,10 @@
-import { TypeOfTruncation } from '../../../../types/enums.ts'
-import type { Injector } from '../../../../types/operations.ts'
+import { TypeOfTruncation } from "../../../../types/enums.ts"
+import type { Injector } from "../../../../types/operations.ts"
 import type {
 	NumberValue,
 	PrecisionNumberValue,
-} from '../../../../types/values.ts'
-import convertToPrecisionNumber from '../../../utilities/convertToPrecisionNumber/mod.ts'
+} from "../../../../types/values.ts"
+import convertToPrecisionNumber from "../../../utilities/convertToPrecisionNumber/mod.ts"
 
 export default function multiplyPrecisionNumbers(
 	multiplicands: Array<Injector>,
@@ -20,13 +20,13 @@ export default function multiplyPrecisionNumbers(
 			) as PrecisionNumberValue
 
 			return {
-				datatype: 'precision',
+				datatype: "precision",
 				decimalPlaces,
 				value: acc.value * value.value,
 			} as PrecisionNumberValue
 		},
 		{
-			datatype: 'precision',
+			datatype: "precision",
 			decimalPlaces,
 			value: 1,
 		} as PrecisionNumberValue,

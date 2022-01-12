@@ -1,56 +1,56 @@
-import superset from './mod.js'
 import {
 	SupersetConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import superset from "./mod.js"
 
 const constraint: SupersetConstraint = {
 	constraintType: TypeOfConstraint.SUPERSET,
-	operand: 'cyan,red,yellow,blue',
+	operand: "cyan,red,yellow,blue",
 }
 
-test('[superset] returns correct validation if value set is a superset of the constraint set', () => {
+test("[superset] returns correct validation if value set is a superset of the constraint set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'red,yellow,green,cyan,blue,magenta',
+		datatype: "set",
+		value: "red,yellow,green,cyan,blue,magenta",
 	}
 
 	expect(superset(constraint)(validation)).toEqual(validation)
 })
 
-test('[superset] returns correct validation with arrays', () => {
+test("[superset] returns correct validation with arrays", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: ['cyan', 'red', 'yellow', 'blue'],
+		datatype: "set",
+		value: ["cyan", "red", "yellow", "blue"],
 	}
 
 	expect(
 		superset({
 			...constraint,
-			operand: ['red', 'yellow', 'blue'],
+			operand: ["red", "yellow", "blue"],
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[superset] returns correct validation with sets', () => {
+test("[superset] returns correct validation with sets", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: new Set(['cyan', 'magenta', 'yellow', 'blue']),
+		datatype: "set",
+		value: new Set(["cyan", "magenta", "yellow", "blue"]),
 	}
 
 	expect(
 		superset({
 			...constraint,
-			operand: new Set(['cyan', 'magenta', 'blue']),
+			operand: new Set(["cyan", "magenta", "blue"]),
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[superset] returns correct validation if constraint set has no members (is empty)', () => {
+test("[superset] returns correct validation if constraint set has no members (is empty)", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,red,yellow,blue',
+		datatype: "set",
+		value: "cyan,red,yellow,blue",
 	}
 
 	expect(
@@ -61,10 +61,10 @@ test('[superset] returns correct validation if constraint set has no members (is
 	).toEqual(validation)
 })
 
-test('[superset] returns error if constraint set has members not in value set', () => {
+test("[superset] returns error if constraint set has members not in value set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,red,yellow,black',
+		datatype: "set",
+		value: "cyan,red,yellow,black",
 	}
 
 	expect(superset(constraint)(validation)).toEqual({
@@ -79,10 +79,10 @@ test('[superset] returns error if constraint set has members not in value set', 
 	})
 })
 
-test('[superset] returns error if value set is identical to constraint set', () => {
+test("[superset] returns error if value set is identical to constraint set", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: 'cyan,red,yellow,blue',
+		datatype: "set",
+		value: "cyan,red,yellow,blue",
 	}
 
 	expect(superset(constraint)(validation)).toEqual({

@@ -1,6 +1,6 @@
-import type { Injector } from '../../../../types/operations.ts'
-import type { NumberValue, RealNumberValue } from '../../../../types/values.ts'
-import convertToRealNumber from '../../../utilities/convertToRealNumber/mod.ts'
+import type { Injector } from "../../../../types/operations.ts"
+import type { NumberValue, RealNumberValue } from "../../../../types/values.ts"
+import convertToRealNumber from "../../../utilities/convertToRealNumber/mod.ts"
 
 export default function divideRealNumbers(
 	dividend: Injector,
@@ -10,7 +10,7 @@ export default function divideRealNumbers(
 	const right = convertToRealNumber(divisor() as NumberValue | number)
 
 	return {
-		datatype: 'real',
+		datatype: "real",
 		value: left.value / right.value,
 	} as RealNumberValue
 }

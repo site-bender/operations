@@ -1,10 +1,10 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 import type {
 	InstantTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import getInstant from '../../../utilities/getInstant/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import getInstant from "../../../utilities/getInstant/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 // FIXME
 export default function makeIsInstant(

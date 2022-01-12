@@ -1,9 +1,9 @@
-import makeIsPrecision from './mod.js'
 import {
 	PrecisionTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import makeIsPrecision from "./mod.js"
 
 const constraint: PrecisionTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_PRECISION,
@@ -11,16 +11,16 @@ const constraint: PrecisionTypeConstraint = {
 }
 
 const validation: Validation = {
-	datatype: 'precision',
+	datatype: "precision",
 	value: 3.1415,
 	decimalPlaces: 4,
 }
 
-test('[makeIsPrecision] returns correct validation when value is a correct precision number', () => {
+test("[makeIsPrecision] returns correct validation when value is a correct precision number", () => {
 	expect(makeIsPrecision(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsPrecision] defaults precision to zero', () => {
+test("[makeIsPrecision] defaults precision to zero", () => {
 	expect(
 		makeIsPrecision({
 			...constraint,
@@ -42,11 +42,11 @@ test('[makeIsPrecision] defaults precision to zero', () => {
 	})
 })
 
-test('[makeIsPrecision] returns correct validation when value is a correct precision number', () => {
+test("[makeIsPrecision] returns correct validation when value is a correct precision number", () => {
 	expect(makeIsPrecision(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsPrecision] returns error when value is not a precision number but should be', () => {
+test("[makeIsPrecision] returns error when value is not a precision number but should be", () => {
 	expect(
 		makeIsPrecision({
 			...constraint,

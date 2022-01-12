@@ -1,18 +1,18 @@
-import atMostNCharacters from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	AtMostNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import atMostNCharacters from "./mod.ts"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
 Deno.test(
-	'[atMostNCharacters] returns correct validation if string length less than constraint value',
+	"[atMostNCharacters] returns correct validation if string length less than constraint value",
 	() => {
 		const constraint: AtMostNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_MOST_N_CHARACTERS,
@@ -24,7 +24,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostNCharacters] returns correct validation if string length equals constraint value',
+	"[atMostNCharacters] returns correct validation if string length equals constraint value",
 	() => {
 		const constraint: AtMostNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_MOST_N_CHARACTERS,
@@ -36,7 +36,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostNCharacters] returns error if string length less than constraint value',
+	"[atMostNCharacters] returns error if string length less than constraint value",
 	() => {
 		const constraint: AtMostNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_MOST_N_CHARACTERS,
@@ -57,7 +57,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostNCharacters] returns correct validation if string length equals constraint value using match',
+	"[atMostNCharacters] returns correct validation if string length equals constraint value using match",
 	() => {
 		const constraint: AtMostNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_MOST_N_CHARACTERS,
@@ -70,7 +70,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostNCharacters] returns correct response when match returns null',
+	"[atMostNCharacters] returns correct response when match returns null",
 	() => {
 		const constraint: AtMostNCharactersConstraint = {
 			constraintType: TypeOfConstraint.AT_MOST_N_CHARACTERS,

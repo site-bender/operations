@@ -1,27 +1,27 @@
-import makeIsInstant from './mod.js'
 import {
 	InstantTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { InstantValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { InstantValue } from "../../../../types/values.js"
+import makeIsInstant from "./mod.js"
 
 const constraint: InstantTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_INSTANT,
 }
 
-test('[makeIsInstant] returns correct validation when value is a date', () => {
+test("[makeIsInstant] returns correct validation when value is a date", () => {
 	const validation: Validation = {
-		datatype: 'instant',
-		value: '2000-01-01',
+		datatype: "instant",
+		value: "2000-01-01",
 	}
 
 	expect(makeIsInstant(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsInstant] returns error when value is not a date', () => {
+test("[makeIsInstant] returns error when value is not a date", () => {
 	const validation: Validation & InstantValue = {
-		datatype: 'instant',
+		datatype: "instant",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -33,7 +33,7 @@ test('[makeIsInstant] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_INSTANT,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

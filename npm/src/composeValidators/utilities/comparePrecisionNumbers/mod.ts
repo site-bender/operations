@@ -1,5 +1,5 @@
-import type { PrecisionNumberValue } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
+import type { PrecisionNumberValue } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
 
 export default function comparePrecisionNumbers(
 	left: PrecisionNumberValue,

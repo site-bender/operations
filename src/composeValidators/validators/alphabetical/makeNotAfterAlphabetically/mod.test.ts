@@ -1,22 +1,22 @@
-import notAfterAlphabetically from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	NotAfterAlphabeticallyConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import notAfterAlphabetically from "./mod.ts"
 
 const constraint: NotAfterAlphabeticallyConstraint = {
 	constraintType: TypeOfConstraint.NOT_AFTER_ALPHABETICALLY,
-	operand: 'bob',
+	operand: "bob",
 }
 
 Deno.test(
-	'[notAfterAlphabetically] returns correct validation if string comes before constraint value alphabetically',
+	"[notAfterAlphabetically] returns correct validation if string comes before constraint value alphabetically",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: 'alice',
+			datatype: "string",
+			value: "alice",
 		}
 
 		assertEquals(notAfterAlphabetically(constraint)(validation), validation)
@@ -24,18 +24,18 @@ Deno.test(
 )
 
 Deno.test(
-	'[notAfterAlphabetically] returns correct validation if string and constraint value are alphabetically equal',
+	"[notAfterAlphabetically] returns correct validation if string and constraint value are alphabetically equal",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: 'BOB',
+			datatype: "string",
+			value: "BOB",
 		}
 
 		assertEquals(
 			notAfterAlphabetically({
 				...constraint,
 				options: {
-					sensitivity: 'base',
+					sensitivity: "base",
 				},
 			})(validation),
 			validation,
@@ -43,28 +43,28 @@ Deno.test(
 	},
 )
 
-Deno.test('[notAfterAlphabetically] handles constraint with options', () => {
+Deno.test("[notAfterAlphabetically] handles constraint with options", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	assertEquals(
 		notAfterAlphabetically({
 			...constraint,
-			language: 'fr',
+			language: "fr",
 			options: {
-				sensitivity: 'accent',
+				sensitivity: "accent",
 			},
 		})(validation),
 		validation,
 	)
 })
 
-Deno.test('[notAfterAlphabetically] returns error if validation fails', () => {
+Deno.test("[notAfterAlphabetically] returns error if validation fails", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	assertEquals(notAfterAlphabetically(constraint)(validation), {

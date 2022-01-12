@@ -1,5 +1,5 @@
-import { TypeOfConstraint, TypeOfSource } from './enums.ts'
-import { Operation } from './operations.ts'
+import { TypeOfConstraint, TypeOfSource } from "./enums.ts"
+import { Operation } from "./operations.ts"
 import {
 	AnyDateTimeValue,
 	AnyDateValue,
@@ -13,7 +13,7 @@ import {
 	SetValue,
 	StringValue,
 	Value,
-} from './values.ts'
+} from "./values.ts"
 
 export type TestValues<T> = {
 	valueToTest: {
@@ -224,7 +224,7 @@ export type ReversedListConstraint = {
 	*/
 export type ArrayTypeConstraint = {
 	readonly constraintType: TypeOfConstraint.IS_ARRAY
-	readonly datatype: 'array'
+	readonly datatype: "array"
 	separator?: string | RegExp
 }
 
@@ -382,7 +382,7 @@ export type BranchConstraint = AndConstraint | OrConstraint | XorConstraint
 
 export type Constraint = BranchConstraint | LeafConstraint
 
-export type ValidationErrorType = `${TypeOfConstraint}_ERROR`
+export type ValidationErrorType = keyof typeof TypeOfConstraint
 
 export type ArrayInfer<A> = A extends (infer I)[] ? I : never
 

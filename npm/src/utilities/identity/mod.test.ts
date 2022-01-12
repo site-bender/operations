@@ -1,6 +1,6 @@
-import identity from './mod.js'
+import identity from "./mod.js"
 
-test('[identity] returns what it is passed', () => {
+test("[identity] returns what it is passed", () => {
 	expect(identity(1)).toBe(1)
 	expect(identity(-1)).toBe(-1)
 	expect(identity(true)).toBe(true)

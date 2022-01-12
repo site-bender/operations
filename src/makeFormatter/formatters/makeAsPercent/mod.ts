@@ -1,4 +1,4 @@
-import type { Formatter } from '../../types.ts'
+import type { Formatter } from "../../types.ts"
 
 const numericPattern = /^[+-]?[1-9]?\d+(\.\d+)?$/
 

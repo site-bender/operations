@@ -1,5 +1,5 @@
-import { FractionValue } from '../../../types/values.js'
-import greatestCommonDenominator from '../greatestCommonDenominator/mod.js'
+import { FractionValue } from "../../../types/values.js"
+import greatestCommonDenominator from "../greatestCommonDenominator/mod.js"
 
 export default function reduceToLowestForm(
 	fraction: FractionValue,

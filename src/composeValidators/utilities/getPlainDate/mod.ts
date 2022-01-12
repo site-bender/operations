@@ -1,4 +1,4 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 
 export default function getPlainDate(
 	d: string | Date | Temporal.PlainDate,
@@ -6,7 +6,7 @@ export default function getPlainDate(
 	if (d instanceof Temporal.PlainDate) {
 		return d
 	}
-	console.log('date?', d instanceof Date)
+
 	return (
 		(d instanceof Date &&
 			Temporal.PlainDate.from({

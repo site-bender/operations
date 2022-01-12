@@ -1,58 +1,58 @@
-import type { Constraint, Validation } from '../types/constraints.js'
-import { TypeOfConstraint } from '../types/enums.js'
-import not from '../utilities/not/mod.js'
-import makeAfterAlphabetically from './validators/alphabetical/makeAfterAlphabetically/mod.js'
-import makeBeforeAlphabetically from './validators/alphabetical/makeBeforeAlphabetically/mod.js'
-import makeNotAfterAlphabetically from './validators/alphabetical/makeNotAfterAlphabetically/mod.js'
-import makeNotBeforeAlphabetically from './validators/alphabetical/makeNotBeforeAlphabetically/mod.js'
-import makeAnd from './validators/composers/makeAnd/mod.js'
-import makeOr from './validators/composers/makeOr/mod.js'
-import makeXor from './validators/composers/makeXor/mod.js'
-import makeAfterDate from './validators/date/makeAfterDate/mod.js'
-import makeBeforeDate from './validators/date/makeBeforeDate/mod.js'
-import makeOnOrAfterDate from './validators/date/makeOnOrAfterDate/mod.js'
-import makeOnOrBeforeDate from './validators/date/makeOnOrBeforeDate/mod.js'
-import makeAfterDateTime from './validators/datetime/makeAfterDateTime/mod.js'
-import makeBeforeDateTime from './validators/datetime/makeBeforeDateTime/mod.js'
-import makeAtLeastNCharacters from './validators/length/makeAtLeastNCharacters/mod.js'
-import makeAtMostNCharacters from './validators/length/makeAtMostNCharacters/mod.js'
-import makeExactlyNCharacters from './validators/length/makeExactlyNCharacters/mod.js'
-import makeFewerThanNCharacters from './validators/length/makeFewerThanNCharacters/mod.js'
-import makeMoreThanNCharacters from './validators/length/makeMoreThanNCharacters/mod.js'
-import makeAtLeastN from './validators/number/makeAtLeastN/mod.js'
-import makeAtMostN from './validators/number/makeAtMostN/mod.js'
-import makeEqualToN from './validators/number/makeEqualToN/mod.js'
-import makeLessThanN from './validators/number/makeLessThanN/mod.js'
-import makeMoreThanN from './validators/number/makeMoreThanN/mod.js'
-import makeNotEqualToN from './validators/number/makeNotEqualToN/mod.js'
-import makeConfirmation from './validators/other/makeConfirmation/mod.js'
-import makeMatch from './validators/other/makeMatch/mod.js'
-import makeIsOrderedList from './validators/sequence/makeIsOrderedList/mod.js'
-import makeIsReversedList from './validators/sequence/makeIsReversedList/mod.js'
-import makeDisjointSet from './validators/set/makeDisjointSet/mod.js'
-import makeMember from './validators/set/makeMember/mod.js'
-import makeOverlappingSet from './validators/set/makeOverlappingSet/mod.js'
-import makeSubset from './validators/set/makeSubset/mod.js'
-import makeSuperset from './validators/set/makeSuperset/mod.js'
-import makeIsArray from './validators/static/makeIsArray/mod.js'
-import makeIsBoolean from './validators/static/makeIsBoolean/mod.js'
-import makeIsDate from './validators/static/makeIsDate/mod.js'
-import makeIsDateTime from './validators/static/makeIsDateTime/mod.js'
-import makeIsDuration from './validators/static/makeIsDuration/mod.js'
-import makeIsFraction from './validators/static/makeIsFraction/mod.js'
-import makeIsInstant from './validators/static/makeIsInstant/mod.js'
-import makeIsInteger from './validators/static/makeIsInteger/mod.js'
-import makeIsList from './validators/static/makeIsList/mod.js'
-import makeIsMap from './validators/static/makeIsMap/mod.js'
-import makeIsMember from './validators/static/makeIsMember/mod.js'
-import makeIsMonthDay from './validators/static/makeIsMonthDay/mod.js'
-import makeIsPrecision from './validators/static/makeIsPrecision/mod.js'
-import makeIsReal from './validators/static/makeIsReal/mod.js'
-import makeIsSet from './validators/static/makeIsSet/mod.js'
-import makeIsString from './validators/static/makeIsString/mod.js'
-import makeIsTimeZone from './validators/static/makeIsTimeZone/mod.js'
-import makeIsYearMonth from './validators/static/makeIsYearMonth/mod.js'
-import makeIsZonedDateTime from './validators/static/makeIsZonedDateTime/mod.js'
+import type { Constraint, Validation } from "../types/constraints.js"
+import { TypeOfConstraint } from "../types/enums.js"
+import not from "../utilities/not/mod.js"
+import makeAfterAlphabetically from "./validators/alphabetical/makeAfterAlphabetically/mod.js"
+import makeBeforeAlphabetically from "./validators/alphabetical/makeBeforeAlphabetically/mod.js"
+import makeNotAfterAlphabetically from "./validators/alphabetical/makeNotAfterAlphabetically/mod.js"
+import makeNotBeforeAlphabetically from "./validators/alphabetical/makeNotBeforeAlphabetically/mod.js"
+import makeAnd from "./validators/composers/makeAnd/mod.js"
+import makeOr from "./validators/composers/makeOr/mod.js"
+import makeXor from "./validators/composers/makeXor/mod.js"
+import makeAfterDate from "./validators/date/makeAfterDate/mod.js"
+import makeBeforeDate from "./validators/date/makeBeforeDate/mod.js"
+import makeOnOrAfterDate from "./validators/date/makeOnOrAfterDate/mod.js"
+import makeOnOrBeforeDate from "./validators/date/makeOnOrBeforeDate/mod.js"
+import makeAfterDateTime from "./validators/datetime/makeAfterDateTime/mod.js"
+import makeBeforeDateTime from "./validators/datetime/makeBeforeDateTime/mod.js"
+import makeAtLeastNCharacters from "./validators/length/makeAtLeastNCharacters/mod.js"
+import makeAtMostNCharacters from "./validators/length/makeAtMostNCharacters/mod.js"
+import makeExactlyNCharacters from "./validators/length/makeExactlyNCharacters/mod.js"
+import makeFewerThanNCharacters from "./validators/length/makeFewerThanNCharacters/mod.js"
+import makeMoreThanNCharacters from "./validators/length/makeMoreThanNCharacters/mod.js"
+import makeAtLeastN from "./validators/number/makeAtLeastN/mod.js"
+import makeAtMostN from "./validators/number/makeAtMostN/mod.js"
+import makeEqualToN from "./validators/number/makeEqualToN/mod.js"
+import makeLessThanN from "./validators/number/makeLessThanN/mod.js"
+import makeMoreThanN from "./validators/number/makeMoreThanN/mod.js"
+import makeNotEqualToN from "./validators/number/makeNotEqualToN/mod.js"
+import makeConfirmation from "./validators/other/makeConfirmation/mod.js"
+import makeMatch from "./validators/other/makeMatch/mod.js"
+import makeIsOrderedList from "./validators/sequence/makeIsOrderedList/mod.js"
+import makeIsReversedList from "./validators/sequence/makeIsReversedList/mod.js"
+import makeDisjointSet from "./validators/set/makeDisjointSet/mod.js"
+import makeMember from "./validators/set/makeMember/mod.js"
+import makeOverlappingSet from "./validators/set/makeOverlappingSet/mod.js"
+import makeSubset from "./validators/set/makeSubset/mod.js"
+import makeSuperset from "./validators/set/makeSuperset/mod.js"
+import makeIsArray from "./validators/static/makeIsArray/mod.js"
+import makeIsBoolean from "./validators/static/makeIsBoolean/mod.js"
+import makeIsDate from "./validators/static/makeIsDate/mod.js"
+import makeIsDateTime from "./validators/static/makeIsDateTime/mod.js"
+import makeIsDuration from "./validators/static/makeIsDuration/mod.js"
+import makeIsFraction from "./validators/static/makeIsFraction/mod.js"
+import makeIsInstant from "./validators/static/makeIsInstant/mod.js"
+import makeIsInteger from "./validators/static/makeIsInteger/mod.js"
+import makeIsList from "./validators/static/makeIsList/mod.js"
+import makeIsMap from "./validators/static/makeIsMap/mod.js"
+import makeIsMember from "./validators/static/makeIsMember/mod.js"
+import makeIsMonthDay from "./validators/static/makeIsMonthDay/mod.js"
+import makeIsPrecision from "./validators/static/makeIsPrecision/mod.js"
+import makeIsReal from "./validators/static/makeIsReal/mod.js"
+import makeIsSet from "./validators/static/makeIsSet/mod.js"
+import makeIsString from "./validators/static/makeIsString/mod.js"
+import makeIsTimeZone from "./validators/static/makeIsTimeZone/mod.js"
+import makeIsYearMonth from "./validators/static/makeIsYearMonth/mod.js"
+import makeIsZonedDateTime from "./validators/static/makeIsZonedDateTime/mod.js"
 
 const validators = {
 	[TypeOfConstraint.AFTER_ALPHABETICALLY]: makeAfterAlphabetically,
@@ -109,7 +109,7 @@ const validators = {
 	[TypeOfConstraint.XOR]: makeXor,
 }
 
-function noOp(validation: Validation): Validation {
+function noOp (validation: Validation): Validation {
 	return validation
 }
 

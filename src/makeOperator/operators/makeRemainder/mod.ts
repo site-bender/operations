@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	Injector,
 	Operation,
 	RemainderOperation,
-} from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import convertToInteger from '../../utilities/convertToInteger/mod.ts'
+} from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import convertToInteger from "../../utilities/convertToInteger/mod.ts"
 
 export default function makeRemainder(operation: RemainderOperation): Injector {
 	const { dividend, divisor } = operation as RemainderOperation
@@ -23,7 +23,7 @@ export default function makeRemainder(operation: RemainderOperation): Injector {
 		const right = convertToInteger(second() as NumberValue | number)
 
 		return {
-			datatype: 'integer',
+			datatype: "integer",
 			value: left.value % right.value,
 		}
 	}

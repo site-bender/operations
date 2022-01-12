@@ -1,4 +1,4 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 
 export default function getMonthDay(
 	d: string | Date | Temporal.PlainMonthDay,

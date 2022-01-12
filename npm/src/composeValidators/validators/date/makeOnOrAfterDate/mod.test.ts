@@ -1,37 +1,37 @@
-import onOrAfterDate from './mod.js'
 import {
 	OnOrAfterDateConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import onOrAfterDate from "./mod.js"
 
 const constraint: OnOrAfterDateConstraint = {
 	constraintType: TypeOfConstraint.ON_OR_AFTER_DATE,
-	operand: '2001-01-01',
+	operand: "2001-01-01",
 }
 
-test('[onOrAfterDate] returns correct validation if date after constraint value', () => {
+test("[onOrAfterDate] returns correct validation if date after constraint value", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2001-09-11',
+		datatype: "plainDate",
+		value: "2001-09-11",
 	}
 
 	expect(onOrAfterDate(constraint)(validation)).toEqual(validation)
 })
 
-test('[onOrAfterDate] returns correct validation if date equals constraint value', () => {
+test("[onOrAfterDate] returns correct validation if date equals constraint value", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2001-01-01',
+		datatype: "plainDate",
+		value: "2001-01-01",
 	}
 
 	expect(onOrAfterDate(constraint)(validation)).toEqual(validation)
 })
 
-test('[onOrAfterDate] returns error if date before constraint value', () => {
+test("[onOrAfterDate] returns error if date before constraint value", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '1999-01-01',
+		datatype: "plainDate",
+		value: "1999-01-01",
 	}
 
 	expect(onOrAfterDate(constraint)(validation)).toEqual({
@@ -46,10 +46,10 @@ test('[onOrAfterDate] returns error if date before constraint value', () => {
 	})
 })
 
-test('[onOrAfterDate] returns error if bad date', () => {
+test("[onOrAfterDate] returns error if bad date", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2001-09-31',
+		datatype: "plainDate",
+		value: "2001-09-31",
 	}
 
 	expect(onOrAfterDate(constraint)(validation)).toEqual({
@@ -58,7 +58,7 @@ test('[onOrAfterDate] returns error if bad date', () => {
 			{
 				constraint,
 				error: TypeOfConstraint.ON_OR_AFTER_DATE,
-				errorMessage: 'RangeError: value out of range: 1 <= 31 <= 30',
+				errorMessage: "RangeError: value out of range: 1 <= 31 <= 30",
 			},
 		],
 		isInvalid: true,

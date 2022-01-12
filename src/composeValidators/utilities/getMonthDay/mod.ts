@@ -1,4 +1,4 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 
 export default function getMonthDay(
 	d: string | Date | Temporal.PlainMonthDay,

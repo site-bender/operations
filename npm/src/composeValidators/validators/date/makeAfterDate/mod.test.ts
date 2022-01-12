@@ -1,28 +1,28 @@
-import afterDate from './mod.js'
 import {
 	AfterDateConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import afterDate from "./mod.js"
 
 const constraint: AfterDateConstraint = {
 	constraintType: TypeOfConstraint.AFTER_DATE,
-	operand: '2001-01-01',
+	operand: "2001-01-01",
 }
 
-test('[afterDate] returns correct validation if date after constraint value', () => {
+test("[afterDate] returns correct validation if date after constraint value", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2001-09-11',
+		datatype: "plainDate",
+		value: "2001-09-11",
 	}
 
 	expect(afterDate(constraint)(validation)).toEqual(validation)
 })
 
-test('[afterDate] returns error if date before constraint value', () => {
+test("[afterDate] returns error if date before constraint value", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '1999-01-01',
+		datatype: "plainDate",
+		value: "1999-01-01",
 	}
 
 	expect(afterDate(constraint)(validation)).toEqual({
@@ -37,10 +37,10 @@ test('[afterDate] returns error if date before constraint value', () => {
 	})
 })
 
-test('[afterDate] returns error if bad date', () => {
+test("[afterDate] returns error if bad date", () => {
 	const validation: Validation = {
-		datatype: 'plainDate',
-		value: '2001-09-31',
+		datatype: "plainDate",
+		value: "2001-09-31",
 	}
 
 	expect(afterDate(constraint)(validation)).toEqual({
@@ -49,7 +49,7 @@ test('[afterDate] returns error if bad date', () => {
 			{
 				constraint,
 				error: TypeOfConstraint.AFTER_DATE,
-				errorMessage: 'RangeError: value out of range: 1 <= 31 <= 30',
+				errorMessage: "RangeError: value out of range: 1 <= 31 <= 30",
 			},
 		],
 		isInvalid: true,

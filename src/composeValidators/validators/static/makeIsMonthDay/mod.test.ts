@@ -1,31 +1,31 @@
-import makeIsMonthDay from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	MonthDayConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import type { MonthDayValue } from '../../../../types/values.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import type { MonthDayValue } from "../../../../types/values.ts"
+import makeIsMonthDay from "./mod.ts"
 
 const constraint: MonthDayConstraint = {
 	constraintType: TypeOfConstraint.IS_MONTH_DAY,
 }
 
 Deno.test(
-	'[makeIsMonthDay] returns correct validation when value is a date',
+	"[makeIsMonthDay] returns correct validation when value is a date",
 	() => {
 		const validation: Validation = {
-			datatype: 'monthDay',
-			value: '2000-01-01',
+			datatype: "monthDay",
+			value: "2000-01-01",
 		}
 
 		assertEquals(makeIsMonthDay(constraint)(validation), validation)
 	},
 )
 
-Deno.test('[makeIsMonthDay] returns error when value is not a date', () => {
+Deno.test("[makeIsMonthDay] returns error when value is not a date", () => {
 	const validation: Validation & MonthDayValue = {
-		datatype: 'monthDay',
+		datatype: "monthDay",
 		// @ts-ignore: for testing purposes
 		value: 666,
 	}
@@ -37,7 +37,7 @@ Deno.test('[makeIsMonthDay] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_MONTH_DAY,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

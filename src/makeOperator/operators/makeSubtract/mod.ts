@@ -1,11 +1,11 @@
-import { TypeOfReturn, TypeOfTruncation } from '../../../types/enums.ts'
-import type { Injector, SubtractOperation } from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import subtractFractions from './subtractFractions/mod.ts'
-import subtractIntegers from './subtractIntegers/mod.ts'
-import subtractPrecisionNumbers from './subtractPrecisionNumbers/mod.ts'
-import subtractRealNumbers from './subtractRealNumbers/mod.ts'
-import convertOperandToInjector from '../../utilities/convertOperandToInjector/mod.ts'
+import { TypeOfReturn, TypeOfTruncation } from "../../../types/enums.ts"
+import type { Injector, SubtractOperation } from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import convertOperandToInjector from "../../utilities/convertOperandToInjector/mod.ts"
+import subtractFractions from "./subtractFractions/mod.ts"
+import subtractIntegers from "./subtractIntegers/mod.ts"
+import subtractPrecisionNumbers from "./subtractPrecisionNumbers/mod.ts"
+import subtractRealNumbers from "./subtractRealNumbers/mod.ts"
 
 export type Subtractor = (
 	minuend: Injector,

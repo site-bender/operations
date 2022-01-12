@@ -1,11 +1,11 @@
-import { TypeOfReturn, TypeOfTruncation } from '../../../types/enums.ts'
-import type { DivideOperation, Injector } from '../../../types/operations.ts'
-import type { NumberValue } from '../../../types/values.ts'
-import divideFractions from './divideFractions/mod.ts'
-import divideIntegers from './divideIntegers/mod.ts'
-import dividePrecisionNumbers from './dividePrecisionNumbers/mod.ts'
-import divideRealNumbers from './divideRealNumbers/mod.ts'
-import convertOperandToInjector from '../../utilities/convertOperandToInjector/mod.ts'
+import { TypeOfReturn, TypeOfTruncation } from "../../../types/enums.ts"
+import type { DivideOperation, Injector } from "../../../types/operations.ts"
+import type { NumberValue } from "../../../types/values.ts"
+import convertOperandToInjector from "../../utilities/convertOperandToInjector/mod.ts"
+import divideFractions from "./divideFractions/mod.ts"
+import divideIntegers from "./divideIntegers/mod.ts"
+import dividePrecisionNumbers from "./dividePrecisionNumbers/mod.ts"
+import divideRealNumbers from "./divideRealNumbers/mod.ts"
 
 export type Divider = (
 	dividend: Injector,

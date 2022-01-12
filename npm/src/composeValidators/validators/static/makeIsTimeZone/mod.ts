@@ -1,10 +1,10 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 import type {
 	TimeZoneTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import getTimeZone from '../../../utilities/getTimeZone/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import getTimeZone from "../../../utilities/getTimeZone/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 // FIXME
 export default function makeIsTimeZone(

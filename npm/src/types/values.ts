@@ -1,4 +1,4 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 export type Arrays =
 	| Array<Arrays>
 	| Array<Maps>
@@ -74,16 +74,16 @@ export type FormState = Record<
 /*
 	===== String sorting =====
 */
-export type LanguageType = 'en' | 'fr'
+export type LanguageType = "en" | "fr"
 
 export type LocaleCompareOptions = {
 	language?: LanguageType | Array<LanguageType>
 	options?: {
 		ignorePunctuation?: boolean
-		usage?: 'search' | 'sort'
-		sensitivity?: 'base' | 'accent' | 'case' | 'variant'
+		usage?: "search" | "sort"
+		sensitivity?: "base" | "accent" | "case" | "variant"
 		numeric?: boolean
-		caseFirst?: 'upper' | 'lower' | 'false'
+		caseFirst?: "upper" | "lower" | "false"
 	}
 }
 
@@ -92,7 +92,7 @@ export type Fraction = {
 	numerator: number
 }
 
-export type NumberDatatype = 'integer' | 'floatingPoint' | 'precision'
+export type NumberDatatype = "integer" | "floatingPoint" | "precision"
 
 export type NumberFormat = typeof Intl.NumberFormat
 
@@ -113,140 +113,140 @@ export type DurationOptions = {
 	===== Value types =====
 */
 export type ArrayValue = {
-	readonly datatype: 'array'
+	readonly datatype: "array"
 	value: Arrays | string
 	separator?: string | RegExp
 }
 
 export type BooleanValue = {
-	readonly datatype: 'boolean'
+	readonly datatype: "boolean"
 	value: boolean
 	permitIndeterminate?: boolean
 }
 
 export type CalendarValue = {
-	readonly datatype: 'calendar'
+	readonly datatype: "calendar"
 	value: Temporal.Calendar | string
 }
 
 export type DurationValue = {
-	readonly datatype: 'duration'
+	readonly datatype: "duration"
 	value: Temporal.Duration | Temporal.DurationOptions | string
 }
 
 export type EmptyValue = {
-	readonly datatype: 'empty'
+	readonly datatype: "empty"
 	value: []
 }
 
 export type FractionValue = {
-	readonly datatype: 'fraction'
+	readonly datatype: "fraction"
 	value: Fraction
-	numberType?: 'integer' | 'bigint'
+	numberType?: "integer" | "bigint"
 }
 
 export type InstantValue = {
-	readonly datatype: 'instant'
+	readonly datatype: "instant"
 	value: Temporal.Instant | Date | string
 }
 
 export type IntegerValue = {
-	readonly datatype: 'integer'
+	readonly datatype: "integer"
 	value: number
-	numberType?: 'integer' | 'bigint'
+	numberType?: "integer" | "bigint"
 	format?: NumberFormat
 }
 
 export type ListValue = {
-	readonly datatype: 'list'
+	readonly datatype: "list"
 	value: Arrays | string
 	separator?: string | RegExp
 }
 
 export type MemberValue = {
-	readonly datatype: 'member'
+	readonly datatype: "member"
 	value: unknown
 }
 
 export type MapValue = {
-	readonly datatype: 'map'
+	readonly datatype: "map"
 	value: Maps | Records | string
 	keyValueSeparator?: string | RegExp
 	separator?: string | RegExp
 }
 
 export type MonthDayValue = {
-	readonly datatype: 'monthDay'
+	readonly datatype: "monthDay"
 	value: Temporal.PlainMonthDay | string
 }
 
 export type PlainDateValue = {
-	readonly datatype: 'plainDate'
+	readonly datatype: "plainDate"
 	value: Temporal.PlainDate | string | Date
 }
 
 export type PlainDateTimeValue = {
-	readonly datatype: 'plainDateTime'
+	readonly datatype: "plainDateTime"
 	value: Temporal.PlainDateTime | string | Date
 }
 
 export type PrecisionNumberValue = {
-	readonly datatype: 'precision'
+	readonly datatype: "precision"
 	value: number
 	decimalPlaces: number
 	format?: NumberFormat
 }
 
 export type RadianValue = {
-	readonly datatype: 'radian'
+	readonly datatype: "radian"
 	value: number
 }
 
 export type RealNumberValue = {
-	readonly datatype: 'real'
+	readonly datatype: "real"
 	value: number
 	format?: NumberFormat
 	decimalPlaces?: number
 }
 
 export type RecordValue = {
-	readonly datatype: 'map'
+	readonly datatype: "map"
 	value: Records | string
 	keyValueSeparator?: string | RegExp
 	separator?: string | RegExp
 }
 
 export type RegularExpressionValue = {
-	readonly datatype: 'string'
+	readonly datatype: "string"
 	value: string
 	flags?: string
 	message?: string
 }
 
 export type SetValue = {
-	readonly datatype: 'set'
+	readonly datatype: "set"
 	value: Sets | Arrays | string
 	separator?: string | RegExp
 }
 
 export type StringValue = {
-	readonly datatype: 'string'
+	readonly datatype: "string"
 	value: string
 	matches?: RegExp
 }
 
 export type TimeZoneValue = {
-	readonly datatype: 'timeZone'
+	readonly datatype: "timeZone"
 	value: Temporal.TimeZone | string
 }
 
 export type YearMonthValue = {
-	readonly datatype: 'yearMonth'
+	readonly datatype: "yearMonth"
 	value: Temporal.PlainYearMonth | string
 }
 
 export type ZonedDateTimeValue = {
-	readonly datatype: 'zonedDateTime'
+	readonly datatype: "zonedDateTime"
 	value: Temporal.ZonedDateTime | string | Date
 	timeZone?: Temporal.TimeZone | string
 }

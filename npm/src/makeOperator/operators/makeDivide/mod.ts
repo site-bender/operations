@@ -1,15 +1,15 @@
-import makeOperator from '../../mod.js'
-import { TypeOfReturn, TypeOfTruncation } from '../../../types/enums.js'
+import { TypeOfReturn, TypeOfTruncation } from "../../../types/enums.js"
 import type {
 	DivideOperation,
 	Injector,
 	Operation,
-} from '../../../types/operations.js'
-import { NumberValue } from '../../../types/values.js'
-import divideFractions from './divideFractions/mod.js'
-import divideIntegers from './divideIntegers/mod.js'
-import dividePrecisionNumbers from './dividePrecisionNumbers/mod.js'
-import divideRealNumbers from './divideRealNumbers/mod.js'
+} from "../../../types/operations.js"
+import { NumberValue } from "../../../types/values.js"
+import makeOperator from "../../mod.js"
+import divideFractions from "./divideFractions/mod.js"
+import divideIntegers from "./divideIntegers/mod.js"
+import dividePrecisionNumbers from "./dividePrecisionNumbers/mod.js"
+import divideRealNumbers from "./divideRealNumbers/mod.js"
 
 export type Divider = (
 	dividend: Injector,

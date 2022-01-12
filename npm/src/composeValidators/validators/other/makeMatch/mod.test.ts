@@ -1,25 +1,25 @@
-import matches from './mod.js'
-import { MatchConstraint, Validation } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { MatchConstraint, Validation } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import matches from "./mod.js"
 
 const constraint: MatchConstraint = {
 	constraintType: TypeOfConstraint.MATCHING,
-	operand: '^\\d+$',
+	operand: "^\\d+$",
 }
 
-test('[matches] returns correct validation when value matches constraint regexp', () => {
+test("[matches] returns correct validation when value matches constraint regexp", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: '666',
+		datatype: "string",
+		value: "666",
 	}
 
 	expect(matches(constraint)(validation)).toEqual(validation)
 })
 
-test('[matches] returns error when value does not match constraint regexp', () => {
+test("[matches] returns error when value does not match constraint regexp", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'xyz',
+		datatype: "string",
+		value: "xyz",
 	}
 
 	expect(matches(constraint)(validation)).toEqual({
@@ -34,17 +34,17 @@ test('[matches] returns error when value does not match constraint regexp', () =
 	})
 })
 
-test('[matches] works with flags', () => {
+test("[matches] works with flags", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'xyz',
+		datatype: "string",
+		value: "xyz",
 	}
 
 	expect(
 		matches({
 			...constraint,
-			operand: '^[A-Z]+$',
-			flags: 'i',
+			operand: "^[A-Z]+$",
+			flags: "i",
 		})(validation),
 	).toEqual(validation)
 })

@@ -1,18 +1,18 @@
-import exactlyNCharacters from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	ExactlyNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import exactlyNCharacters from "./mod.ts"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
 Deno.test(
-	'[exactlyNCharacters] returns error if string length less than constraint value',
+	"[exactlyNCharacters] returns error if string length less than constraint value",
 	() => {
 		const constraint: ExactlyNCharactersConstraint = {
 			constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
@@ -33,7 +33,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[exactlyNCharacters] returns correct validation if string length equals constraint value',
+	"[exactlyNCharacters] returns correct validation if string length equals constraint value",
 	() => {
 		const constraint: ExactlyNCharactersConstraint = {
 			constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
@@ -45,7 +45,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[exactlyNCharacters] returns error if string length more than constraint value',
+	"[exactlyNCharacters] returns error if string length more than constraint value",
 	() => {
 		const constraint: ExactlyNCharactersConstraint = {
 			constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
@@ -66,7 +66,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[exactlyNCharacters] returns correct validation if string length equal to constraint value using match',
+	"[exactlyNCharacters] returns correct validation if string length equal to constraint value using match",
 	() => {
 		const constraint: ExactlyNCharactersConstraint = {
 			constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
@@ -79,7 +79,7 @@ Deno.test(
 )
 
 Deno.test(
-	'[exactlyNCharacters] returns correct response when match returns null',
+	"[exactlyNCharacters] returns correct response when match returns null",
 	() => {
 		const constraint: ExactlyNCharactersConstraint = {
 			constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,

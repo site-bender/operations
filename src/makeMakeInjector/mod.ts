@@ -1,17 +1,17 @@
-import { TypeOfSource } from '../types/enums.ts'
-import type { Injector, InjectValueOperation } from '../types/operations.ts'
-import type { EmptyValue } from '../types/values.ts'
-import getFromLocalStorage from './injectors/getFromLocalStorage/mod.ts'
-import getFromQueryString from './injectors/getFromQueryString/mod.ts'
-import getFromSessionStorage from './injectors/getFromSessionStorage/mod.ts'
-import getFromState from './injectors/getFromState/mod.ts'
-import getFromUrlParams from './injectors/getFromUrlParams/mod.ts'
+import { TypeOfSource } from "../types/enums.ts"
+import type { Injector, InjectValueOperation } from "../types/operations.ts"
+import type { EmptyValue } from "../types/values.ts"
+import getFromLocalStorage from "./injectors/getFromLocalStorage/mod.ts"
+import getFromQueryString from "./injectors/getFromQueryString/mod.ts"
+import getFromSessionStorage from "./injectors/getFromSessionStorage/mod.ts"
+import getFromState from "./injectors/getFromState/mod.ts"
+import getFromUrlParams from "./injectors/getFromUrlParams/mod.ts"
 
 // TODO: inject router and route
 const useRouter = (): {
 	location: Record<string, string>
 	path: Array<string>
-} => ({ location: {}, path: ['path'] })
+} => ({ location: {}, path: ["path"] })
 const useRoute = (): { params: Record<string, string> } => ({ params: {} })
 
 // TODO: how to inject store?

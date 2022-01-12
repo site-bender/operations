@@ -2,26 +2,26 @@ import {
 	FractionValue,
 	NonFractionValue,
 	NumberValue,
-} from '../../../../types/values.ts'
+} from "../../../../types/values.ts"
 
 export default function calculateAbsoluteValue(
 	value: NumberValue | number,
 ): NumberValue {
-	if (typeof value === 'number') {
+	if (typeof value === "number") {
 		return Number.isInteger(value)
 			? {
-					datatype: 'integer',
-					value: Math.abs(value),
-			  }
+				datatype: "integer",
+				value: Math.abs(value),
+			}
 			: {
-					datatype: 'real',
-					value: Math.abs(value),
-			  }
+				datatype: "real",
+				value: Math.abs(value),
+			}
 	}
 
-	if ((value as NumberValue).datatype === 'fraction') {
+	if ((value as NumberValue).datatype === "fraction") {
 		return {
-			datatype: 'fraction',
+			datatype: "fraction",
 			value: {
 				denominator: Math.abs((value as FractionValue).value.denominator),
 				numerator: Math.abs((value as FractionValue).value.numerator),

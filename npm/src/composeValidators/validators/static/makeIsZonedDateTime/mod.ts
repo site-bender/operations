@@ -1,10 +1,10 @@
-import { Temporal } from '@js-temporal/polyfill'
-import getZonedDateTime from '../../../../makeMakeInjector/utilities/getZonedDateTime/mod.js'
+import { Temporal } from "@js-temporal/polyfill"
+import getZonedDateTime from "../../../../makeMakeInjector/utilities/getZonedDateTime/mod.js"
 import type {
 	Validation,
 	ZonedDateTimeTypeConstraint,
-} from '../../../../types/constraints.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeIsZonedDateTime(
 	constraint: ZonedDateTimeTypeConstraint,

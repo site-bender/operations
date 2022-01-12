@@ -1,27 +1,27 @@
-import lessThanN from './mod.js'
 import {
 	LessThanNConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import lessThanN from "./mod.js"
 
 const constraint: LessThanNConstraint = {
 	constraintType: TypeOfConstraint.LESS_THAN_N,
 	operand: 42,
 }
 
-test('[lessThanN] returns correct validation if integer less than constraint value', () => {
+test("[lessThanN] returns correct validation if integer less than constraint value", () => {
 	const validation: Validation = {
-		datatype: 'integer',
+		datatype: "integer",
 		value: 41,
 	}
 
 	expect(lessThanN(constraint)(validation)).toEqual(validation)
 })
 
-test('[lessThanN] returns error if integer more than constraint value', () => {
+test("[lessThanN] returns error if integer more than constraint value", () => {
 	const validation: Validation = {
-		datatype: 'integer',
+		datatype: "integer",
 		value: 43,
 	}
 

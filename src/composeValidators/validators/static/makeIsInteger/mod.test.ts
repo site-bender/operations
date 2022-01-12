@@ -1,20 +1,20 @@
-import makeIsInteger from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	IntegerTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import makeIsInteger from "./mod.ts"
 
 const constraint: IntegerTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_INTEGER,
 }
 
 Deno.test(
-	'[makeIsInteger] returns correct validation when value is an integer',
+	"[makeIsInteger] returns correct validation when value is an integer",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 3,
 		}
 
@@ -22,9 +22,9 @@ Deno.test(
 	},
 )
 
-Deno.test('[makeIsInteger] returns error when value is not an integer', () => {
+Deno.test("[makeIsInteger] returns error when value is not an integer", () => {
 	const validation: Validation = {
-		datatype: 'integer',
+		datatype: "integer",
 		value: 3.1415,
 	}
 

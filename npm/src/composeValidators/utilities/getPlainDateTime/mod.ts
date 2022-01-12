@@ -1,4 +1,4 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 
 export default function getPlainDateTime(
 	d: string | Date | Temporal.PlainDateTime,

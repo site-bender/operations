@@ -1,5 +1,5 @@
-import type { PrecisionNumberValue } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
+import type { PrecisionNumberValue } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
 
 export default function comparePrecisionNumbers(
 	left: PrecisionNumberValue,

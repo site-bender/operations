@@ -15,7 +15,7 @@ import type {
 	TypeOfTrigger,
 	WindowFocusTrigger,
 	WindowLoadingTrigger,
-} from './enums.ts'
+} from "./enums.ts"
 
 export type Action = {
 	action: TypeOfAction
@@ -28,7 +28,9 @@ export interface CustomEvent<T = unknown> extends Event {
 	detail: T
 }
 
-export type TriggeredEvent = Partial<Record<keyof typeof TypeOfTrigger, Action>>
+export type TriggeredEvent = Partial<
+	Record<keyof typeof TypeOfTrigger, Action>
+>
 
 export type ClipboardEvent = Partial<
 	Record<keyof typeof ClipboardTrigger, Action>

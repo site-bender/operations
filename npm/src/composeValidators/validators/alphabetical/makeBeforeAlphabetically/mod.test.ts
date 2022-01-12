@@ -1,45 +1,45 @@
-import beforeAlphabetically from './mod.js'
 import {
 	BeforeAlphabeticallyConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import beforeAlphabetically from "./mod.js"
 
 const constraint: BeforeAlphabeticallyConstraint = {
 	constraintType: TypeOfConstraint.BEFORE_ALPHABETICALLY,
-	operand: 'bob',
+	operand: "bob",
 }
 
-test('[beforeAlphabetically] returns correct validation if value validates against constraint', () => {
+test("[beforeAlphabetically] returns correct validation if value validates against constraint", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	expect(beforeAlphabetically(constraint)(validation)).toEqual(validation)
 })
 
-test('[beforeAlphabetically] handles constraint with options', () => {
+test("[beforeAlphabetically] handles constraint with options", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	expect(
 		beforeAlphabetically({
 			...constraint,
-			language: 'fr',
+			language: "fr",
 			options: {
-				sensitivity: 'accent',
+				sensitivity: "accent",
 			},
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[beforeAlphabetically] returns error if validation fails', () => {
+test("[beforeAlphabetically] returns error if validation fails", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	expect(beforeAlphabetically(constraint)(validation)).toEqual({

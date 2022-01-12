@@ -1,10 +1,10 @@
 import type {
 	MapTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import type { MapValue } from '../../../../types/values.js'
-import makeError from '../../../utilities/makeError/mod.js'
-import stringToMap from '../../../utilities/stringToMap/mod.js'
+} from "../../../../types/constraints.js"
+import type { MapValue } from "../../../../types/values.js"
+import makeError from "../../../utilities/makeError/mod.js"
+import stringToMap from "../../../utilities/stringToMap/mod.js"
 
 export default function makeIsMap(
 	constraint: MapTypeConstraint,
@@ -13,9 +13,9 @@ export default function makeIsMap(
 		const { keyValueSeparator, separator, value } = validation as MapValue
 
 		try {
-			typeof value === 'string'
+			typeof value === "string"
 				? stringToMap(value, separator, keyValueSeparator)
-				: 'entries' in value
+				: "entries" in value
 				? value
 				: new Map(Object.entries(value))
 

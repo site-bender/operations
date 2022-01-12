@@ -1,19 +1,19 @@
-import minorUnitToCurrency from '../../../utilities/minorUnitToCurrency/mod.js'
-import type { MakeAsCurrencyParameters } from '../../types.js'
+import minorUnitToCurrency from "../../../utilities/minorUnitToCurrency/mod.js"
+import type { MakeAsCurrencyParameters } from "../../types.js"
 
 export default function makeAsCurrency({
 	subdivision = 100,
-	code = 'NZD',
+	code = "NZD",
 	isMajorUnit = false,
-	numberFormat = 'en-NZ',
+	numberFormat = "en-NZ",
 }: MakeAsCurrencyParameters) {
 	return (value: number | string) => {
 		const amount = isMajorUnit
 			? value
-			: minorUnitToCurrency(value, subdivision).join('.')
+			: minorUnitToCurrency(value, subdivision).join(".")
 
 		return new Intl.NumberFormat(numberFormat, {
-			style: 'currency',
+			style: "currency",
 			currency: code,
 		}).format(Number(amount))
 	}

@@ -1,17 +1,17 @@
-import { TypeOfReturn } from '../../../types/enums.js'
-import { InjectValueOperation } from '../../../types/operations.js'
-import { Arrays, Value } from '../../../types/values.js'
-import getArray from '../getArray/mod.js'
-import getCalendar from '../getCalendar/mod.js'
-import getDuration from '../getDuration/mod.js'
-import getInstant from '../getInstant/mod.js'
-import getMap from '../getMap/mod.js'
-import getPlainDate from '../getPlainDate/mod.js'
-import getPlainDateTime from '../getPlainDateTime/mod.js'
-import getRecord from '../getRecord/mod.js'
-import getSet from '../getSet/mod.js'
-import getZonedDateTime from '../getZonedDateTime/mod.js'
-import roundToSignificantDigits from '../roundToSignificantDigits/mod.js'
+import { TypeOfReturn } from "../../../types/enums.js"
+import { InjectValueOperation } from "../../../types/operations.js"
+import { Arrays, Value } from "../../../types/values.js"
+import getArray from "../getArray/mod.js"
+import getCalendar from "../getCalendar/mod.js"
+import getDuration from "../getDuration/mod.js"
+import getInstant from "../getInstant/mod.js"
+import getMap from "../getMap/mod.js"
+import getPlainDate from "../getPlainDate/mod.js"
+import getPlainDateTime from "../getPlainDateTime/mod.js"
+import getRecord from "../getRecord/mod.js"
+import getSet from "../getSet/mod.js"
+import getZonedDateTime from "../getZonedDateTime/mod.js"
+import roundToSignificantDigits from "../roundToSignificantDigits/mod.js"
 
 const falseValueMatcher = /^f|false|0$/i
 
@@ -24,90 +24,88 @@ export default function parseValue(
 	switch (returnType) {
 		case TypeOfReturn.INTEGER:
 			return {
-				datatype: 'integer',
+				datatype: "integer",
 				value: parseInt(value, 10),
 			}
 		case TypeOfReturn.REAL_NUMBER:
 			return {
-				datatype: 'real',
-				value:
-					typeof decimalPlaces === 'number'
-						? roundToSignificantDigits(parseFloat(value), decimalPlaces)
-						: parseFloat(value),
-				...(typeof decimalPlaces === 'number'
+				datatype: "real",
+				value: typeof decimalPlaces === "number"
+					? roundToSignificantDigits(parseFloat(value), decimalPlaces)
+					: parseFloat(value),
+				...(typeof decimalPlaces === "number"
 					? { significantDigits: decimalPlaces }
 					: {}),
 			}
 		case TypeOfReturn.PRECISION_NUMBER:
 			return {
-				datatype: 'precision',
-				value:
-					typeof decimalPlaces === 'number'
-						? roundToSignificantDigits(parseFloat(value), decimalPlaces)
-						: parseFloat(value),
-				...(typeof decimalPlaces === 'number'
+				datatype: "precision",
+				value: typeof decimalPlaces === "number"
+					? roundToSignificantDigits(parseFloat(value), decimalPlaces)
+					: parseFloat(value),
+				...(typeof decimalPlaces === "number"
 					? { decimalPlaces: decimalPlaces }
 					: {}),
 			}
 		case TypeOfReturn.BOOLEAN:
 			return {
-				datatype: 'boolean',
+				datatype: "boolean",
 				value: falseValueMatcher.test(value) ? false : Boolean(value),
 			}
 		case TypeOfReturn.PLAIN_DATE:
 			return {
-				datatype: 'plainDate',
+				datatype: "plainDate",
 				value: getPlainDate(value),
 			}
 		case TypeOfReturn.PLAIN_DATE_TIME:
 			return {
-				datatype: 'plainDateTime',
+				datatype: "plainDateTime",
 				value: getPlainDateTime(value),
 			}
 		case TypeOfReturn.ZONED_DATE_TIME:
 			return {
-				datatype: 'zonedDateTime',
+				datatype: "zonedDateTime",
 				value: getZonedDateTime(value),
 			}
 		case TypeOfReturn.INSTANT:
 			return {
-				datatype: 'instant',
+				datatype: "instant",
 				value: getInstant(value),
 			}
 		case TypeOfReturn.CALENDAR:
 			return {
-				datatype: 'calendar',
+				datatype: "calendar",
 				value: getCalendar(value),
 			}
 		case TypeOfReturn.DURATION:
 			return {
-				datatype: 'duration',
+				datatype: "duration",
 				value: getDuration(value),
 			}
 		case TypeOfReturn.ARRAY:
 			return {
-				datatype: 'array',
+				datatype: "array",
 				value: getArray(value, separator) as Arrays,
 				separator,
 			}
 		case TypeOfReturn.MAP:
 			return {
-				datatype: 'map',
+				datatype: "map",
 				value: getMap(value, separator, keyValueSeparator),
 			}
 		case TypeOfReturn.RECORD:
 			return {
-				datatype: 'record',
+				datatype: "record",
 				value: getRecord(value, separator, keyValueSeparator),
 			}
 		case TypeOfReturn.SET:
 			return {
-				datatype: 'set',
+				datatype: "set",
 				value: getSet(value, separator),
 			}
 		default:
 			return {
-				datatype: 'string',
+				datatype: "string",
 				value,
 			}
 	}

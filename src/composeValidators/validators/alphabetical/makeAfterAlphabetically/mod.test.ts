@@ -1,50 +1,50 @@
-import afterAlphabetically from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	AfterAlphabeticallyConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import afterAlphabetically from "./mod.ts"
 
 const constraint: AfterAlphabeticallyConstraint = {
 	constraintType: TypeOfConstraint.AFTER_ALPHABETICALLY,
-	operand: 'bob',
+	operand: "bob",
 }
 
 Deno.test(
-	'[afterAlphabetically] returns correct validation if string comes after constraint value alphabetically',
+	"[afterAlphabetically] returns correct validation if string comes after constraint value alphabetically",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: 'carol',
+			datatype: "string",
+			value: "carol",
 		}
 
 		assertEquals(afterAlphabetically(constraint)(validation), validation)
 	},
 )
 
-Deno.test('[afterAlphabetically] handles constraint with options', () => {
+Deno.test("[afterAlphabetically] handles constraint with options", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	assertEquals(
 		afterAlphabetically({
 			...constraint,
-			language: 'fr',
+			language: "fr",
 			options: {
-				sensitivity: 'accent',
+				sensitivity: "accent",
 			},
 		})(validation),
 		validation,
 	)
 })
 
-Deno.test('[afterAlphabetically] returns error if validation fails', () => {
+Deno.test("[afterAlphabetically] returns error if validation fails", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	assertEquals(afterAlphabetically(constraint)(validation), {
@@ -53,6 +53,7 @@ Deno.test('[afterAlphabetically] returns error if validation fails', () => {
 			{
 				constraint,
 				error: TypeOfConstraint.AFTER_ALPHABETICALLY,
+				errorMessage: `come after ${constraint.operand} alphabetically`,
 			},
 		],
 		isInvalid: true,

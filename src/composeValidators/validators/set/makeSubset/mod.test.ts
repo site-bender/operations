@@ -1,63 +1,63 @@
-import subset from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import type {
 	SubsetConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import subset from "./mod.ts"
 
 const constraint: SubsetConstraint = {
 	constraintType: TypeOfConstraint.SUBSET,
-	operand: 'red,yellow,green,cyan,blue,magenta',
+	operand: "red,yellow,green,cyan,blue,magenta",
 }
 
 Deno.test(
-	'[subset] returns correct validation if value set is a subset of the constraint set',
+	"[subset] returns correct validation if value set is a subset of the constraint set",
 	() => {
 		const validation: Validation = {
-			datatype: 'set',
-			value: 'cyan,red,yellow,blue',
+			datatype: "set",
+			value: "cyan,red,yellow,blue",
 		}
 
 		assertEquals(subset(constraint)(validation), validation)
 	},
 )
 
-Deno.test('[subset] returns correct validation with arrays', () => {
+Deno.test("[subset] returns correct validation with arrays", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: ['red', 'yellow', 'blue'],
+		datatype: "set",
+		value: ["red", "yellow", "blue"],
 	}
 
 	assertEquals(
 		subset({
 			...constraint,
-			operand: ['cyan', 'red', 'yellow', 'blue'],
+			operand: ["cyan", "red", "yellow", "blue"],
 		})(validation),
 		validation,
 	)
 })
 
-Deno.test('[subset] returns correct validation with sets', () => {
+Deno.test("[subset] returns correct validation with sets", () => {
 	const validation: Validation = {
-		datatype: 'set',
-		value: new Set(['cyan', 'magenta', 'blue']),
+		datatype: "set",
+		value: new Set(["cyan", "magenta", "blue"]),
 	}
 
 	assertEquals(
 		subset({
 			...constraint,
-			operand: new Set(['cyan', 'magenta', 'yellow', 'blue']),
+			operand: new Set(["cyan", "magenta", "yellow", "blue"]),
 		})(validation),
 		validation,
 	)
 })
 
 Deno.test(
-	'[subset] returns correct validation if value set has no members (is empty)',
+	"[subset] returns correct validation if value set has no members (is empty)",
 	() => {
 		const validation: Validation = {
-			datatype: 'set',
+			datatype: "set",
 			value: [],
 		}
 
@@ -66,11 +66,11 @@ Deno.test(
 )
 
 Deno.test(
-	'[subset] returns error if value set has members not in constraint set',
+	"[subset] returns error if value set has members not in constraint set",
 	() => {
 		const validation: Validation = {
-			datatype: 'set',
-			value: 'cyan,magenta,yellow,black',
+			datatype: "set",
+			value: "cyan,magenta,yellow,black",
 		}
 
 		assertEquals(subset(constraint)(validation), {
@@ -87,11 +87,11 @@ Deno.test(
 )
 
 Deno.test(
-	'[subset] returns error if value set is identical to constraint set',
+	"[subset] returns error if value set is identical to constraint set",
 	() => {
 		const validation: Validation = {
-			datatype: 'set',
-			value: 'cyan,blue,magenta,red,yellow,green',
+			datatype: "set",
+			value: "cyan,blue,magenta,red,yellow,green",
 		}
 
 		assertEquals(subset(constraint)(validation), {

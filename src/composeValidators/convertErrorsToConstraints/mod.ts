@@ -1,4 +1,4 @@
-import type { Constraint, ValidationError } from '../../types/constraints.ts'
+import type { Constraint, ValidationError } from "../../types/constraints.ts"
 
 export default function convertConstraintsToConstraints(
 	errors: Array<ValidationError>,
@@ -7,23 +7,23 @@ export default function convertConstraintsToConstraints(
 		const { constraint, error, errors, errorMessage } = err
 		const { constraintType, ...rest } = constraint
 
-		return ['and', 'or', 'xor'].includes(error)
+		return ["and", "or", "xor"].includes(error)
 			? [
-					...acc,
-					{
-						constraintType: error,
-						tests: convertConstraintsToConstraints(
-							errors as Array<ValidationError>,
-						),
-						...(errorMessage ? { errorMessage } : {}),
-					} as Constraint,
-			  ]
+				...acc,
+				{
+					constraintType: error,
+					tests: convertConstraintsToConstraints(
+						errors as Array<ValidationError>,
+					),
+					...(errorMessage ? { errorMessage } : {}),
+				} as Constraint,
+			]
 			: [
-					...acc,
-					{
-						constraintType,
-						...rest,
-					} as Constraint,
-			  ]
+				...acc,
+				{
+					constraintType,
+					...rest,
+				} as Constraint,
+			]
 	}, [] as Array<Constraint>)
 }

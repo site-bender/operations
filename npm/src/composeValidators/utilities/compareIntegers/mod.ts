@@ -1,5 +1,5 @@
-import type { IntegerValue } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
+import type { IntegerValue } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
 
 export default function compareIntegers(
 	left: IntegerValue,

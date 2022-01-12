@@ -1,28 +1,28 @@
-import { TypeOfTruncation } from '../../../types/enums.js'
+import { TypeOfTruncation } from "../../../types/enums.js"
 import {
 	FractionValue,
 	NonFractionValue,
 	NumberValue,
 	PrecisionNumberValue,
-} from '../../../types/values.js'
-import truncate from '../truncate/mod.js'
+} from "../../../types/values.js"
+import truncate from "../truncate/mod.js"
 
 export default function convertToPrecisionNumber(
 	value: NumberValue | number,
 	decimalPlaces = 0,
 	truncationType = TypeOfTruncation.ROUND,
 ): PrecisionNumberValue {
-	if (typeof value === 'number') {
+	if (typeof value === "number") {
 		return {
-			datatype: 'precision',
+			datatype: "precision",
 			decimalPlaces,
 			value: truncate(value, truncationType, decimalPlaces) as number,
 		}
 	}
 
-	if ((value as NumberValue).datatype === 'fraction') {
+	if ((value as NumberValue).datatype === "fraction") {
 		return {
-			datatype: 'precision',
+			datatype: "precision",
 			decimalPlaces,
 			value: truncate(
 				(value as FractionValue).value.numerator /
@@ -34,7 +34,7 @@ export default function convertToPrecisionNumber(
 	}
 
 	return {
-		datatype: 'precision',
+		datatype: "precision",
 		decimalPlaces,
 		value: truncate(
 			(value as NonFractionValue).value,

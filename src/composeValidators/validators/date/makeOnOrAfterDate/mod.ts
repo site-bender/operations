@@ -1,12 +1,12 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
-import makeOperator from '../../../../makeOperator/mod.ts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
+import makeOperator from "../../../../makeOperator/mod.ts"
 import type {
 	OnOrAfterDateConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import type { Operation } from '../../../../types/operations.ts'
-import getPlainDate from '../../../utilities/getPlainDate/mod.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import type { Operation } from "../../../../types/operations.ts"
+import getPlainDate from "../../../utilities/getPlainDate/mod.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 export default function makeOnOrAfterDate(
 	constraint: OnOrAfterDateConstraint,
@@ -18,10 +18,9 @@ export default function makeOnOrAfterDate(
 
 	return function onOrAfterDate(validation: Validation): Validation {
 		const injected = injector()
-		const testValue =
-			typeof injected === 'object' && 'value' in injected
-				? injected.value
-				: injected
+		const testValue = typeof injected === "object" && "value" in injected
+			? injected.value
+			: injected
 
 		try {
 			const testDate = getPlainDate(

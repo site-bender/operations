@@ -1,5 +1,5 @@
-import { EmptyValue } from './../../../types/values.ts'
-import type { Injector } from '../../../types/operations.ts'
+import type { Injector } from "../../../types/operations.ts"
+import { EmptyValue } from "./../../../types/values.ts"
 
 export default function makeNoOp(): Injector {
 	return function noOp() {

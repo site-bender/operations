@@ -1,41 +1,41 @@
-import makeIsSet from './mod.js'
 import type {
 	SetTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import type { SetValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import type { SetValue } from "../../../../types/values.js"
+import makeIsSet from "./mod.js"
 
 const constraint: SetTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_SET,
 }
 
-test('[makeIsSet] returns correct validation when value is a set', () => {
+test("[makeIsSet] returns correct validation when value is a set", () => {
 	const stringValidation: Validation = {
-		datatype: 'set',
-		value: 'red,green,blue',
+		datatype: "set",
+		value: "red,green,blue",
 	}
 
 	expect(makeIsSet(constraint)(stringValidation)).toEqual(stringValidation)
 
 	const arrayValidation: Validation = {
-		datatype: 'set',
+		datatype: "set",
 		value: [1, 4, 9, 16, 25],
 	}
 
 	expect(makeIsSet(constraint)(arrayValidation)).toEqual(arrayValidation)
 
 	const setValidation: Validation = {
-		datatype: 'set',
+		datatype: "set",
 		value: new Set([3.3, 4.4, 5.5]),
 	}
 
 	expect(makeIsSet(constraint)(setValidation)).toEqual(setValidation)
 })
 
-test('[makeIsSet] returns error when value is not a set', () => {
+test("[makeIsSet] returns error when value is not a set", () => {
 	const validation: Validation & SetValue = {
-		datatype: 'set',
+		datatype: "set",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -53,8 +53,8 @@ test('[makeIsSet] returns error when value is not a set', () => {
 	})
 
 	const unsetValidation: Validation = {
-		datatype: 'set',
-		value: 'red,green,blue,red,green',
+		datatype: "set",
+		value: "red,green,blue,red,green",
 	}
 
 	expect(makeIsSet(constraint)(unsetValidation)).toEqual({

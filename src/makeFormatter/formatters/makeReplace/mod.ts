@@ -1,13 +1,14 @@
-import type { Formatter, MakeReplaceParameters } from '../../types.ts'
+import type { Formatter, MakeReplaceParameters } from "../../types.ts"
 
 export default function makeReplace({
 	pattern,
-	replaceWith = '',
+	replaceWith = "",
 	replaceOne,
 }: MakeReplaceParameters): Formatter {
-	const flag = replaceOne ? '' : 'g'
-	const matcher =
-		typeof pattern === 'string' ? new RegExp(pattern, flag) : pattern
+	const flag = replaceOne ? "" : "g"
+	const matcher = typeof pattern === "string"
+		? new RegExp(pattern, flag)
+		: pattern
 
 	return (value: string) =>
 		replaceOne

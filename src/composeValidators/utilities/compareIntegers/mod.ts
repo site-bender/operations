@@ -1,5 +1,5 @@
-import type { IntegerValue } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
+import type { IntegerValue } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
 
 export default function compareIntegers(
 	left: IntegerValue,

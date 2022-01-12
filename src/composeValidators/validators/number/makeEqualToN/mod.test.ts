@@ -1,10 +1,10 @@
-import moreThanN from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	EqualToNConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import equalToN from "./mod.ts"
 
 const constraint: EqualToNConstraint = {
 	constraintType: TypeOfConstraint.EQUAL_TO_N,
@@ -12,26 +12,26 @@ const constraint: EqualToNConstraint = {
 }
 
 Deno.test(
-	'[moreThanN] returns correct validation if integer more than constraint value',
+	"[equalToN] returns correct validation if integer equal to constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
-			value: 43,
+			datatype: "integer",
+			value: 42,
 		}
 
-		assertEquals(moreThanN(constraint)(validation), validation)
+		assertEquals(equalToN(constraint)(validation), validation)
 	},
 )
 
 Deno.test(
-	'[moreThanN] returns error if integer less than constraint value',
+	"[equalToN] returns error if integer less than constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 41,
 		}
 
-		assertEquals(moreThanN(constraint)(validation), {
+		assertEquals(equalToN(constraint)(validation), {
 			...validation,
 			errors: [
 				{

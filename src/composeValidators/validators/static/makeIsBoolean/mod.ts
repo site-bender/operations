@@ -1,21 +1,20 @@
 import type {
 	TypeOfBooleanConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import type { Value } from '../../../../types/values.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import type { Value } from "../../../../types/values.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 export default function makeIsBoolean(
 	constraint: TypeOfBooleanConstraint,
 ): (validation: Validation) => Validation {
 	return function isBoolean(validation: Validation): Validation {
-		const value =
-			typeof validation?.value === 'object' &&
-			'value' in (validation.value as Value)
-				? (validation.value as Value).value
-				: validation.value
+		const value = typeof validation?.value === "object" &&
+				"value" in (validation.value as Value)
+			? (validation.value as Value).value
+			: validation.value
 
-		return typeof value === 'boolean'
+		return typeof value === "boolean"
 			? validation
 			: makeError(validation, constraint)
 	}

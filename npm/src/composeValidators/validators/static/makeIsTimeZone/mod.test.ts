@@ -1,27 +1,27 @@
-import makeIsTimeZone from './mod.js'
 import {
 	TimeZoneTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { TimeZoneValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { TimeZoneValue } from "../../../../types/values.js"
+import makeIsTimeZone from "./mod.js"
 
 const constraint: TimeZoneTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_TIME_ZONE,
 }
 
-test('[makeIsTimeZone] returns correct validation when value is a date', () => {
+test("[makeIsTimeZone] returns correct validation when value is a date", () => {
 	const validation: Validation = {
-		datatype: 'timeZone',
-		value: 'NZT',
+		datatype: "timeZone",
+		value: "NZT",
 	}
 
 	expect(makeIsTimeZone(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsTimeZone] returns error when value is not a date', () => {
+test("[makeIsTimeZone] returns error when value is not a date", () => {
 	const validation: Validation & TimeZoneValue = {
-		datatype: 'timeZone',
+		datatype: "timeZone",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -33,7 +33,7 @@ test('[makeIsTimeZone] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_TIME_ZONE,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

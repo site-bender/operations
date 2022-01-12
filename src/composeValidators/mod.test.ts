@@ -1,7 +1,7 @@
-import composeValidators from './mod.ts'
-import type { Constraint, Validation } from '../types/constraints.ts'
-import { TypeOfConstraint } from '../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
+import type { Constraint, Validation } from "../types/constraints.ts"
+import { TypeOfConstraint } from "../types/enums.ts"
+import composeValidators from "./mod.ts"
 
 const constraint: Constraint = {
 	constraintType: TypeOfConstraint.AND,
@@ -44,12 +44,14 @@ const constraint: Constraint = {
 }
 
 Deno.test(
-	'[composeValidators] returns correct validation if value validates against constraint',
+	"[composeValidators] returns correct validation if value validates against constraint",
 	() => {
 		const validate = composeValidators(constraint)
 
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
+			errors: undefined,
+			isInvalid: undefined,
 			value: 8,
 		}
 
@@ -58,12 +60,12 @@ Deno.test(
 )
 
 Deno.test(
-	'[composeValidators] returns error validation if given invalid value',
+	"[composeValidators] returns error validation if given invalid value",
 	() => {
 		const validate = composeValidators(constraint)
 
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 5,
 		}
 
@@ -112,6 +114,7 @@ Deno.test(
 						],
 					},
 					error: TypeOfConstraint.AND,
+					errorMessage: "",
 					errors: [
 						{
 							constraint: {
@@ -146,6 +149,7 @@ Deno.test(
 								],
 							},
 							error: TypeOfConstraint.OR,
+							errorMessage: "",
 							errors: [
 								{
 									constraint: {
@@ -162,6 +166,7 @@ Deno.test(
 										],
 									},
 									error: TypeOfConstraint.AND,
+									errorMessage: "",
 									errors: [
 										{
 											error: TypeOfConstraint.LESS_THAN_N,
@@ -187,6 +192,7 @@ Deno.test(
 										],
 									},
 									error: TypeOfConstraint.AND,
+									errorMessage: "",
 									errors: [
 										{
 											error: TypeOfConstraint.AT_MOST_N,

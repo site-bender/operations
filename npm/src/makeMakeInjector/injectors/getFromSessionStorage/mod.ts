@@ -1,7 +1,7 @@
-import { Injector, InjectValueOperation } from '../../../types/operations.js'
-import { Value } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
-import parseValue from '../../utilities/parseValue/mod.js'
+import { Injector, InjectValueOperation } from "../../../types/operations.js"
+import { Value } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
+import parseValue from "../../utilities/parseValue/mod.js"
 
 export default function getFromSessionStorage(
 	operation: InjectValueOperation,

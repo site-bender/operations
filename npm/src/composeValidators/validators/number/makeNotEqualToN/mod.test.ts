@@ -1,27 +1,27 @@
-import notEqualToN from './mod.js'
 import {
 	NotEqualToNConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import notEqualToN from "./mod.js"
 
 const constraint: NotEqualToNConstraint = {
 	constraintType: TypeOfConstraint.NOT_EQUAL_TO_N,
 	operand: 42,
 }
 
-test('[moreThanN] returns correct validation if integer more than constraint value', () => {
+test("[moreThanN] returns correct validation if integer more than constraint value", () => {
 	const validation: Validation = {
-		datatype: 'integer',
+		datatype: "integer",
 		value: 43,
 	}
 
 	expect(notEqualToN(constraint)(validation)).toEqual(validation)
 })
 
-test('[notEqualToN] returns error if integer less than constraint value', () => {
+test("[notEqualToN] returns error if integer less than constraint value", () => {
 	const validation: Validation = {
-		datatype: 'integer',
+		datatype: "integer",
 		value: 41,
 	}
 

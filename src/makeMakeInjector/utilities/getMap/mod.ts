@@ -1,12 +1,12 @@
-import type { Maps, Records } from '../../../types/values.ts'
-import stringToMap from '../stringToMap/mod.ts'
+import type { Maps, Records } from "../../../types/values.ts"
+import stringToMap from "../stringToMap/mod.ts"
 
 export default function getMap(
 	map: Maps | Records | string,
-	separator: string | RegExp = ',',
-	keyValueSeparator: string | RegExp = ':',
+	separator: string | RegExp = ",",
+	keyValueSeparator: string | RegExp = ":",
 ): Maps {
-	if (typeof map === 'string') {
+	if (typeof map === "string") {
 		return stringToMap(map, separator, keyValueSeparator)
 	}
 

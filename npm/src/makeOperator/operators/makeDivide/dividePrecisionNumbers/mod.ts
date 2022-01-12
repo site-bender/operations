@@ -1,8 +1,8 @@
-import { TypeOfTruncation } from '../../../../types/enums.js'
-import { Injector } from '../../../../types/operations.js'
-import { NumberValue, PrecisionNumberValue } from '../../../../types/values.js'
-import convertToPrecisionNumber from '../../../utilities/convertToPrecisionNumber/mod.js'
-import truncate from '../../../utilities/truncate/mod.js'
+import { TypeOfTruncation } from "../../../../types/enums.js"
+import { Injector } from "../../../../types/operations.js"
+import { NumberValue, PrecisionNumberValue } from "../../../../types/values.js"
+import convertToPrecisionNumber from "../../../utilities/convertToPrecisionNumber/mod.js"
+import truncate from "../../../utilities/truncate/mod.js"
 
 export default function dividePrecisionNumbers(
 	dividend: Injector,
@@ -22,7 +22,7 @@ export default function dividePrecisionNumbers(
 	)
 
 	return {
-		datatype: 'precision',
+		datatype: "precision",
 		decimalPlaces,
 		value: truncate(left.value / right.value, truncationType, decimalPlaces),
 	} as PrecisionNumberValue

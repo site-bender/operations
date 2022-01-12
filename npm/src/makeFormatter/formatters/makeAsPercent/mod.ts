@@ -1,4 +1,4 @@
-import type { Formatter } from '../../types.js'
+import type { Formatter } from "../../types.js"
 
 const numericPattern = /^[+-]?[1-9]?\d+(\.\d+)?$/
 

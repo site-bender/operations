@@ -1,29 +1,28 @@
-import { TypeOfTruncation } from '../../../types/enums.ts'
+import { TypeOfTruncation } from "../../../types/enums.ts"
 import {
 	FractionValue,
 	NumberValue,
 	RealNumberValue,
-} from '../../../types/values.ts'
-import truncate from '../truncate/mod.ts'
+} from "../../../types/values.ts"
+import truncate from "../truncate/mod.ts"
 
 export default function convertToFraction(
 	value: NumberValue | number,
 	decimalPlaces = 0,
 	truncationType = TypeOfTruncation.ROUND,
 ): FractionValue {
-	if (typeof value === 'object' && value.datatype === 'fraction') {
+	if (typeof value === "object" && value.datatype === "fraction") {
 		return value
 	}
 
-	const exponent: number =
-		typeof value === 'object'
-			? (value as RealNumberValue).decimalPlaces || 0
-			: decimalPlaces
+	const exponent: number = typeof value === "object"
+		? (value as RealNumberValue).decimalPlaces || 0
+		: decimalPlaces
 	const multiplier = Math.pow(10, exponent)
-	const finalValue = typeof value === 'number' ? value : value.value
+	const finalValue = typeof value === "number" ? value : value.value
 
 	return {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			denominator: multiplier,
 			numerator: truncate(finalValue * multiplier, truncationType) as number,

@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	Injector,
 	IsEvenOperation,
 	Operation,
-} from '../../../types/operations.ts'
-import type { IntegerValue } from '../../../types/values.ts'
-import checkIsEven from './checkIsEven/mod.ts'
+} from "../../../types/operations.ts"
+import type { IntegerValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import checkIsEven from "./checkIsEven/mod.ts"
 
 export default function makeIsEven(operation: IsEvenOperation): Injector {
 	const { operand } = operation as IsEvenOperation

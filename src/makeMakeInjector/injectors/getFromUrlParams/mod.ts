@@ -1,10 +1,10 @@
 import type {
 	Injector,
 	InjectValueOperation,
-} from '../../../types/operations.ts'
-import type { Value } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
-import parseValue from '../../utilities/parseValue/mod.ts'
+} from "../../../types/operations.ts"
+import type { Value } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
+import parseValue from "../../utilities/parseValue/mod.ts"
 
 export default function getFromUrlParams(
 	operation: InjectValueOperation,
@@ -15,11 +15,11 @@ export default function getFromUrlParams(
 	const [name] = path
 
 	if (not(name)) {
-		return () => ({})
+		return () => ({ datatype: "undefined", value: undefined })
 	}
 
 	return function injectValueFromUrlParams(): Value {
-		const paramValue = name ? params[name] : ''
+		const paramValue = name ? params[name] : ""
 
 		return parseValue(paramValue, operation)
 	}

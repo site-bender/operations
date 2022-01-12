@@ -1,49 +1,49 @@
-import makeIsMap from './mod.js'
 import type {
 	MapTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import type { MapValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import type { MapValue } from "../../../../types/values.js"
+import makeIsMap from "./mod.js"
 
 const constraint: MapTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_MAP,
 }
 
-test('[makeIsMap] returns correct validation when value is a map', () => {
+test("[makeIsMap] returns correct validation when value is a map", () => {
 	const stringValidation: Validation = {
-		datatype: 'map',
-		value: 'red:f00,green:0f0,blue:00f',
+		datatype: "map",
+		value: "red:f00,green:0f0,blue:00f",
 	}
 
 	expect(makeIsMap(constraint)(stringValidation)).toEqual(stringValidation)
 
 	const objectValidation: Validation = {
-		datatype: 'map',
+		datatype: "map",
 		value: {
-			red: 'f00',
-			green: '0f0',
-			blue: '00f',
+			red: "f00",
+			green: "0f0",
+			blue: "00f",
 		},
 	}
 
 	expect(makeIsMap(constraint)(objectValidation)).toEqual(objectValidation)
 
 	const mapValidation: Validation = {
-		datatype: 'map',
+		datatype: "map",
 		value: new Map([
-			['red', 'f00'],
-			['green', '0f0'],
-			['blue', '00f'],
+			["red", "f00"],
+			["green", "0f0"],
+			["blue", "00f"],
 		]),
 	}
 
 	expect(makeIsMap(constraint)(mapValidation)).toEqual(mapValidation)
 })
 
-test('[makeIsMap] returns error when value is not a map', () => {
+test("[makeIsMap] returns error when value is not a map", () => {
 	const validation: Validation & MapValue = {
-		datatype: 'map',
+		datatype: "map",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}

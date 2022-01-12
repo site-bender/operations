@@ -1,9 +1,9 @@
-import not from '../../../utilities/not/mod.ts'
+import not from "../../../utilities/not/mod.ts"
 
 export default function stringToMap(
 	str: string,
-	separator: string | RegExp = ',',
-	keyValueSeparator: string | RegExp = ':',
+	separator: string | RegExp = ",",
+	keyValueSeparator: string | RegExp = ":",
 ): Map<string, string> {
 	const obj: Record<string, string> = str.split(separator).reduce((acc, v) => {
 		const [key, value] = v.split(keyValueSeparator)
@@ -11,9 +11,9 @@ export default function stringToMap(
 		return not(key)
 			? acc
 			: {
-					...acc,
-					[key]: value,
-			  }
+				...acc,
+				[key]: value,
+			}
 	}, {})
 
 	return new Map<string, string>(Object.entries(obj))

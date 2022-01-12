@@ -1,7 +1,7 @@
-import { TypeOfTruncation } from '../../../../types/enums.js'
-import { Injector } from '../../../../types/operations.js'
-import { IntegerValue, NumberValue } from '../../../../types/values.js'
-import convertToInteger from '../../../utilities/convertToInteger/mod.js'
+import { TypeOfTruncation } from "../../../../types/enums.js"
+import { Injector } from "../../../../types/operations.js"
+import { IntegerValue, NumberValue } from "../../../../types/values.js"
+import convertToInteger from "../../../utilities/convertToInteger/mod.js"
 
 export default function divideIntegers(
 	dividend: Injector,
@@ -18,7 +18,7 @@ export default function divideIntegers(
 	)
 
 	return {
-		datatype: 'integer',
+		datatype: "integer",
 		value: Math.round(left.value / right.value),
 	} as IntegerValue
 }

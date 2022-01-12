@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.js'
 import {
 	Injector,
 	Operation,
 	ReciprocalOperation,
-} from '../../../types/operations.js'
-import { NumberValue } from '../../../types/values.js'
-import getReciprocal from './getReciprocal/mod.js'
+} from "../../../types/operations.js"
+import { NumberValue } from "../../../types/values.js"
+import makeOperator from "../../mod.js"
+import getReciprocal from "./getReciprocal/mod.js"
 
 export default function makeReciprocal(
 	operation: ReciprocalOperation,

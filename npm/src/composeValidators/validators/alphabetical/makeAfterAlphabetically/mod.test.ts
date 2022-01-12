@@ -1,45 +1,45 @@
-import afterAlphabetically from './mod.js'
 import {
 	AfterAlphabeticallyConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import afterAlphabetically from "./mod.js"
 
 const constraint: AfterAlphabeticallyConstraint = {
 	constraintType: TypeOfConstraint.AFTER_ALPHABETICALLY,
-	operand: 'bob',
+	operand: "bob",
 }
 
-test('[afterAlphabetically] returns correct validation if string comes after constraint value alphabetically', () => {
+test("[afterAlphabetically] returns correct validation if string comes after constraint value alphabetically", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	expect(afterAlphabetically(constraint)(validation)).toEqual(validation)
 })
 
-test('[afterAlphabetically] handles constraint with options', () => {
+test("[afterAlphabetically] handles constraint with options", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	expect(
 		afterAlphabetically({
 			...constraint,
-			language: 'fr',
+			language: "fr",
 			options: {
-				sensitivity: 'accent',
+				sensitivity: "accent",
 			},
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[afterAlphabetically] returns error if validation fails', () => {
+test("[afterAlphabetically] returns error if validation fails", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	expect(afterAlphabetically(constraint)(validation)).toEqual({

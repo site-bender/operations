@@ -1,10 +1,10 @@
-import atMostN from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import type {
 	AtMostNConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import atMostN from "./mod.ts"
 
 const constraint: AtMostNConstraint = {
 	constraintType: TypeOfConstraint.AT_MOST_N,
@@ -12,10 +12,10 @@ const constraint: AtMostNConstraint = {
 }
 
 Deno.test(
-	'[atMostN] returns correct validation if integer less than constraint value',
+	"[atMostN] returns correct validation if integer less than constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 41,
 		}
 
@@ -24,10 +24,10 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostN] returns correct validation if integer equals constraint value',
+	"[atMostN] returns correct validation if integer equals constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 42,
 		}
 
@@ -36,10 +36,10 @@ Deno.test(
 )
 
 Deno.test(
-	'[atMostN] returns error if integer more than constraint value',
+	"[atMostN] returns error if integer more than constraint value",
 	() => {
 		const validation: Validation = {
-			datatype: 'integer',
+			datatype: "integer",
 			value: 43,
 		}
 

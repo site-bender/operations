@@ -1,24 +1,24 @@
-import { TypeOfOperator } from '../types/enums.ts'
+import { TypeOfOperator } from "../types/enums.ts"
 import {
 	Injector,
 	InjectValueOperation,
 	Operation,
-} from '../types/operations.ts'
-import type { Value } from '../types/values.ts'
-import makeDivide from './operators/makeDivide/mod.ts'
-import makeIsEven from './operators/makeIsEven/mod.ts'
-import makeIsOdd from './operators/makeIsOdd/mod.ts'
-import makeMaximum from './operators/makeMaximum/mod.ts'
-import makeMinimum from './operators/makeMinimum/mod.ts'
-import makeModulo from './operators/makeModulo/mod.ts'
-import makeMultiply from './operators/makeMultiply/mod.ts'
-import makeNegate from './operators/makeNegate/mod.ts'
-import makeNoOp from './operators/makeNoOp/mod.ts'
-import makeReciprocal from './operators/makeReciprocal/mod.ts'
-import makeRemainder from './operators/makeRemainder/mod.ts'
-import makeSubtract from './operators/makeSubtract/mod.ts'
-import makeSum from './operators/makeSum/mod.ts'
-import makeAbsoluteValue from './operators/makeAbsoluteValue/mod.ts'
+} from "../types/operations.ts"
+import type { Value } from "../types/values.ts"
+import makeAbsoluteValue from "./operators/makeAbsoluteValue/mod.ts"
+import makeDivide from "./operators/makeDivide/mod.ts"
+import makeIsEven from "./operators/makeIsEven/mod.ts"
+import makeIsOdd from "./operators/makeIsOdd/mod.ts"
+import makeMaximum from "./operators/makeMaximum/mod.ts"
+import makeMinimum from "./operators/makeMinimum/mod.ts"
+import makeModulo from "./operators/makeModulo/mod.ts"
+import makeMultiply from "./operators/makeMultiply/mod.ts"
+import makeNegate from "./operators/makeNegate/mod.ts"
+import makeNoOp from "./operators/makeNoOp/mod.ts"
+import makeReciprocal from "./operators/makeReciprocal/mod.ts"
+import makeRemainder from "./operators/makeRemainder/mod.ts"
+import makeSubtract from "./operators/makeSubtract/mod.ts"
+import makeSum from "./operators/makeSum/mod.ts"
 
 const makers = {
 	[TypeOfOperator.ABSOLUTE_VALUE]: makeAbsoluteValue,
@@ -101,17 +101,18 @@ const makers = {
 }
 
 // FIXME
-function getRenderer(): [
+function getRenderer (): [
 	boolean,
 	{ makeInjector: (operation: Operation) => Injector },
 ] {
 	return [
 		false,
 		{
-			makeInjector: () => () => ({
-				datatype: 'integer',
-				value: 0,
-			}),
+			makeInjector: () =>
+				() => ({
+					datatype: "integer",
+					value: 0,
+				}),
 		},
 	]
 }
@@ -120,14 +121,14 @@ export default function makeOperator(
 	operation: Operation,
 	maker?: (operation: Operation) => Injector,
 ): () => Value {
-	const [, { makeInjector }] = getRenderer() || [false, { makeInjector: maker }]
+	const [, { makeInjector }] = getRenderer() ||
+		[false, { makeInjector: maker }]
 
-	const operator =
-		operation.operatorType === TypeOfOperator.INJECT_VALUE
-			? makeInjector
-			: (makers[operation.operatorType as keyof typeof makers] as (
-					operation: Operation,
-			  ) => Injector)
+	const operator = operation.operatorType === TypeOfOperator.INJECT_VALUE
+		? makeInjector
+		: (makers[operation.operatorType as keyof typeof makers] as (
+			operation: Operation,
+		) => Injector)
 
 	return operator(operation as InjectValueOperation)
 }

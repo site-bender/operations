@@ -1,32 +1,32 @@
 {
-  "module": "./esm/mod.js",
-  "main": "./umd/mod.js",
-  "types": "./types/mod.d.ts",
-  "name": "@sitebender/operations",
-  "version": "0.1.0",
-  "description": "A library for validation, formatting, and operations in Sitebender components.",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/site-bender/operations.git"
-  },
-  "bugs": {
-    "url": "https://github.com/site-bender/operations/issues"
-  },
-  "exports": {
-    ".": {
-      "import": "./esm/mod.js",
-      "require": "./umd/mod.js",
-      "types": "./types/mod.d.ts"
-    }
-  },
-  "scripts": {
-    "test": "node test_runner.js"
-  },
-  "dependencies": {
-    "@js-temporal/polyfill": "0.3.0"
-  },
-  "devDependencies": {
-    "chalk": "4.1.2"
-  }
+	"module": "./esm/mod.js",
+	"main": "./umd/mod.js",
+	"types": "./types/mod.d.ts",
+	"name": "@sitebender/operations",
+	"version": "0.1.0",
+	"description": "A library for validation, formatting, and operations in Sitebender components.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/site-bender/operations.git"
+	},
+	"bugs": {
+		"url": "https://github.com/site-bender/operations/issues"
+	},
+	"exports": {
+		".": {
+			"import": "./esm/mod.js",
+			"require": "./umd/mod.js",
+			"types": "./types/mod.d.ts"
+		}
+	},
+	"scripts": {
+		"test": "node test_runner.js"
+	},
+	"dependencies": {
+		"@js-temporal/polyfill": "0.3.0"
+	},
+	"devDependencies": {
+		"chalk": "4.1.2"
+	}
 }

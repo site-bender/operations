@@ -1,15 +1,15 @@
-import composeValidators from '../../../mod.js'
 import type {
 	Constraint,
 	OrConstraint,
 	Validation,
 	ValidationError,
-} from '../../../../types/constraints.js'
-import pipe from '../../../../utilities/pipe/mod.js'
+} from "../../../../types/constraints.js"
+import pipe from "../../../../utilities/pipe/mod.js"
+import composeValidators from "../../../mod.js"
 
-const orFormatter = new Intl.ListFormat('en', {
-	style: 'long',
-	type: 'disjunction',
+const orFormatter = new Intl.ListFormat("en", {
+	style: "long",
+	type: "disjunction",
 })
 
 export default function makeOr(
@@ -26,7 +26,7 @@ export default function makeOr(
 			validated.errors || ([] as Array<ValidationError>)
 		).reduce(
 			(acc, error) =>
-				error.error === 'OR_ERROR'
+				error.error === "OR_ERROR"
 					? { ...acc, ors: [...acc.ors, error] }
 					: { ...acc, others: [...acc.others, error] },
 			{ ors: [], others: [] } as OrSplitter,
@@ -34,30 +34,30 @@ export default function makeOr(
 
 		const output = validated.isInvalid
 			? {
-					isInvalid: true,
-					errors: [
-						...ors,
-						{
-							constraint,
-							error: 'OR_ERROR',
-							errors: others,
-							errorMessage: orFormatter.format(
-								others
-									.map(({ errorMessage }) => errorMessage)
-									.filter(value => value) as Array<string>,
-							),
-						} as ValidationError,
-					],
-			  }
+				isInvalid: true,
+				errors: [
+					...ors,
+					{
+						constraint,
+						error: "OR_ERROR",
+						errors: others,
+						errorMessage: orFormatter.format(
+							others
+								.map(({ errorMessage }) => errorMessage)
+								.filter((value) => value) as Array<string>,
+						),
+					} as ValidationError,
+				],
+			}
 			: { isInvalid: validated.isInvalid, errors: validated.errors }
 
 		return ((validated.errors || []) as Array<ValidationError>).length <
-			constraint.tests.length
+				constraint.tests.length
 			? validation
 			: {
-					...validation,
-					...output,
-			  }
+				...validation,
+				...output,
+			}
 	}
 }
 

@@ -1,5 +1,5 @@
-import { TypeOfConstraint, TypeOfSource } from './enums.js'
-import { Operation } from './operations.js'
+import { TypeOfConstraint, TypeOfSource } from "./enums.js"
+import { Operation } from "./operations.js"
 import {
 	AnyDateTimeValue,
 	AnyDateValue,
@@ -13,7 +13,7 @@ import {
 	SetValue,
 	StringValue,
 	Value,
-} from './values.js'
+} from "./values.js"
 
 export type TestValues<T> = {
 	valueToTest: {
@@ -224,7 +224,7 @@ export type ReversedListConstraint = {
 	*/
 export type ArrayTypeConstraint = {
 	readonly constraintType: TypeOfConstraint.IS_ARRAY
-	readonly datatype: 'array'
+	readonly datatype: "array"
 	separator?: string | RegExp
 }
 

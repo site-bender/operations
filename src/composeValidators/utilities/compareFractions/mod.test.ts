@@ -1,12 +1,12 @@
-import type { FractionValue } from '../../../types/values.ts'
-import compareFractions from './mod.ts'
 import {
 	assertEquals,
 	assertThrows,
-} from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "https://deno.land/std@0.118.0/testing/asserts.ts"
+import type { FractionValue } from "../../../types/values.ts"
+import compareFractions from "./mod.ts"
 
 const half: FractionValue = {
-	datatype: 'fraction',
+	datatype: "fraction",
 	value: {
 		denominator: 2,
 		numerator: 1,
@@ -14,27 +14,27 @@ const half: FractionValue = {
 }
 
 const fiveQuarters: FractionValue = {
-	datatype: 'fraction',
+	datatype: "fraction",
 	value: {
 		denominator: 4,
 		numerator: 5,
 	},
 }
 
-Deno.test('[compareFractions] returns -1 if left is less than right', () => {
+Deno.test("[compareFractions] returns -1 if left is less than right", () => {
 	assertEquals(compareFractions(half, fiveQuarters), -1)
 })
 
-Deno.test('[compareFractions] returns 0 if left is equal to right', () => {
+Deno.test("[compareFractions] returns 0 if left is equal to right", () => {
 	assertEquals(compareFractions(half, half), 0)
 })
 
-Deno.test('[compareFractions] returns 1 if left is greater than right', () => {
+Deno.test("[compareFractions] returns 1 if left is greater than right", () => {
 	assertEquals(compareFractions(fiveQuarters, half), 1)
 })
 
-Deno.test('[compareFractions] throws an error if numerator missing', () => {
-	const bad = { datatype: 'fraction', value: { denominator: 4 } }
+Deno.test("[compareFractions] throws an error if numerator missing", () => {
+	const bad = { datatype: "fraction", value: { denominator: 4 } }
 
 	assertThrows(
 		// @ts-ignore: for testing purposes
@@ -44,8 +44,8 @@ Deno.test('[compareFractions] throws an error if numerator missing', () => {
 	)
 })
 
-Deno.test('[compareFractions] throws an error if denominator missing', () => {
-	const bad = { datatype: 'fraction', value: { numerator: 4 } }
+Deno.test("[compareFractions] throws an error if denominator missing", () => {
+	const bad = { datatype: "fraction", value: { numerator: 4 } }
 
 	assertThrows(
 		// @ts-ignore: for testing purposes
@@ -56,13 +56,13 @@ Deno.test('[compareFractions] throws an error if denominator missing', () => {
 })
 
 Deno.test(
-	'[compareFractions] throws an error if argument is not a fraction',
+	"[compareFractions] throws an error if argument is not a fraction",
 	() => {
 		assertThrows(
 			// @ts-ignore: for testing purposes
 			() => compareFractions(half, {}),
 			Error,
-			'undefined is not a fraction',
+			"undefined is not a fraction",
 		)
 	},
 )

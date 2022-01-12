@@ -1,8 +1,8 @@
 import type {
 	StringTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 export default function makeIsString(
 	constraint: StringTypeConstraint,
@@ -10,7 +10,7 @@ export default function makeIsString(
 	return function isString(validation: Validation): Validation {
 		const value = validation.value
 
-		return typeof value === 'string'
+		return typeof value === "string"
 			? validation
 			: makeError(validation, constraint)
 	}

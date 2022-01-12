@@ -1,29 +1,29 @@
-import makeIsReal from './mod.js'
 import type {
 	RealTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import type { RealNumberValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import type { RealNumberValue } from "../../../../types/values.js"
+import makeIsReal from "./mod.js"
 
 const constraint: RealTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_REAL,
 }
 
-test('[makeIsReal] returns correct validation when value is a real number', () => {
+test("[makeIsReal] returns correct validation when value is a real number", () => {
 	const validation: Validation = {
-		datatype: 'real',
+		datatype: "real",
 		value: 3.1415,
 	}
 
 	expect(makeIsReal(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsReal] returns error when value is not a real number', () => {
+test("[makeIsReal] returns error when value is not a real number", () => {
 	const validation: Validation & RealNumberValue = {
-		datatype: 'real',
+		datatype: "real",
 		// @ts-expect-error override for testing purposes
-		value: '7.7',
+		value: "7.7",
 	}
 
 	expect(makeIsReal(constraint)(validation)).toEqual({

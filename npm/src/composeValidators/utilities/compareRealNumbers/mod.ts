@@ -1,5 +1,5 @@
-import type { RealNumberValue } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
+import type { RealNumberValue } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
 
 export const REAL_NUMBER_PRECISION = 10 ** 12
 

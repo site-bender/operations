@@ -1,16 +1,18 @@
-import composeValidators from '../../../mod.ts'
+/// <reference types="../../../../types.d.ts" />
+
 import type {
 	AndConstraint,
 	Constraint,
 	Validation,
 	ValidationError,
-} from '../../../../types/constraints.ts'
-import pipe from '../../../../utilities/pipe/mod.ts'
-import ListFormat from 'https://cdn.skypack.dev/@formatjs/intl-listformat?dts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import pipe from "../../../../utilities/pipe/mod.ts"
+import composeValidators from "../../../mod.ts"
 
-const andFormatter = new ListFormat('en', {
-	style: 'long',
-	type: 'conjunction',
+const andFormatter = new Intl.ListFormat("en", {
+	style: "long",
+	type: "conjunction",
 })
 
 export default function makeAnd(
@@ -27,7 +29,7 @@ export default function makeAnd(
 			validated.errors || ([] as Array<ValidationError>)
 		).reduce(
 			(acc, error) => {
-				return error.error === 'AND_ERROR'
+				return error.error === TypeOfConstraint.AND
 					? { ...acc, ands: [...acc.ands, error] }
 					: { ...acc, others: [...acc.others, error] }
 			},
@@ -35,21 +37,21 @@ export default function makeAnd(
 		)
 		const output = validated.isInvalid
 			? {
-					isInvalid: true,
-					errors: [
-						...ands,
-						{
-							constraint,
-							error: 'AND_ERROR',
-							errors: others,
-							errorMessage: andFormatter.format(
-								others
-									.map(({ errorMessage }) => errorMessage)
-									.filter(value => value) as Array<string>,
-							),
-						} as ValidationError,
-					],
-			  }
+				isInvalid: true,
+				errors: [
+					...ands,
+					{
+						constraint,
+						error: TypeOfConstraint.AND,
+						errors: others,
+						errorMessage: andFormatter.format(
+							others
+								.map(({ errorMessage }) => errorMessage)
+								.filter((value) => value) as Array<string>,
+						),
+					} as ValidationError,
+				],
+			}
 			: { isInvalid: validated.isInvalid, errors: validated.errors }
 
 		return {

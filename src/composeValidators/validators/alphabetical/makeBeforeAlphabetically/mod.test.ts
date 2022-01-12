@@ -1,50 +1,50 @@
-import beforeAlphabetically from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import {
 	BeforeAlphabeticallyConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import beforeAlphabetically from "./mod.ts"
 
 const constraint: BeforeAlphabeticallyConstraint = {
 	constraintType: TypeOfConstraint.BEFORE_ALPHABETICALLY,
-	operand: 'bob',
+	operand: "bob",
 }
 
 Deno.test(
-	'[beforeAlphabetically] returns correct validation if value validates against constraint',
+	"[beforeAlphabetically] returns correct validation if value validates against constraint",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: 'alice',
+			datatype: "string",
+			value: "alice",
 		}
 
 		assertEquals(beforeAlphabetically(constraint)(validation), validation)
 	},
 )
 
-Deno.test('[beforeAlphabetically] handles constraint with options', () => {
+Deno.test("[beforeAlphabetically] handles constraint with options", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'alice',
+		datatype: "string",
+		value: "alice",
 	}
 
 	assertEquals(
 		beforeAlphabetically({
 			...constraint,
-			language: 'fr',
+			language: "fr",
 			options: {
-				sensitivity: 'accent',
+				sensitivity: "accent",
 			},
 		})(validation),
 		validation,
 	)
 })
 
-Deno.test('[beforeAlphabetically] returns error if validation fails', () => {
+Deno.test("[beforeAlphabetically] returns error if validation fails", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'carol',
+		datatype: "string",
+		value: "carol",
 	}
 
 	assertEquals(beforeAlphabetically(constraint)(validation), {

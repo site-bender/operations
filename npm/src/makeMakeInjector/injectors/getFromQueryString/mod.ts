@@ -1,8 +1,8 @@
-import { Injector, InjectValueOperation } from '../../../types/operations.js'
-import { Value } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
-import parseValue from '../../utilities/parseValue/mod.js'
-import stringToMap from '../../utilities/stringToMap/mod.js'
+import { Injector, InjectValueOperation } from "../../../types/operations.js"
+import { Value } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
+import parseValue from "../../utilities/parseValue/mod.js"
+import stringToMap from "../../utilities/stringToMap/mod.js"
 
 export default function getFromQueryString(
 	operation: InjectValueOperation,
@@ -17,7 +17,7 @@ export default function getFromQueryString(
 	}
 
 	return function injectValueFromQueryString(): Value {
-		const queryValue = stringToMap(router.location.queryString, '&', '=').get(
+		const queryValue = stringToMap(router.location.queryString, "&", "=").get(
 			name,
 		)
 

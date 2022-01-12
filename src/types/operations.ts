@@ -1,4 +1,4 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 import {
 	TypeOfMatch,
 	TypeOfOperator,
@@ -6,7 +6,7 @@ import {
 	TypeOfSource,
 	TypeOfTrim,
 	TypeOfTruncation,
-} from './enums.ts'
+} from "./enums.ts"
 import {
 	Arrays,
 	DurationValue,
@@ -17,7 +17,7 @@ import {
 	StringValue,
 	Value,
 	ValueType,
-} from './values.ts'
+} from "./values.ts"
 
 export type Injector = () => Value
 

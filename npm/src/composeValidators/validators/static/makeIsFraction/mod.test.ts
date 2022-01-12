@@ -1,18 +1,18 @@
-import makeIsFraction from './mod.js'
 import {
 	FractionTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { FractionValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { FractionValue } from "../../../../types/values.js"
+import makeIsFraction from "./mod.js"
 
 const constraint: FractionTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_FRACTION,
 }
 
-test('[makeIsFraction] returns correct validation when value is a fraction', () => {
+test("[makeIsFraction] returns correct validation when value is a fraction", () => {
 	const validation: Validation = {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			denominator: 7,
 			numerator: 22,
@@ -22,9 +22,9 @@ test('[makeIsFraction] returns correct validation when value is a fraction', () 
 	expect(makeIsFraction(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsFraction] returns error when numerator is not a number', () => {
+test("[makeIsFraction] returns error when numerator is not a number", () => {
 	const validation: Validation & FractionValue = {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			denominator: 7,
 			// @ts-expect-error override for testing purposes
@@ -44,9 +44,9 @@ test('[makeIsFraction] returns error when numerator is not a number', () => {
 	})
 })
 
-test('[makeIsFraction] returns error when denominator is not a number', () => {
+test("[makeIsFraction] returns error when denominator is not a number", () => {
 	const validation: Validation & FractionValue = {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			// @ts-expect-error override for testing purposes
 			denominator: undefined,
@@ -66,9 +66,9 @@ test('[makeIsFraction] returns error when denominator is not a number', () => {
 	})
 })
 
-test('[makeIsFraction] returns error when denominator is zero', () => {
+test("[makeIsFraction] returns error when denominator is zero", () => {
 	const validation: Validation = {
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
 			denominator: 0,
 			numerator: 22,

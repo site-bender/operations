@@ -1,16 +1,16 @@
-import exactlyNCharacters from './mod.js'
 import {
 	ExactlyNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import exactlyNCharacters from "./mod.js"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
-test('[exactlyNCharacters] returns error if string length less than constraint value', () => {
+test("[exactlyNCharacters] returns error if string length less than constraint value", () => {
 	const constraint: ExactlyNCharactersConstraint = {
 		constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
 		operand: 46,
@@ -28,7 +28,7 @@ test('[exactlyNCharacters] returns error if string length less than constraint v
 	})
 })
 
-test('[exactlyNCharacters] returns correct validation if string length equals constraint value', () => {
+test("[exactlyNCharacters] returns correct validation if string length equals constraint value", () => {
 	const constraint: ExactlyNCharactersConstraint = {
 		constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
 		operand: 45,
@@ -37,7 +37,7 @@ test('[exactlyNCharacters] returns correct validation if string length equals co
 	expect(exactlyNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[exactlyNCharacters] returns error if string length more than constraint value', () => {
+test("[exactlyNCharacters] returns error if string length more than constraint value", () => {
 	const constraint: ExactlyNCharactersConstraint = {
 		constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
 		operand: 44,
@@ -55,7 +55,7 @@ test('[exactlyNCharacters] returns error if string length more than constraint v
 	})
 })
 
-test('[exactlyNCharacters] returns correct validation if string length equal to constraint value using match', () => {
+test("[exactlyNCharacters] returns correct validation if string length equal to constraint value using match", () => {
 	const constraint: ExactlyNCharactersConstraint = {
 		constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
 		operand: 12,
@@ -65,7 +65,7 @@ test('[exactlyNCharacters] returns correct validation if string length equal to 
 	expect(exactlyNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[exactlyNCharacters] returns correct response when match returns null', () => {
+test("[exactlyNCharacters] returns correct response when match returns null", () => {
 	const constraint: ExactlyNCharactersConstraint = {
 		constraintType: TypeOfConstraint.EXACTLY_N_CHARACTERS,
 		operand: 13,

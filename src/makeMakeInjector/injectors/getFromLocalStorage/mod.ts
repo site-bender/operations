@@ -1,10 +1,10 @@
 import type {
 	Injector,
 	InjectValueOperation,
-} from '../../../types/operations.ts'
-import type { Value } from '../../../types/values.ts'
-import not from '../../../utilities/not/mod.ts'
-import parseValue from '../../utilities/parseValue/mod.ts'
+} from "../../../types/operations.ts"
+import type { Value } from "../../../types/values.ts"
+import not from "../../../utilities/not/mod.ts"
+import parseValue from "../../utilities/parseValue/mod.ts"
 
 export default function getFromLocalStorage(
 	operation: InjectValueOperation,
@@ -13,7 +13,7 @@ export default function getFromLocalStorage(
 	const [name, ...rest] = path
 
 	if (not(name)) {
-		return () => ({})
+		return () => ({ datatype: "undefined", value: undefined })
 	}
 
 	return function injectValue(): Value {

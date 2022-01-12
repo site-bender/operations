@@ -1,4 +1,4 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 
 export default function getZonedDateTime(
 	d: string | Date | Temporal.ZonedDateTime,
@@ -7,8 +7,12 @@ export default function getZonedDateTime(
 		return d
 	}
 
-	return (
-		(d instanceof Date && Temporal.ZonedDateTime.from(d.toISOString())) ||
-		Temporal.ZonedDateTime.from(d as string)
-	)
+	if (d instanceof Date) {
+		return Temporal.Instant.fromEpochMilliseconds(d.getTime()).toZonedDateTime({
+			timeZone: Temporal.Now.timeZone().toString(),
+			calendar: "gregory",
+		})
+	}
+
+	return Temporal.ZonedDateTime.from(d as string)
 }

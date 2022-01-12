@@ -1,22 +1,22 @@
-import matches from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import type {
 	MatchConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import matches from "./mod.ts"
 
 const constraint: MatchConstraint = {
 	constraintType: TypeOfConstraint.MATCHING,
-	operand: '^\\d+$',
+	operand: "^\\d+$",
 }
 
 Deno.test(
-	'[matches] returns correct validation when value matches constraint regexp',
+	"[matches] returns correct validation when value matches constraint regexp",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: '666',
+			datatype: "string",
+			value: "666",
 		}
 
 		assertEquals(matches(constraint)(validation), validation)
@@ -24,11 +24,11 @@ Deno.test(
 )
 
 Deno.test(
-	'[matches] returns error when value does not match constraint regexp',
+	"[matches] returns error when value does not match constraint regexp",
 	() => {
 		const validation: Validation = {
-			datatype: 'string',
-			value: 'xyz',
+			datatype: "string",
+			value: "xyz",
 		}
 
 		assertEquals(matches(constraint)(validation), {
@@ -44,17 +44,17 @@ Deno.test(
 	},
 )
 
-Deno.test('[matches] works with flags', () => {
+Deno.test("[matches] works with flags", () => {
 	const validation: Validation = {
-		datatype: 'string',
-		value: 'xyz',
+		datatype: "string",
+		value: "xyz",
 	}
 
 	assertEquals(
 		matches({
 			...constraint,
-			operand: '^[A-Z]+$',
-			flags: 'i',
+			operand: "^[A-Z]+$",
+			flags: "i",
 		})(validation),
 		validation,
 	)

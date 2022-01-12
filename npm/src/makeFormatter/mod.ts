@@ -1,19 +1,19 @@
-import not from '../utilities/not/mod.js'
-import pipe from '../utilities/pipe/mod.js'
-import makeAsCurrency from './formatters/makeAsCurrency/mod.js'
-import makeAsPercent from './formatters/makeAsPercent/mod.js'
-import makeInsert from './formatters/makeInsert/mod.js'
-import makeMaskValue from './formatters/makeMaskValue/mod.js'
-import makeReplace from './formatters/makeReplace/mod.js'
+import not from "../utilities/not/mod.js"
+import pipe from "../utilities/pipe/mod.js"
+import makeAsCurrency from "./formatters/makeAsCurrency/mod.js"
+import makeAsPercent from "./formatters/makeAsPercent/mod.js"
+import makeInsert from "./formatters/makeInsert/mod.js"
+import makeMaskValue from "./formatters/makeMaskValue/mod.js"
+import makeReplace from "./formatters/makeReplace/mod.js"
 
-import type { Formatter, MakeFormatterParameters } from './types.js'
+import type { Formatter, MakeFormatterParameters } from "./types.js"
 
 enum TypeOfFormatter {
-	AS_CURRENCY = 'AS_CURRENCY',
-	AS_PERCENT = 'AS_PERCENT',
-	INSERT = 'INSERT',
-	MASK_VALUE = 'MASK_VALUE',
-	REPLACE = 'REPLACE',
+	AS_CURRENCY = "AS_CURRENCY",
+	AS_PERCENT = "AS_PERCENT",
+	INSERT = "INSERT",
+	MASK_VALUE = "MASK_VALUE",
+	REPLACE = "REPLACE",
 }
 
 const formatterMakers = {

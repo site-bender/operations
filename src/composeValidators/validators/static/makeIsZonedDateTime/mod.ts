@@ -1,10 +1,10 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
-import getZonedDateTime from '../../../../makeMakeInjector/utilities/getZonedDateTime/mod.ts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
+import getZonedDateTime from "../../../../makeMakeInjector/utilities/getZonedDateTime/mod.ts"
 import type {
 	Validation,
 	ZonedDateTimeTypeConstraint,
-} from '../../../../types/constraints.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 export default function makeIsZonedDateTime(
 	constraint: ZonedDateTimeTypeConstraint,

@@ -1,21 +1,20 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { Temporal } from "@js-temporal/polyfill"
 import type {
 	DateTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Value } from '../../../../types/values.js'
-import getPlainDate from '../../../utilities/getPlainDate/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Value } from "../../../../types/values.js"
+import getPlainDate from "../../../utilities/getPlainDate/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeIsDate(
 	constraint: DateTypeConstraint,
 ): (validation: Validation) => Validation {
 	return function isDate(validation: Validation): Validation {
-		const value =
-			typeof validation?.value === 'object' &&
-			'value' in (validation.value as Value)
-				? (validation.value as Value).value
-				: validation.value
+		const value = typeof validation?.value === "object" &&
+				"value" in (validation.value as Value)
+			? (validation.value as Value).value
+			: validation.value
 
 		try {
 			getPlainDate(value as string | Temporal.PlainDate | Date)

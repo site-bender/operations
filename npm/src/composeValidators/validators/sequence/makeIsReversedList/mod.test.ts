@@ -1,42 +1,42 @@
-import reversedList from './mod.js'
 import {
 	ReversedListConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import reversedList from "./mod.js"
 
 const constraint: ReversedListConstraint = {
 	constraintType: TypeOfConstraint.REVERSED_LIST,
-	operand: 'red,yellow,green,cyan,blue,magenta',
+	operand: "red,yellow,green,cyan,blue,magenta",
 }
 
-test('[reversedList] returns correct validation if list contains the constraint values in the same order', () => {
+test("[reversedList] returns correct validation if list contains the constraint values in the same order", () => {
 	const validation: Validation = {
-		datatype: 'list',
-		value: 'blue,green,red',
+		datatype: "list",
+		value: "blue,green,red",
 	}
 
 	expect(reversedList(constraint)(validation)).toEqual(validation)
 })
 
-test('[reversedList] works with arrays', () => {
+test("[reversedList] works with arrays", () => {
 	const validation: Validation = {
-		datatype: 'list',
-		value: ['blue', 'green', 'red'],
+		datatype: "list",
+		value: ["blue", "green", "red"],
 	}
 
 	expect(
 		reversedList({
 			...constraint,
-			operand: ['red', 'yellow', 'green', 'cyan', 'blue', 'magenta'],
+			operand: ["red", "yellow", "green", "cyan", "blue", "magenta"],
 		})(validation),
 	).toEqual(validation)
 })
 
-test('[reversedList] returns error if list after constraint value', () => {
+test("[reversedList] returns error if list after constraint value", () => {
 	const validation: Validation = {
-		datatype: 'list',
-		value: 'red,blue,green',
+		datatype: "list",
+		value: "red,blue,green",
 	}
 
 	expect(reversedList(constraint)(validation)).toEqual({

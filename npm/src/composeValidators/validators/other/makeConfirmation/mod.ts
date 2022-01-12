@@ -1,8 +1,8 @@
 import type {
 	ConfirmationConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeConfirmation(
 	constraint: ConfirmationConstraint,
@@ -10,7 +10,7 @@ export default function makeConfirmation(
 	return function confirmation(validation: Validation): Validation {
 		const value = validation.value
 
-		return (typeof value === 'boolean' && value) || value
+		return (typeof value === "boolean" && value) || value
 			? validation
 			: makeError(validation, constraint)
 	}

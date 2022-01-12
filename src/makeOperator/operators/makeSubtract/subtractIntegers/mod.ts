@@ -1,7 +1,7 @@
-import { TypeOfTruncation } from '../../../../types/enums.ts'
-import type { Injector } from '../../../../types/operations.ts'
-import type { IntegerValue, NumberValue } from '../../../../types/values.ts'
-import convertToInteger from '../../../utilities/convertToInteger/mod.ts'
+import { TypeOfTruncation } from "../../../../types/enums.ts"
+import type { Injector } from "../../../../types/operations.ts"
+import type { IntegerValue, NumberValue } from "../../../../types/values.ts"
+import convertToInteger from "../../../utilities/convertToInteger/mod.ts"
 
 export default function subtractIntegers(
 	minuend: Injector,
@@ -18,7 +18,7 @@ export default function subtractIntegers(
 	)
 
 	return {
-		datatype: 'integer',
+		datatype: "integer",
 		value: Math.round(left.value - right.value),
 	} as IntegerValue
 }

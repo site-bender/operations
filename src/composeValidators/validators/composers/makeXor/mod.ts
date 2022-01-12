@@ -1,16 +1,18 @@
-import composeValidators from '../../../mod.ts'
+/// <reference types="../../../../types.d.ts" />
+
 import type {
 	Constraint,
 	Validation,
 	ValidationError,
 	XorConstraint,
-} from '../../../../types/constraints.ts'
-import pipe from '../../../../utilities/pipe/mod.ts'
-import ListFormat from 'https://cdn.skypack.dev/@formatjs/intl-listformat?dts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import pipe from "../../../../utilities/pipe/mod.ts"
+import composeValidators from "../../../mod.ts"
 
-const xorFormatter = new ListFormat('en', {
-	style: 'long',
-	type: 'unit',
+const xorFormatter = new Intl.ListFormat("en", {
+	style: "long",
+	type: "unit",
 })
 
 export default function makeXor(
@@ -21,7 +23,9 @@ export default function makeXor(
 		(test: Constraint): ((validation: Validation) => Validation) =>
 			composeValidators(test),
 	)
-	const validateXor = pipe(validators) as (validation: Validation) => Validation
+	const validateXor = pipe(validators) as (
+		validation: Validation,
+	) => Validation
 
 	return function xor(validation: Validation): Validation {
 		const validated: Validation = validateXor(validation) as Validation
@@ -30,7 +34,7 @@ export default function makeXor(
 			validated.errors || ([] as Array<ValidationError>)
 		).reduce(
 			(acc, error) =>
-				error.error === 'XOR_ERROR'
+				error.error === TypeOfConstraint.XOR
 					? { ...acc, xors: [...acc.xors, error] }
 					: { ...acc, others: [...acc.others, error] },
 			{ xors: [], others: [] } as XorSplitter,
@@ -39,22 +43,22 @@ export default function makeXor(
 		return validated.errors?.length === constraint.tests.length - 1
 			? validation
 			: {
-					...validation,
-					isInvalid: true,
-					errors: [
-						...xors,
-						{
-							constraint,
-							error: 'XOR_ERROR',
-							errors: others,
-							errorMessage: xorFormatter.format(
-								others
-									.map(({ errorMessage }) => errorMessage)
-									.filter(value => value) as Array<string>,
-							),
-						} as ValidationError,
-					],
-			  }
+				...validation,
+				isInvalid: true,
+				errors: [
+					...xors,
+					{
+						constraint,
+						error: TypeOfConstraint.XOR,
+						errors: others,
+						errorMessage: xorFormatter.format(
+							others
+								.map(({ errorMessage }) => errorMessage)
+								.filter((value) => value) as Array<string>,
+						),
+					} as ValidationError,
+				],
+			}
 	}
 }
 

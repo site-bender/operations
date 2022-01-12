@@ -1,10 +1,10 @@
-import makeOperator from '../../../../makeOperator/mod.js'
+import makeOperator from "../../../../makeOperator/mod.js"
 import type {
 	MatchConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Operation } from '../../../../types/operations.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Operation } from "../../../../types/operations.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeMatch(
 	constraint: MatchConstraint,
@@ -17,10 +17,9 @@ export default function makeMatch(
 
 	return function match(validation: Validation): Validation {
 		const injected = injector()
-		const testValue =
-			typeof injected === 'object' && 'value' in injected
-				? injected.value
-				: injected
+		const testValue = typeof injected === "object" && "value" in injected
+			? injected.value
+			: injected
 
 		const matcher = (
 			testValue instanceof RegExp ? injected : new RegExp(injected as string)

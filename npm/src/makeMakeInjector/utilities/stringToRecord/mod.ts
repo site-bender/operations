@@ -1,10 +1,10 @@
-import { Records } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
+import { Records } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
 
 export default function stringToRecord(
 	str: string,
-	separator: string | RegExp = ',',
-	keyValueSeparator: string | RegExp = ':',
+	separator: string | RegExp = ",",
+	keyValueSeparator: string | RegExp = ":",
 ): Records {
 	return str.split(separator).reduce((acc, v) => {
 		const [key, value] = v.split(keyValueSeparator)
@@ -12,8 +12,8 @@ export default function stringToRecord(
 		return not(key)
 			? acc
 			: {
-					...acc,
-					[key]: value,
-			  }
+				...acc,
+				[key]: value,
+			}
 	}, {}) as Records
 }

@@ -1,27 +1,27 @@
-import makeIsDuration from './mod.js'
 import {
 	DurationTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { DurationValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { DurationValue } from "../../../../types/values.js"
+import makeIsDuration from "./mod.js"
 
 const constraint: DurationTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_DURATION,
 }
 
-test('[makeIsDuration] returns correct validation when value is a date', () => {
+test("[makeIsDuration] returns correct validation when value is a date", () => {
 	const validation: Validation = {
-		datatype: 'duration',
-		value: '2000-01-01',
+		datatype: "duration",
+		value: "2000-01-01",
 	}
 
 	expect(makeIsDuration(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsDuration] returns error when value is not a date', () => {
+test("[makeIsDuration] returns error when value is not a date", () => {
 	const validation: Validation & DurationValue = {
-		datatype: 'duration',
+		datatype: "duration",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -33,7 +33,7 @@ test('[makeIsDuration] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_DURATION,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

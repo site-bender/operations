@@ -2,7 +2,7 @@ import type {
 	Constraint,
 	Validation,
 	ValidationError,
-} from '../../../types/constraints.ts'
+} from "../../../types/constraints.ts"
 
 export default function makeError<V extends Validation, C extends Constraint>(
 	validation: V,

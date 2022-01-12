@@ -1,17 +1,17 @@
-import makeOperator from '../../../../makeOperator/mod.js'
+import makeOperator from "../../../../makeOperator/mod.js"
 import type {
 	AtLeastNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Operation } from '../../../../types/operations.js'
-import { IntegerValue } from '../../../../types/values.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Operation } from "../../../../types/operations.js"
+import { IntegerValue } from "../../../../types/values.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeAtLeastNCharacters(
 	constraint: AtLeastNCharactersConstraint,
 ): (validation: Validation) => Validation {
 	const { match, operand } = constraint
-	const matcher = typeof match === 'string' ? new RegExp(match) : match
+	const matcher = typeof match === "string" ? new RegExp(match) : match
 	const injector = (operand as Operation).operatorType
 		? makeOperator(operand as Operation)
 		: () => operand
@@ -19,21 +19,20 @@ export default function makeAtLeastNCharacters(
 	return function atLeastNCharacters(validation: Validation): Validation {
 		const injected = injector() as IntegerValue | number
 		const testValue: number =
-			typeof injected === 'object' && 'value' in injected
+			typeof injected === "object" && "value" in injected
 				? injected.value
 				: injected
 
-		const value: string | Array<string> =
-			(matcher
-				? (validation.value as string).match(matcher)
-				: (validation.value as string)) || ''
+		const value: string | Array<string> = (matcher
+			? (validation.value as string).match(matcher)
+			: (validation.value as string)) || ""
 
 		return value.length >= testValue
 			? validation
 			: makeError(
-					validation,
-					constraint,
-					`include at least ${testValue} characters`,
-			  )
+				validation,
+				constraint,
+				`include at least ${testValue} characters`,
+			)
 	}
 }

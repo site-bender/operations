@@ -3,7 +3,7 @@ import type {
 	Validation,
 	ValidationError,
 	ValidationErrorType,
-} from '../../../types/constraints.js'
+} from "../../../types/constraints.js"
 
 export default function makeError<V extends Validation, C extends Constraint>(
 	validation: V,

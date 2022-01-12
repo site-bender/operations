@@ -1,50 +1,50 @@
-import makeIsMap from './mod.ts'
+import { assertEquals } from "https://deno.land/std@0.118.0/testing/asserts.ts"
 import type {
 	MapTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.ts'
-import { TypeOfConstraint } from '../../../../types/enums.ts'
-import type { MapValue } from '../../../../types/values.ts'
-import { assertEquals } from 'https://deno.land/std@0.118.0/testing/asserts.ts'
+} from "../../../../types/constraints.ts"
+import { TypeOfConstraint } from "../../../../types/enums.ts"
+import type { MapValue } from "../../../../types/values.ts"
+import makeIsMap from "./mod.ts"
 
 const constraint: MapTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_MAP,
 }
 
-Deno.test('[makeIsMap] returns correct validation when value is a map', () => {
+Deno.test("[makeIsMap] returns correct validation when value is a map", () => {
 	const stringValidation: Validation = {
-		datatype: 'map',
-		value: 'red:f00,green:0f0,blue:00f',
+		datatype: "map",
+		value: "red:f00,green:0f0,blue:00f",
 	}
 
 	assertEquals(makeIsMap(constraint)(stringValidation), stringValidation)
 
 	const objectValidation: Validation = {
-		datatype: 'map',
+		datatype: "map",
 		value: {
-			red: 'f00',
-			green: '0f0',
-			blue: '00f',
+			red: "f00",
+			green: "0f0",
+			blue: "00f",
 		},
 	}
 
 	assertEquals(makeIsMap(constraint)(objectValidation), objectValidation)
 
 	const mapValidation: Validation = {
-		datatype: 'map',
+		datatype: "map",
 		value: new Map([
-			['red', 'f00'],
-			['green', '0f0'],
-			['blue', '00f'],
+			["red", "f00"],
+			["green", "0f0"],
+			["blue", "00f"],
 		]),
 	}
 
 	assertEquals(makeIsMap(constraint)(mapValidation), mapValidation)
 })
 
-Deno.test('[makeIsMap] returns error when value is not a map', () => {
+Deno.test("[makeIsMap] returns error when value is not a map", () => {
 	const validation: Validation & MapValue = {
-		datatype: 'map',
+		datatype: "map",
 		// @ts-ignore: for testing purposes
 		value: 666,
 	}

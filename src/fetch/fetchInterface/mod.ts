@@ -1,15 +1,15 @@
-import type { Configuration } from '../../types/configurations.ts'
+import type { Configuration } from "../../types/configurations.ts"
 
 export default async function fetchInterface(
 	name: string,
 ): Promise<Configuration> {
-	const response = await fetch('https://imaker.hasura.app/v1/graphql', {
-		method: 'POST',
+	const response = await fetch("https://imaker.hasura.app/v1/graphql", {
+		method: "POST",
 		headers: {
-			'x-hasura-admin-secret':
-				'vxqJlZIraNka8T4wiefSd7fdQEsmN27xa7W5viCW7RYJ4R8OPFdo8JwNeD4QG2oc',
-			'Content-Type': 'application/json',
-			'Accept': 'application/json',
+			"x-hasura-admin-secret":
+				"vxqJlZIraNka8T4wiefSd7fdQEsmN27xa7W5viCW7RYJ4R8OPFdo8JwNeD4QG2oc",
+			"Content-Type": "application/json",
+			"Accept": "application/json",
 		},
 		body: JSON.stringify({
 			query: `query GetInterface($name: String) {
@@ -23,7 +23,7 @@ export default async function fetchInterface(
 			variables: {
 				name,
 			},
-			operationName: 'GetInterface',
+			operationName: "GetInterface",
 		}),
 	})
 

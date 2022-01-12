@@ -1,26 +1,26 @@
-import makeIsMember from './mod.js'
 import {
 	MemberTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import makeIsMember from "./mod.js"
 
 const constraint: MemberTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_MEMBER,
 }
 
-test('[makeIsMember] returns correct validation when value is a potential member', () => {
+test("[makeIsMember] returns correct validation when value is a potential member", () => {
 	const validation: Validation = {
-		datatype: 'member',
+		datatype: "member",
 		value: true,
 	}
 
 	expect(makeIsMember(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsMember] returns error when value is not a potential member (undefined)', () => {
+test("[makeIsMember] returns error when value is not a potential member (undefined)", () => {
 	const validation: Validation = {
-		datatype: 'member',
+		datatype: "member",
 		value: undefined,
 	}
 

@@ -1,8 +1,8 @@
-import { TypeOfTruncation } from '../../../../types/enums.ts'
-import type { Injector } from '../../../../types/operations.ts'
-import type { FractionValue, NumberValue } from '../../../../types/values.ts'
-import convertToFraction from '../../../utilities/convertToFraction/mod.ts'
-import reduceToLowestForm from '../../../utilities/reduceToLowestForm/mod.ts'
+import { TypeOfTruncation } from "../../../../types/enums.ts"
+import type { Injector } from "../../../../types/operations.ts"
+import type { FractionValue, NumberValue } from "../../../../types/values.ts"
+import convertToFraction from "../../../utilities/convertToFraction/mod.ts"
+import reduceToLowestForm from "../../../utilities/reduceToLowestForm/mod.ts"
 
 export default function subtractFractions(
 	minuend: Injector,
@@ -22,13 +22,11 @@ export default function subtractFractions(
 	)
 
 	return reduceToLowestForm({
-		datatype: 'fraction',
+		datatype: "fraction",
 		value: {
-			denominator:
-				(left as FractionValue).value.denominator *
+			denominator: (left as FractionValue).value.denominator *
 				(right as FractionValue).value.denominator,
-			numerator:
-				(left as FractionValue).value.numerator *
+			numerator: (left as FractionValue).value.numerator *
 					(right as FractionValue).value.denominator -
 				(right as FractionValue).value.numerator *
 					(left as FractionValue).value.denominator,

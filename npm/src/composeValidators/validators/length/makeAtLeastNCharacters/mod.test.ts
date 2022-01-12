@@ -1,16 +1,16 @@
-import atLeastNCharacters from './mod.js'
 import {
 	AtLeastNCharactersConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import atLeastNCharacters from "./mod.js"
 
 const validation: Validation = {
-	datatype: 'string',
-	value: 'Peter Piper picked a peck of pickled peppers.',
+	datatype: "string",
+	value: "Peter Piper picked a peck of pickled peppers.",
 }
 
-test('[atLeastNCharacters] returns correct validation if string length more than constraint value', () => {
+test("[atLeastNCharacters] returns correct validation if string length more than constraint value", () => {
 	const constraint: AtLeastNCharactersConstraint = {
 		constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
 		operand: 44,
@@ -19,7 +19,7 @@ test('[atLeastNCharacters] returns correct validation if string length more than
 	expect(atLeastNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[atLeastNCharacters] returns correct validation if string length equals constraint value', () => {
+test("[atLeastNCharacters] returns correct validation if string length equals constraint value", () => {
 	const constraint: AtLeastNCharactersConstraint = {
 		constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
 		operand: 45,
@@ -28,7 +28,7 @@ test('[atLeastNCharacters] returns correct validation if string length equals co
 	expect(atLeastNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[atLeastNCharacters] returns error if string length less than constraint value', () => {
+test("[atLeastNCharacters] returns error if string length less than constraint value", () => {
 	const constraint: AtLeastNCharactersConstraint = {
 		constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
 		operand: 46,
@@ -46,7 +46,7 @@ test('[atLeastNCharacters] returns error if string length less than constraint v
 	})
 })
 
-test('[atLeastNCharacters] returns correct validation if string length equals constraint value using match', () => {
+test("[atLeastNCharacters] returns correct validation if string length equals constraint value using match", () => {
 	const constraint: AtLeastNCharactersConstraint = {
 		constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
 		operand: 12,
@@ -56,7 +56,7 @@ test('[atLeastNCharacters] returns correct validation if string length equals co
 	expect(atLeastNCharacters(constraint)(validation)).toEqual(validation)
 })
 
-test('[atLeastNCharacters] returns correct response when match returns null', () => {
+test("[atLeastNCharacters] returns correct response when match returns null", () => {
 	const constraint: AtLeastNCharactersConstraint = {
 		constraintType: TypeOfConstraint.AT_LEAST_N_CHARACTERS,
 		operand: 12,

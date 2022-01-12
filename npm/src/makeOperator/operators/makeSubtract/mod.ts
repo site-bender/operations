@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.js'
-import { TypeOfReturn, TypeOfTruncation } from '../../../types/enums.js'
-import type { Injector, SubtractOperation } from '../../../types/operations.js'
-import { NumberValue } from '../../../types/values.js'
-import subtractFractions from './subtractFractions/mod.js'
-import subtractIntegers from './subtractIntegers/mod.js'
-import subtractPrecisionNumbers from './subtractPrecisionNumbers/mod.js'
-import subtractRealNumbers from './subtractRealNumbers/mod.js'
+import { TypeOfReturn, TypeOfTruncation } from "../../../types/enums.js"
+import type { Injector, SubtractOperation } from "../../../types/operations.js"
+import { NumberValue } from "../../../types/values.js"
+import makeOperator from "../../mod.js"
+import subtractFractions from "./subtractFractions/mod.js"
+import subtractIntegers from "./subtractIntegers/mod.js"
+import subtractPrecisionNumbers from "./subtractPrecisionNumbers/mod.js"
+import subtractRealNumbers from "./subtractRealNumbers/mod.js"
 
 export type Subtractor = (
 	minuend: Injector,

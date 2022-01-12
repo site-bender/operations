@@ -1,10 +1,10 @@
-import { Maps } from '../../../types/values.js'
-import not from '../../../utilities/not/mod.js'
+import { Maps } from "../../../types/values.js"
+import not from "../../../utilities/not/mod.js"
 
 export default function stringToMap(
 	value: string,
-	separator: string | RegExp = ',',
-	keyValueSeparator: string | RegExp = ':',
+	separator: string | RegExp = ",",
+	keyValueSeparator: string | RegExp = ":",
 ): Maps {
 	const obj: Record<string, string> = value
 		.split(separator)
@@ -14,9 +14,9 @@ export default function stringToMap(
 			return not(key)
 				? acc
 				: {
-						...acc,
-						[key]: value,
-				  }
+					...acc,
+					[key]: value,
+				}
 		}, {})
 
 	return new Map(Object.entries(obj)) as Maps

@@ -1,27 +1,27 @@
-import makeIsYearMonth from './mod.js'
 import {
 	Validation,
 	YearMonthConstraint,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
-import { YearMonthValue } from '../../../../types/values.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import { YearMonthValue } from "../../../../types/values.js"
+import makeIsYearMonth from "./mod.js"
 
 const constraint: YearMonthConstraint = {
 	constraintType: TypeOfConstraint.IS_YEAR_MONTH,
 }
 
-test('[makeIsYearMonth] returns correct validation when value is a date', () => {
+test("[makeIsYearMonth] returns correct validation when value is a date", () => {
 	const validation: Validation = {
-		datatype: 'yearMonth',
-		value: '2000-01',
+		datatype: "yearMonth",
+		value: "2000-01",
 	}
 
 	expect(makeIsYearMonth(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsYearMonth] returns error when value is not a date', () => {
+test("[makeIsYearMonth] returns error when value is not a date", () => {
 	const validation: Validation & YearMonthValue = {
-		datatype: 'yearMonth',
+		datatype: "yearMonth",
 		// @ts-expect-error override for testing purposes
 		value: 666,
 	}
@@ -33,7 +33,7 @@ test('[makeIsYearMonth] returns error when value is not a date', () => {
 			{
 				error: TypeOfConstraint.IS_YEAR_MONTH,
 				constraint,
-				errorMessage: 'RangeError: invalid ISO 8601 string: 666',
+				errorMessage: "RangeError: invalid ISO 8601 string: 666",
 			},
 		],
 	})

@@ -1,8 +1,8 @@
 import type {
 	MemberTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeIsMember(
 	constraint: MemberTypeConstraint,
@@ -10,7 +10,7 @@ export default function makeIsMember(
 	return function isMember(validation: Validation): Validation {
 		const value = validation.value
 
-		return typeof value !== 'undefined'
+		return typeof value !== "undefined"
 			? validation
 			: makeError(validation, constraint)
 	}

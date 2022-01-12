@@ -1,40 +1,40 @@
-import xor from './mod.js'
-import { Validation, XorConstraint } from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+import { Validation, XorConstraint } from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import xor from "./mod.js"
 
 const constraint: XorConstraint = {
-	constraintType: 'xor',
+	constraintType: "xor",
 	tests: [
 		{
 			constraintType: TypeOfConstraint.MEMBER,
-			operand: ['red', 'green', 'blue'],
+			operand: ["red", "green", "blue"],
 		},
 		{
 			constraintType: TypeOfConstraint.MEMBER,
-			operand: ['cyan', 'magenta', 'yellow', 'blue'],
+			operand: ["cyan", "magenta", "yellow", "blue"],
 		},
 		{
 			constraintType: TypeOfConstraint.MEMBER,
-			operand: ['chartreuse', 'mauve', 'yellow', 'blue'],
+			operand: ["chartreuse", "mauve", "yellow", "blue"],
 		},
 	],
 }
 
 const validate = xor(constraint)
 
-test('[xor] passes when one constraint check passes', () => {
+test("[xor] passes when one constraint check passes", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'red',
+		datatype: "member",
+		value: "red",
 	}
 
 	expect(validate(validation)).toEqual(validation)
 })
 
-test('[xor] fails when more than one constraint check passes', () => {
+test("[xor] fails when more than one constraint check passes", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'yellow',
+		datatype: "member",
+		value: "yellow",
 	}
 
 	expect(validate(validation)).toEqual({
@@ -47,15 +47,15 @@ test('[xor] fails when more than one constraint check passes', () => {
 					tests: [
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['red', 'green', 'blue'],
+							operand: ["red", "green", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['cyan', 'magenta', 'yellow', 'blue'],
+							operand: ["cyan", "magenta", "yellow", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['chartreuse', 'mauve', 'yellow', 'blue'],
+							operand: ["chartreuse", "mauve", "yellow", "blue"],
 						},
 					],
 				},
@@ -65,7 +65,7 @@ test('[xor] fails when more than one constraint check passes', () => {
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['red', 'green', 'blue'],
+							operand: ["red", "green", "blue"],
 						},
 					},
 				],
@@ -74,10 +74,10 @@ test('[xor] fails when more than one constraint check passes', () => {
 	})
 })
 
-test('[xor] fails when all constraint checks pass', () => {
+test("[xor] fails when all constraint checks pass", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'blue',
+		datatype: "member",
+		value: "blue",
 	}
 
 	expect(validate(validation)).toEqual({
@@ -90,15 +90,15 @@ test('[xor] fails when all constraint checks pass', () => {
 					tests: [
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['red', 'green', 'blue'],
+							operand: ["red", "green", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['cyan', 'magenta', 'yellow', 'blue'],
+							operand: ["cyan", "magenta", "yellow", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['chartreuse', 'mauve', 'yellow', 'blue'],
+							operand: ["chartreuse", "mauve", "yellow", "blue"],
 						},
 					],
 				},
@@ -109,10 +109,10 @@ test('[xor] fails when all constraint checks pass', () => {
 	})
 })
 
-test('[xor] fails when all constraint checks fail', () => {
+test("[xor] fails when all constraint checks fail", () => {
 	const validation: Validation = {
-		datatype: 'member',
-		value: 'orange',
+		datatype: "member",
+		value: "orange",
 	}
 
 	expect(validate(validation)).toEqual({
@@ -125,15 +125,15 @@ test('[xor] fails when all constraint checks fail', () => {
 					tests: [
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['red', 'green', 'blue'],
+							operand: ["red", "green", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['cyan', 'magenta', 'yellow', 'blue'],
+							operand: ["cyan", "magenta", "yellow", "blue"],
 						},
 						{
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['chartreuse', 'mauve', 'yellow', 'blue'],
+							operand: ["chartreuse", "mauve", "yellow", "blue"],
 						},
 					],
 				},
@@ -143,21 +143,21 @@ test('[xor] fails when all constraint checks fail', () => {
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['red', 'green', 'blue'],
+							operand: ["red", "green", "blue"],
 						},
 					},
 					{
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['cyan', 'magenta', 'yellow', 'blue'],
+							operand: ["cyan", "magenta", "yellow", "blue"],
 						},
 					},
 					{
 						error: TypeOfConstraint.MEMBER,
 						constraint: {
 							constraintType: TypeOfConstraint.MEMBER,
-							operand: ['chartreuse', 'mauve', 'yellow', 'blue'],
+							operand: ["chartreuse", "mauve", "yellow", "blue"],
 						},
 					},
 				],

@@ -1,10 +1,10 @@
-import { Temporal } from 'https://cdn.skypack.dev/@js-temporal/polyfill?dts'
+import { Temporal } from "https://cdn.skypack.dev/@js-temporal/polyfill?dts"
 import type {
 	Validation,
 	YearMonthConstraint,
-} from '../../../../types/constraints.ts'
-import getYearMonth from '../../../utilities/getYearMonth/mod.ts'
-import makeError from '../../../utilities/makeError/mod.ts'
+} from "../../../../types/constraints.ts"
+import getYearMonth from "../../../utilities/getYearMonth/mod.ts"
+import makeError from "../../../utilities/makeError/mod.ts"
 
 // FIXME
 export default function makeIsYearMonth(

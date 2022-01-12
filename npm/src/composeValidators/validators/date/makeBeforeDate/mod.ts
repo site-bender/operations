@@ -1,12 +1,12 @@
-import { Temporal } from '@js-temporal/polyfill'
-import makeOperator from '../../../../makeOperator/mod.js'
+import { Temporal } from "@js-temporal/polyfill"
+import makeOperator from "../../../../makeOperator/mod.js"
 import type {
 	BeforeDateConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Operation } from '../../../../types/operations.js'
-import getPlainDate from '../../../utilities/getPlainDate/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Operation } from "../../../../types/operations.js"
+import getPlainDate from "../../../utilities/getPlainDate/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeBeforeDate(
 	constraint: BeforeDateConstraint,
@@ -18,10 +18,9 @@ export default function makeBeforeDate(
 
 	return function beforeDate(validation: Validation): Validation {
 		const injected = injector()
-		const testValue =
-			typeof injected === 'object' && 'value' in injected
-				? injected.value
-				: injected
+		const testValue = typeof injected === "object" && "value" in injected
+			? injected.value
+			: injected
 
 		try {
 			const testDate = getPlainDate(

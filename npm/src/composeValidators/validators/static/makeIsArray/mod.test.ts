@@ -1,28 +1,28 @@
-import makeIsArray from './mod.js'
 import {
 	ArrayTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { TypeOfConstraint } from '../../../../types/enums.js'
+} from "../../../../types/constraints.js"
+import { TypeOfConstraint } from "../../../../types/enums.js"
+import makeIsArray from "./mod.js"
 
 const constraint: ArrayTypeConstraint = {
 	constraintType: TypeOfConstraint.IS_ARRAY,
-	datatype: 'array',
+	datatype: "array",
 }
 
-test('[makeIsArray] returns correct validation when value is an array', () => {
+test("[makeIsArray] returns correct validation when value is an array", () => {
 	const validation: Validation = {
-		datatype: 'array',
+		datatype: "array",
 		value: [],
 	}
 
 	expect(makeIsArray(constraint)(validation)).toEqual(validation)
 })
 
-test('[makeIsArray] returns error when value is not an array', () => {
+test("[makeIsArray] returns error when value is not an array", () => {
 	const validation: Validation = {
-		datatype: 'array',
-		value: '',
+		datatype: "array",
+		value: "",
 	}
 
 	expect(makeIsArray(constraint)(validation)).toEqual({

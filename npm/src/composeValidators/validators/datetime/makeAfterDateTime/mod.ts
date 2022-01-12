@@ -1,12 +1,12 @@
-import { Temporal } from '@js-temporal/polyfill'
-import makeOperator from '../../../../makeOperator/mod.js'
+import { Temporal } from "@js-temporal/polyfill"
+import makeOperator from "../../../../makeOperator/mod.js"
 import type {
 	AfterDateTimeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import { Operation } from '../../../../types/operations.js'
-import getPlainDateTime from '../../../utilities/getPlainDateTime/mod.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import { Operation } from "../../../../types/operations.js"
+import getPlainDateTime from "../../../utilities/getPlainDateTime/mod.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 export default function makeAfterDateTime(
 	constraint: AfterDateTimeConstraint,
@@ -18,10 +18,9 @@ export default function makeAfterDateTime(
 
 	return function afterDateTime(validation: Validation): Validation {
 		const injected = injector()
-		const testValue =
-			typeof injected === 'object' && 'value' in injected
-				? injected.value
-				: injected
+		const testValue = typeof injected === "object" && "value" in injected
+			? injected.value
+			: injected
 
 		try {
 			const testDateTime = getPlainDateTime(

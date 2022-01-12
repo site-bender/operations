@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.ts'
 import {
 	Injector,
 	IsOddOperation,
 	Operation,
-} from '../../../types/operations.ts'
-import type { IntegerValue } from '../../../types/values.ts'
-import checkIsOdd from './checkIsOdd/mod.ts'
+} from "../../../types/operations.ts"
+import type { IntegerValue } from "../../../types/values.ts"
+import makeOperator from "../../mod.ts"
+import checkIsOdd from "./checkIsOdd/mod.ts"
 
 export default function makeIsOdd(operation: IsOddOperation): Injector {
 	const { operand } = operation as IsOddOperation

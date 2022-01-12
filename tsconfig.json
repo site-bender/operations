@@ -1,18 +1,28 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true
-  },
-  "include": ["./src"]
+	"compilerOptions": {
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"ESNext.AsyncIterable",
+			"deno.ns",
+			"deno.unstable"
+		],
+		"moduleResolution": "Node",
+		"strict": true,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"noEmit": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"types": [
+			"./src/types.d.ts",
+			"https://deno.land/x/pkg@1.0.0/types.d.ts"
+		]
+	},
+	"include": ["./src"]
 }

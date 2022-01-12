@@ -1,8 +1,8 @@
 import type {
 	PrecisionTypeConstraint,
 	Validation,
-} from '../../../../types/constraints.js'
-import makeError from '../../../utilities/makeError/mod.js'
+} from "../../../../types/constraints.js"
+import makeError from "../../../utilities/makeError/mod.js"
 
 // TODO: rethink this. Is it necessary?
 export default function makeIsPrecision(
@@ -15,7 +15,7 @@ export default function makeIsPrecision(
 		const value = validation.value
 		const shifted = (value as number) * multiplier
 
-		return typeof value === 'number' && shifted - Math.floor(shifted) === 0
+		return typeof value === "number" && shifted - Math.floor(shifted) === 0
 			? validation
 			: makeError(validation, constraint)
 	}

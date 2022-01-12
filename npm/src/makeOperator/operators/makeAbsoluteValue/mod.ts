@@ -1,11 +1,11 @@
-import makeOperator from '../../mod.js'
 import {
 	AbsoluteValueOperation,
 	Injector,
 	Operation,
-} from '../../../types/operations.js'
-import { NumberValue } from '../../../types/values.js'
-import calculateAbsoluteValue from './calculateAbsoluteValue/mod.js'
+} from "../../../types/operations.js"
+import { NumberValue } from "../../../types/values.js"
+import makeOperator from "../../mod.js"
+import calculateAbsoluteValue from "./calculateAbsoluteValue/mod.js"
 
 export default function makeAbsoluteValue(
 	operation: AbsoluteValueOperation,

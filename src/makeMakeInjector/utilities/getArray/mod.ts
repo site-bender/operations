@@ -1,12 +1,12 @@
-import type { Arrays } from '../../../types/values.ts'
+import type { Arrays } from "../../../types/values.ts"
 
 export default function getArray(
 	arr: Arrays | string,
-	separator: string | RegExp = ',',
+	separator: string | RegExp = ",",
 ): Arrays {
 	if (Array.isArray(arr)) {
 		return arr
 	}
 
-	return typeof arr === 'string' ? arr.split(separator) : []
+	return typeof arr === "string" ? arr.split(separator) : []
 }
