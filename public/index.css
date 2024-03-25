@@ -1,0 +1,10 @@
+body {
+	font-family: system-ui, sans-serif;
+	margin: 5vw;
+}
+
+pre,
+code {
+	font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+		"DejaVu Sans Mono", monospace;
+}

@@ -1,0 +1,43 @@
+{
+	"name": "operations",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"bump:major": "pnpm version major --force",
+		"bump:minor": "pnpm version minor --force",
+		"bump": "pnpm version patch --force",
+		"check:exports": "pnpx find-unused-exports",
+		"check:packages": "pnpx npm-check -u",
+		"dep": "pnpm fmt && pnpm lint && pnpm lint:fix && pnpm check:packages && pnpm build && rm -rf .cache .history dist",
+		"fmt": "pnpm prettier . --write",
+		"lint:css": "pnpm stylelint \"public/**/*.css\"",
+		"lint:fix": "pnpm stylelint \"public/**/*.css\" --fix",
+		"lint": "pnpx oxlint@latest",
+		"pub": "npm publish --access=public",
+		"push": "git add -A && pnpm bump && git push",
+		"test": "vitest",
+		"build:docs": "tsc && vite build",
+		"build": "tsc --p ./tsconfig-build.json && vite build",
+		"dev": "vite",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@formatjs/intl-getcanonicallocales": "^2.3.0",
+		"@formatjs/intl-listformat": "^7.5.5",
+		"@formatjs/intl-locale": "^3.4.5",
+		"@types/node": "^20.11.30",
+		"prettier": "^3.2.5",
+		"stylelint": "^16.3.0",
+		"stylelint-config-standard": "^36.0.0",
+		"temporal-polyfill": "^0.2.3",
+		"typescript": "^5.4.3",
+		"vite": "^5.2.6",
+		"vitest": "^1.4.0",
+		"vitest-localstorage-mock": "^0.1.2"
+	},
+	"dependencies": {
+		"fp-ts": "^2.16.4",
+		"ts-pattern": "^5.0.8"
+	}
+}
