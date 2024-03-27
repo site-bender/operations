@@ -5,7 +5,7 @@ import composeOperations from "../../composeOperations"
 const getOperands =
 	<T>(operands: Array<T | Operation>) =>
 	(type: string) =>
-		operands.map((operand) =>
+		operands.map(operand =>
 			typeof operand === type
 				? right(operand)
 				: composeOperations(operand as Operation)(),

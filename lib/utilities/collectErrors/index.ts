@@ -1,8 +1,11 @@
-import type { Either, Left } from "fp-ts/lib/Either"
+import type { Either, Left, Right } from "fp-ts/lib/Either"
 import { isLeft, left } from "fp-ts/lib/Either"
 
-const collectErrors = <T>(results: Array<T>): Either<Array<string>, T> => {
-	const lefts = results.filter((r) => isLeft(r))
+type CollectErrors<T> = (
+	r: Array<Left<Array<string>>, Right<T>>,
+) => Either<Array<string>, never> | Array<Right<T>>
+const collectErrors: CollectErrors<T> = results => {
+	const lefts = results.filter(r => isLeft(r))
 
 	if (lefts.length) {
 		return left(
@@ -10,7 +13,7 @@ const collectErrors = <T>(results: Array<T>): Either<Array<string>, T> => {
 				(acc, error) => acc.concat((error as Left<Array<string>>).left),
 				[] as Array<string>,
 			),
-		)
+		) as Either<Array<string>, never>
 	}
 
 	return results

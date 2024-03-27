@@ -5,16 +5,16 @@ import collectErrors from "../../utilities/collectErrors"
 import getOperands from "../../utilities/getOperands"
 
 type Negate = (o: NegateOperation) => () => Either<Array<string>, number>
-const negate: Negate = (op) => {
+const negate: Negate = op => {
 	const [operand] = getOperands([op.operand])("number") as (
 		| Left<string[]>
 		| Right<number>
 	)[]
 
-	const errors = collectErrors([operand])
+	const error = collectErrors([operand]) as Left<Array<string>>
 
-	return isLeft(errors as Left<Array<string>>)
-		? () => errors
+	return isLeft(error)
+		? () => error
 		: () => right(-(operand as Right<number>).right)
 }
 

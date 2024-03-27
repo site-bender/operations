@@ -5,7 +5,7 @@ import collectErrors from "../../utilities/collectErrors"
 import getOperands from "../../utilities/getOperands"
 
 type Divide = (o: DivideOperation) => () => Either<Array<string>, number>
-const divide: Divide = (op) => {
+const divide: Divide = op => {
 	const [dividend, divisor] = getOperands([op.dividend, op.divisor])(
 		"number",
 	) as (Left<string[]> | Right<number>)[]

@@ -4,7 +4,7 @@ import { map } from "fp-ts/lib/Either"
 type CastValue = <T, U>(
 	type: string,
 ) => (value: Left<string[]> | Right<T>) => Left<string[]> | Right<U>
-const castValue: CastValue = (type) => (value) => {
+const castValue: CastValue = type => value => {
 	switch (type) {
 		case "integer":
 			return map(parseInt)(value)

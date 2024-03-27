@@ -10,7 +10,7 @@ type GetComparison = (
 ) => (
 	op: Either<Array<string>, number>,
 ) => (t: Either<Array<string>, number>) => IO<Either<Array<string>, number>>
-const getComparison: GetComparison = (operation) => (operand) => (test) => {
+const getComparison: GetComparison = operation => operand => test => {
 	switch (operation) {
 		case "lessThan":
 			return () =>
@@ -60,7 +60,7 @@ const getComparison: GetComparison = (operation) => (operand) => (test) => {
 type CompareNumbers = (
 	o: LogicalNumericalOperation,
 ) => () => Either<Array<string>, number>
-const compareNumbers: CompareNumbers = (op) => {
+const compareNumbers: CompareNumbers = op => {
 	const [operand, test] = getOperands([op.operand, op.test])("number") as (
 		| Left<string[]>
 		| Right<number>

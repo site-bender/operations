@@ -1,12 +1,12 @@
 /** @type {import("prettier").Config} */
 export default {
-	arrowParens: "always",
+	arrowParens: "avoid",
 	bracketSameLine: false,
 	bracketSpacing: true,
 	proseWrap: "always",
 	quoteProps: "consistent",
 	semi: false,
-	singleAttributePerLine: true,
+	singleAttributePerLine: false,
 	singleQuote: false,
 	tabWidth: 2,
 	trailingComma: "all",
