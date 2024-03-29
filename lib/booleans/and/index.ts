@@ -1,18 +1,19 @@
-import { isLeft, right } from "../../fp/either"
+import type { Either } from "fp-ts/lib/Either"
+import { left, right, traverseArray, match } from "fp-ts/lib/Either"
+import { pipe } from "fp-ts/lib/function"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { composeOperations } from "../../operations/compose"
 
-type And = (o: AndOperation) => () => Either<Array<string>, boolean>
+type And = (op: AndOperation) => () => Either<Array<string>, boolean>
 const and: And = op => {
-	const operands = getOperands(op.operands)("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
-
-	const errors = collectErrors(operands) as Left<Array<string>>
-
-	return isLeft(errors) ? () => errors : () => right(true)
+	return pipe(
+		op.operands,
+		traverseArray(_ => composeOperations(_)()),
+		match(
+			errs => () => left(errs),
+			_ => () => right(true),
+		),
+	)
 }
 
 export default and

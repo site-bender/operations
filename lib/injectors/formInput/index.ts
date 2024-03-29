@@ -1,14 +1,13 @@
 import castValue from "../../utilities/castValue"
 import getValue from "../../utilities/getValue"
 
-type FromFormInput = <T>(
+type FromFormInput = (
 	op: FormInputOperation,
-) => () => Either<Array<string>, T>
-const fromFormInput: FromFormInput = <T>(op: FormInputOperation) => {
+) => () => Either<Array<string>, number>
+const fromFormInput: FromFormInput = op => {
 	if (op.eager) {
-		const item = castValue(op.returns)(getValue(op.name)())
-
-		return () => item as Either<Array<string>, T>
+		const item = castValue("integer")(getValue(op.name)())
+		return () => item
 	}
 
 	return () =>
