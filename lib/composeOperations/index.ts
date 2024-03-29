@@ -1,48 +1,54 @@
-import type { Either } from "fp-ts/lib/Either"
-import { left } from "fp-ts/lib/Either"
+import { left } from "../fp/either"
 
-import add from "../numerical/add"
+import add from "../mathematical/add"
 import and from "../booleans/and"
 import compareNumbers from "../logical/compareNumbers"
-import divide from "../numerical/divide"
+import divide from "../mathematical/divide"
 import fromFormInput from "../injectors/formInput"
-import multiply from "../numerical/multiply"
-import negate from "../numerical/negate"
+import multiply from "../mathematical/multiply"
+import negate from "../mathematical/negate"
 import or from "../booleans/or"
-import power from "../numerical/power"
-import root from "../numerical/root"
-import subtract from "../numerical/subtract"
+import power from "../mathematical/power"
+import root from "../mathematical/root"
+import subtract from "../mathematical/subtract"
 
-type ComposeOperations = (o: Operation) => () => Either<Array<string>, number>
-const composeOperations: ComposeOperations = (op: Operation) => {
+const composeOperations = <T>(
+	op: Operation,
+): (() => Either<Array<string>, T>) => {
 	switch (op.operation) {
 		case "add":
-			return add(op as AddOperation)
+			return add(op as AddOperation) as () => Either<Array<string>, T>
 		case "and":
-			return and(op as AndOperation)
+			return and(op as AndOperation) as () => Either<Array<string>, T>
 		case "formInput":
-			return fromFormInput(op as FormInputOperation)
+			return fromFormInput(op as FormInputOperation) as () => Either<
+				Array<string>,
+				T
+			>
 		case "multiply":
-			return multiply(op as MultiplyOperation)
+			return multiply(op as MultiplyOperation) as () => Either<Array<string>, T>
 		case "subtract":
-			return subtract(op as SubtractOperation)
+			return subtract(op as SubtractOperation) as () => Either<Array<string>, T>
 		case "divide":
-			return divide(op as DivideOperation)
+			return divide(op as DivideOperation) as () => Either<Array<string>, T>
 		case "or":
-			return or(op as OrOperation)
+			return or(op as OrOperation) as () => Either<Array<string>, T>
 		case "power":
-			return power(op as PowerOperation)
+			return power(op as PowerOperation) as () => Either<Array<string>, T>
 		case "root":
-			return root(op as RootOperation)
+			return root(op as RootOperation) as () => Either<Array<string>, T>
 		case "negate":
-			return negate(op as NegateOperation)
+			return negate(op as NegateOperation) as () => Either<Array<string>, T>
 		case "equalTo":
 		case "greaterThan":
 		case "lessThan":
 		case "noLessThan":
 		case "noMoreThan":
 		case "unequalTo":
-			return compareNumbers(op as LogicalNumericalOperation)
+			return compareNumbers(op as LogicalNumericalOperation) as () => Either<
+				Array<string>,
+				T
+			>
 		default:
 			return () => left([`Unknown operation.`])
 	}

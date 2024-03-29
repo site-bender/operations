@@ -1,5 +1,4 @@
-import type { Either, Left, Right } from "fp-ts/lib/Either"
-import { isLeft, right } from "fp-ts/lib/Either"
+import { isLeft, right } from "../../fp/either"
 
 import collectErrors from "../../utilities/collectErrors"
 import getOperands from "../../utilities/getOperands"
@@ -11,11 +10,9 @@ const and: And = op => {
 		| Right<number>
 	)[]
 
-	const errors = collectErrors(operands)
+	const errors = collectErrors(operands) as Left<Array<string>>
 
-	return isLeft(errors as Left<Array<string>>)
-		? () => errors
-		: () => right(true)
+	return isLeft(errors) ? () => errors : () => right(true)
 }
 
 export default and

@@ -1,6 +1,5 @@
-import type { Either, Left, Right } from "fp-ts/lib/Either"
 import type { IO } from "fp-ts/lib/IO"
-import { isLeft, left } from "fp-ts/lib/Either"
+import { isLeft, left } from "../../fp/either"
 
 import collectErrors from "../../utilities/collectErrors"
 import getOperands from "../../utilities/getOperands"
@@ -66,10 +65,10 @@ const compareNumbers: CompareNumbers = op => {
 		| Right<number>
 	)[]
 
-	const errors = collectErrors([operand, test])
+	const error = collectErrors([operand, test]) as Left<Array<string>>
 
-	return isLeft(errors as Left<Array<string>>)
-		? () => errors
+	return isLeft(error)
+		? () => error
 		: getComparison(op.operation)(operand)(test)
 }
 
