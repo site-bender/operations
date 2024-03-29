@@ -1,7 +1,7 @@
 import { pipe } from "fp-ts/lib/function"
 import { right, traverseArray, match, left } from "fp-ts/lib/Either"
 
-import { evaluateNumericOperations } from "../../operations/compose"
+import evaluateNumericOperations from "../../operations/compose/evaluateNumericOperations"
 
 import { ADDITION_IDENTITY } from "../../constants"
 

@@ -10,8 +10,8 @@ const isBooleanOperation = (o: any): o is BooleanOperation =>
 const isUnitOperation = (o: any): o is UnitOperation =>
 	notNullish(o) && o["returns"] === "unit"
 
-const isFailOperation = (o: any): o is FailOperation =>
-	notNullish(o) && o["returns"] === "error"
+// const isFailOperation = (o: any): o is FailOperation =>
+// 	notNullish(o) && o["returns"] === "error"
 
 const isAddOperation = (o: any): o is AddOperation =>
 	isNumericOperation(o) && o.operation === "add"
@@ -31,6 +31,6 @@ export {
 	isBooleanOperation,
 	isUnitOperation,
 	isAddOperation,
-	isFailOperation,
+	// isFailOperation,
 	AddOperation,
 }
