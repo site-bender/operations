@@ -16,7 +16,7 @@ const add: Add = op => {
 		op.addends,
 		traverseArray(lift),
 		match(
-			errs => () => left(errs),
+			errors => () => left(errors),
 			nums => () =>
 				right(nums.reduce((sum, operand) => sum + operand, ADDITION_IDENTITY)),
 		),
