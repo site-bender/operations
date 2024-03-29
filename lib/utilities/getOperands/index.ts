@@ -1,6 +1,6 @@
 import { right } from "fp-ts/lib/Either"
 
-import composeOperations from "../../composeOperations"
+import { composeOperations } from "../../operations/compose"
 
 const getOperands =
 	<T>(operands: Array<T | Operation>) =>

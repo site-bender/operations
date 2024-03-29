@@ -1,30 +1,27 @@
-import type { Left, Right } from "fp-ts/lib/Either"
-import { isLeft, right } from "fp-ts/lib/Either"
+import type { Either } from "fp-ts/lib/Either"
+import { pipe } from "fp-ts/lib/function"
+import { right, traverseArray, match, left } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { evaluateNumericOperations } from "../../operations/compose"
 
 import { ADDITION_IDENTITY } from "../../constants"
 
-type Add = (o: AddOperation) => () => Left<Array<string>> | Right<number>
+const lift = (addend: number | NumericOperation): Either<string[], number> =>
+	typeof addend === "number"
+		? right<string[], number>(addend)
+		: evaluateNumericOperations(addend)()
+
+type Add = (op: AddOperation) => () => Either<Array<string>, number>
 const add: Add = op => {
-	const addends = getOperands(op.addends)("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
-
-	const error = collectErrors<number>(addends)
-
-	return isLeft(error as Left<Array<string>>)
-		? () => error as Left<Array<string>>
-		: () =>
-				addends.reduce(
-					(sum, operand) =>
-						right(
-							(operand as Right<number>).right + (sum as Right<number>).right,
-						),
-					right(ADDITION_IDENTITY),
-				) as Right<number>
+	return pipe(
+		op.addends,
+		traverseArray(lift),
+		match(
+			errs => () => left(errs),
+			nums => () =>
+				right(nums.reduce((sum, operand) => sum + operand, ADDITION_IDENTITY)),
+		),
+	)
 }
 
 export default add

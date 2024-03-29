@@ -11,7 +11,7 @@ interface OperationBase {
 }
 
 interface AddOperation extends OperationBase {
-	addends: Array<number | Operation>
+	addends: Array<number | NumericOperation>
 	operation: "add"
 	returns: "number"
 }
@@ -87,6 +87,7 @@ interface LogicalNumericalOperation extends OperationBase {
 }
 
 interface InjectValueOperation extends OperationBase {
+	returns: "unit"
 	eager?: boolean | undefined
 	parse?: boolean | undefined
 }
@@ -106,18 +107,25 @@ interface SessionStorageOperation extends InjectValueOperation {
 	operation: "sessionStorage"
 }
 
-type Operation =
+type NumericOperation =
 	| AddOperation
-	| AndOperation
 	| DivideOperation
-	| FailOperation
 	| LogicalNumericalOperation
 	| MultiplyOperation
 	| NegateOperation
-	| OrOperation
 	| PowerOperation
 	| RootOperation
 	| SubtractOperation
+
+type BooleanOperation = AndOperation | OrOperation
+
+type UnitOperation =
 	| FormInputOperation
 	| LocalStorageOperation
 	| SessionStorageOperation
+
+type Operation =
+	| NumericOperation
+	| BooleanOperation
+	| UnitOperation
+	| FailOperation
