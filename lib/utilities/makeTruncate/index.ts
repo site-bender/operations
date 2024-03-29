@@ -1,4 +1,4 @@
-type Truncation = Omit<OperationBase, "operator">
+type Truncation = Omit<NumericalBase, "operation">
 
 export default function makeTruncate(
 	{ truncation = "round", precision = 0 } = {} as Truncation,

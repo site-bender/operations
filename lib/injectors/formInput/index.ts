@@ -1,5 +1,3 @@
-import type { Either } from "fp-ts/lib/Either"
-
 import castValue from "../../utilities/castValue"
 import getValue from "../../utilities/getValue"
 
@@ -12,7 +10,8 @@ const fromFormInput: FromFormInput = op => {
 		return () => item
 	}
 
-	return () => castValue("integer")(getValue(op.name)())
+	return () =>
+		castValue(op.returns)(getValue(op.name)()) as Either<Array<string>, T>
 }
 
 export default fromFormInput

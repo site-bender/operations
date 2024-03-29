@@ -1,5 +1,4 @@
-import type { Left, Right } from "fp-ts/lib/Either"
-import { isLeft } from "fp-ts/lib/Either"
+import { isLeft } from "../../fp/either"
 import { expect, test } from "vitest"
 
 import compareNumbers from "."

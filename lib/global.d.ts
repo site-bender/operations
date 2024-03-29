@@ -10,7 +10,12 @@ interface OperationBase {
 	returns: string
 }
 
-interface AddOperation extends OperationBase {
+interface NumericalBase extends OperationBase {
+	precision?: number | undefined
+	truncation?: "ceiling" | "floor" | "round" | "truncate" | undefined
+}
+
+interface AddOperation extends NumericalBase {
 	addends: Array<number | NumericOperation>
 	operation: "add"
 	returns: "number"
@@ -22,7 +27,7 @@ interface AndOperation extends OperationBase {
 	returns: "boolean"
 }
 
-interface DivideOperation extends OperationBase {
+interface DivideOperation extends NumericalBase {
 	dividend: number | Operation
 	divisor: number | Operation
 	operation: "divide"
@@ -34,13 +39,13 @@ interface FailOperation extends OperationBase {
 	returns: "error"
 }
 
-interface MultiplyOperation extends OperationBase {
+interface MultiplyOperation extends NumericalBase {
 	multipliers: Array<number | Operation>
 	operation: "multiply"
 	returns: "number"
 }
 
-interface NegateOperation extends OperationBase {
+interface NegateOperation extends NumericalBase {
 	operand: number | Operation
 	operation: "negate"
 	returns: "number"
@@ -52,21 +57,21 @@ interface OrOperation extends OperationBase {
 	returns: "boolean"
 }
 
-interface PowerOperation extends OperationBase {
+interface PowerOperation extends NumericalBase {
 	base: number | Operation
 	exponent: number | Operation
 	operation: "power"
 	returns: "number"
 }
 
-interface RootOperation extends OperationBase {
+interface RootOperation extends NumericalBase {
 	index: number | Operation
 	operation: "root"
 	radicand: number | Operation
 	returns: "number"
 }
 
-interface SubtractOperation extends OperationBase {
+interface SubtractOperation extends NumericalBase {
 	minuend: number | Operation
 	operation: "subtract"
 	returns: "number"

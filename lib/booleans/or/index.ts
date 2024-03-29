@@ -1,5 +1,4 @@
-import type { Either, Left, Right } from "fp-ts/lib/Either"
-import { isLeft, right } from "fp-ts/lib/Either"
+import { isLeft, right } from "../../fp/either"
 
 import collectErrors from "../../utilities/collectErrors"
 import getOperands from "../../utilities/getOperands"
@@ -14,7 +13,7 @@ const or: Or = op => {
 	const errors = operands.filter(r => isLeft(r))
 
 	return errors.length === operands.length
-		? () => collectErrors(operands)
+		? () => collectErrors(operands) as Left<Array<string>>
 		: () => right(true)
 }
 
