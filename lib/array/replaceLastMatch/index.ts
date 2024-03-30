@@ -1,12 +1,12 @@
 import { isNone } from "../../fp/option"
 import replaceAt from "../replaceAt"
-import findLastIndex from "../findIndex"
+import findLastIndex from "../findLastIndex"
 
-type ReplaceLastMatchF = (
-	r: RegExp,
+export type ReplaceLastMatchF = (
+	re: RegExp,
 ) => (f: (i: string) => string) => (arr: Array<string>) => Array<string>
-const replaceLastMatch: ReplaceLastMatchF = r => f => arr => {
-	const index = findLastIndex<string>(item => r.test(item))(arr)
+const replaceLastMatch: ReplaceLastMatchF = re => f => arr => {
+	const index = findLastIndex<string>(item => new RegExp(re).test(item))(arr)
 
 	return isNone(index)
 		? arr

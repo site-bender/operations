@@ -1,4 +1,4 @@
-type RemoveF = <T>(item: T) => (arr: Array<T>) => Array<T>
+export type RemoveF = <T>(item: T) => (arr: Array<T>) => Array<T>
 const remove: RemoveF = item => arr => {
 	const index = arr.indexOf(item)
 

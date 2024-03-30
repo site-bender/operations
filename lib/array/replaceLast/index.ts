@@ -1,6 +1,6 @@
 import replaceAt from "../replaceAt"
 
-type ReplaceLastF = <T>(
+export type ReplaceLastF = <T>(
 	item: T,
 ) => (f: (item: T) => T) => (arr: Array<T>) => Array<T>
 const replaceLast: ReplaceLastF = item => f => arr =>

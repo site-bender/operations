@@ -1,7 +1,7 @@
-type ReplaceAllMatchesF = (
-	r: RegExp,
+export type ReplaceAllMatchesF = (
+	re: RegExp,
 ) => (f: (item: string) => string) => (arr: Array<string>) => Array<string>
-const replaceAllMatches: ReplaceAllMatchesF = r => f => arr =>
-	arr.map(item => (r.test(item) ? f(item) : item))
+const replaceAllMatches: ReplaceAllMatchesF = re => f => arr =>
+	arr.map(item => (re.test(item) ? f(item) : item))
 
 export default replaceAllMatches

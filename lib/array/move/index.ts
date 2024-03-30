@@ -1,15 +1,16 @@
 import insertAt from "../insertAt"
 import removeAt from "../removeAt"
+import { pipe } from "fp-ts/function"
 
-type MoveF = <T>(i: number) => (j: number) => (arr: Array<T>) => Array<T>
+export type MoveF = (i: number) => (j: number) => <T>(arr: Array<T>) => Array<T>
 const move: MoveF = i => j => arr => {
-	if (i < 0 || i > arr.length - 1 || j < 0 || j > arr.length) {
-		return arr
+	if (i >= 0 && i < arr.length && j >= 0 && j < arr.length) {
+		const toMove = arr[i]
+
+		return pipe(arr, removeAt(i)<(typeof arr)[0]>, insertAt(j)(toMove))
 	}
 
-	const toMove = arr[i]
-
-	return insertAt<(typeof arr)[0]>(j)(toMove)(removeAt<(typeof arr)[0]>(i)(arr))
+	return arr
 }
 
 export default move

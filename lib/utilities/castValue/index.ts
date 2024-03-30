@@ -1,7 +1,7 @@
 import type { Either } from "fp-ts/lib/Either"
 import { map } from "fp-ts/lib/Either"
 
-type Cast = "integer" | "number" | "string" | "boolean"
+type Cast = "integer" | "number" | "string" | "boolean" | "unit"
 
 type Reify<T extends Cast> = T extends "integer" | "number"
 	? number
