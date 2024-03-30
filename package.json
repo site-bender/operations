@@ -17,7 +17,7 @@
 		"pub": "npm publish --access=public",
 		"push": "git add -A && pnpm bump && git push",
 		"test": "vitest",
-		"test:cov": "vitest --coverage",
+		"test:cov": "vitest --coverage.exclude=temp/** --coverage",
 		"build:docs": "tsc && vite build",
 		"build": "tsc --p ./tsconfig-build.json && vite build",
 		"dev": "vite",

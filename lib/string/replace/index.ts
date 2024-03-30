@@ -1,4 +1,6 @@
-type ReplaceF = (r: RegExp | string) => (sub: string) => (str: string) => string
-const replace: ReplaceF = r => sub => str => str.replace(r, sub)
+type ReplaceF = (
+	re: RegExp | string,
+) => (substitute: string) => (str: string) => string
+const replace: ReplaceF = re => substitute => str => str.replace(re, substitute)
 
 export default replace
