@@ -2,11 +2,11 @@ import { isNone } from "../../fp/option"
 import replaceAt from "../replaceAt"
 import findIndex from "../findIndex"
 
-type ReplaceFirstMatchF = (
-	r: RegExp,
+export type ReplaceFirstMatchF = (
+	re: RegExp,
 ) => (f: (i: string) => string) => (arr: Array<string>) => Array<string>
-const replaceFirstMatch: ReplaceFirstMatchF = r => f => arr => {
-	const index = findIndex<string>(item => r.test(item))(arr)
+const replaceFirstMatch: ReplaceFirstMatchF = re => f => arr => {
+	const index = findIndex<string>(item => re.test(item))(arr)
 
 	return isNone(index)
 		? arr

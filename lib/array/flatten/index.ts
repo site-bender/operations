@@ -1,6 +1,6 @@
-type FlattenF = <T>(
+export type FlattenF = (
 	d?: number,
-) => (
+) => <T>(
 	arr: Array<T>,
 ) => FlatArray<
 	T,

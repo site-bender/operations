@@ -1,6 +1,6 @@
 import { none, some } from "../../fp/option"
 
-type FindLastIndexF = <T>(
+export type FindLastIndexF = <T>(
 	f: (i: T) => boolean,
 ) => (arr: Array<T>) => Option<number>
 const findLastIndex: FindLastIndexF = f => arr => {

@@ -1,4 +1,4 @@
-type ReplaceAtF = <T>(
+export type ReplaceAtF = <T>(
 	i: number,
 ) => (f: (item: T) => T) => (arr: Array<T>) => Array<T>
 const replaceAt: ReplaceAtF = i => f => arr =>

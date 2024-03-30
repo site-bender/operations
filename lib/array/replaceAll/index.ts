@@ -1,4 +1,4 @@
-type ReplaceAllF = <T>(
+export type ReplaceAllF = <T>(
 	i: T,
 ) => (f: (item: T) => T) => (arr: Array<T>) => Array<T>
 const replaceAll: ReplaceAllF = i => f => arr =>

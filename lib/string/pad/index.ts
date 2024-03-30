@@ -1,7 +1,7 @@
 import repeat from "../repeat"
 
-type PadF = (padder: string) => (times: number) => (str: string) => string
-const pad: PadF = padder => times => str =>
-	`${repeat(padder)(times)}${str}${repeat(padder)(times)}`
+type PadF = (chars: string) => (times: number) => (str: string) => string
+const pad: PadF = chars => times => str =>
+	`${repeat(chars)(times)}${str}${repeat(chars)(times)}`
 
 export default pad
