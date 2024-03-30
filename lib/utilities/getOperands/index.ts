@@ -1,6 +1,6 @@
 import { right } from "../../fp/either"
 
-import { composeOperations } from "../../operations/compose"
+import composeOperations from "../../operations/compose"
 
 const getOperands =
 	<T>(operands: Array<T | Operation>) =>

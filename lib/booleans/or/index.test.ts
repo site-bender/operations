@@ -49,8 +49,6 @@ test("returns an error when all operands are errors", async () => {
 		returns: "boolean",
 	})()
 
-	console.log("OR failure", JSON.stringify(failure, null, 2))
-
 	expect(isLeft(failure)).toBeTruthy()
 	//expect((failure as Left<Array<string>>).left).toEqual([
 	//	"Unknown operation.",
