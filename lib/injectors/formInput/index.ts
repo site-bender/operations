@@ -10,8 +10,7 @@ const fromFormInput: FromFormInput = op => {
 		return () => item
 	}
 
-	return () =>
-		castValue(op.returns)(getValue(op.name)()) as Either<Array<string>, T>
+	return () => castValue(op.returns)(getValue(op.name)())
 }
 
 export default fromFormInput

@@ -2,7 +2,7 @@ type ReplaceAtF = <T>(
 	i: number,
 ) => (f: (item: T) => T) => (arr: Array<T>) => Array<T>
 const replaceAt: ReplaceAtF = i => f => arr =>
-	i >= arr.length
+	i < 0 || i >= arr.length
 		? arr
 		: arr
 				.slice(0, i)

@@ -1,4 +1,4 @@
-type JoinF = (conj: string) => (arr: Array<string>) => string
-const join: JoinF = conj => arr => arr.join(conj)
+type JoinF = (separator: string) => (arr: Array<string>) => string
+const join: JoinF = separator => arr => arr.join(separator)
 
 export default join
