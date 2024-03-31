@@ -1,25 +1,31 @@
-import { isLeft, left, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
 
-type Divide = (o: DivideOperation) => () => Either<Array<string>, number>
+type Divide = (
+	operation: DivideOperation,
+) => () => Either<Array<string>, Option<number>>
+
 const divide: Divide = op => {
-	const [dividend, divisor] = getOperands([op.dividend, op.divisor])(
-		"number",
-	) as (Left<string[]> | Right<number>)[]
+	return pipe(
+		[op.dividend, op.divisor],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([dividend, divisor]: Array<Some<number>>) =>
+				() => {
+					const quotient =
+						(dividend as Some<number>).value / (divisor as Some<number>).value
 
-	const error = collectErrors([dividend, divisor]) as Left<Array<string>>
-
-	return isLeft(error)
-		? () => error
-		: (divisor as Right<number>).right === 0
-			? () => left(["Cannot divide by 0."])
-			: () =>
-					right(
-						(dividend as Right<number>).right /
-							(divisor as Right<number>).right,
-					)
+					return Number.isNaN(quotient) || quotient === Infinity
+						? left(["Invalid numeric operation: divide."])
+						: right(some(quotient))
+				},
+		),
+	)
 }
 
 export default divide

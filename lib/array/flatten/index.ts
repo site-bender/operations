@@ -27,6 +27,7 @@ export type FlattenF = (
 	| 19
 	| 20
 >[]
+
 const flatten: FlattenF = d => arr => arr.flat(d)
 
 export default flatten

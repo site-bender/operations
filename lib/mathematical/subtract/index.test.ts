@@ -1,4 +1,5 @@
-import { isLeft } from "fp-ts/lib/Either"
+import { isLeft, right } from "../../fp/either"
+import { some } from "../../fp/option"
 import { expect, test } from "vitest"
 
 import subtract from "."
@@ -22,7 +23,7 @@ test("subtracts a subtrahend from a minuend", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(30)
+	expect(success).toEqual(right(some(30)))
 })
 
 test("returns an error when minuend and/or subtrahend is an error", async () => {
@@ -30,7 +31,7 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 		minuend: {
 			operation: "fail",
 			returns: "error",
-		},
+		} as unknown as SubtractOperation,
 		subtrahend: {
 			minuend: 12,
 			subtrahend: 0,
@@ -42,5 +43,7 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	//expect((failure as Left<Array<string>>).left).toEqual(["Unknown operation."])
+	expect((failure as Left<Array<string>>).left).toEqual([
+		"Invalid numeric operation: fail.",
+	])
 })

@@ -1,31 +1,33 @@
-import { isLeft, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { isNone, none, some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
+import reduce from "../../array/reduce"
 
 import { MULTIPLICATION_IDENTITY } from "../../constants"
 
-type Multiply = (
-	o: MultiplyOperation,
-) => () => Left<Array<string>> | Right<number>
-const multiply: Multiply = op => {
-	const multipliers = getOperands(op.multipliers)("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
+type MultiplyF = (
+	op: MultiplyOperation,
+) => () => Either<Array<string>, Option<number>>
 
-	const error = collectErrors(multipliers) as Left<Array<string>>
-
-	return isLeft(error)
-		? () => error
-		: () =>
-				multipliers.reduce(
-					(sum, operand) =>
-						right(
-							(operand as Right<number>).right * (sum as Right<number>).right,
-						),
-					right(MULTIPLICATION_IDENTITY),
-				)
+const multiply: MultiplyF = op => {
+	return pipe(
+		op.multipliers,
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			nums => () =>
+				right(
+					reduce((sum: Option<number>, n: Option<number>) =>
+						isNone(sum) || isNone(n)
+							? none
+							: some((sum as Some<number>).value * (n as Some<number>).value),
+					)(some(MULTIPLICATION_IDENTITY))(nums as Array<Option<number>>),
+				),
+		),
+	)
 }
 
 export default multiply

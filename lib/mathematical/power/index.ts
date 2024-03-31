@@ -1,26 +1,32 @@
-import { isLeft, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
 
-type Power = (o: PowerOperation) => () => Either<Array<string>, number>
-const power: Power = op => {
-	const [base, exponent] = getOperands([op.base, op.exponent])("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
+type PowerF = (
+	operation: PowerOperation,
+) => () => Either<Array<string>, Option<number>>
 
-	const error = collectErrors([base, exponent]) as Left<Array<string>>
-
-	return isLeft(error)
-		? () => error
-		: () =>
-				right(
-					Math.pow(
-						(base as Right<number>).right,
-						(exponent as Right<number>).right,
+const power: PowerF = op => {
+	return pipe(
+		[op.base, op.exponent],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([base, exponent]: Array<Some<number>>) =>
+				() =>
+					right(
+						some(
+							Math.pow(
+								(base as Some<number>).value,
+								(exponent as Some<number>).value,
+							),
+						),
 					),
-				)
+		),
+	)
 }
 
 export default power

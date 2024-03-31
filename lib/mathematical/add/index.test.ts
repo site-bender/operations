@@ -1,4 +1,5 @@
-import { isLeft } from "../../fp/either"
+import { isLeft, left, right } from "../../fp/either"
+import { some } from "../../fp/option"
 import { expect, test } from "vitest"
 
 import add from "."
@@ -27,7 +28,7 @@ test("adds a set of numbers together", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(42)
+	expect(success).toEqual(right(some(42)))
 })
 
 test("returns an error when one or more addends is an error", async () => {
@@ -36,7 +37,7 @@ test("returns an error when one or more addends is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as any as AddOperation,
+			} as unknown as AddOperation,
 			{
 				addends: [5, 6],
 				operation: "add",
@@ -45,11 +46,12 @@ test("returns an error when one or more addends is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as any as AddOperation,
+			} as unknown as AddOperation,
 		],
 		operation: "add",
 		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
+	expect(failure).toStrictEqual(left(["Invalid numeric operation: fail."]))
 })

@@ -28,8 +28,8 @@ interface AndOperation extends OperationBase {
 }
 
 interface DivideOperation extends NumericalBase {
-	dividend: number | Operation
-	divisor: number | Operation
+	dividend: number | NumericOperation
+	divisor: number | NumericOperation
 	operation: "divide"
 	returns: "number"
 }
@@ -40,13 +40,13 @@ interface FailOperation extends OperationBase {
 }
 
 interface MultiplyOperation extends NumericalBase {
-	multipliers: Array<number | Operation>
+	multipliers: Array<number | NumericOperation>
 	operation: "multiply"
 	returns: "number"
 }
 
 interface NegateOperation extends NumericalBase {
-	operand: number | Operation
+	operand: number | NumericOperation
 	operation: "negate"
 	returns: "number"
 }
@@ -58,24 +58,24 @@ interface OrOperation extends OperationBase {
 }
 
 interface PowerOperation extends NumericalBase {
-	base: number | Operation
-	exponent: number | Operation
+	base: number | NumericOperation
+	exponent: number | NumericOperation
 	operation: "power"
 	returns: "number"
 }
 
 interface RootOperation extends NumericalBase {
-	index: number | Operation
+	index: number | NumericOperation
 	operation: "root"
-	radicand: number | Operation
+	radicand: number | NumericOperation
 	returns: "number"
 }
 
 interface SubtractOperation extends NumericalBase {
-	minuend: number | Operation
+	minuend: number | NumericOperation
 	operation: "subtract"
 	returns: "number"
-	subtrahend: number | Operation
+	subtrahend: number | NumericOperation
 }
 
 interface LogicalNumericalOperation extends OperationBase {

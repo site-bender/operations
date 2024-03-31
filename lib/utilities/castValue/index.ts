@@ -1,5 +1,6 @@
-import type { Either } from "fp-ts/lib/Either"
-import { map } from "fp-ts/lib/Either"
+import { flatten, map } from "fp-ts/lib/Either"
+
+import isBoolean from "./isBoolean"
 
 type Cast = "integer" | "number" | "string" | "boolean" | "unit"
 
@@ -14,6 +15,7 @@ type Reify<T extends Cast> = T extends "integer" | "number"
 type CastValue = <T extends Cast>(
 	type: T,
 ) => (value: Either<string[], any>) => Either<string[], Reify<T>>
+
 const castValue: CastValue = type => value => {
 	switch (type) {
 		case "integer":
@@ -23,7 +25,7 @@ const castValue: CastValue = type => value => {
 		case "string":
 			return map(String)(value)
 		case "boolean":
-			return map(Boolean)(value)
+			return flatten(map(isBoolean)(value))
 		default:
 			return value
 	}

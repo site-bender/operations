@@ -4,11 +4,9 @@ import { left } from "fp-ts/lib/Either"
 import evaluateNumericOperations from "./evaluateNumericOperations"
 import evaluateBooleanOperation from "./evaluateBooleanOperation"
 import evaluateUnitOperations from "./evaluateUnitOperations"
-import {
-	isBooleanOperation,
-	isNumericOperation,
-	isUnitOperation,
-} from "../../operations"
+import isBooleanOperation from "../../utilities/isBooleanOperation"
+import isNumericOperation from "../../utilities/isNumericOperation"
+import isUnitOperation from "../../utilities/isUnitOperation"
 
 type ComposeOperations = (
 	o: Operation,
