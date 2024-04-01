@@ -9,9 +9,7 @@ export type ReplaceFirstMatchF = (
 const replaceFirstMatch: ReplaceFirstMatchF = re => f => arr => {
 	const index = findIndex<string>(item => re.test(item))(arr)
 
-	return isNone(index)
-		? arr
-		: replaceAt<string>((index as Some<number>).value)(f)(arr)
+	return isNone(index) ? arr : replaceAt<string>(index.value)(f)(arr)
 }
 
 export default replaceFirstMatch

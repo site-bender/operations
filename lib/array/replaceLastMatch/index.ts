@@ -9,9 +9,7 @@ export type ReplaceLastMatchF = (
 const replaceLastMatch: ReplaceLastMatchF = re => f => arr => {
 	const index = findLastIndex<string>(item => new RegExp(re).test(item))(arr)
 
-	return isNone(index)
-		? arr
-		: replaceAt<string>((index as Some<number>).value)(f)(arr)
+	return isNone(index) ? arr : replaceAt<string>(index.value)(f)(arr)
 }
 
 export default replaceLastMatch

@@ -21,9 +21,7 @@ const multiply: MultiplyF = op => {
 			nums => () =>
 				right(
 					reduce((sum: Option<number>, n: Option<number>) =>
-						isNone(sum) || isNone(n)
-							? none
-							: some((sum as Some<number>).value * (n as Some<number>).value),
+						isNone(sum) || isNone(n) ? none : some(sum.value * n.value),
 					)(some(MULTIPLICATION_IDENTITY))(nums as Array<Option<number>>),
 				),
 		),

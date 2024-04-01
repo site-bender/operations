@@ -1,30 +1,35 @@
-import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
-
-import { isNone, none, some } from "../../fp/option"
-import { left, right } from "../../fp/either"
+import * as Option from "../../fp/option"
+import * as Either from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
-import reduce from "../../array/reduce"
+import map from "../../array/map"
 
 import { ADDITION_IDENTITY } from "../../constants"
+import traverseAccumulate from "../../fp/either/traverseAccumulate"
+import { pipe } from "../../fp/functions"
+import reduce from "../../array/reduce"
 
 type AddF = (op: AddOperation) => () => Either<Array<string>, Option<number>>
 
 const add: AddF = op => {
 	return pipe(
 		op.addends,
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			nums => () =>
-				right(
-					reduce((sum: Option<number>, n: Option<number>) =>
-						// there must be a way to do this with pipe, flow, and/or map
-						isNone(sum) || isNone(n)
-							? none
-							: some((sum as Some<number>).value + (n as Some<number>).value),
-					)(some(ADDITION_IDENTITY))(nums as Array<Option<number>>),
+		pipe(
+			liftNumeric,
+			traverseAccumulate((a, b) => [...a, ...b]),
+		),
+		pipe(
+			(numbers: Option<number>[]) => () =>
+				pipe(
+					numbers,
+					map(Option.match(() => 0)((a: number) => a)),
+					pipe(
+						ADDITION_IDENTITY,
+						reduce((a, b: number) => a + b),
+					),
+					Option.some,
+					Either.right,
 				),
+			Either.match(errors => () => Either.left(errors)),
 		),
 	)
 }
