@@ -1,7 +1,7 @@
-import * as Option from "../../fp/option"
-import * as Either from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import map from "../../array/map"
+import { left, right, match as matchEither } from "../../fp/either"
+import { some, match as matchOption } from "../../fp/option"
 
 import { ADDITION_IDENTITY } from "../../constants"
 import traverseAccumulate from "../../fp/either/traverseAccumulate"
@@ -21,15 +21,15 @@ const add: AddF = op => {
 			(numbers: Option<number>[]) => () =>
 				pipe(
 					numbers,
-					map(Option.match(() => 0)((a: number) => a)),
+					map(matchOption(() => 0)((a: number) => a)),
 					pipe(
 						ADDITION_IDENTITY,
 						reduce((a, b: number) => a + b),
 					),
-					Option.some,
-					Either.right,
+					some,
+					right,
 				),
-			Either.match(errors => () => Either.left(errors)),
+			matchEither(errors => () => left(errors)),
 		),
 	)
 }
