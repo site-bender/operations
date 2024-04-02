@@ -1,4 +1,5 @@
-import { isLeft } from "../../fp/either"
+import { isLeft, right } from "../../fp/either"
+import { some } from "../../fp/option"
 import { expect, test } from "vitest"
 
 import power from "."
@@ -17,7 +18,7 @@ test("raises a base to an exponent correctly", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(216)
+	expect(success).toEqual(right(some(216)))
 })
 
 test("returns an error when base or exponent is an error", async () => {
@@ -31,14 +32,14 @@ test("returns an error when base or exponent is an error", async () => {
 		exponent: {
 			operation: "fail",
 			returns: "error",
-		},
+		} as unknown as PowerOperation,
 		operation: "power",
 		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	//expect((failure as Left<Array<string>>).left).toEqual([
-	//	"Cannot divide by 0.",
-	//	"Unknown operation.",
-	//])
+	// TODO: collect errors!
+	expect((failure as Left<Array<string>>).left).toEqual([
+		"Invalid numeric operation: divide.",
+	])
 })

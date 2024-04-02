@@ -1,20 +1,25 @@
-import { isLeft, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
 
-type Negate = (o: NegateOperation) => () => Either<Array<string>, number>
+type Negate = (
+	operation: NegateOperation,
+) => () => Either<Array<string>, Option<number>>
+
 const negate: Negate = op => {
-	const [operand] = getOperands([op.operand])("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
-
-	const error = collectErrors([operand]) as Left<Array<string>>
-
-	return isLeft(error)
-		? () => error
-		: () => right(-(operand as Right<number>).right)
+	return pipe(
+		[op.operand],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([operand]: Array<Some<number>>) =>
+				() =>
+					right(some(-(operand as Some<number>).value)),
+		),
+	)
 }
 
 export default negate

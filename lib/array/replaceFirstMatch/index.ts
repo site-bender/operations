@@ -5,6 +5,7 @@ import findIndex from "../findIndex"
 export type ReplaceFirstMatchF = (
 	re: RegExp,
 ) => (f: (i: string) => string) => (arr: Array<string>) => Array<string>
+
 const replaceFirstMatch: ReplaceFirstMatchF = re => f => arr => {
 	const index = findIndex<string>(item => re.test(item))(arr)
 

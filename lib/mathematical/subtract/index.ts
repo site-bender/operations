@@ -1,23 +1,31 @@
-import { isLeft, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
 
-type Subtract = (o: SubtractOperation) => () => Either<Array<string>, number>
-const subtract: Subtract = op => {
-	const [minuend, subtrahend] = getOperands([op.minuend, op.subtrahend])(
-		"number",
-	) as (Left<string[]> | Right<number>)[]
+type SubtractF = (
+	o: SubtractOperation,
+) => () => Either<Array<string>, Option<number>>
 
-	const error = collectErrors([minuend, subtrahend]) as Left<Array<string>>
+const divide: SubtractF = op => {
+	return pipe(
+		[op.minuend, op.subtrahend],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([minuend, subtrahend]: Array<Some<number>>) =>
+				() => {
+					const difference =
+						(minuend as Some<number>).value - (subtrahend as Some<number>).value
 
-	return isLeft(error)
-		? () => error
-		: () =>
-				right(
-					(minuend as Right<number>).right -
-						(subtrahend as Right<number>).right,
-				)
+					return Number.isNaN(difference)
+						? left(["Invalid numeric operation: divide."])
+						: right(some(difference))
+				},
+		),
+	)
 }
 
-export default subtract
+export default divide

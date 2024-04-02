@@ -1,26 +1,32 @@
-import { isLeft, right } from "../../fp/either"
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
 
-type Root = (o: RootOperation) => () => Either<Array<string>, number>
-const root: Root = op => {
-	const [radicand, index] = getOperands([op.radicand, op.index])("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
+type RootF = (
+	operation: RootOperation,
+) => () => Either<Array<string>, Option<number>>
 
-	const error = collectErrors([radicand, index]) as Left<Array<string>>
-
-	return isLeft(error)
-		? () => error
-		: () =>
-				right(
-					Math.pow(
-						(radicand as Right<number>).right,
-						1 / (index as Right<number>).right,
+const root: RootF = op => {
+	return pipe(
+		[op.radicand, op.index],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([radicand, index]: Array<Some<number>>) =>
+				() =>
+					right(
+						some(
+							Math.pow(
+								(radicand as Some<number>).value,
+								1 / (index as Some<number>).value,
+							),
+						),
 					),
-				)
+		),
+	)
 }
 
 export default root

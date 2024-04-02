@@ -3,6 +3,7 @@ import { none, some } from "../../fp/option"
 export type LastIndexOfMatchF = (
 	re: RegExp,
 ) => (arr: Array<string>) => Option<number>
+
 const lastIndexOfMatch: LastIndexOfMatchF = re => arr => {
 	const index = arr.reduce<number>(
 		(out, item, index) => (new RegExp(re).test(item) ? index : out),

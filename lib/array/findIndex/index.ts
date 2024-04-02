@@ -3,6 +3,7 @@ import { none, some } from "../../fp/option"
 export type FindIndexF = <T>(
 	f: (i: T) => boolean,
 ) => (arr: Array<T>) => Option<number>
+
 const findIndex: FindIndexF = f => arr => {
 	const index = arr.findIndex(f)
 

@@ -1,6 +1,7 @@
 export type ReplaceAtF = <T>(
 	i: number,
 ) => (f: (item: T) => T) => (arr: Array<T>) => Array<T>
+
 const replaceAt: ReplaceAtF = i => f => arr =>
 	i < 0 || i >= arr.length
 		? arr

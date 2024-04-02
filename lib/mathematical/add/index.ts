@@ -1,24 +1,30 @@
 import { pipe } from "fp-ts/lib/function"
-import { right, traverseArray, match, left } from "fp-ts/lib/Either"
+import { traverseArray, match } from "fp-ts/lib/Either"
 
-import evaluateNumericOperations from "../../operations/compose/evaluateNumericOperations"
+import { isNone, none, some } from "../../fp/option"
+import { left, right } from "../../fp/either"
+import liftNumeric from "../../operations/liftNumerical"
+import reduce from "../../array/reduce"
 
 import { ADDITION_IDENTITY } from "../../constants"
 
-const lift = (addend: number | NumericOperation): Either<string[], number> =>
-	typeof addend === "number"
-		? right<string[], number>(addend)
-		: evaluateNumericOperations(addend)()
+type AddF = (op: AddOperation) => () => Either<Array<string>, Option<number>>
 
-type Add = (op: AddOperation) => () => Either<Array<string>, number>
-const add: Add = op => {
+const add: AddF = op => {
 	return pipe(
 		op.addends,
-		traverseArray(lift),
+		traverseArray(liftNumeric),
 		match(
 			errors => () => left(errors),
 			nums => () =>
-				right(nums.reduce((sum, operand) => sum + operand, ADDITION_IDENTITY)),
+				right(
+					reduce((sum: Option<number>, n: Option<number>) =>
+						// there must be a way to do this with pipe, flow, and/or map
+						isNone(sum) || isNone(n)
+							? none
+							: some((sum as Some<number>).value + (n as Some<number>).value),
+					)(some(ADDITION_IDENTITY))(nums as Array<Option<number>>),
+				),
 		),
 	)
 }

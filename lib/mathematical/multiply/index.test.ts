@@ -1,4 +1,5 @@
-import { isLeft } from "../../fp/either"
+import { isLeft, left, right } from "../../fp/either"
+import { some } from "../../fp/option"
 import { expect, test } from "vitest"
 
 import multiply from "."
@@ -27,7 +28,7 @@ test("multiplies a set of numbers together", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(181440)
+	expect(success).toEqual(right(some(181440)))
 })
 
 test("returns an error when one or more multipliers is an error", async () => {
@@ -36,7 +37,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			},
+			} as unknown as MultiplyOperation,
 			{
 				multipliers: [5, 6],
 				operation: "multiply",
@@ -45,15 +46,12 @@ test("returns an error when one or more multipliers is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			},
+			} as unknown as MultiplyOperation,
 		],
 		operation: "multiply",
 		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	//expect((failure as Left<Array<string>>).left).toEqual([
-	//	"Unknown operation.",
-	//	"Unknown operation.",
-	//])
+	expect(failure).toStrictEqual(left(["Invalid numeric operation: fail."]))
 })

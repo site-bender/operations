@@ -1,4 +1,4 @@
-type IsNotNullishF = (i: unknown) => boolean
-const isNotNullish: IsNotNullishF = item => item != null
+const isNotNullish = <T>(item: T): item is Exclude<T, null | undefined> =>
+	item != null
 
 export default isNotNullish
