@@ -37,8 +37,6 @@ test("gets Some(value) from checkbox if checked or None if unchecked", () => {
 		"[name=multiselect]",
 	) as HTMLSelectElement
 
-	// console.log("values", multiselect.value)
-
 	expect(getFromSelect(unselected)()).toStrictEqual(none)
 	expect(getFromSelect(select)()).toStrictEqual(some("2"))
 	expect(getFromSelect(multiselect)()).toStrictEqual(some("yellow"))

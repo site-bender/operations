@@ -34,11 +34,6 @@ interface DivideOperation extends NumericalBase {
 	returns: "number"
 }
 
-interface FailOperation extends OperationBase {
-	operation: "fail"
-	returns: "error"
-}
-
 interface MultiplyOperation extends NumericalBase {
 	multipliers: Array<number | NumericOperation>
 	operation: "multiply"
@@ -79,16 +74,16 @@ interface SubtractOperation extends NumericalBase {
 }
 
 interface LogicalNumericalOperation extends OperationBase {
-	operand: number | Operation
+	operand: number | NumericOperation
 	operation:
 		| "equalTo"
-		| "greaterThan"
+		| "moreThan"
 		| "lessThan"
 		| "noLessThan"
 		| "noMoreThan"
 		| "unequalTo"
 	returns: "number"
-	test: number | Operation
+	test: number | NumericOperation
 }
 
 interface InjectValueOperation extends OperationBase {
@@ -129,8 +124,4 @@ type UnitOperation =
 	| LocalStorageOperation
 	| SessionStorageOperation
 
-type Operation =
-	| NumericOperation
-	| BooleanOperation
-	| UnitOperation
-	| FailOperation
+type Operation = NumericOperation | BooleanOperation | UnitOperation

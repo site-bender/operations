@@ -4,6 +4,7 @@ import getValue from "../../utilities/getValue"
 type FromFormInput = (
 	op: FormInputOperation,
 ) => () => Either<Array<string>, number>
+
 const fromFormInput: FromFormInput = op => {
 	if (op.eager) {
 		const item = castValue("integer")(getValue(op.name)())

@@ -1,4 +1,5 @@
 import { isLeft } from "../../fp/either"
+import { some } from "../../fp/option"
 import { expect, test } from "vitest"
 
 import compareNumbers from "."
@@ -12,7 +13,7 @@ test("lessThan returns the value when it is less than the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(5)
+	expect((success as Right<Option<number>>).right).toEqual(some(5))
 })
 
 test("lessThan returns an error when it is not less than the test", async () => {
@@ -25,33 +26,33 @@ test("lessThan returns an error when it is not less than the test", async () => 
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 6 is not less than 6.",
+		"6 is not lessThan 6.",
 	])
 })
 
-test("greaterThan returns the value when it is greater than the test", async () => {
+test("moreThan returns the value when it is greater than the test", async () => {
 	const success = compareNumbers({
 		operand: 6,
-		operation: "greaterThan",
+		operation: "moreThan",
 		returns: "number",
 		test: 5,
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Option<number>>).right).toEqual(some(6))
 })
 
-test("greaterThan returns an error when it is not greater than the test", async () => {
+test("moreThan returns an error when it is not greater than the test", async () => {
 	const failure = compareNumbers({
 		operand: 6,
-		operation: "greaterThan",
+		operation: "moreThan",
 		returns: "number",
 		test: 6,
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 6 is not greater than 6.",
+		"6 is not moreThan 6.",
 	])
 })
 
@@ -64,7 +65,7 @@ test("noMoreThan returns the value when it is no more than the test", async () =
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Option<number>>).right).toEqual(some(6))
 })
 
 test("noMoreThan returns an error when it is not no more than the test", async () => {
@@ -77,7 +78,7 @@ test("noMoreThan returns an error when it is not no more than the test", async (
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 7 is not at most 6.",
+		"7 is not noMoreThan 6.",
 	])
 })
 
@@ -90,7 +91,7 @@ test("noLessThan returns the value when it is no less than the test", async () =
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Option<number>>).right).toEqual(some(6))
 })
 
 test("noLessThan returns an error when it is not no less than the test", async () => {
@@ -103,7 +104,7 @@ test("noLessThan returns an error when it is not no less than the test", async (
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 5 is not at least 6.",
+		"5 is not noLessThan 6.",
 	])
 })
 
@@ -116,7 +117,7 @@ test("equalTo returns the value when it is equal to the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Option<number>>).right).toEqual(some(6))
 })
 
 test("equalTo returns an error when it is not equal to the test", async () => {
@@ -128,9 +129,7 @@ test("equalTo returns an error when it is not equal to the test", async () => {
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 5 is not equal to 6.",
-	])
+	expect((failure as Left<Array<string>>).left).toEqual(["5 is not equalTo 6."])
 })
 
 test("unequalTo returns the value when it is unequal to the test", async () => {
@@ -142,7 +141,7 @@ test("unequalTo returns the value when it is unequal to the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(5)
+	expect((success as Right<Option<number>>).right).toEqual(some(5))
 })
 
 test("unequalTo returns an error when it is not unequal to the test", async () => {
@@ -155,6 +154,6 @@ test("unequalTo returns an error when it is not unequal to the test", async () =
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Value 6 is not unequal to 6.",
+		"6 is not unequalTo 6.",
 	])
 })

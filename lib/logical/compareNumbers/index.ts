@@ -1,75 +1,43 @@
+import { pipe } from "fp-ts/lib/function"
+import { traverseArray, match } from "fp-ts/lib/Either"
 import type { IO } from "fp-ts/lib/IO"
-import { isLeft, left } from "../../fp/either"
 
-import collectErrors from "../../utilities/collectErrors"
-import getOperands from "../../utilities/getOperands"
+import { left, right } from "../../fp/either"
+import { isNone } from "../../fp/option"
+import liftNumeric from "../../operations/liftNumerical"
 
-type GetComparison = (
-	o: Operation["operation"],
-) => (
-	op: Either<Array<string>, number>,
-) => (t: Either<Array<string>, number>) => IO<Either<Array<string>, number>>
-const getComparison: GetComparison = operation => operand => test => {
-	switch (operation) {
-		case "lessThan":
-			return () =>
-				(operand as Right<number>).right < (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not less than ${(test as Right<number>).right}.`,
-						])
-		case "greaterThan":
-			return () =>
-				(operand as Right<number>).right > (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not greater than ${(test as Right<number>).right}.`,
-						])
-		case "noLessThan":
-			return () =>
-				(operand as Right<number>).right >= (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not at least ${(test as Right<number>).right}.`,
-						])
-		case "noMoreThan":
-			return () =>
-				(operand as Right<number>).right <= (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not at most ${(test as Right<number>).right}.`,
-						])
-		case "equalTo":
-			return () =>
-				(operand as Right<number>).right === (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not equal to ${(test as Right<number>).right}.`,
-						])
-		default:
-			return () =>
-				(operand as Right<number>).right !== (test as Right<number>).right
-					? operand
-					: left([
-							`Value ${(operand as Right<number>).right} is not unequal to ${(test as Right<number>).right}.`,
-						])
-	}
-}
+import makeCompare from "./makeCompare"
 
 type CompareNumbers = (
-	o: LogicalNumericalOperation,
-) => () => Either<Array<string>, number>
-const compareNumbers: CompareNumbers = op => {
-	const [operand, test] = getOperands([op.operand, op.test])("number") as (
-		| Left<string[]>
-		| Right<number>
-	)[]
+	operation: LogicalNumericalOperation,
+) => IO<Either<Array<string>, Option<number>>>
 
-	const error = collectErrors([operand, test]) as Left<Array<string>>
+const compareNumbers: CompareNumbers = operation => {
+	return pipe(
+		[operation.operand, operation.test],
+		traverseArray(liftNumeric),
+		match(
+			errors => () => left(errors),
+			([operand, test]: Array<Some<number>>) =>
+				() => {
+					const result = makeCompare(operation.operation)(operand)(test)()
 
-	return isLeft(error)
-		? () => error
-		: getComparison(op.operation)(operand)(test)
+					if (isNone(result)) {
+						return left([`${operation.operation} failed: missing value.`])
+					}
+
+					if ((result as Some<number | void>).value == null) {
+						return left([`Invalid operation: ${operation.operation}.`])
+					}
+
+					return (result as Some<boolean>).value
+						? right(operand)
+						: left([
+								`${operand.value} is not ${operation.operation} ${test.value}.`,
+							])
+				},
+		),
+	)
 }
 
 export default compareNumbers
