@@ -34,17 +34,16 @@ test("returns an error when one or more operands is an error", async () => {
 	const failure = and({
 		operands: [
 			{
-				operation: "fail",
-				returns: "error",
-			},
-			{
-				addends: [5, 6],
-				operation: "add",
+				operand: 5,
+				operation: "lessThan",
 				returns: "number",
+				test: 3,
 			},
 			{
-				operation: "fail",
-				returns: "error",
+				operand: 10,
+				operation: "moreThan",
+				returns: "number",
+				test: 5,
 			},
 		],
 		operation: "and",
