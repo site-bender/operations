@@ -1,9 +1,8 @@
 import { map as mapOption, sequence } from "../../fp/option"
-import { left, right, match, traverseAccumulate } from "../../fp/either"
+import { left, right, match, allOf } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
-import reduce from "../../array/reduce"
+import { default as multiplyArray } from "../../array/reduce/multiply"
 
-import { MULTIPLICATION_IDENTITY } from "../../constants"
 import pipe from "../../fp/functions/pipe"
 
 type MultiplyF = (
@@ -12,24 +11,10 @@ type MultiplyF = (
 
 const multiply: MultiplyF = op => {
 	return pipe(
-		op.multipliers,
-		pipe(
-			liftNumeric,
-			traverseAccumulate((a, b) => [...a, ...b]),
-		),
+		allOf(liftNumeric)(op.multipliers),
 		pipe(
 			(nums: Option<number>[]) => () =>
-				pipe(
-					nums,
-					sequence,
-					mapOption(
-						pipe(
-							MULTIPLICATION_IDENTITY,
-							reduce((sum, n: number) => sum * n),
-						),
-					),
-					right,
-				),
+				pipe(nums, sequence, mapOption(multiplyArray), right),
 			match(errors => () => left(errors)),
 		),
 	)

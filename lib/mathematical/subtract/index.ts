@@ -1,9 +1,7 @@
 import { some, map, sequence, getOrElse, none } from "../../fp/option"
-import { match, left, right, traverseAccumulate } from "../../fp/either"
+import { match, left, right, allOf } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "../../fp/functions/pipe"
-import uncurry from "../../utilities/uncurry"
-import concat from "../../array/concat"
 
 type SubtractF = (
 	o: SubtractOperation,
@@ -11,8 +9,7 @@ type SubtractF = (
 
 const divide: SubtractF = op => {
 	return pipe(
-		[op.minuend, op.subtrahend],
-		pipe(liftNumeric, traverseAccumulate(uncurry(concat<string>))),
+		allOf(liftNumeric)([op.minuend, op.subtrahend]),
 		pipe(
 			([minuend, subtrahend]: Array<Option<number>>) =>
 				() =>

@@ -4,6 +4,7 @@ import flatMap from "./flatMap"
 import match from "./match"
 import traverseAccumulate from "./traverseAccumulate"
 import getOrElse from "./getOrElse"
+import allOf from "./allOf"
 
 const left = <E, A = never>(e: E): Either<E, A> => ({
 	_tag: "Left",
@@ -30,4 +31,5 @@ export {
 	flatMap,
 	getOrElse,
 	traverseAccumulate,
+	allOf,
 }
