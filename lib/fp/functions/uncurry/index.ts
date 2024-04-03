@@ -1,4 +1,4 @@
-import reduce from "../../array/reduce"
+import reduce from "../../../array/reduce"
 
 type Params<F> = F extends (arg: infer A) => infer R
 	? [A, ...(R extends (arg: any) => any ? Params<R> : [])]
