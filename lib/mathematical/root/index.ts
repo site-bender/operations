@@ -1,32 +1,36 @@
 import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
 
-import { some } from "../../fp/option"
-import { left, right } from "../../fp/either"
+import { sequence, map } from "../../fp/option"
+import { match, left, right, traverseAccumulate } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import truncate from "../../utilities/truncate"
+import uncurry from "../../utilities/uncurry"
+import { default as concatArray } from "../../array/concat"
 
 type RootF = (
 	operation: RootOperation,
 ) => () => Either<Array<string>, Option<number>>
 
 const root: RootF = operation => {
+	const doTruncation = (n: number) =>
+		operation.truncation ? truncate(operation)(n) : n
+
+	const concat = uncurry(concatArray<string>)
+
 	return pipe(
 		[operation.radicand, operation.index],
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			([radicand, index]: Array<Some<number>>) =>
-				() => {
-					const value = Math.pow(
-						(radicand as Some<number>).value,
-						1 / (index as Some<number>).value,
-					)
-
-					const val = operation.truncation ? truncate(operation)(value) : value
-
-					return right(some(val))
-				},
+		pipe(liftNumeric, traverseAccumulate(concat)),
+		pipe(
+			([radicand, index]: Array<Option<number>>) =>
+				() =>
+					pipe(
+						[radicand, index],
+						sequence,
+						map(([radicand, index]) => Math.pow(radicand, 1 / index)),
+						map(doTruncation),
+						right,
+					),
+			match(errors => () => left(errors)),
 		),
 	)
 }

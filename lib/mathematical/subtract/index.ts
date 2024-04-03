@@ -1,9 +1,9 @@
-import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
-
-import { some } from "../../fp/option"
-import { left, right } from "../../fp/either"
+import { some, map, sequence, getOrElse, none } from "../../fp/option"
+import { match, left, right, traverseAccumulate } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
+import pipe from "../../fp/functions/pipe"
+import uncurry from "../../utilities/uncurry"
+import concat from "../../array/concat"
 
 type SubtractF = (
 	o: SubtractOperation,
@@ -12,18 +12,23 @@ type SubtractF = (
 const divide: SubtractF = op => {
 	return pipe(
 		[op.minuend, op.subtrahend],
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			([minuend, subtrahend]: Array<Some<number>>) =>
-				() => {
-					const difference =
-						(minuend as Some<number>).value - (subtrahend as Some<number>).value
+		pipe(liftNumeric, traverseAccumulate(uncurry(concat<string>))),
+		pipe(
+			([minuend, subtrahend]: Array<Option<number>>) =>
+				() =>
+					pipe(
+						[minuend, subtrahend],
+						sequence,
+						map(([minuend, subtrahend]) => {
+							const difference = minuend - subtrahend
 
-					return Number.isNaN(difference)
-						? left(["Invalid numeric operation: divide."])
-						: right(some(difference))
-				},
+							return Number.isNaN(difference)
+								? left(["Invalid numeric operation: divide."])
+								: right(some(difference))
+						}),
+						getOrElse((): Either<Array<string>, Option<number>> => right(none)),
+					),
+			match(errors => () => left(errors)),
 		),
 	)
 }

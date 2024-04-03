@@ -1,12 +1,10 @@
-import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
-
-import { isNone, none, some } from "../../fp/option"
-import { left, right } from "../../fp/either"
+import { map as mapOption, sequence } from "../../fp/option"
+import { left, right, match, traverseAccumulate } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import reduce from "../../array/reduce"
 
 import { MULTIPLICATION_IDENTITY } from "../../constants"
+import pipe from "../../fp/functions/pipe"
 
 type MultiplyF = (
 	op: MultiplyOperation,
@@ -15,15 +13,24 @@ type MultiplyF = (
 const multiply: MultiplyF = op => {
 	return pipe(
 		op.multipliers,
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			nums => () =>
-				right(
-					reduce((sum: Option<number>, n: Option<number>) =>
-						isNone(sum) || isNone(n) ? none : some(sum.value * n.value),
-					)(some(MULTIPLICATION_IDENTITY))(nums as Array<Option<number>>),
+		pipe(
+			liftNumeric,
+			traverseAccumulate((a, b) => [...a, ...b]),
+		),
+		pipe(
+			(nums: Option<number>[]) => () =>
+				pipe(
+					nums,
+					sequence,
+					mapOption(
+						pipe(
+							MULTIPLICATION_IDENTITY,
+							reduce((sum, n: number) => sum * n),
+						),
+					),
+					right,
 				),
+			match(errors => () => left(errors)),
 		),
 	)
 }

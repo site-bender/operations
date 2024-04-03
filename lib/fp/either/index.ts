@@ -2,6 +2,8 @@ import ap from "./apply"
 import map from "./map"
 import flatMap from "./flatMap"
 import match from "./match"
+import traverseAccumulate from "./traverseAccumulate"
+import getOrElse from "./getOrElse"
 
 const left = <E, A = never>(e: E): Either<E, A> => ({
 	_tag: "Left",
@@ -17,4 +19,15 @@ const isLeft = <E, A>(x: Either<E, A>): x is Left<E> => x._tag === "Left"
 
 const isRight = <A>(x: Either<any, A>): x is Right<A> => x._tag === "Right"
 
-export { left, right, isLeft, isRight, ap, match, map, flatMap }
+export {
+	left,
+	right,
+	isLeft,
+	isRight,
+	ap,
+	match,
+	map,
+	flatMap,
+	getOrElse,
+	traverseAccumulate,
+}
