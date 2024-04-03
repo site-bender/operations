@@ -1,6 +1,6 @@
 import type { IO } from "fp-ts/lib/IO"
 import { left, right } from "../../fp/either"
-import isNullish from "../isNullish"
+import isNullish from "../../fp/predicates/isNullish"
 
 import getFromCheckbox from "./getFromCheckbox"
 import getFromInput from "./getFromInput"
