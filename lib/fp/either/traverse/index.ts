@@ -3,7 +3,7 @@ import { right, isLeft } from "../index"
 
 type Traverse = <E, A, B>(
 	f: (a: A) => Either<E, B>,
-) => (as: A[]) => Either<E, B[]>
+) => (as: Array<A>) => Either<E, Array<B>>
 
 const traverse: Traverse = f => as => {
 	if (as.length < 1) return right([])

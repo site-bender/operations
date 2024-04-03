@@ -2,7 +2,9 @@ import isNone from "../isNone"
 import none from "../none"
 import some from "../some"
 
-type Traverse = <T, R>(f: (t: T) => R) => (self: Option<T>[]) => Option<R[]>
+type Traverse = <T, R>(
+	f: (t: T) => R,
+) => (self: Array<Option<T>>) => Option<Array<R>>
 
 const traverse: Traverse = f => self => {
 	const rs = []

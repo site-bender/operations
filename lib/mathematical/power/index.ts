@@ -2,6 +2,8 @@ import { map, sequence } from "../../fp/option"
 import { left, match, right, traverseAccumulate } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "../../fp/functions/pipe"
+import concat from "../../array/concat"
+import uncurry from "../../utilities/uncurry"
 
 type PowerF = (
 	operation: PowerOperation,
@@ -10,10 +12,7 @@ type PowerF = (
 const power: PowerF = op => {
 	return pipe(
 		[op.base, op.exponent],
-		pipe(
-			liftNumeric,
-			traverseAccumulate((a, b) => [...a, ...b]),
-		),
+		pipe(liftNumeric, traverseAccumulate(uncurry(concat<string>))),
 		pipe(
 			([base, exponent]: Array<Option<number>>) =>
 				() =>

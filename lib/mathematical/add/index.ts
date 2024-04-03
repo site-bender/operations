@@ -7,16 +7,15 @@ import { ADDITION_IDENTITY } from "../../constants"
 import traverseAccumulate from "../../fp/either/traverseAccumulate"
 import { pipe } from "../../fp/functions"
 import reduce from "../../array/reduce"
+import uncurry from "../../utilities/uncurry"
+import concat from "../../array/concat"
 
 type AddF = (op: AddOperation) => () => Either<Array<string>, Option<number>>
 
 const add: AddF = op => {
 	return pipe(
 		op.addends,
-		pipe(
-			liftNumeric,
-			traverseAccumulate((a, b) => [...a, ...b]),
-		),
+		pipe(liftNumeric, traverseAccumulate(uncurry(concat<string>))),
 		pipe(
 			(numbers: Option<number>[]) => () =>
 				pipe(
