@@ -1,5 +1,9 @@
 {
 	"name": "operations",
+	"files": [
+		"lib",
+		"index.ts"
+	],
 	"private": true,
 	"version": "0.0.2",
 	"type": "module",
@@ -28,7 +32,7 @@
 		"@formatjs/intl-listformat": "^7.5.5",
 		"@formatjs/intl-locale": "^3.4.5",
 		"@types/jsdom": "^21.1.6",
-		"@types/node": "^20.12.2",
+		"@types/node": "^20.12.4",
 		"@vitest/coverage-v8": "^1.4.0",
 		"jsdom": "^24.0.0",
 		"prettier": "^3.2.5",
@@ -36,12 +40,12 @@
 		"stylelint-config-standard": "^36.0.0",
 		"temporal-polyfill": "^0.2.3",
 		"typescript": "^5.4.3",
-		"vite": "^5.2.7",
+		"vite": "^5.2.8",
 		"vitest": "^1.4.0",
 		"vitest-localstorage-mock": "^0.1.2"
 	},
 	"dependencies": {
 		"fp-ts": "^2.16.5",
-		"ts-pattern": "^5.0.8"
+		"ts-pattern": "^5.1.0"
 	}
 }

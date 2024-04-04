@@ -1,6 +1,6 @@
-import { pipe } from "./fp/functions"
-import * as Option from "./fp/option"
-import * as Either from "./fp/either"
+import { pipe } from "../fp/functions"
+import * as Option from "../fp/option"
+import * as Either from "../fp/either"
 
 type ApOption = <A>(o: Option<A>) => <B>(fab: Option<(a: A) => B>) => Option<B>
 const apOption: ApOption = o => fab =>
@@ -73,13 +73,13 @@ export const dual: {
 //const bar: (x: number) => number = add(1, 2)
 //const baz : (x: number) => (y: number) => number = add(1)
 
-const add = (x: number) => (y: number) => x + y
-const add3 = (x: number) => (y: number) => (z: number) => x + y + z
+// const add = (x: number) => (y: number) => x + y
+// const add3 = (x: number) => (y: number) => (z: number) => x + y + z
 
-const uncurry =
-	f =>
-	(...arguments) =>
-		arguments.reduce((acc, arg) => acc(arg), f)
+// const uncurry =
+// 	f =>
+// 	(...args) =>
+// 		args.reduce((acc, arg) => acc(arg), f)
 
-const uncurriedAdd = uncurry(add)
-const uncurriedAdd3 = uncurry(add3)
+// const uncurriedAdd = uncurry(add)
+// const uncurriedAdd3 = uncurry(add3)

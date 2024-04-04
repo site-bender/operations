@@ -1,4 +1,4 @@
-import fromFormInput from "../../../injectors/formInput"
+import fromFormInput from "../../../injectors/fromFormInput"
 import { left } from "../../../fp/either"
 
 type EvaluateUnitOperations = (
