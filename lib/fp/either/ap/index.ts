@@ -2,13 +2,13 @@ import { pipe } from "../../functions"
 import map from "../map"
 import flatMap from "../flatMap"
 
-type ApF = <E, A, U>(
-	fau: Either<E, (a: A) => U>,
-) => (e: Either<E, A>) => Either<E, U>
+type ApF = <E, A, B>(
+	fab: Either<E, (a: A) => B>,
+) => (e: Either<E, A>) => Either<E, B>
 
-const ap: ApF = fau => e =>
+const ap: ApF = fab => e =>
 	pipe(
-		fau,
+		fab,
 		flatMap(au => pipe(e, map(au))),
 	)
 
