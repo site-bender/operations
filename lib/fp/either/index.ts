@@ -1,20 +1,10 @@
-import ap from "./apply"
-import map from "./map"
+import ap from "./ap"
 import flatMap from "./flatMap"
+import isLeft from "./isLeft"
+import isRight from "./isRight"
+import left from "./left"
+import map from "./map"
 import match from "./match"
+import right from "./right"
 
-const left = <E, A = never>(e: E): Either<E, A> => ({
-	_tag: "Left",
-	left: e,
-})
-
-const right = <A, E = never>(a: A): Either<E, A> => ({
-	_tag: "Right",
-	right: a,
-})
-
-const isLeft = <E, A>(x: Either<E, A>): x is Left<E> => x._tag === "Left"
-
-const isRight = <A>(x: Either<any, A>): x is Right<A> => x._tag === "Right"
-
-export { left, right, isLeft, isRight, ap, match, map, flatMap }
+export { ap, flatMap, isLeft, isRight, left, map, match, right }
