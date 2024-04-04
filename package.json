@@ -1,30 +1,37 @@
 {
-	"name": "operations",
+	"name": "@sitebender/operations",
+	"version": "0.0.3",
+	"description": "Operations module for configured algorithmic operations.",
+	"license": "MIT",
+	"author": "Charles F. Munat <coder@craft-code.dev>",
+	"type": "module",
 	"files": [
 		"lib",
 		"index.ts"
 	],
-	"version": "0.0.2",
-	"type": "module",
 	"scripts": {
+		"build": "tsc --p ./tsconfig-build.json && vite build",
+		"build:docs": "tsc && vite build",
+		"bump": "pnpm version patch --force",
 		"bump:major": "pnpm version major --force",
 		"bump:minor": "pnpm version minor --force",
-		"bump": "pnpm version patch --force",
 		"check:exports": "pnpx find-unused-exports",
 		"check:packages": "pnpx npm-check -u",
 		"dep": "pnpm fmt && pnpm lint && pnpm lint:fix && pnpm check:packages && pnpm build && rm -rf .cache .history dist",
+		"dev": "vite",
 		"fmt": "pnpm prettier . --write",
+		"lint": "pnpx oxlint@latest",
 		"lint:css": "pnpm stylelint \"public/**/*.css\"",
 		"lint:fix": "pnpm stylelint \"public/**/*.css\" --fix",
-		"lint": "pnpx oxlint@latest",
+		"preview": "vite preview",
 		"pub": "npm publish --access=public",
 		"push": "git add -A && pnpm bump && git push",
 		"test": "vitest",
-		"test:cov": "vitest --coverage.exclude=temp/** --coverage",
-		"build:docs": "tsc && vite build",
-		"build": "tsc --p ./tsconfig-build.json && vite build",
-		"dev": "vite",
-		"preview": "vite preview"
+		"test:cov": "vitest --coverage.exclude=temp/** --coverage"
+	},
+	"dependencies": {
+		"fp-ts": "^2.16.5",
+		"ts-pattern": "^5.1.0"
 	},
 	"devDependencies": {
 		"@formatjs/intl-getcanonicallocales": "^2.3.0",
@@ -42,9 +49,5 @@
 		"vite": "^5.2.8",
 		"vitest": "^1.4.0",
 		"vitest-localstorage-mock": "^0.1.2"
-	},
-	"dependencies": {
-		"fp-ts": "^2.16.5",
-		"ts-pattern": "^5.1.0"
 	}
 }
