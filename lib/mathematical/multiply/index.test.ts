@@ -53,5 +53,10 @@ test("returns an error when one or more multipliers is an error", async () => {
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	expect(failure).toStrictEqual(left(["Invalid numeric operation: fail."]))
+	expect(failure).toStrictEqual(
+		left([
+			"Invalid numeric operation: fail.",
+			"Invalid numeric operation: fail.",
+		]),
+	)
 })

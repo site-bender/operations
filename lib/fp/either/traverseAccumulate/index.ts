@@ -1,4 +1,4 @@
-import { isLeft, isRight, left, right } from ".."
+import { isLeft, left, right } from ".."
 import map from "../map"
 import tail from "../../../array/tail"
 import { pipe } from "../../functions"
@@ -19,19 +19,11 @@ const traverseAccumulate: TraverseAccumulate = concat => f => as => {
 	return rest.reduce((acc, val) => {
 		const eitherB = f(val)
 
-		if (isLeft(acc)) {
-			if (isLeft(eitherB)) {
-				return left(concat(acc.left, eitherB.left))
-			}
-
-			return acc
-		}
-
-		if (isRight(eitherB)) {
-			return right([...acc.right, eitherB.right])
-		}
-
-		return acc
+		if (isLeft(acc) && isLeft(eitherB))
+			return left(concat(acc.left, eitherB.left))
+		else if (isLeft(acc)) return acc
+		else if (isLeft(eitherB)) return eitherB
+		else return right([...acc.right, eitherB.right])
 	}, first)
 }
 

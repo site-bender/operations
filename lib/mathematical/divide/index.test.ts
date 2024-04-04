@@ -41,5 +41,10 @@ test("returns an error when dividend and/or divisor is an error", async () => {
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
-	expect(failure).toEqual(left(["Invalid numeric operation: fail."]))
+	expect(failure).toEqual(
+		left([
+			"Invalid numeric operation: fail.",
+			"Invalid numeric operation: fail.",
+		]),
+	)
 })
