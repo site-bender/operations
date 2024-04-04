@@ -1,4 +1,4 @@
-import isNotNullish from "../isNotNullish"
+import isNotNullish from "../../fp/predicates/isNotNullish"
 
 const isBooleanOperation = (
 	operation: Operation,

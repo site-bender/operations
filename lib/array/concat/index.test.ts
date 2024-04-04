@@ -18,8 +18,10 @@ test("concatenates two arrays together and returns a new array", () => {
 test("returns the array when the other is empty or undefined", () => {
 	const empty = [] as Array<number>
 
+	// @ts-expect-error
 	expect(concat()(arr2)).toStrictEqual(arr2)
 	expect(concat(empty)(arr2)).toStrictEqual(arr2)
+	// @ts-expect-error
 	expect(concat(arr1)()).toStrictEqual(arr1)
 	expect(concat(arr1)(empty)).toStrictEqual(arr1)
 })
