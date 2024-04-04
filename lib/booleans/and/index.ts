@@ -1,18 +1,17 @@
-import type { Either } from "fp-ts/lib/Either"
-import { left, right, traverseArray, match } from "fp-ts/lib/Either"
-import { pipe } from "fp-ts/lib/function"
 import { IO } from "fp-ts/lib/IO"
 
 import composeOperations from "../../operations/compose"
+import { allOf, match, right, left } from "../../fp/either"
+import pipe from "../../fp/functions/pipe"
 
 type And = (op: AndOperation) => IO<Either<Array<string>, boolean>>
 const and: And = op => {
 	return pipe(
 		op.operands,
-		traverseArray(_ => composeOperations(_)()), // nice, but only returns first error: is that what we want?
-		match(
-			errors => () => left(errors),
-			_ => () => right(true),
+		allOf(_ => composeOperations(_)()),
+		pipe(
+			() => () => right(true),
+			match(errors => () => left(errors)),
 		),
 	)
 }
