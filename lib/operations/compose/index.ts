@@ -10,7 +10,7 @@ import isUnitOperation from "../../utilities/isUnitOperation"
 
 type ComposeOperations = (
 	o: Operation,
-) => () => Either<Array<string>, number | boolean | void>
+) => () => Either<Array<string>, Option<number> | number | boolean>
 const composeOperations: ComposeOperations = op => {
 	if (isNumericOperation(op)) {
 		return evaluateNumericOperations(op)

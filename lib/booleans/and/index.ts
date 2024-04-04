@@ -7,8 +7,10 @@ import pipe from "../../fp/functions/pipe"
 type And = (op: AndOperation) => IO<Either<Array<string>, boolean>>
 const and: And = op => {
 	return pipe(
-		op.operands,
-		allOf(_ => composeOperations(_)()),
+		pipe(
+			op.operands,
+			allOf(a => composeOperations(a)()),
+		),
 		pipe(
 			() => () => right(true),
 			match(errors => () => left(errors)),
