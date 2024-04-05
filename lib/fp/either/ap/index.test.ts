@@ -39,11 +39,11 @@ describe("Either applicative", () => {
 		// i.e ap just applies the rhs to lhs; no special handling of either
 		fc.assert(
 			fc.property(fc.integer(), value => {
-				const fab = right(inc)
+				const eitherF = right(inc)
 
-				const liftValue = pipe(right(value), ap(fab))
+				const liftValue = pipe(right(value), ap(eitherF))
 				const liftFunction = pipe(
-					fab,
+					eitherF,
 					ap(right((f: (n: number) => number) => f(value))),
 				)
 

@@ -3,13 +3,13 @@ import map from "../map"
 import flatMap from "../flatMap"
 
 type ApF = <E, A, B>(
-	fab: Either<E, (a: A) => B>,
+	eitherF: Either<E, (a: A) => B>,
 ) => (e: Either<E, A>) => Either<E, B>
 
-const ap: ApF = fab => e =>
+const ap: ApF = eitherF => e =>
 	pipe(
-		fab,
-		flatMap(au => pipe(e, map(au))),
+		eitherF,
+		flatMap(f => pipe(e, map(f))),
 	)
 
 export default ap
