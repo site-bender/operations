@@ -5,7 +5,7 @@ import { pipe } from "../../functions"
 
 type TraverseAccumulate = <E>(
 	concat: (e: E, e2: E) => E,
-) => <A, B>(f: (a: A) => Either<E, B>) => (as: A[]) => Either<E, B[]>
+) => <A, B>(f: (a: A) => Either<E, B>) => (as: Array<A>) => Either<E, Array<B>>
 
 const traverseAccumulate: TraverseAccumulate = concat => f => as => {
 	if (as.length < 1) return right([])
