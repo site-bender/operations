@@ -1,3 +1,4 @@
+/* v8 ignore start */
 import compareNumbers from "./compareNumbers"
 import equalTo from "./equalTo"
 import invalidOperator from "./invalidOperator"
