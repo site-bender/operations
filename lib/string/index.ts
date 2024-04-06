@@ -1,4 +1,3 @@
-/* v8 ignore start */
 import concat from "./concat"
 import endsWith from "./endsWith"
 import match from "./match"
