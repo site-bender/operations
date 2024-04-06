@@ -4,7 +4,7 @@ import { resolve } from "path"
 export default defineConfig({
 	build: {
 		lib: {
-			entry: resolve(__dirname, "lib/main.ts"),
+			entry: resolve(__dirname, "index.ts"),
 			formats: ["es"],
 		},
 	},

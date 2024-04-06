@@ -5,6 +5,11 @@ declare module globalThis {
 	}
 }
 
+type AnyFunction = (...args: Array<any>) => any
+type UnaryFunction = (args: any) => any
+type MapFunction = (args: any, index?: number) => any
+type ReduceFunction = (acc: any, item: any, index?: number) => any
+
 interface OperationBase {
 	operation: string
 	returns: string
