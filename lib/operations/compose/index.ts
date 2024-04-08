@@ -20,7 +20,7 @@ const composeOperations: ComposeOperations = op => {
 		return evaluateUnitOperations(op)
 	}
 
-	return () => left([`Unknown operation: ${op.operation}.`])
+	return () => left([`Unknown operation: ${op}.`])
 }
 
 export default composeOperations
