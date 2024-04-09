@@ -41,5 +41,6 @@ test("returns an error when base or exponent is an error", async () => {
 	// TODO: collect errors!
 	expect((failure as Left<Array<string>>).left).toEqual([
 		"Invalid numeric operation: divide.",
+		"Invalid numeric operation: fail.",
 	])
 })

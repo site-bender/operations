@@ -1,5 +1,10 @@
 {
-	"name": "operations",
+	"name": "@sitebender/operations",
+	"version": "0.0.14",
+	"description": "Operations module for configured algorithmic operations.",
+	"license": "MIT",
+	"author": "Charles F. Munat <coder@craft-code.dev>",
+	"type": "module",
 	"files": [
 		"index.ts",
 		"lib",
@@ -13,12 +18,12 @@
 		"build": "tsc --p ./tsconfig-build.json && vite build",
 		"bump:major": "pnpm version major --force",
 		"bump:minor": "pnpm version minor --force",
-		"bump": "pnpm version patch --force",
 		"check:exports": "pnpx find-unused-exports",
 		"check:packages": "pnpx npm-check -u",
 		"dep": "pnpm fmt && pnpm lint && pnpm lint:fix && pnpm check:packages && pnpm build && rm -rf .cache .history dist",
 		"dev": "astro dev",
 		"fmt": "pnpm prettier . --write",
+		"lint": "pnpx oxlint@latest",
 		"lint:css": "pnpm stylelint \"public/**/*.css\"",
 		"lint:fix": "pnpm stylelint \"public/**/*.css\" --fix",
 		"lint": "pnpx oxlint@latest",
@@ -47,9 +52,5 @@
 		"vite": "^5.2.8",
 		"vitest": "^1.4.0",
 		"vitest-localstorage-mock": "^0.1.2"
-	},
-	"dependencies": {
-		"fp-ts": "^2.16.5",
-		"ts-pattern": "^5.1.0"
 	}
 }

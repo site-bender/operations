@@ -18,3 +18,5 @@ coverage/
 .vercel/
 docs/
 temp/
+
+lib/test/*

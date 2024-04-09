@@ -3,8 +3,23 @@ import flatMap from "./flatMap"
 import isLeft from "./isLeft"
 import isRight from "./isRight"
 import left from "./left"
+import right from "./right"
 import map from "./map"
 import match from "./match"
-import right from "./right"
+import traverseAccumulate from "./traverseAccumulate"
+import getOrElse from "./getOrElse"
+import allOf from "./allOf"
 
-export { ap, flatMap, isLeft, isRight, left, map, match, right }
+export {
+	left,
+	right,
+	isLeft,
+	isRight,
+	ap,
+	match,
+	map,
+	flatMap,
+	getOrElse,
+	traverseAccumulate,
+	allOf,
+}

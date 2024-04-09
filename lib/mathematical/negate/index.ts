@@ -1,9 +1,7 @@
-import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
-
-import { some } from "../../fp/option"
-import { left, right } from "../../fp/either"
+import { map as mapOption } from "../../fp/option"
+import { left, right, match } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
+import pipe from "../../fp/functions/pipe"
 
 type Negate = (
 	operation: NegateOperation,
@@ -11,13 +9,16 @@ type Negate = (
 
 const negate: Negate = op => {
 	return pipe(
-		[op.operand],
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			([operand]: Array<Some<number>>) =>
-				() =>
-					right(some(-(operand as Some<number>).value)),
+		op.operand,
+		liftNumeric,
+		pipe(
+			(operand: Option<number>) => () =>
+				pipe(
+					operand,
+					mapOption(o => -o),
+					right,
+				),
+			match(errors => () => left(errors)),
 		),
 	)
 }
