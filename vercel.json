@@ -1,0 +1,10 @@
+{
+	"buildCommand": "tsc --p ./tsconfig-build.json && vite build",
+	"cleanUrls": true,
+	"name": "@sitebender/operations",
+	"routes": {
+		"src": "/",
+		"dest": "/index.html"
+	},
+  "trailingSlash": false
+}
