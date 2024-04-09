@@ -1,13 +1,14 @@
 import castValue from "../../utilities/castValue"
 import getValue from "../../utilities/getValue"
+import Reify from "../reify"
 
 type FromFormInput = (
 	op: FormInputOperation,
-) => () => Either<Array<string>, number>
+) => () => Either<Array<string>, Reify<CastableValues>>
 
 const fromFormInput: FromFormInput = op => {
 	if (op.eager) {
-		const item = castValue("integer")(getValue(op.name)())
+		const item = castValue(op.returns)(getValue(op.name)())
 		return () => item
 	}
 

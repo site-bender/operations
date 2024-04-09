@@ -1,6 +1,9 @@
 import isNotNullish from "../../fp/predicates/isNotNullish"
 
-const isUnitOperation = (operation: Operation): operation is UnitOperation =>
-	isNotNullish(operation) && operation["returns"] === "unit"
+const isInjectableOperation = (
+	operation: Operation,
+): operation is InjectableOperation =>
+	isNotNullish(operation) &&
+	["formInput", "sessionStorage", "localStorage"].includes(operation.operation)
 
-export default isUnitOperation
+export default isInjectableOperation

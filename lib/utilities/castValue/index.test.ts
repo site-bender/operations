@@ -11,6 +11,5 @@ test("casts the value to the actual type", () => {
 	expect(castValue("number")(right(-66))).toStrictEqual(right(-66))
 	expect(castValue("number")(right("55"))).toStrictEqual(right(55))
 	expect(castValue("string")(right(-66))).toStrictEqual(right("-66"))
-	expect(castValue("unit")(right("bob"))).toStrictEqual(right("bob"))
 	expect(isLeft(castValue("boolean")(right(0)))).toBeTruthy()
 })

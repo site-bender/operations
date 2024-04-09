@@ -86,8 +86,10 @@ interface LogicalNumericalOperation extends OperationBase {
 	test: number | NumericOperation
 }
 
+type CastableValues = "integer" | "number" | "string" | "boolean"
+
 interface InjectValueOperation extends OperationBase {
-	returns: "unit"
+	returns: CastableValues
 	eager?: boolean | undefined
 	parse?: boolean | undefined
 }
@@ -119,9 +121,9 @@ type NumericOperation =
 
 type BooleanOperation = AndOperation | OrOperation
 
-type UnitOperation =
+type InjectableOperation =
 	| FormInputOperation
 	| LocalStorageOperation
 	| SessionStorageOperation
 
-type Operation = NumericOperation | BooleanOperation | UnitOperation
+type Operation = NumericOperation | BooleanOperation | InjectableOperation

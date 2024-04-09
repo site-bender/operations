@@ -2,10 +2,10 @@ import { left, right } from "../../../fp/either"
 import { some } from "../../../fp/option"
 import { expect, test } from "vitest"
 
-import evaluateNumericOperations from "."
+import evaluateNumericOperation from "."
 
 test("works for add operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		addends: [2, 3],
 		operation: "add",
 		returns: "number",
@@ -15,7 +15,7 @@ test("works for add operations", async () => {
 })
 
 test("works for divide operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		dividend: 12,
 		divisor: 6,
 		operation: "divide",
@@ -26,7 +26,7 @@ test("works for divide operations", async () => {
 })
 
 test("works for multiply operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		multipliers: [2, 3, 4],
 		operation: "multiply",
 		returns: "number",
@@ -36,7 +36,7 @@ test("works for multiply operations", async () => {
 })
 
 test("works for negate operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		operand: 5,
 		operation: "negate",
 		returns: "number",
@@ -46,7 +46,7 @@ test("works for negate operations", async () => {
 })
 
 test("works for power operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		base: 2,
 		exponent: 5,
 		operation: "power",
@@ -57,7 +57,7 @@ test("works for power operations", async () => {
 })
 
 test("works for root operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		index: 3,
 		operation: "root",
 		radicand: 64,
@@ -69,7 +69,7 @@ test("works for root operations", async () => {
 })
 
 test("works for subtract operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		minuend: 10,
 		operation: "subtract",
 		returns: "number",
@@ -80,7 +80,7 @@ test("works for subtract operations", async () => {
 })
 
 test("works for unrecognized operations", async () => {
-	const result = evaluateNumericOperations({
+	const result = evaluateNumericOperation({
 		addends: [2, 3],
 		// @ts-expect-error
 		operation: "other",

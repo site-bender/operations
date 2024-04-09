@@ -1,7 +1,7 @@
 import { right } from "../../fp/either"
 import { some } from "../../fp/option"
 
-import evaluateNumericOperations from "../../operations/compose/evaluateNumericOperations"
+import evaluateNumericOperation from "../../operations/compose/evaluateNumericOperation"
 
 type LiftNumericF = (
 	operand: number | NumericOperation,
@@ -10,6 +10,6 @@ type LiftNumericF = (
 const liftNumeric: LiftNumericF = operand =>
 	typeof operand === "number"
 		? right(some(operand))
-		: evaluateNumericOperations(operand)()
+		: evaluateNumericOperation(operand)()
 
 export default liftNumeric

@@ -7,10 +7,10 @@ import root from "../../../mathematical/root"
 import subtract from "../../../mathematical/subtract"
 import { left } from "../../../fp/either"
 
-type EvaluateNumericOperations = (
+type EvaluateNumericOperation = (
 	OperationMultiply: NumericOperation,
 ) => () => Either<Array<string>, Option<number>>
-const evaluateNumericOperations: EvaluateNumericOperations = op => {
+const evaluateNumericOperation: EvaluateNumericOperation = op => {
 	switch (op.operation) {
 		case "add":
 			return add(op)
@@ -31,4 +31,4 @@ const evaluateNumericOperations: EvaluateNumericOperations = op => {
 	}
 }
 
-export default evaluateNumericOperations
+export default evaluateNumericOperation

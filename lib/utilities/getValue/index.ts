@@ -17,13 +17,13 @@ type NullableInput =
 type GetValue = (name: string) => IO<Either<Array<string>, Option<string>>>
 
 const getValue: GetValue = name => () => {
-	const element = document.querySelector(`[name=${name}]`) as NullableInput
+	const element: NullableInput = document.querySelector(`[name=${name}]`)
 
 	if (isNullish(element)) {
 		return left([`Form element \`${name}\` not found.`])
 	}
 
-	const tagName = toLower(element?.tagName as string)
+	const tagName = toLower(element.tagName)
 
 	switch (tagName) {
 		case "input":

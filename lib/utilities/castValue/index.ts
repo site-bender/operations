@@ -1,18 +1,9 @@
 import { flatten, map } from "fp-ts/lib/Either"
 
 import isBoolean from "./isBoolean"
+import Reify from "../../injectors/reify"
 
-type Cast = "integer" | "number" | "string" | "boolean" | "unit"
-
-type Reify<T extends Cast> = T extends "integer" | "number"
-	? number
-	: T extends "string"
-		? string
-		: T extends "boolean"
-			? boolean
-			: never
-
-type CastValue = <T extends Cast>(
+type CastValue = <T extends CastableValues>(
 	type: T,
 ) => (value: Either<string[], any>) => Either<string[], Reify<T>>
 
