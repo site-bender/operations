@@ -6,6 +6,7 @@ export default defineConfig({
 		lib: {
 			entry: resolve(__dirname, "index.ts"),
 			formats: ["es"],
+			name: "@sitebender/operations",
 		},
 	},
 	test: {

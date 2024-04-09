@@ -1,1 +1,1 @@
-ignores: []
+ignores: ["@astrojs/sitemap"]
