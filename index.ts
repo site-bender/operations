@@ -19,9 +19,12 @@ import * as l from "./lib/logical"
 // MATHEMATICAL functions
 import * as m from "./lib/mathematical"
 
+// OPERATIONS
+import compose from "./lib/operations/compose"
+
 // STRING functions
 import * as s from "./lib/string"
 
 // UTILITY functions
 
-export { a, b, e, f, i, l, m, o, p, s }
+export { a, b, compose, e, f, i, l, m, o, p, s }
