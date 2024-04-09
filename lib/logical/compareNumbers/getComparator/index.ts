@@ -1,5 +1,5 @@
+import { left, right } from "../../../fp/either"
 import equalTo from "../../equalTo"
-import invalidOperation from "../../invalidOperator"
 import lessThan from "../../lessThan"
 import moreThan from "../../moreThan"
 import noLessThan from "../../noLessThan"
@@ -8,24 +8,24 @@ import unequalTo from "../../unequalTo"
 
 type GetComparatorF = (
 	operation: string,
-) => (x: number) => (y: number) => boolean | void
+) => Either<string[], (x: number) => (y: number) => boolean>
 
 const getComparator: GetComparatorF = operation => {
 	switch (operation) {
 		case "equalTo":
-			return equalTo
+			return right(equalTo)
 		case "lessThan":
-			return lessThan
+			return right(lessThan)
 		case "moreThan":
-			return moreThan
+			return right(moreThan)
 		case "noLessThan":
-			return noLessThan
+			return right(noLessThan)
 		case "noMoreThan":
-			return noMoreThan
+			return right(noMoreThan)
 		case "unequalTo":
-			return unequalTo
+			return right(unequalTo)
 		default:
-			return invalidOperation
+			return left([`invalid operation: ${operation}`])
 	}
 }
 

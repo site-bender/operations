@@ -1410,8 +1410,11 @@ packages:
     dev: true
 
   /fast-check@3.17.1:
-    resolution: {integrity: sha512-jIKXJVe6ZO0SpwEgVtEVujTf8TwjI9wMXFJCjsDHUB3RroUbXBgF4kOSz3A7MW0UR26aqsoB8i9O2mjtjERAiA==}
-    engines: {node: '>=8.0.0'}
+    resolution:
+      {
+        integrity: sha512-jIKXJVe6ZO0SpwEgVtEVujTf8TwjI9wMXFJCjsDHUB3RroUbXBgF4kOSz3A7MW0UR26aqsoB8i9O2mjtjERAiA==,
+      }
+    engines: { node: ">=8.0.0" }
     dependencies:
       pure-rand: 6.1.0
     dev: true
@@ -2409,7 +2412,10 @@ packages:
     dev: true
 
   /pure-rand@6.1.0:
-    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
+    resolution:
+      {
+        integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==,
+      }
     dev: true
 
   /querystringify@2.2.0:

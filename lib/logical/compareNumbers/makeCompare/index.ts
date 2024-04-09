@@ -1,25 +1,23 @@
 import type { IO } from "fp-ts/lib/IO"
-import { isNone, none, some } from "../../../fp/option"
 
 import getComparator from "../getComparator"
+import { map } from "../../../fp/either"
+import { pipe } from "../../../fp/functions"
 
 type MakeCompareF = (
 	operation: Operation["operation"],
-) => (
-	operand: Option<number>,
-) => (test: Option<number>) => IO<Some<boolean | void> | None>
+) => (operand: number) => (test: number) => IO<Either<string[], boolean>>
 
 const makeCompare: MakeCompareF = operation => operand => test => {
-	const compare = getComparator(operation)
+	//if (isNone(operand) || isNone(test)) {
+	//	return () => right(none)
+	//}
 
-	if (isNone(operand) || isNone(test)) {
-		return () => none
-	}
-
-	const x = (operand as Some<number>).value
-	const y = (test as Some<number>).value
-
-	return () => some(compare(x)(y))
+	return () =>
+		pipe(
+			getComparator(operation),
+			map(comparator => pipe(test, comparator(operand))),
+		)
 }
 
 export default makeCompare

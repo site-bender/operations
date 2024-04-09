@@ -1,8 +1,7 @@
 import { pipe } from "fp-ts/lib/function"
-import { traverseArray, match } from "fp-ts/lib/Either"
 import type { IO } from "fp-ts/lib/IO"
 
-import { left, right } from "../../fp/either"
+import { allOf, flatMap, left, right, match } from "../../fp/either"
 import { isNone } from "../../fp/option"
 import liftNumeric from "../../operations/liftNumerical"
 
@@ -10,32 +9,30 @@ import makeCompare from "./makeCompare"
 
 type CompareNumbers = (
 	operation: LogicalNumericalOperation,
-) => IO<Either<Array<string>, Option<number>>>
+) => IO<Either<Array<string>, number>>
 
 const compareNumbers: CompareNumbers = operation => {
 	return pipe(
-		[operation.operand, operation.test],
-		traverseArray(liftNumeric),
-		match(
-			errors => () => left(errors),
-			([operand, test]: Array<Some<number>>) =>
+		allOf(liftNumeric)([operation.operand, operation.test]),
+		pipe(
+			([operand, test]: Array<Option<number>>) =>
 				() => {
-					const result = makeCompare(operation.operation)(operand)(test)()
-
-					if (isNone(result)) {
+					if (isNone(operand) || isNone(test)) {
 						return left([`${operation.operation} failed: missing value.`])
 					}
 
-					if ((result as Some<number | void>).value == null) {
-						return left([`Invalid operation: ${operation.operation}.`])
-					}
-
-					return (result as Some<boolean>).value
-						? right(operand)
-						: left([
-								`${operand.value} is not ${operation.operation} ${test.value}.`,
-							])
+					return pipe(
+						makeCompare(operation.operation)(operand.value)(test.value)(),
+						flatMap(result =>
+							result
+								? right(operand.value)
+								: left([
+										`${operand.value} is not ${operation.operation} ${test.value}.`,
+									]),
+						),
+					)
 				},
+			match(errors => () => left(errors)),
 		),
 	)
 }
