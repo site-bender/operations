@@ -1,2 +1,2 @@
 depcheck:
-  ignoreMatches: []
+  ignoreMatches: ["@astrojs/sitemap"]
