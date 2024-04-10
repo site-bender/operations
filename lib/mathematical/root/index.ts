@@ -1,9 +1,8 @@
-import { pipe } from "fp-ts/lib/function"
-
 import { sequence, map } from "../../fp/option"
 import { match, left, right, allOf } from "../../fp/either"
 import liftNumeric from "../../operations/liftNumerical"
 import truncate from "../../utilities/truncate"
+import { pipe } from "../../fp/functions"
 
 type RootF = (
 	operation: RootOperation,

@@ -1,6 +1,6 @@
+import { pipe } from "../../fp/functions"
 import insertAt from "../insertAt"
 import removeAt from "../removeAt"
-import { pipe } from "fp-ts/function"
 
 export type MoveF = (i: number) => (j: number) => <T>(arr: Array<T>) => Array<T>
 
