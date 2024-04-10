@@ -1,7 +1,7 @@
-import { flatten, map } from "fp-ts/lib/Either"
-
 import isBoolean from "./isBoolean"
 import Reify from "../../injectors/reify"
+import { flatMap, map } from "../../fp/either"
+import { pipe } from "../../fp/functions"
 
 type CastValue = <T extends CastableValues>(
 	type: T,
@@ -10,13 +10,13 @@ type CastValue = <T extends CastableValues>(
 const castValue: CastValue = type => value => {
 	switch (type) {
 		case "integer":
-			return map(parseInt)(value)
+			return pipe(value, map(parseInt))
 		case "number":
-			return map(Number)(value)
+			return pipe(value, map(Number))
 		case "string":
-			return map(String)(value)
+			return pipe(value, map(String))
 		case "boolean":
-			return flatten(map(isBoolean)(value))
+			return pipe(value, flatMap(isBoolean))
 		default:
 			return value
 	}

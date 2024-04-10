@@ -1,7 +1,7 @@
+import { Lazy } from "../../../fp/lazy"
 import { none, some } from "../../../fp/option"
-import { IO } from "fp-ts/IO"
 
-type GetFromSelectF = (input: HTMLSelectElement) => IO<Option<string>>
+type GetFromSelectF = (input: HTMLSelectElement) => Lazy<Option<string>>
 
 const getFromSelect: GetFromSelectF = select => () =>
 	select.value ? some(select.value) : none
