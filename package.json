@@ -1,6 +1,6 @@
 {
 	"name": "@sitebender/operations",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Operations module for configured algorithmic operations.",
 	"license": "MIT",
 	"author": "Charles F. Munat <coder@craft-code.dev>",
@@ -12,8 +12,7 @@
 	],
 	"private": true,
 	"scripts": {
-		"build:docs": "tsc && vite build",
-		"build": "tsc --p ./tsconfig-build.json && vite build",
+		"build": "tsc && vite build",
 		"bump": "pnpm version patch --force",
 		"bump:major": "pnpm version major --force",
 		"bump:minor": "pnpm version minor --force",
@@ -23,16 +22,17 @@
 		"dev": "astro dev",
 		"fmt": "pnpm prettier . --write",
 		"lint": "pnpx oxlint@latest",
-		"lint:css": "pnpm stylelint \"public/**/*.css\"",
-		"lint:fix": "pnpm stylelint \"public/**/*.css\" --fix",
+		"lint:css": "pnpm stylelint \"src/**/*.css\"",
+		"lint:fix": "pnpm stylelint \"src/**/*.css\" --fix",
 		"preview": "astro preview",
 		"pub": "npm publish --access=public",
 		"push": "git add -A && pnpm bump && git push",
-		"test:cov": "vitest --coverage.exclude=temp/** --coverage",
-		"test": "vitest"
+		"test": "vitest",
+		"test:cov": "vitest --coverage.exclude=temp/** --coverage"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.5.10",
+		"@astrojs/sitemap": "^3.1.2",
 		"@formatjs/intl-getcanonicallocales": "^2.3.0",
 		"@formatjs/intl-listformat": "^7.5.5",
 		"@formatjs/intl-locale": "^3.4.5",
@@ -43,6 +43,7 @@
 		"fast-check": "^3.17.1",
 		"jsdom": "^24.0.0",
 		"prettier": "^3.2.5",
+		"prettier-plugin-astro": "^0.13.0",
 		"stylelint": "^16.3.1",
 		"stylelint-config-standard": "^36.0.0",
 		"temporal-polyfill": "^0.2.3",
