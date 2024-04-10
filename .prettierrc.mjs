@@ -20,4 +20,4 @@ export default {
 	tabWidth: 2,
 	trailingComma: "all",
 	useTabs: true,
-};
+}

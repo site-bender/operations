@@ -5,7 +5,7 @@ export default defineConfig({
 		coverage: {
 			exclude: [
 				"temp/**",
-				"lib/main.ts",
+				"index.ts",
 				"lib/test**",
 				"lib/mathematical/index.ts",
 				"lib/injectors/index.ts",

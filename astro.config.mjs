@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig } from "astro/config"
 
 // ignore unused exports
 export default defineConfig({
@@ -6,4 +6,4 @@ export default defineConfig({
 		format: "directory",
 	},
 	site: "https://operations.sitebender.org/",
-});
+})
