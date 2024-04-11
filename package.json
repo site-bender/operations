@@ -12,6 +12,7 @@
 	],
 	"private": true,
 	"scripts": {
+		"astro": "astro",
 		"build": "tsc && astro build",
 		"bump": "pnpm version patch --force",
 		"bump:major": "pnpm version major --force",
@@ -27,6 +28,7 @@
 		"preview": "astro preview",
 		"pub": "npm publish --access=public",
 		"push": "git add -A && pnpm bump && git push",
+		"start": "astro dev",
 		"test": "vitest",
 		"test:cov": "vitest --coverage.exclude=temp/** --coverage"
 	},
