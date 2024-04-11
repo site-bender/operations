@@ -12,7 +12,7 @@
 	],
 	"private": true,
 	"scripts": {
-		"build": "tsc && vite build",
+		"build": "tsc && astro build",
 		"bump": "pnpm version patch --force",
 		"bump:major": "pnpm version major --force",
 		"bump:minor": "pnpm version minor --force",
