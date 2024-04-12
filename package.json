@@ -1,6 +1,6 @@
 {
 	"name": "@sitebender/operations",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"description": "Operations module for configured algorithmic operations.",
 	"license": "MIT",
 	"author": "Charles F. Munat <coder@craft-code.dev>",
