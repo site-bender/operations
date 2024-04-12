@@ -1,6 +1,6 @@
+import { Either, left } from "@sitebender/fp/lib/either"
 import and from "../../../booleans/and"
 import or from "../../../booleans/or"
-import { left } from "../../../fp/either"
 
 type EvaluateBooleanOperations = (
 	o: BooleanOperation,

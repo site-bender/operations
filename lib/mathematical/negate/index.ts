@@ -1,7 +1,7 @@
-import { map as mapOption } from "../../fp/option"
-import { left, right, match } from "../../fp/either"
+import { Option, map as mapOption } from "@sitebender/fp/lib/option"
+import { left, right, match, Either } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
-import pipe from "../../fp/functions/pipe"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type Negate = (
 	operation: NegateOperation,

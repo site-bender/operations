@@ -1,6 +1,6 @@
 import { map, some } from "../../array"
-import { isRight, right } from "../../fp/either"
-import pipe from "../../fp/functions/pipe"
+import { Either, isRight, right } from "@sitebender/fp/lib/either"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 import composeOperations from "../../operations/compose"
 
 type Or = (op: OrOperation) => () => Either<Array<string>, boolean>

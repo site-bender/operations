@@ -1,4 +1,4 @@
-import { left, right } from "../../../fp/either"
+import { Either, left, right } from "@sitebender/fp/lib/either"
 import equalTo from "../../equalTo"
 import lessThan from "../../lessThan"
 import moreThan from "../../moreThan"

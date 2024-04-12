@@ -5,7 +5,8 @@ import negate from "../../../mathematical/negate"
 import power from "../../../mathematical/power"
 import root from "../../../mathematical/root"
 import subtract from "../../../mathematical/subtract"
-import { left } from "../../../fp/either"
+import { Either, left } from "@sitebender/fp/lib/either"
+import { Option } from "@sitebender/fp/lib/option"
 
 type EvaluateNumericOperation = (
 	OperationMultiply: NumericOperation,

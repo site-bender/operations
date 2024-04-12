@@ -1,4 +1,4 @@
-import { fromNullable, none } from "../../fp/option"
+import { Option, fromNullable, none } from "@sitebender/fp/lib/option"
 
 export type NthF = (i: number) => <T>(arr: Array<T>) => Option<T>
 

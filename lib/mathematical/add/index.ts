@@ -1,9 +1,10 @@
 import liftNumeric from "../../operations/liftNumerical"
 import map from "../../array/map"
-import { left, right, match as matchEither, allOf } from "../../fp/either"
-import { some, match as matchOption } from "../../fp/option"
+import { e, o } from "@sitebender/fp"
+import { Either, allOf, right, left } from "@sitebender/fp/lib/either"
+import { Option, some } from "@sitebender/fp/lib/option"
+import { pipe } from "@sitebender/fp/lib/functions"
 
-import { pipe } from "../../fp/functions"
 import sum from "../../array/reduce/sum"
 
 type AddF = (op: AddOperation) => () => Either<Array<string>, Option<number>>
@@ -15,12 +16,12 @@ const add: AddF = op => {
 			(numbers: Option<number>[]) => () =>
 				pipe(
 					numbers,
-					map(matchOption(() => 0)((a: number) => a)),
+					map(o.match(() => 0)((a: number) => a)),
 					sum,
 					some,
 					right,
 				),
-			matchEither(errors => () => left(errors)),
+			e.match(errors => () => left(errors)),
 		),
 	)
 }

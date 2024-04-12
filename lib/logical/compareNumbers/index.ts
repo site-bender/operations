@@ -1,10 +1,17 @@
-import { allOf, flatMap, left, right, match } from "../../fp/either"
-import { pipe } from "../../fp/functions"
-import { Lazy } from "../../fp/lazy"
-import { isNone } from "../../fp/option"
+import {
+	allOf,
+	flatMap,
+	left,
+	right,
+	match,
+	Either,
+} from "@sitebender/fp/lib/either"
+import { Option, isNone } from "@sitebender/fp/lib/option"
 import liftNumeric from "../../operations/liftNumerical"
 
 import makeCompare from "./makeCompare"
+import { Lazy } from "@sitebender/fp/lib/lazy"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type CompareNumbers = (
 	operation: LogicalNumericalOperation,

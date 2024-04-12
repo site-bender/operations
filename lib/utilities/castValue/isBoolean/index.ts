@@ -1,4 +1,4 @@
-import { left, right } from "../../../fp/either"
+import { Either, left, right } from "@sitebender/fp/lib/either"
 
 const isTrue = /^(t|true)$/i
 const isFalse = /^(f|false)$/i

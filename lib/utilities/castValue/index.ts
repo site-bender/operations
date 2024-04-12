@@ -1,7 +1,7 @@
 import isBoolean from "./isBoolean"
 import Reify from "../../injectors/reify"
-import { flatMap, map } from "../../fp/either"
-import { pipe } from "../../fp/functions"
+import { Either, flatMap, map } from "@sitebender/fp/lib/either"
+import { pipe } from "@sitebender/fp/lib/functions"
 
 type CastValue = <T extends CastableValues>(
 	type: T,

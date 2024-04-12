@@ -1,4 +1,4 @@
-import { isNone } from "../../fp/option"
+import { isNone } from "@sitebender/fp/lib/option"
 import replaceAt from "../replaceAt"
 import findIndex from "../findIndex"
 
