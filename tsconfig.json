@@ -23,5 +23,9 @@
 		"declarationMap": true
 	},
 	"include": ["index.ts", "lib"],
+<<<<<<< Updated upstream
 	"exclude": ["node_modules", "vite.config.js"]
+=======
+	"exclude": ["node_modules"]
+>>>>>>> Stashed changes
 }
