@@ -15,7 +15,7 @@ export default defineConfig({
 				"lib/logical/index.ts",
 				"lib/string/index.ts",
 			],
-			include: ["lib/**", "src/**"],
+			include: ["lib/**"],
 			provider: "v8",
 		},
 	},
