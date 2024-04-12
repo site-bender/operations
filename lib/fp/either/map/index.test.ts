@@ -1,9 +1,8 @@
 import { describe, test, expect } from "vitest"
 import * as fc from "fast-check"
 import map from "."
-import { identity } from "fp-ts/lib/function"
 import right from "../right"
-import { pipe } from "../../functions"
+import { identity, pipe } from "../../functions"
 
 describe("Either map", () => {
 	test("identity", () => {

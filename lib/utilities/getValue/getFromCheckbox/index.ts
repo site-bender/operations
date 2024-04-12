@@ -1,7 +1,7 @@
+import { Lazy } from "../../../fp/lazy"
 import { none, some } from "../../../fp/option"
-import { IO } from "fp-ts/IO"
 
-type GetFromCheckboxF = (input: HTMLInputElement) => IO<Option<string>>
+type GetFromCheckboxF = (input: HTMLInputElement) => Lazy<Option<string>>
 
 const getFromCheckbox: GetFromCheckboxF = input => {
 	return () => (input.checked && input.value ? some(input.value) : none)

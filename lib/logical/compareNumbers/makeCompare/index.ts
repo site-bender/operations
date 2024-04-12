@@ -1,12 +1,11 @@
-import type { IO } from "fp-ts/lib/IO"
-
 import getComparator from "../getComparator"
 import { map } from "../../../fp/either"
 import { pipe } from "../../../fp/functions"
+import { Lazy } from "../../../fp/lazy"
 
 type MakeCompareF = (
 	operation: Operation["operation"],
-) => (operand: number) => (test: number) => IO<Either<string[], boolean>>
+) => (operand: number) => (test: number) => Lazy<Either<string[], boolean>>
 
 const makeCompare: MakeCompareF = operation => operand => test => {
 	//if (isNone(operand) || isNone(test)) {

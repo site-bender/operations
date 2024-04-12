@@ -1,12 +1,10 @@
-import type { Either } from "fp-ts/lib/Either"
-import { left } from "fp-ts/lib/Either"
-
 import evaluateNumericOperation from "./evaluateNumericOperation"
 import evaluateBooleanOperation from "./evaluateBooleanOperation"
 import evaluateInjectableOperation from "./evaluateInjectableOperation"
 import isBooleanOperation from "../../utilities/isBooleanOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
 import isInjectableOperation from "../../utilities/isUnitOperation"
+import { left } from "../../fp/either"
 
 type ComposeOperations = (
 	o: Operation,

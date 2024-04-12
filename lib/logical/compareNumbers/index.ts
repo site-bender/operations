@@ -1,7 +1,6 @@
-import { pipe } from "fp-ts/lib/function"
-import type { IO } from "fp-ts/lib/IO"
-
 import { allOf, flatMap, left, right, match } from "../../fp/either"
+import { pipe } from "../../fp/functions"
+import { Lazy } from "../../fp/lazy"
 import { isNone } from "../../fp/option"
 import liftNumeric from "../../operations/liftNumerical"
 
@@ -9,7 +8,7 @@ import makeCompare from "./makeCompare"
 
 type CompareNumbers = (
 	operation: LogicalNumericalOperation,
-) => IO<Either<Array<string>, number>>
+) => Lazy<Either<Array<string>, number>>
 
 const compareNumbers: CompareNumbers = operation => {
 	return pipe(
