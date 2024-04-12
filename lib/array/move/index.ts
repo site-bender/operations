@@ -1,4 +1,4 @@
-import { pipe } from "../../fp/functions"
+import { pipe } from "@sitebender/fp/lib/functions"
 import insertAt from "../insertAt"
 import removeAt from "../removeAt"
 

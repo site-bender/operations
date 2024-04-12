@@ -1,4 +1,4 @@
-import { fromNullable } from "../../fp/option"
+import { Option, fromNullable } from "@sitebender/fp/lib/option"
 
 export type LastIndexOfF = <T>(t: T) => (arr: Array<T>) => Option<number>
 

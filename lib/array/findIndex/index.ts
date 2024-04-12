@@ -1,4 +1,4 @@
-import { none, some } from "../../fp/option"
+import { Option, none, some } from "@sitebender/fp/lib/option"
 
 export type FindIndexF = <T>(
 	f: (i: T) => boolean,

@@ -1,7 +1,14 @@
-import { some, map, sequence, getOrElse, none } from "../../fp/option"
-import { match, left, right, allOf } from "../../fp/either"
+import {
+	Option,
+	some,
+	map,
+	sequence,
+	getOrElse,
+	none,
+} from "@sitebender/fp/lib/option"
+import { Either, match, left, right, allOf } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
-import pipe from "../../fp/functions/pipe"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type SubtractF = (
 	o: SubtractOperation,

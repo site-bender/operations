@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { isLeft, right } from "../../../fp/either"
+import { isLeft, right } from "@sitebender/fp/lib/either"
 
 import isBoolean from "."
 

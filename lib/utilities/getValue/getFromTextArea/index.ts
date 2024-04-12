@@ -1,5 +1,5 @@
-import { Lazy } from "../../../fp/lazy"
-import { none, some } from "../../../fp/option"
+import { Lazy } from "@sitebender/fp/lib/lazy"
+import { Option, none, some } from "@sitebender/fp/lib/option"
 
 type GetFromTextAreaF = (textarea: HTMLTextAreaElement) => Lazy<Option<string>>
 

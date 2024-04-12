@@ -1,8 +1,8 @@
-import { isLeft, left, right } from "../../fp/either"
-import { some } from "../../fp/option"
+import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import multiply from "."
+import { some } from "@sitebender/fp/lib/option"
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({

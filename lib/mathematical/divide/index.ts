@@ -1,7 +1,13 @@
-import { some, getOrElse } from "../../fp/option"
-import { allOf, left, match as matchEither, right } from "../../fp/either"
+import { Option, some, getOrElse } from "@sitebender/fp/lib/option"
+import {
+	Either,
+	allOf,
+	left,
+	match as matchEither,
+	right,
+} from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
-import pipe from "../../fp/functions/pipe"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type Divide = (
 	operation: DivideOperation,

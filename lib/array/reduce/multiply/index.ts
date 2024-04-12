@@ -1,5 +1,5 @@
 import { MULTIPLICATION_IDENTITY } from "../../../constants"
-import pipe from "../../../fp/functions/pipe"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 import reduce from "../../reduce"
 
 type MULTIPLY = (self: Array<number>) => number

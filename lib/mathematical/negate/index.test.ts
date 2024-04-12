@@ -1,8 +1,8 @@
-import { isLeft, right } from "../../fp/either"
-import { some } from "../../fp/option"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import negate from "."
+import { some } from "@sitebender/fp/lib/option"
 
 test("negates a positive number", async () => {
 	const success = negate({

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
 import { JSDOM } from "jsdom"
-import { none, some } from "../../../fp/option"
+import { none, some } from "@sitebender/fp/lib/option"
 
 import getFromInput from "."
 

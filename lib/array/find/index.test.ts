@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { none, some } from "../../fp/option"
+import { none, some } from "@sitebender/fp/lib/option"
 
 import find from "."
 

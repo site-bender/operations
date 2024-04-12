@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import { isLeft, right } from "../../fp/either"
 
 import castValue from "."
+import { isLeft, right } from "@sitebender/fp/lib/either"
 
 test("casts the value to the actual type", () => {
 	expect(castValue("boolean")(right("false"))).toStrictEqual(right(false))

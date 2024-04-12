@@ -1,7 +1,7 @@
+import { Lazy } from "@sitebender/fp/lib/lazy"
 import getComparator from "../getComparator"
-import { map } from "../../../fp/either"
-import { pipe } from "../../../fp/functions"
-import { Lazy } from "../../../fp/lazy"
+import { Either, map } from "@sitebender/fp/lib/either"
+import { pipe } from "@sitebender/fp/lib/functions"
 
 type MakeCompareF = (
 	operation: Operation["operation"],

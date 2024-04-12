@@ -1,5 +1,5 @@
-import { isLeft, left, right } from "../../fp/either"
-import { some } from "../../fp/option"
+import { isLeft, left, right } from "@sitebender/fp/lib/either"
+import { some } from "@sitebender/fp/lib/option"
 import { expect, test } from "vitest"
 
 import divide from "."
