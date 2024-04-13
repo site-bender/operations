@@ -1,3 +1,5 @@
+import type { DivideOperation } from "../../types"
+
 import { Option, some, getOrElse } from "@sitebender/fp/lib/option"
 import {
 	Either,
@@ -9,7 +11,7 @@ import {
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type Divide = (
+export type Divide = (
 	operation: DivideOperation,
 ) => () => Either<Array<string>, Option<number>>
 

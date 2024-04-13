@@ -1,8 +1,9 @@
-import { Left, isLeft, right } from "@sitebender/fp/lib/either"
-import { expect, test } from "vitest"
+import type { PowerOperation } from "../../types"
 
-import power from "."
+import { expect, test } from "vitest"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
+import power from "."
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({

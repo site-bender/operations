@@ -1,11 +1,8 @@
-// ARRAY functions
-import * as a from "./lib/array"
-
 // BOOLEAN functions
 import * as b from "./lib/booleans"
 
 // INJECTOR functions
-import * as i from "./lib/logical"
+import * as i from "./lib/injectors"
 
 // LOGICAL functions
 import * as l from "./lib/logical"
@@ -14,11 +11,9 @@ import * as l from "./lib/logical"
 import * as m from "./lib/mathematical"
 
 // OPERATIONS
-import compose from "./lib/operations/compose"
-
-// STRING functions
-import * as s from "./lib/string"
+import * as o from "./lib/operations"
 
 // UTILITY functions
+import * as u from "./lib/utilities"
 
-export { a, b, compose, i, l, m, s }
+export { b, i, l, m, o, u }

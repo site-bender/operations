@@ -1,9 +1,12 @@
-import composeOperations from "../../operations/compose"
-import { Either, allOf, match, right, left } from "@sitebender/fp/lib/either"
-import pipe from "@sitebender/fp/lib/functions/pipe"
-import { Lazy } from "@sitebender/fp/lib/lazy"
+import type { AndOperation } from "../../types"
 
-type And = (op: AndOperation) => Lazy<Either<Array<string>, boolean>>
+import { Either, allOf, match, right, left } from "@sitebender/fp/lib/either"
+import { Lazy } from "@sitebender/fp/lib/lazy"
+import composeOperations from "../../operations/compose"
+import pipe from "@sitebender/fp/lib/functions/pipe"
+
+export type And = (op: AndOperation) => Lazy<Either<Array<string>, boolean>>
+
 const and: And = op => {
 	return pipe(
 		pipe(

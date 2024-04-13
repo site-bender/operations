@@ -1,9 +1,10 @@
+import type { CastableValues, Reify } from "../../types"
+
 import isBoolean from "./isBoolean"
-import Reify from "../../injectors/reify"
 import { Either, flatMap, map } from "@sitebender/fp/lib/either"
 import { pipe } from "@sitebender/fp/lib/functions"
 
-type CastValue = <T extends CastableValues>(
+export type CastValue = <T extends CastableValues>(
 	type: T,
 ) => (value: Either<string[], any>) => Either<string[], Reify<T>>
 

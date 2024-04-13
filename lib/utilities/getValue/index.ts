@@ -2,19 +2,21 @@ import getFromCheckbox from "./getFromCheckbox"
 import getFromInput from "./getFromInput"
 import getFromSelect from "./getFromSelect"
 import getFromTextArea from "./getFromTextArea"
-import toLower from "../../string/toLower"
+import toLower from "@sitebender/fp/lib/string/toLower"
 import { Lazy } from "@sitebender/fp/lib/lazy"
 import { Either, left, right } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
 import { isNullish } from "@sitebender/fp/lib/predicates"
 
-type NullableInput =
+export type NullableInput =
 	| HTMLInputElement
 	| HTMLSelectElement
 	| HTMLTextAreaElement
 	| null
 
-type GetValue = (name: string) => Lazy<Either<Array<string>, Option<string>>>
+export type GetValue = (
+	name: string,
+) => Lazy<Either<Array<string>, Option<string>>>
 
 const getValue: GetValue = name => () => {
 	const element: NullableInput = document.querySelector(`[name=${name}]`)

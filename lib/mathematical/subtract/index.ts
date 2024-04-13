@@ -1,3 +1,5 @@
+import type { SubtractOperation } from "../../types"
+
 import {
 	Option,
 	some,
@@ -10,7 +12,7 @@ import { Either, match, left, right, allOf } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type SubtractF = (
+export type SubtractF = (
 	o: SubtractOperation,
 ) => () => Either<Array<string>, Option<number>>
 

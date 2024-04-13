@@ -1,6 +1,8 @@
+import type { AddOperation as AO } from "../../types"
+
 import { Option, none, some } from "@sitebender/fp/lib/option"
 
-type AddOperationF = (config: Partial<AddOperation>) => Option<AddOperation>
+export type AddOperationF = (config: Partial<AO>) => Option<AO>
 
 const AddOperation: AddOperationF = config => {
 	const { addends = [], ...rest } = config

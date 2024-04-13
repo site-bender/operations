@@ -1,8 +1,9 @@
-import { Left, isLeft, right } from "@sitebender/fp/lib/either"
-import { expect, test } from "vitest"
+import type { NegateOperation } from "../../types"
 
-import negate from "."
+import { expect, test } from "vitest"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
+import negate from "."
 
 test("negates a positive number", async () => {
 	const success = negate({
