@@ -1,9 +1,11 @@
+import type { PowerOperation } from "../../types"
+
 import { Option, map, sequence } from "@sitebender/fp/lib/option"
 import { Either, allOf, left, match, right } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type PowerF = (
+export type PowerF = (
 	operation: PowerOperation,
 ) => () => Either<Array<string>, Option<number>>
 

@@ -1,8 +1,9 @@
-import { Left, isLeft, right } from "@sitebender/fp/lib/either"
-import { expect, test } from "vitest"
+import type { RootOperation } from "../../types"
 
-import root from "."
+import { expect, test } from "vitest"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
+import root from "."
 
 test("gets the indexed root of the radicand correctly", async () => {
 	const success = root({

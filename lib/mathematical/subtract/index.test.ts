@@ -1,6 +1,7 @@
-import { Left, isLeft, right } from "@sitebender/fp/lib/either"
-import { expect, test } from "vitest"
+import type { SubtractOperation } from "../../types"
 
+import { expect, test } from "vitest"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import subtract from "."
 import { some } from "@sitebender/fp/lib/option"
 

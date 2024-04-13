@@ -1,3 +1,5 @@
+import type { NumericOperation, Operation } from "../../types"
+
 import isNotNullish from "@sitebender/fp/lib/predicates/isNotNullish"
 
 const isNumericOperation = (

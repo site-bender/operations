@@ -1,10 +1,12 @@
+import type { MultiplyOperation } from "../../types"
+
 import { Option, map as mapOption, sequence } from "@sitebender/fp/lib/option"
 import { Either, left, right, match, allOf } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
-import { default as multiplyArray } from "../../array/reduce/multiply"
+import { default as multiplyArray } from "@sitebender/fp/lib/array/reduce/multiply"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type MultiplyF = (
+export type MultiplyF = (
 	op: MultiplyOperation,
 ) => () => Either<Array<string>, Option<number>>
 

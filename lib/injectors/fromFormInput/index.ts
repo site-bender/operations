@@ -1,9 +1,10 @@
+import type { CastableValues, FormInputOperation, Reify } from "../../types"
+
 import { Either } from "@sitebender/fp/lib/either"
 import castValue from "../../utilities/castValue"
 import getValue from "../../utilities/getValue"
-import Reify from "../reify"
 
-type FromFormInput = (
+export type FromFormInput = (
 	op: FormInputOperation,
 ) => () => Either<Array<string>, Reify<CastableValues>>
 

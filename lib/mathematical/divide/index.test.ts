@@ -1,7 +1,8 @@
+import type { DivideOperation } from "../../types"
+
+import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
-import { expect, test } from "vitest"
-
 import divide from "."
 
 test("divides a divisor into a dividend", async () => {

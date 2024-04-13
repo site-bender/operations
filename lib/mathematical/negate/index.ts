@@ -1,9 +1,11 @@
+import type { NegateOperation } from "../../types"
+
 import { Option, map as mapOption } from "@sitebender/fp/lib/option"
 import { left, right, match, Either } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type Negate = (
+export type Negate = (
 	operation: NegateOperation,
 ) => () => Either<Array<string>, Option<number>>
 

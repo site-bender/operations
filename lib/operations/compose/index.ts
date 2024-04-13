@@ -1,13 +1,15 @@
-import evaluateNumericOperation from "./evaluateNumericOperation"
-import evaluateBooleanOperation from "./evaluateBooleanOperation"
-import evaluateInjectableOperation from "./evaluateInjectableOperation"
-import isBooleanOperation from "../../utilities/isBooleanOperation"
-import isNumericOperation from "../../utilities/isNumericOperation"
-import isInjectableOperation from "../../utilities/isUnitOperation"
+import type { Operation } from "../../types"
+
 import { Either, left } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
+import evaluateBooleanOperation from "./evaluateBooleanOperation"
+import evaluateInjectableOperation from "./evaluateInjectableOperation"
+import evaluateNumericOperation from "./evaluateNumericOperation"
+import isBooleanOperation from "../../utilities/isBooleanOperation"
+import isInjectableOperation from "../../utilities/isUnitOperation"
+import isNumericOperation from "../../utilities/isNumericOperation"
 
-type ComposeOperations = (
+export type ComposeOperations = (
 	o: Operation,
 ) => () => Either<Array<string>, Option<number> | number | boolean | string>
 const composeOperations: ComposeOperations = op => {

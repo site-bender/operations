@@ -1,3 +1,7 @@
+import type { NumericOperation } from "../../../types"
+
+import { Either, left } from "@sitebender/fp/lib/either"
+import { Option } from "@sitebender/fp/lib/option"
 import add from "../../../mathematical/add"
 import divide from "../../../mathematical/divide"
 import multiply from "../../../mathematical/multiply"
@@ -5,12 +9,11 @@ import negate from "../../../mathematical/negate"
 import power from "../../../mathematical/power"
 import root from "../../../mathematical/root"
 import subtract from "../../../mathematical/subtract"
-import { Either, left } from "@sitebender/fp/lib/either"
-import { Option } from "@sitebender/fp/lib/option"
 
-type EvaluateNumericOperation = (
+export type EvaluateNumericOperation = (
 	OperationMultiply: NumericOperation,
 ) => () => Either<Array<string>, Option<number>>
+
 const evaluateNumericOperation: EvaluateNumericOperation = op => {
 	switch (op.operation) {
 		case "add":

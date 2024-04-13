@@ -1,6 +1,8 @@
-type Truncation = Omit<NumericalBase, "operation">
+import type { NumericalBase } from "../../types"
 
-type TruncateF = (op: Truncation) => (value: number) => number
+export type Truncation = Omit<NumericalBase, "operation">
+
+export type TruncateF = (op: Truncation) => (value: number) => number
 
 const truncate: TruncateF = trunc => value => {
 	const { truncation = "round", precision = 0 } = trunc

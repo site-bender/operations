@@ -1,9 +1,10 @@
+import type { NumericOperation } from "../../types"
+
 import { Either, right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
-
 import evaluateNumericOperation from "../../operations/compose/evaluateNumericOperation"
 
-type LiftNumericF = (
+export type LiftNumericF = (
 	operand: number | NumericOperation,
 ) => Either<string[], Option<number>>
 

@@ -1,3 +1,5 @@
+import type { LogicalNumericalOperation } from "../../types"
+
 import {
 	allOf,
 	flatMap,
@@ -6,14 +8,13 @@ import {
 	match,
 	Either,
 } from "@sitebender/fp/lib/either"
+import { Lazy } from "@sitebender/fp/lib/lazy"
 import { Option, isNone } from "@sitebender/fp/lib/option"
 import liftNumeric from "../../operations/liftNumerical"
-
 import makeCompare from "./makeCompare"
-import { Lazy } from "@sitebender/fp/lib/lazy"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type CompareNumbers = (
+export type CompareNumbers = (
 	operation: LogicalNumericalOperation,
 ) => Lazy<Either<Array<string>, number>>
 

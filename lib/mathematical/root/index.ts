@@ -1,10 +1,12 @@
+import type { RootOperation } from "../../types"
+
 import { Option, sequence, map } from "@sitebender/fp/lib/option"
 import { match, left, right, allOf, Either } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
 import truncate from "../../utilities/truncate"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
-type RootF = (
+export type RootF = (
 	operation: RootOperation,
 ) => () => Either<Array<string>, Option<number>>
 

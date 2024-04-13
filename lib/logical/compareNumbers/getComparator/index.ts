@@ -6,7 +6,7 @@ import noLessThan from "../../noLessThan"
 import noMoreThan from "../../noMoreThan"
 import unequalTo from "../../unequalTo"
 
-type GetComparatorF = (
+export type GetComparatorF = (
 	operation: string,
 ) => Either<string[], (x: number) => (y: number) => boolean>
 
