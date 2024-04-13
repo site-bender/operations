@@ -4,7 +4,8 @@ import evaluateInjectableOperation from "./evaluateInjectableOperation"
 import isBooleanOperation from "../../utilities/isBooleanOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
 import isInjectableOperation from "../../utilities/isUnitOperation"
-import { left } from "../../fp/either"
+import { Either, left } from "@sitebender/fp/lib/either"
+import { Option } from "@sitebender/fp/lib/option"
 
 type ComposeOperations = (
 	o: Operation,

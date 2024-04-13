@@ -1,4 +1,4 @@
-import { none, some } from "../../fp/option"
+import { Option, none, some } from "@sitebender/fp/lib/option"
 
 export type LastIndexOfMatchF = (
 	re: RegExp,
@@ -10,7 +10,7 @@ const lastIndexOfMatch: LastIndexOfMatchF = re => arr => {
 		-1,
 	)
 
-	return index < 0 ? none : (some(index) as Some<number>)
+	return index < 0 ? none : some(index)
 }
 
 export default lastIndexOfMatch

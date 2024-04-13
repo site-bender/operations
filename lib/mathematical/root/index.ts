@@ -1,8 +1,8 @@
-import { sequence, map } from "../../fp/option"
-import { match, left, right, allOf } from "../../fp/either"
+import { Option, sequence, map } from "@sitebender/fp/lib/option"
+import { match, left, right, allOf, Either } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
 import truncate from "../../utilities/truncate"
-import { pipe } from "../../fp/functions"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type RootF = (
 	operation: RootOperation,

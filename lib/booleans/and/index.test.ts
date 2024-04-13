@@ -1,4 +1,4 @@
-import { isLeft } from "../../fp/either"
+import { Left, Right, isLeft } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import and from "."

@@ -4,12 +4,6 @@ import * as a from "./lib/array"
 // BOOLEAN functions
 import * as b from "./lib/booleans"
 
-// FP functions
-import * as e from "./lib/fp/either"
-import * as f from "./lib/fp/functions"
-import * as o from "./lib/fp/option"
-import * as p from "./lib/fp/predicates"
-
 // INJECTOR functions
 import * as i from "./lib/logical"
 
@@ -27,4 +21,4 @@ import * as s from "./lib/string"
 
 // UTILITY functions
 
-export { a, b, compose, e, f, i, l, m, o, p, s }
+export { a, b, compose, i, l, m, s }

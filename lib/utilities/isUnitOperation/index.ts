@@ -1,4 +1,4 @@
-import isNotNullish from "../../fp/predicates/isNotNullish"
+import isNotNullish from "@sitebender/fp/lib/predicates/isNotNullish"
 
 const isInjectableOperation = (
 	operation: Operation,

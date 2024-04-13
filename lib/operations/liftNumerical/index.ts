@@ -1,5 +1,5 @@
-import { right } from "../../fp/either"
-import { some } from "../../fp/option"
+import { Either, right } from "@sitebender/fp/lib/either"
+import { Option, some } from "@sitebender/fp/lib/option"
 
 import evaluateNumericOperation from "../../operations/compose/evaluateNumericOperation"
 

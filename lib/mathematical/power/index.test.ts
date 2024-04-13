@@ -1,8 +1,8 @@
-import { isLeft, right } from "../../fp/either"
-import { some } from "../../fp/option"
+import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import power from "."
+import { some } from "@sitebender/fp/lib/option"
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({

@@ -1,3 +1,4 @@
+import { Either } from "@sitebender/fp/lib/either"
 import castValue from "../../utilities/castValue"
 import getValue from "../../utilities/getValue"
 import Reify from "../reify"

@@ -1,8 +1,8 @@
-import { left, right } from "../../../fp/either"
-import { some } from "../../../fp/option"
+import { left, right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import evaluateNumericOperation from "."
+import { some } from "@sitebender/fp/lib/option"
 
 test("works for add operations", async () => {
 	const result = evaluateNumericOperation({

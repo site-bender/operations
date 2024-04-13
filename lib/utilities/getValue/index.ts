@@ -1,12 +1,12 @@
-import { left, right } from "../../fp/either"
-import isNullish from "../../fp/predicates/isNullish"
-
 import getFromCheckbox from "./getFromCheckbox"
 import getFromInput from "./getFromInput"
 import getFromSelect from "./getFromSelect"
 import getFromTextArea from "./getFromTextArea"
 import toLower from "../../string/toLower"
-import { Lazy } from "../../fp/lazy"
+import { Lazy } from "@sitebender/fp/lib/lazy"
+import { Either, left, right } from "@sitebender/fp/lib/either"
+import { Option } from "@sitebender/fp/lib/option"
+import { isNullish } from "@sitebender/fp/lib/predicates"
 
 type NullableInput =
 	| HTMLInputElement

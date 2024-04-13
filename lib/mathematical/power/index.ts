@@ -1,7 +1,7 @@
-import { map, sequence } from "../../fp/option"
-import { allOf, left, match, right } from "../../fp/either"
+import { Option, map, sequence } from "@sitebender/fp/lib/option"
+import { Either, allOf, left, match, right } from "@sitebender/fp/lib/either"
 import liftNumeric from "../../operations/liftNumerical"
-import pipe from "../../fp/functions/pipe"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type PowerF = (
 	operation: PowerOperation,

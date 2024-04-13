@@ -1,5 +1,5 @@
+import { Either, left } from "@sitebender/fp/lib/either"
 import fromFormInput from "../../../injectors/fromFormInput"
-import { left } from "../../../fp/either"
 import Reify from "../../../injectors/reify"
 
 type EvaluateInjectableOperation = (
