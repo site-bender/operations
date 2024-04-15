@@ -81,6 +81,35 @@ export interface LogicalNumericalOperation extends OperationBase {
 
 export type CastableValues = "integer" | "number" | "string" | "boolean"
 
+export interface LiteralLookupOperation extends OperationBase {
+	operation: "literalLookup"
+	operand: {
+		operation: "params"
+		returns: CastableValues
+	}
+	test: { [key: string]: Reify<LiteralLookupOperation["operand"]["returns"]> }
+}
+
+export interface TableLookupEntry<T extends CastableValues> {
+	operation: "tableValue"
+	operands: {
+		operand: number
+		operation: "lessThan"
+		returns: boolean
+	}
+	returns: T
+	value: Reify<T>
+}
+
+export interface TableLookupOperation extends OperationBase {
+	operation: "tableLookup"
+	operand: {
+		operation: "params"
+		returns: number
+	}
+	test: Array<TableLookupEntry<"number">>
+}
+
 export interface InjectValueOperation extends OperationBase {
 	returns: CastableValues
 	eager?: boolean | undefined
@@ -119,10 +148,13 @@ export type InjectableOperation =
 	| LocalStorageOperation
 	| SessionStorageOperation
 
+export type LookupOperation = LiteralLookupOperation | TableLookupOperation
+
 export type Operation =
 	| NumericOperation
 	| BooleanOperation
 	| InjectableOperation
+	| LookupOperation
 
 export type Reify<T extends CastableValues> = T extends "integer" | "number"
 	? number

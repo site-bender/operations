@@ -15,6 +15,7 @@ export type EvaluateNumericOperation = (
 ) => () => Either<Array<string>, Option<number>>
 
 const evaluateNumericOperation: EvaluateNumericOperation = op => {
+	// TODO handle comparison operatons - lessThan etc
 	switch (op.operation) {
 		case "add":
 			return add(op)

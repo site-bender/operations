@@ -8,6 +8,8 @@ import evaluateNumericOperation from "./evaluateNumericOperation"
 import isBooleanOperation from "../../utilities/isBooleanOperation"
 import isInjectableOperation from "../../utilities/isUnitOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
+import isLookupOperation from "../../utilities/isLookupOperation"
+import evaluateLookupOperation from "./evaluateLookupOperation"
 
 export type ComposeOperations = (
 	o: Operation,
@@ -19,6 +21,8 @@ const composeOperations: ComposeOperations = op => {
 		return evaluateBooleanOperation(op)
 	} else if (isInjectableOperation(op)) {
 		return evaluateInjectableOperation(op)
+	} else if (isLookupOperation(op)) {
+		return evaluateLookupOperation(op)
 	}
 
 	return () => left([`Unknown operation: ${op}.`])
