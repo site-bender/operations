@@ -26,9 +26,10 @@ const tableLookup: TableLookup = op => {
 						e.flatMap(test =>
 							pipe(
 								getComparator(t.operands.operation),
-								e.map(comparator => comparator(test)(Number(arg))),
+								e.map(comparator => comparator(Number(arg))(test)),
 							),
 						),
+						e.getOrElse(() => false),
 					),
 				),
 				o.fromNullable,
