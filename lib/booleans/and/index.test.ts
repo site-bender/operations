@@ -36,13 +36,13 @@ test("returns an error when one or more operands is an error", async () => {
 			{
 				operand: 5,
 				operation: "lessThan",
-				returns: "number",
+				returns: "boolean",
 				test: 3,
 			},
 			{
 				operand: 10,
 				operation: "moreThan",
-				returns: "number",
+				returns: "boolean",
 				test: 5,
 			},
 		],
@@ -52,7 +52,7 @@ test("returns an error when one or more operands is an error", async () => {
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Invalid numeric operation: lessThan.",
-		"Invalid numeric operation: moreThan.",
+		"Invalid boolean operation: lessThan.",
+		"Invalid boolean operation: moreThan.",
 	])
 })

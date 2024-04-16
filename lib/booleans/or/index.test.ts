@@ -19,7 +19,7 @@ test("returns a true wrapped in a right when one operation works", async () => {
 			{
 				operand: 5,
 				operation: "lessThan",
-				returns: "number",
+				returns: "boolean",
 				test: 3,
 			},
 		],
@@ -36,13 +36,13 @@ test("returns false wrapped in a right when all operands fail", async () => {
 			{
 				operand: 5,
 				operation: "lessThan",
-				returns: "number",
+				returns: "boolean",
 				test: 3,
 			},
 			{
 				operand: 10,
 				operation: "moreThan",
-				returns: "number",
+				returns: "boolean",
 				test: 5,
 			},
 		],

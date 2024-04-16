@@ -1,4 +1,4 @@
-import type { LogicalNumericalOperation } from "../../types"
+import type { LogicalNumericOperation } from "../../types"
 
 import {
 	allOf,
@@ -15,7 +15,7 @@ import makeCompare from "./makeCompare"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 
 export type CompareNumbers = (
-	operation: LogicalNumericalOperation,
+	operation: LogicalNumericOperation,
 ) => Lazy<Either<Array<string>, number>>
 
 const compareNumbers: CompareNumbers = operation => {

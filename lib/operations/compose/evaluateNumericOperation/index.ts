@@ -15,6 +15,9 @@ export type EvaluateNumericOperation = (
 ) => () => Either<Array<string>, Option<number>>
 
 const evaluateNumericOperation: EvaluateNumericOperation = op => {
+	const error = (op: never) => () =>
+		left([`Invalid numeric operation: ${op["operation"] ?? "unknown"}.`])
+
 	// TODO handle comparison operatons - lessThan etc
 	switch (op.operation) {
 		case "add":
@@ -32,7 +35,7 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 		case "subtract":
 			return subtract(op)
 		default:
-			return () => left([`Invalid numeric operation: ${op.operation}.`])
+			return error(op)
 	}
 }
 

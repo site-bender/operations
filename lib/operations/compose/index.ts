@@ -1,5 +1,3 @@
-import type { Operation } from "../../types"
-
 import { Either, left } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
 import evaluateBooleanOperation from "./evaluateBooleanOperation"
@@ -10,6 +8,7 @@ import isInjectableOperation from "../../utilities/isUnitOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
 import isLookupOperation from "../../utilities/isLookupOperation"
 import evaluateLookupOperation from "./evaluateLookupOperation"
+import { Operation } from "../../types"
 
 export type ComposeOperations = (
 	o: Operation,
