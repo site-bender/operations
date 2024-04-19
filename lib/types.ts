@@ -66,20 +66,56 @@ export interface SubtractOperation extends NumericalBase {
 	subtrahend: number | NumericOperation
 }
 
-export interface LogicalNumericalOperation extends OperationBase {
+export interface NumericComparisonBase extends OperationBase {
 	operand: number | NumericOperation
-	operation:
-		| "equalTo"
-		| "moreThan"
-		| "lessThan"
-		| "noLessThan"
-		| "noMoreThan"
-		| "unequalTo"
-	returns: "number"
+	returns: "boolean"
 	test: number | NumericOperation
 }
 
+export interface UnequalToOperation extends NumericComparisonBase {
+	operation: "unequalTo"
+}
+
+export interface EqualToOperation extends NumericComparisonBase {
+	operation: "equalTo"
+}
+
+export interface LessThanOperation extends NumericComparisonBase {
+	operation: "lessThan"
+}
+
+export interface MoreThanOperation extends NumericComparisonBase {
+	operation: "moreThan"
+}
+
+export interface NoLessThanOperation extends NumericComparisonBase {
+	operation: "noLessThan"
+}
+
+export interface NoMoreThanOperation extends NumericComparisonBase {
+	operation: "noMoreThan"
+}
+
 export type CastableValues = "integer" | "number" | "string" | "boolean"
+
+export interface LiteralLookupOperation extends OperationBase {
+	operation: "literalLookup"
+	operand: InjectableOperation
+	test: { [key: string]: Reify<LiteralLookupOperation["operand"]["returns"]> }
+}
+
+export interface TableLookupEntry<T extends CastableValues> {
+	operation: "tableValue"
+	operands: LogicalNumericOperation
+	returns: T
+	value: Reify<T>
+}
+
+export interface TableLookupOperation extends OperationBase {
+	operation: "tableLookup"
+	operand: InjectableOperation
+	test: Array<TableLookupEntry<"number">>
+}
 
 export interface InjectValueOperation extends OperationBase {
 	returns: CastableValues
@@ -105,12 +141,19 @@ export interface SessionStorageOperation extends InjectValueOperation {
 export type NumericOperation =
 	| AddOperation
 	| DivideOperation
-	| LogicalNumericalOperation
 	| MultiplyOperation
 	| NegateOperation
 	| PowerOperation
 	| RootOperation
 	| SubtractOperation
+
+export type LogicalNumericOperation =
+	| LessThanOperation
+	| NoLessThanOperation
+	| MoreThanOperation
+	| NoMoreThanOperation
+	| EqualToOperation
+	| UnequalToOperation
 
 export type BooleanOperation = AndOperation | OrOperation
 
@@ -119,10 +162,14 @@ export type InjectableOperation =
 	| LocalStorageOperation
 	| SessionStorageOperation
 
+export type LookupOperation = LiteralLookupOperation | TableLookupOperation
+
 export type Operation =
 	| NumericOperation
+	| LogicalNumericOperation
 	| BooleanOperation
 	| InjectableOperation
+	| LookupOperation
 
 export type Reify<T extends CastableValues> = T extends "integer" | "number"
 	? number

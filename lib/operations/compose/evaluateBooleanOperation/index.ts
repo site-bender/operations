@@ -15,7 +15,8 @@ const evaluateBooleanOperation: EvaluateBooleanOperations = op => {
 		case "or":
 			return or(op)
 		default:
-			return () => left([`Invalid boolean operation ${op}`])
+			return () =>
+				left([`Invalid boolean operation: ${op["operation"] ?? "unknown"}.`])
 	}
 }
 

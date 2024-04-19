@@ -7,7 +7,7 @@ test("lessThan returns the value when it is less than the test", async () => {
 	const success = compareNumbers({
 		operand: 5,
 		operation: "lessThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -19,7 +19,7 @@ test("lessThan returns an error when it is not less than the test", async () => 
 	const failure = compareNumbers({
 		operand: 6,
 		operation: "lessThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -33,7 +33,7 @@ test("moreThan returns the value when it is greater than the test", async () => 
 	const success = compareNumbers({
 		operand: 6,
 		operation: "moreThan",
-		returns: "number",
+		returns: "boolean",
 		test: 5,
 	})()
 
@@ -45,7 +45,7 @@ test("moreThan returns an error when it is not greater than the test", async () 
 	const failure = compareNumbers({
 		operand: 6,
 		operation: "moreThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -59,7 +59,7 @@ test("noMoreThan returns the value when it is no more than the test", async () =
 	const success = compareNumbers({
 		operand: 6,
 		operation: "noMoreThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -71,7 +71,7 @@ test("noMoreThan returns an error when it is not no more than the test", async (
 	const failure = compareNumbers({
 		operand: 7,
 		operation: "noMoreThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -85,7 +85,7 @@ test("noLessThan returns the value when it is no less than the test", async () =
 	const success = compareNumbers({
 		operand: 6,
 		operation: "noLessThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -97,7 +97,7 @@ test("noLessThan returns an error when it is not no less than the test", async (
 	const failure = compareNumbers({
 		operand: 5,
 		operation: "noLessThan",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -111,7 +111,7 @@ test("equalTo returns the value when it is equal to the test", async () => {
 	const success = compareNumbers({
 		operand: 6,
 		operation: "equalTo",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -123,7 +123,7 @@ test("equalTo returns an error when it is not equal to the test", async () => {
 	const failure = compareNumbers({
 		operand: 5,
 		operation: "equalTo",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -135,7 +135,7 @@ test("unequalTo returns the value when it is unequal to the test", async () => {
 	const success = compareNumbers({
 		operand: 5,
 		operation: "unequalTo",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
@@ -147,7 +147,7 @@ test("unequalTo returns an error when it is not unequal to the test", async () =
 	const failure = compareNumbers({
 		operand: 6,
 		operation: "unequalTo",
-		returns: "number",
+		returns: "boolean",
 		test: 6,
 	})()
 
