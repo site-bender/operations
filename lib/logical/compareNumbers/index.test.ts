@@ -2,6 +2,7 @@ import { Left, Right, isLeft } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import compareNumbers from "."
+import { Some } from "@sitebender/fp/lib/option"
 
 test("lessThan returns the value when it is less than the test", async () => {
 	const success = compareNumbers({
@@ -12,7 +13,7 @@ test("lessThan returns the value when it is less than the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(5)
+	expect((success as Right<Some<number>>).right.value).toEqual(5)
 })
 
 test("lessThan returns an error when it is not less than the test", async () => {
@@ -38,7 +39,7 @@ test("moreThan returns the value when it is greater than the test", async () => 
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("moreThan returns an error when it is not greater than the test", async () => {
@@ -64,7 +65,7 @@ test("noMoreThan returns the value when it is no more than the test", async () =
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("noMoreThan returns an error when it is not no more than the test", async () => {
@@ -90,7 +91,7 @@ test("noLessThan returns the value when it is no less than the test", async () =
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("noLessThan returns an error when it is not no less than the test", async () => {
@@ -116,7 +117,7 @@ test("equalTo returns the value when it is equal to the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(6)
+	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("equalTo returns an error when it is not equal to the test", async () => {
@@ -140,7 +141,7 @@ test("unequalTo returns the value when it is unequal to the test", async () => {
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
-	expect((success as Right<number>).right).toEqual(5)
+	expect((success as Right<Some<number>>).right.value).toEqual(5)
 })
 
 test("unequalTo returns an error when it is not unequal to the test", async () => {

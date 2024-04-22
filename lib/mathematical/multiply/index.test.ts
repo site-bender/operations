@@ -2,7 +2,7 @@ import type { MultiplyOperation } from "../../types"
 
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
-import { some } from "@sitebender/fp/lib/option"
+import { none, some } from "@sitebender/fp/lib/option"
 import multiply from "."
 
 test("multiplies a set of numbers together", async () => {
@@ -26,10 +26,35 @@ test("multiplies a set of numbers together", async () => {
 		],
 		operation: "multiply",
 		returns: "number",
-	})()
+	})(none)
 
 	expect(isLeft(success)).toBeFalsy()
 	expect(success).toEqual(right(some(181440)))
+})
+
+test("multiplies a set of numbers together with an input param", async () => {
+	const success = multiply({
+		multipliers: [
+			{
+				operation: "fromParam",
+			},
+			{
+				multipliers: [5, 6],
+				operation: "multiply",
+				returns: "number",
+			},
+			{
+				multipliers: [7, 8, 9],
+				operation: "multiply",
+				returns: "number",
+			},
+		],
+		operation: "multiply",
+		returns: "number",
+	})(some(3))
+
+	expect(isLeft(success)).toBeFalsy()
+	expect(success).toEqual(right(some(45360)))
 })
 
 test("returns an error when one or more multipliers is an error", async () => {
@@ -51,7 +76,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 		],
 		operation: "multiply",
 		returns: "number",
-	})()
+	})(none)
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect(failure).toStrictEqual(

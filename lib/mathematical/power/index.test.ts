@@ -22,6 +22,25 @@ test("raises a base to an exponent correctly", async () => {
 	expect(success).toEqual(right(some(216)))
 })
 
+test("raises a base to an exponent correctly from an input", async () => {
+	const success = power({
+		base: {
+			dividend: 120,
+			divisor: 20,
+			operation: "divide",
+			returns: "number",
+		},
+		exponent: {
+			operation: "fromParam",
+		},
+		operation: "power",
+		returns: "number",
+	})(some(3))
+
+	expect(isLeft(success)).toBeFalsy()
+	expect(success).toEqual(right(some(216)))
+})
+
 test("returns an error when base or exponent is an error", async () => {
 	const failure = power({
 		base: {

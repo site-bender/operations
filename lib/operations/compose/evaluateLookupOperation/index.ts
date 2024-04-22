@@ -1,11 +1,11 @@
-import type { CastableValues, LookupOperation, Reify } from "../../../types"
+import type { CastableValue, LookupOperation, Reify } from "../../../types"
 
 import { Either, left } from "@sitebender/fp/lib/either"
 import lookup from "../../../lookup/literal"
 
 export type EvaluateLookupOperation = (
 	OperationMultiply: LookupOperation,
-) => () => Either<Array<string>, Reify<CastableValues>>
+) => () => Either<Array<string>, Reify<CastableValue>>
 
 const evaluateLookupOperation: EvaluateLookupOperation = op => {
 	switch (op.operation) {

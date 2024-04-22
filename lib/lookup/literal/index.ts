@@ -1,25 +1,25 @@
-import { fromNullable, match } from "@sitebender/fp/lib/option"
+import { Option, fromNullable, none } from "@sitebender/fp/lib/option"
 import { pipe } from "@sitebender/fp/lib/functions"
-import { CastableValues, LiteralLookupOperation, Reify } from "../../types"
-import { Either, flatMap, left, right } from "@sitebender/fp/lib/either"
-import evaluateInjectableOperation from "../../operations/compose/evaluateInjectableOperation"
+import { CastableValue, LiteralLookupOperation, Reify } from "../../types"
+import { OperationResult } from "../../operations/operationResult/types"
+import * as OpResult from "../../operations/operationResult"
+import liftInjectable from "../../operations/liftInjectable"
 
 type LookupF = (
 	op: LiteralLookupOperation,
-) => () => Either<Array<string>, Reify<CastableValues>>
+) => (
+	input?: Option<Reify<CastableValue>>,
+) => OperationResult<Reify<CastableValue>>
 
-const lookup: LookupF = op => () =>
-	pipe(
-		evaluateInjectableOperation(op.operand)(),
-		flatMap(key =>
-			pipe(
-				fromNullable(op.test[String(key)]),
-				pipe(
-					right,
-					match(() => left([`Not a valid lookup key: ${key}`])),
-				),
+const lookup: LookupF =
+	op =>
+	(input = none) => {
+		return pipe(
+			liftInjectable(input)(op.operand),
+			OpResult.flatMap(key =>
+				OpResult.fromOption(fromNullable(op.test[String(key)])),
 			),
-		),
-	)
+		)
+	}
 
 export default lookup
