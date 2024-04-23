@@ -1,42 +1,32 @@
 import type { SubtractOperation } from "../../types"
 
-import {
-	Option,
-	some,
-	map,
-	sequence,
-	getOrElse,
-	none,
-} from "@sitebender/fp/lib/option"
-import { Either, match, left, right, allOf } from "@sitebender/fp/lib/either"
-import liftNumeric from "../../operations/liftNumerical"
+import { Option, none, some } from "@sitebender/fp/lib/option"
+import { left, right } from "@sitebender/fp/lib/either"
 import pipe from "@sitebender/fp/lib/functions/pipe"
+import * as OpResult from "../../operations/operationResult"
+import { map } from "@sitebender/fp/lib/array"
+import liftNumeric from "../../operations/liftNumerical"
+import { OperationResult } from "../../operations/operationResult/types"
 
 export type SubtractF = (
 	o: SubtractOperation,
-) => () => Either<Array<string>, Option<number>>
+) => (input?: Option<number>) => OperationResult<number>
 
-const divide: SubtractF = op => {
-	return pipe(
-		allOf(liftNumeric)([op.minuend, op.subtrahend]),
-		pipe(
-			([minuend, subtrahend]: Array<Option<number>>) =>
-				() =>
-					pipe(
-						[minuend, subtrahend],
-						sequence,
-						map(([minuend, subtrahend]) => {
-							const difference = minuend - subtrahend
+const subtract: SubtractF =
+	op =>
+	(input = none) => {
+		return pipe(
+			[op.minuend, op.subtrahend],
+			map(liftNumeric(input)),
+			OpResult.sequence,
+			OpResult.flatMap(([minuend, subtrahend]) => {
+				const difference = minuend - subtrahend
 
-							return Number.isNaN(difference)
-								? left(["Invalid numeric operation: divide."])
-								: right(some(difference))
-						}),
-						getOrElse((): Either<Array<string>, Option<number>> => right(none)),
-					),
-			match(errors => () => left(errors)),
-		),
-	)
-}
+				return Number.isNaN(difference)
+					? left(["Invalid numeric operation: divide."])
+					: right(some(difference))
+			}),
+		)
+	}
 
-export default divide
+export default subtract

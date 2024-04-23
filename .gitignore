@@ -11,6 +11,7 @@ dist/
 .cache/*
 .history/*
 .vscode/*
+.idea
 
 temp/
 coverage/

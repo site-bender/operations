@@ -4,9 +4,9 @@ import getFromSelect from "./getFromSelect"
 import getFromTextArea from "./getFromTextArea"
 import toLower from "@sitebender/fp/lib/string/toLower"
 import { Lazy } from "@sitebender/fp/lib/lazy"
-import { Either, left, right } from "@sitebender/fp/lib/either"
-import { Option } from "@sitebender/fp/lib/option"
+import { left, right } from "@sitebender/fp/lib/either"
 import { isNullish } from "@sitebender/fp/lib/predicates"
+import { OperationResult } from "../../operations/operationResult/types"
 
 export type NullableInput =
 	| HTMLInputElement
@@ -14,9 +14,7 @@ export type NullableInput =
 	| HTMLTextAreaElement
 	| null
 
-export type GetValue = (
-	name: string,
-) => Lazy<Either<Array<string>, Option<string>>>
+export type GetValue = (name: string) => Lazy<OperationResult<string>>
 
 const getValue: GetValue = name => () => {
 	const element: NullableInput = document.querySelector(`[name=${name}]`)

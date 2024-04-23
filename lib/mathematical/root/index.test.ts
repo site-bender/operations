@@ -21,6 +21,20 @@ test("gets the indexed root of the radicand correctly", async () => {
 	expect(success).toEqual(right(some(6)))
 })
 
+test("gets the indexed root of the radicand correctly with an iput param", async () => {
+	const success = root({
+		radicand: {
+			operation: "fromParam",
+		},
+		index: 3,
+		operation: "root",
+		returns: "number",
+	})(some(216))
+
+	expect(isLeft(success)).toBeFalsy()
+	expect(success).toEqual(right(some(6)))
+})
+
 test("returns an error when radicand or index is an error", async () => {
 	const failure = root({
 		radicand: {

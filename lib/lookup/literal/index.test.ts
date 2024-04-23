@@ -2,7 +2,8 @@ import { expect, test } from "vitest"
 import { JSDOM } from "jsdom"
 import { LiteralLookupOperation } from "../../types"
 import lookup from "."
-import { left, right } from "@sitebender/fp/lib/either"
+import { right } from "@sitebender/fp/lib/either"
+import { none, some } from "@sitebender/fp/lib/option"
 
 const operation: LiteralLookupOperation = {
 	operation: "literalLookup",
@@ -34,9 +35,19 @@ test("returns a failure for a non-existant key", () => {
 		test: {},
 	}
 
-	expect(lookup(failOperation)()).toEqual(left([`Not a valid lookup key: red`]))
+	expect(lookup(failOperation)()).toEqual(right(none))
 })
 
 test("returns a value for a mapped key", () => {
-	expect(lookup(operation)()).toEqual(right("#f00"))
+	expect(lookup(operation)()).toEqual(right(some("#f00")))
+})
+
+test("returns a value for a mapped key from an input", () => {
+	const withParam: LiteralLookupOperation = {
+		...operation,
+		operand: {
+			operation: "fromParam",
+		},
+	}
+	expect(lookup(withParam)(some("red"))).toEqual(right(some("#f00")))
 })

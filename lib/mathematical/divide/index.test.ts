@@ -27,6 +27,25 @@ test("divides a divisor into a dividend", async () => {
 	expect(success).toEqual(right(some(4)))
 })
 
+test("divides a divisor into a dividend with an input", async () => {
+	const success = divide({
+		divisor: {
+			operation: "fromParam",
+		},
+		dividend: {
+			dividend: 12,
+			divisor: 2,
+			operation: "divide",
+			returns: "number",
+		},
+		operation: "divide",
+		returns: "number",
+	})(some(2))
+
+	expect(isLeft(success)).toBeFalsy()
+	expect(success).toEqual(right(some(3)))
+})
+
 test("returns an error when dividend and/or divisor is an error", async () => {
 	const failure = divide({
 		dividend: {

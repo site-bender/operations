@@ -1,47 +1,36 @@
 import type { LogicalNumericOperation } from "../../types"
 
-import {
-	allOf,
-	flatMap,
-	left,
-	right,
-	match,
-	Either,
-} from "@sitebender/fp/lib/either"
-import { Lazy } from "@sitebender/fp/lib/lazy"
-import { Option, isNone } from "@sitebender/fp/lib/option"
+import { flatMap, left, right } from "@sitebender/fp/lib/either"
+import { Option, none } from "@sitebender/fp/lib/option"
 import liftNumeric from "../../operations/liftNumerical"
 import makeCompare from "./makeCompare"
 import pipe from "@sitebender/fp/lib/functions/pipe"
+import { map } from "@sitebender/fp/lib/array"
+import * as OpResult from "../../operations/operationResult"
+import { OperationResult } from "../../operations/operationResult/types"
 
 export type CompareNumbers = (
 	operation: LogicalNumericOperation,
-) => Lazy<Either<Array<string>, number>>
+) => (input?: Option<number>) => OperationResult<number>
 
-const compareNumbers: CompareNumbers = operation => {
-	return pipe(
-		allOf(liftNumeric)([operation.operand, operation.test]),
-		pipe(
-			([operand, test]: Array<Option<number>>) =>
-				() => {
-					if (isNone(operand) || isNone(test)) {
-						return left([`${operation.operation} failed: missing value.`])
-					}
-
-					return pipe(
-						makeCompare(operation.operation)(operand.value)(test.value)(),
-						flatMap(result =>
-							result
-								? right(operand.value)
-								: left([
-										`${operand.value} is not ${operation.operation} ${test.value}.`,
-									]),
-						),
-					)
-				},
-			match(errors => () => left(errors)),
-		),
-	)
-}
+const compareNumbers: CompareNumbers =
+	operation =>
+	(input = none) => {
+		return pipe(
+			[operation.operand, operation.test],
+			map(liftNumeric(input)),
+			OpResult.sequence,
+			OpResult.mapEither(([operand, test]) => {
+				return pipe(
+					makeCompare(operation.operation)(operand)(test)(),
+					flatMap(result =>
+						result
+							? right(operand)
+							: left([`${operand} is not ${operation.operation} ${test}.`]),
+					),
+				)
+			}),
+		)
+	}
 
 export default compareNumbers

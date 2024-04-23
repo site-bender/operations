@@ -1,37 +1,32 @@
 import type { DivideOperation } from "../../types"
 
-import { Option, some, getOrElse } from "@sitebender/fp/lib/option"
-import {
-	Either,
-	allOf,
-	left,
-	match as matchEither,
-	right,
-} from "@sitebender/fp/lib/either"
-import liftNumeric from "../../operations/liftNumerical"
+import { Option, none, some } from "@sitebender/fp/lib/option"
+import { left, right } from "@sitebender/fp/lib/either"
 import pipe from "@sitebender/fp/lib/functions/pipe"
+import * as OpResult from "../../operations/operationResult"
+import liftNumeric from "../../operations/liftNumerical"
+import { map } from "@sitebender/fp/lib/array"
+import { OperationResult } from "../../operations/operationResult/types"
 
 export type Divide = (
 	operation: DivideOperation,
-) => () => Either<Array<string>, Option<number>>
+) => (input?: Option<number>) => OperationResult<number>
 
-const divide: Divide = op => {
-	return pipe(
-		allOf(liftNumeric)([op.dividend, op.divisor]),
-		pipe(
-			([maybeDividend, maybeDivisor]: Option<number>[]) =>
-				() => {
-					const dividend = getOrElse(() => 0)(maybeDividend)
-					const divisor = getOrElse(() => 1)(maybeDivisor)
-					const quotient = dividend / divisor
+const divide: Divide =
+	op =>
+	(input = none) => {
+		return pipe(
+			[op.dividend, op.divisor],
+			map(liftNumeric(input)),
+			OpResult.sequence,
+			OpResult.flatMap(([dividend, divisor]) => {
+				const quotient = dividend / divisor
 
-					return Number.isNaN(quotient) || quotient === Infinity
-						? left(["Invalid numeric operation: divide."])
-						: right(some(quotient))
-				},
-			matchEither(errors => () => left(errors)),
-		),
-	)
-}
+				return Number.isNaN(quotient) || quotient === Infinity
+					? left(["Invalid numeric operation: divide."])
+					: right(some(quotient))
+			}),
+		)
+	}
 
 export default divide

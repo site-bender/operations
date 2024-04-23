@@ -1,44 +1,45 @@
 import { e, o } from "@sitebender/fp"
 import { pipe } from "@sitebender/fp/lib/functions"
 import { TableLookupOperation } from "../../types"
-import { Either } from "@sitebender/fp/lib/either"
+import { Option, none, some } from "@sitebender/fp/lib/option"
 import getComparator from "../../logical/compareNumbers/getComparator"
 import liftNumeric from "../../operations/liftNumerical"
-import evaluateInjectableOperation from "../../operations/compose/evaluateInjectableOperation"
+import { OperationResult } from "../../operations/operationResult/types"
+import * as OpResult from "../../operations/operationResult"
+import liftInjectable from "../../operations/liftInjectable"
 
-type TableLookup = (op: TableLookupOperation) => () => Either<string[], number>
+type TableLookup = (
+	op: TableLookupOperation,
+) => (input?: Option<number>) => OperationResult<number>
 
-const tableLookup: TableLookup = op => {
-	//TODO this needs to go into @sitebender/fp
-	const toEither = pipe(
-		e.right<number>,
-		o.match(() => e.left(["missing test parameter"])),
-	)
-
-	return pipe(
-		evaluateInjectableOperation(op.operand)(),
-		e.flatMap(arg =>
-			pipe(
-				op.test.find(t =>
-					pipe(
-						liftNumeric(t.operands.test),
-						e.flatMap(toEither),
-						e.flatMap(test =>
-							pipe(
-								getComparator(t.operands.operation),
-								e.map(comparator => comparator(Number(arg))(test)),
+const tableLookup: TableLookup =
+	op =>
+	(input = none) => {
+		return pipe(
+			liftInjectable(input)(op.operand),
+			OpResult.flatMap(arg =>
+				pipe(
+					op.test.find(t =>
+						pipe(
+							liftNumeric(input)(t.operands.test),
+							e.flatMap(o.toEither(() => ["missing test parameter"])),
+							e.flatMap(test =>
+								pipe(
+									getComparator(t.operands.operation),
+									e.map(comparator => comparator(Number(arg))(test)),
+								),
 							),
+							e.getOrElse(() => false),
 						),
-						e.getOrElse(() => false),
+					),
+					o.fromNullable,
+					o.map(_ => e.right(some(_.value))),
+					o.getOrElse(() =>
+						e.left([`All lookup tests failed for value ${arg}`]),
 					),
 				),
-				o.fromNullable,
-				o.map(_ => e.right(_.value)),
-				o.getOrElse(() => e.left([`All lookup tests failed for value ${arg}`])),
 			),
-		),
-		result => () => result,
-	)
-}
+		)
+	}
 
 export default tableLookup

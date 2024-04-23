@@ -12,7 +12,7 @@ import subtract from "../../../mathematical/subtract"
 
 export type EvaluateNumericOperation = (
 	OperationMultiply: NumericOperation,
-) => () => Either<Array<string>, Option<number>>
+) => (input?: Option<number>) => Either<Array<string>, Option<number>>
 
 const evaluateNumericOperation: EvaluateNumericOperation = op => {
 	const error = (op: never) => () =>

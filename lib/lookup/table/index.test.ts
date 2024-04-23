@@ -3,6 +3,7 @@ import { JSDOM } from "jsdom"
 import { TableLookupOperation } from "../../types"
 import tableLookup from "."
 import { left, right } from "@sitebender/fp/lib/either"
+import { some } from "@sitebender/fp/lib/option"
 
 const operation: TableLookupOperation = {
 	operation: "tableLookup",
@@ -40,7 +41,7 @@ const operation: TableLookupOperation = {
 	returns: "string",
 }
 
-test("returns a failure for a non-existant key", () => {
+test("returns a value for a mapped key", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="100">
@@ -49,10 +50,10 @@ test("returns a failure for a non-existant key", () => {
 
 	globalThis.document = dom.window.document
 
-	expect(tableLookup(operation)()).toEqual(right(0.5))
+	expect(tableLookup(operation)()).toEqual(right(some(0.5)))
 })
 
-test("returns a value for a mapped key", () => {
+test("returns a failure for a non-existant key", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="1000">
@@ -64,4 +65,23 @@ test("returns a value for a mapped key", () => {
 	expect(tableLookup(operation)()).toEqual(
 		left(["All lookup tests failed for value 1000"]),
 	)
+})
+
+test("returns a value for a mapped key from an input", () => {
+	const dom = new JSDOM(
+		`<!DOCTYPE html>
+	<input name="foo" type="text" value="1000">
+`,
+	)
+
+	globalThis.document = dom.window.document
+
+	const withParam: TableLookupOperation = {
+		...operation,
+		operand: {
+			operation: "fromParam",
+		},
+	}
+
+	expect(tableLookup(withParam)(some(100))).toEqual(right(some(0.5)))
 })

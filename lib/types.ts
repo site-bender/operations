@@ -1,3 +1,10 @@
+export type ElementOf<T extends readonly unknown[]> =
+	T extends readonly (infer ET)[] ? ET : never
+
+export interface FromParamOperation {
+	readonly operation: "fromParam"
+}
+
 export interface OperationBase {
 	operation: string
 	returns: string
@@ -9,7 +16,7 @@ export interface NumericalBase extends OperationBase {
 }
 
 export interface AddOperation extends NumericalBase {
-	addends: Array<number | NumericOperation>
+	addends: Array<number | FromParamOperation | NumericOperation>
 	operation: "add"
 	returns: "number"
 }
@@ -21,20 +28,20 @@ export interface AndOperation extends OperationBase {
 }
 
 export interface DivideOperation extends NumericalBase {
-	dividend: number | NumericOperation
-	divisor: number | NumericOperation
+	dividend: number | FromParamOperation | NumericOperation
+	divisor: number | FromParamOperation | NumericOperation
 	operation: "divide"
 	returns: "number"
 }
 
 export interface MultiplyOperation extends NumericalBase {
-	multipliers: Array<number | NumericOperation>
+	multipliers: Array<number | FromParamOperation | NumericOperation>
 	operation: "multiply"
 	returns: "number"
 }
 
 export interface NegateOperation extends NumericalBase {
-	operand: number | NumericOperation
+	operand: number | FromParamOperation | NumericOperation
 	operation: "negate"
 	returns: "number"
 }
@@ -46,30 +53,30 @@ export interface OrOperation extends OperationBase {
 }
 
 export interface PowerOperation extends NumericalBase {
-	base: number | NumericOperation
-	exponent: number | NumericOperation
+	base: number | FromParamOperation | NumericOperation
+	exponent: number | FromParamOperation | NumericOperation
 	operation: "power"
 	returns: "number"
 }
 
 export interface RootOperation extends NumericalBase {
-	index: number | NumericOperation
+	index: number | FromParamOperation | NumericOperation
 	operation: "root"
-	radicand: number | NumericOperation
+	radicand: number | FromParamOperation | NumericOperation
 	returns: "number"
 }
 
 export interface SubtractOperation extends NumericalBase {
-	minuend: number | NumericOperation
+	minuend: number | FromParamOperation | NumericOperation
 	operation: "subtract"
 	returns: "number"
-	subtrahend: number | NumericOperation
+	subtrahend: number | FromParamOperation | NumericOperation
 }
 
 export interface NumericComparisonBase extends OperationBase {
-	operand: number | NumericOperation
+	operand: number | FromParamOperation | NumericOperation
 	returns: "boolean"
-	test: number | NumericOperation
+	test: number | FromParamOperation | NumericOperation
 }
 
 export interface UnequalToOperation extends NumericComparisonBase {
@@ -96,15 +103,22 @@ export interface NoMoreThanOperation extends NumericComparisonBase {
 	operation: "noMoreThan"
 }
 
-export type CastableValues = "integer" | "number" | "string" | "boolean"
+export const CastableValues = [
+	"integer",
+	"number",
+	"string",
+	"boolean",
+] as const
+
+export type CastableValue = ElementOf<typeof CastableValues>
 
 export interface LiteralLookupOperation extends OperationBase {
 	operation: "literalLookup"
-	operand: InjectableOperation
-	test: { [key: string]: Reify<LiteralLookupOperation["operand"]["returns"]> }
+	operand: FromParamOperation | InjectableOperation
+	test: { [key: string]: Reify<CastableValue> }
 }
 
-export interface TableLookupEntry<T extends CastableValues> {
+export interface TableLookupEntry<T extends CastableValue> {
 	operation: "tableValue"
 	operands: LogicalNumericOperation
 	returns: T
@@ -113,12 +127,12 @@ export interface TableLookupEntry<T extends CastableValues> {
 
 export interface TableLookupOperation extends OperationBase {
 	operation: "tableLookup"
-	operand: InjectableOperation
+	operand: FromParamOperation | InjectableOperation
 	test: Array<TableLookupEntry<"number">>
 }
 
 export interface InjectValueOperation extends OperationBase {
-	returns: CastableValues
+	returns: CastableValue
 	eager?: boolean | undefined
 	parse?: boolean | undefined
 }
@@ -171,7 +185,7 @@ export type Operation =
 	| InjectableOperation
 	| LookupOperation
 
-export type Reify<T extends CastableValues> = T extends "integer" | "number"
+export type Reify<T extends CastableValue> = T extends "integer" | "number"
 	? number
 	: T extends "string"
 		? string
