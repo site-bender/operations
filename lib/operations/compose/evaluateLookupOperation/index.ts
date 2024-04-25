@@ -1,18 +1,21 @@
 import type { CastableValue, LookupOperation, Reify } from "../../../types"
 
+import { Option } from "@sitebender/fp/lib/option"
 import { Either, left } from "@sitebender/fp/lib/either"
 import lookup from "../../../lookup/literal"
 
 export type EvaluateLookupOperation = (
 	OperationMultiply: LookupOperation,
-) => () => Either<Array<string>, Reify<CastableValue>>
+) => (
+	input: Option<Reify<CastableValue>>,
+) => Either<Array<string>, Option<Reify<CastableValue>>>
 
-const evaluateLookupOperation: EvaluateLookupOperation = op => {
+const evaluateLookupOperation: EvaluateLookupOperation = op => input => {
 	switch (op.operation) {
 		case "literalLookup":
-			return lookup(op)
+			return lookup(op)(input)
 		default:
-			return () => left([`Invalid numeric operation: ${op.operation}.`])
+			return left([`Invalid numeric operation: ${op.operation}.`])
 	}
 }
 
