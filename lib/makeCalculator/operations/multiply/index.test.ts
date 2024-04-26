@@ -36,7 +36,7 @@ test("multiplies a set of numbers together with an input param", async () => {
 	const success = multiply({
 		multipliers: [
 			{
-				operation: "getFromArgument",
+				operation: "injectFromArgument",
 			},
 			{
 				multipliers: [5, 6],

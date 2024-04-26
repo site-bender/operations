@@ -4,7 +4,7 @@ import { Option, none, some } from "@sitebender/fp/lib/option"
 import { right } from "@sitebender/fp/lib/either"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 import * as OpResult from "../../../old/operations/operationResult"
-import isFromParamOperation from "../../../old/utilities/isFromParamOperation"
+import isInjectFromArgumentOperation from "../../../old/utilities/isInjectFromArgumentOperation"
 import evaluateNumericOperation from "../../../old/operations/compose/evaluateNumericOperation"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
@@ -18,7 +18,7 @@ const negate: Negate =
 		const operand =
 			typeof op.operand === "number"
 				? right(some(op.operand))
-				: isFromParamOperation(op.operand)
+				: isInjectFromArgumentOperation(op.operand)
 					? right(input)
 					: evaluateNumericOperation(op.operand)(input)
 

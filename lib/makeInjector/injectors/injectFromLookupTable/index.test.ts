@@ -1,4 +1,4 @@
-import type { GetFromLookupTableOperation } from "../../../types"
+import type { InjectFromLookupTableOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { JSDOM } from "jsdom"
@@ -7,10 +7,10 @@ import left from "@sitebender/fp/lib/either/left"
 import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
 
-import getFromLookupTable from "."
+import injectFromLookupTable from "."
 
-const operation: GetFromLookupTableOperation = {
-	operation: "getFromLookupTable",
+const operation: InjectFromLookupTableOperation = {
+	operation: "injectFromLookupTable",
 	operand: {
 		operation: "formInput",
 		name: "foo",
@@ -45,7 +45,7 @@ const operation: GetFromLookupTableOperation = {
 	returns: "string",
 }
 
-test("[getFromLookupTable] (injectors) returns a value for a mapped key", () => {
+test("[injectFromLookupTable] (injectors) returns a value for a mapped key", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="100">
@@ -54,10 +54,10 @@ test("[getFromLookupTable] (injectors) returns a value for a mapped key", () => 
 
 	globalThis.document = dom.window.document
 
-	expect(getFromLookupTable(operation)()).toEqual(right(some(0.5)))
+	expect(injectFromLookupTable(operation)()).toEqual(right(some(0.5)))
 })
 
-test("[getFromLookupTable] (injectors) returns a failure for a non-existant key", () => {
+test("[injectFromLookupTable] (injectors) returns a failure for a non-existant key", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="1000">
@@ -66,12 +66,12 @@ test("[getFromLookupTable] (injectors) returns a failure for a non-existant key"
 
 	globalThis.document = dom.window.document
 
-	expect(getFromLookupTable(operation)()).toEqual(
+	expect(injectFromLookupTable(operation)()).toEqual(
 		left(["All lookup tests failed for value 1000"]),
 	)
 })
 
-test("[getFromLookupTable] (injectors) returns a value for a mapped key from an input", () => {
+test("[injectFromLookupTable] (injectors) returns a value for a mapped key from an input", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="1000">
@@ -80,12 +80,12 @@ test("[getFromLookupTable] (injectors) returns a value for a mapped key from an 
 
 	globalThis.document = dom.window.document
 
-	const withParam: GetFromLookupTableOperation = {
+	const withParam: InjectFromLookupTableOperation = {
 		...operation,
 		operand: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 	}
 
-	expect(getFromLookupTable(withParam)(some(100))).toEqual(right(some(0.5)))
+	expect(injectFromLookupTable(withParam)(some(100))).toEqual(right(some(0.5)))
 })

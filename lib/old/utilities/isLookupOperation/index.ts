@@ -6,7 +6,7 @@ const isLookupOperation = (
 	operation: Operation,
 ): operation is LookupOperation =>
 	isNotNullish(operation) &&
-	(operation.operation === "getFromMap" ||
-		operation.operation === "getFromLookupTable")
+	(operation.operation === "injectFromMap" ||
+		operation.operation === "injectFromLookupTable")
 
 export default isLookupOperation

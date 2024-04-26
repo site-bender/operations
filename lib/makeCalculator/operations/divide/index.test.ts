@@ -30,7 +30,7 @@ test("divides a divisor into a dividend", async () => {
 test("divides a divisor into a dividend with an input", async () => {
 	const success = divide({
 		divisor: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 		dividend: {
 			dividend: 12,

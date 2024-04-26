@@ -19,7 +19,7 @@ test("negates a positive number", async () => {
 test("negates a positive number from an input", async () => {
 	const success = negate({
 		operand: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 		operation: "negate",
 		returns: "number",

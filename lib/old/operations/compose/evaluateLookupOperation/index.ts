@@ -2,7 +2,7 @@ import type { CastableValue, LookupOperation, Reify } from "../../../../types"
 
 import { Option } from "@sitebender/fp/lib/option"
 import { Either, left } from "@sitebender/fp/lib/either"
-import lookup from "../../../../makeInjector/injectors/getFromMap"
+import lookup from "../../../../makeInjector/injectors/injectFromMap"
 
 export type EvaluateLookupOperation = (
 	OperationMultiply: LookupOperation,
@@ -12,7 +12,7 @@ export type EvaluateLookupOperation = (
 
 const evaluateLookupOperation: EvaluateLookupOperation = op => input => {
 	switch (op.operation) {
-		case "getFromMap":
+		case "injectFromMap":
 			return lookup(op)(input)
 		default:
 			return left([`Invalid numeric operation: ${op.operation}.`])

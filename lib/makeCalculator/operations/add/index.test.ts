@@ -36,7 +36,7 @@ test("adds a set of numbers together with an input", async () => {
 	const success = add({
 		addends: [
 			{
-				operation: "getFromArgument",
+				operation: "injectFromArgument",
 			},
 			{
 				addends: [5, 6],

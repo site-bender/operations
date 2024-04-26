@@ -24,7 +24,7 @@ test("gets the indexed root of the radicand correctly", async () => {
 test("gets the indexed root of the radicand correctly with an iput param", async () => {
 	const success = root({
 		radicand: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 		index: 3,
 		operation: "root",

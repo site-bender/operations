@@ -31,7 +31,7 @@ test("raises a base to an exponent correctly from an input", async () => {
 			returns: "number",
 		},
 		exponent: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 		operation: "power",
 		returns: "number",

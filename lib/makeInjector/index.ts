@@ -1,4 +1,4 @@
-// import getFromArgument from "./getFromArgument"
-import getFromFormInput from "./injectors/getFromFormInput"
+// import injectFromArgument from "./injectFromArgument"
+import injectFromFormInput from "./injectors/injectFromFormInput"
 
-export { /* getFromArgument, */ getFromFormInput }
+export { /* injectFromArgument, */ injectFromFormInput }

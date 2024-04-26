@@ -15,7 +15,7 @@ export type FromFormInput = (
 	input?: Option<Reify<CastableValue>>,
 ) => Lazy<OperationResult<Reify<CastableValue>>>
 
-const getFromFormInput: FromFormInput =
+const injectFromFormInput: FromFormInput =
 	op =>
 	(_ = none) => {
 		//TODO move to fp lib.
@@ -43,4 +43,4 @@ const getFromFormInput: FromFormInput =
 			)
 	}
 
-export default getFromFormInput
+export default injectFromFormInput

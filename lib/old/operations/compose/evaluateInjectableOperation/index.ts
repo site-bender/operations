@@ -6,7 +6,7 @@ import type {
 
 import { left } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
-import getFromFormInput from "../../../../makeInjector/injectors/getFromFormInput"
+import injectFromFormInput from "../../../../makeInjector/injectors/injectFromFormInput"
 import { OperationResult } from "../../operationResult/types"
 
 export type EvaluateInjectableOperation = (
@@ -18,7 +18,7 @@ export type EvaluateInjectableOperation = (
 const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
 	switch (op.operation) {
 		case "formInput":
-			return getFromFormInput(op)()
+			return injectFromFormInput(op)()
 		default:
 			return () => left([`Invalid unit operation ${op}`])
 	}

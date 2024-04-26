@@ -30,7 +30,7 @@ test("subtracts a subtrahend from a minuend", async () => {
 test("subtracts a subtrahend from a minuend with an input", async () => {
 	const success = subtract({
 		minuend: {
-			operation: "getFromArgument",
+			operation: "injectFromArgument",
 		},
 		subtrahend: {
 			minuend: 60,

@@ -1,7 +1,7 @@
 import * as e from "@sitebender/fp/lib/either"
 import * as o from "@sitebender/fp/lib/option"
 import { pipe } from "@sitebender/fp/lib/functions"
-import { GetFromLookupTableOperation } from "../../../types"
+import { InjectFromLookupTableOperation } from "../../../types"
 import { Option, none, some } from "@sitebender/fp/lib/option"
 import getComparator from "../../../old/logical/compareNumbers/getComparator"
 import liftNumeric from "../../../old/operations/liftNumerical"
@@ -10,10 +10,10 @@ import * as OpResult from "../../../old/operations/operationResult"
 import liftInjectable from "../../../old/operations/liftInjectable"
 
 type TableLookup = (
-	op: GetFromLookupTableOperation,
+	op: InjectFromLookupTableOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
-const getFromLookupTable: TableLookup =
+const injectFromLookupTable: TableLookup =
 	op =>
 	(input = none) => {
 		return pipe(
@@ -43,4 +43,4 @@ const getFromLookupTable: TableLookup =
 		)
 	}
 
-export default getFromLookupTable
+export default injectFromLookupTable
