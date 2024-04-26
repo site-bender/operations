@@ -1,8 +1,8 @@
 export type ElementOf<T extends readonly unknown[]> =
 	T extends readonly (infer ET)[] ? ET : never
 
-export interface FromParamOperation {
-	readonly operation: "fromParam"
+export interface InjectFromArgumentOperation {
+	readonly operation: "injectFromArgument"
 }
 
 export interface OperationBase {
@@ -16,7 +16,7 @@ export interface NumericalBase extends OperationBase {
 }
 
 export interface AddOperation extends NumericalBase {
-	addends: Array<number | FromParamOperation | NumericOperation>
+	addends: Array<number | InjectFromArgumentOperation | NumericOperation>
 	operation: "add"
 	returns: "number"
 }
@@ -28,20 +28,20 @@ export interface AndOperation extends OperationBase {
 }
 
 export interface DivideOperation extends NumericalBase {
-	dividend: number | FromParamOperation | NumericOperation
-	divisor: number | FromParamOperation | NumericOperation
+	dividend: number | InjectFromArgumentOperation | NumericOperation
+	divisor: number | InjectFromArgumentOperation | NumericOperation
 	operation: "divide"
 	returns: "number"
 }
 
 export interface MultiplyOperation extends NumericalBase {
-	multipliers: Array<number | FromParamOperation | NumericOperation>
+	multipliers: Array<number | InjectFromArgumentOperation | NumericOperation>
 	operation: "multiply"
 	returns: "number"
 }
 
 export interface NegateOperation extends NumericalBase {
-	operand: number | FromParamOperation | NumericOperation
+	operand: number | InjectFromArgumentOperation | NumericOperation
 	operation: "negate"
 	returns: "number"
 }
@@ -53,30 +53,30 @@ export interface OrOperation extends OperationBase {
 }
 
 export interface PowerOperation extends NumericalBase {
-	base: number | FromParamOperation | NumericOperation
-	exponent: number | FromParamOperation | NumericOperation
+	base: number | InjectFromArgumentOperation | NumericOperation
+	exponent: number | InjectFromArgumentOperation | NumericOperation
 	operation: "power"
 	returns: "number"
 }
 
 export interface RootOperation extends NumericalBase {
-	index: number | FromParamOperation | NumericOperation
+	index: number | InjectFromArgumentOperation | NumericOperation
 	operation: "root"
-	radicand: number | FromParamOperation | NumericOperation
+	radicand: number | InjectFromArgumentOperation | NumericOperation
 	returns: "number"
 }
 
 export interface SubtractOperation extends NumericalBase {
-	minuend: number | FromParamOperation | NumericOperation
+	minuend: number | InjectFromArgumentOperation | NumericOperation
 	operation: "subtract"
 	returns: "number"
-	subtrahend: number | FromParamOperation | NumericOperation
+	subtrahend: number | InjectFromArgumentOperation | NumericOperation
 }
 
 export interface NumericComparisonBase extends OperationBase {
-	operand: number | FromParamOperation | NumericOperation
+	operand: number | InjectFromArgumentOperation | NumericOperation
 	returns: "boolean"
-	test: number | FromParamOperation | NumericOperation
+	test: number | InjectFromArgumentOperation | NumericOperation
 }
 
 export interface UnequalToOperation extends NumericComparisonBase {
@@ -112,9 +112,9 @@ export const CastableValues = [
 
 export type CastableValue = ElementOf<typeof CastableValues>
 
-export interface LiteralLookupOperation extends OperationBase {
-	operation: "literalLookup"
-	operand: FromParamOperation | InjectableOperation
+export interface InjectFromMapOperation extends OperationBase {
+	operation: "injectFromMap"
+	operand: InjectFromArgumentOperation | InjectableOperation
 	test: { [key: string]: Reify<CastableValue> }
 }
 
@@ -125,9 +125,9 @@ export interface TableLookupEntry<T extends CastableValue> {
 	value: Reify<T>
 }
 
-export interface TableLookupOperation extends OperationBase {
-	operation: "tableLookup"
-	operand: FromParamOperation | InjectableOperation
+export interface InjectFromLookupTableOperation extends OperationBase {
+	operation: "injectFromLookupTable"
+	operand: InjectFromArgumentOperation | InjectableOperation
 	test: Array<TableLookupEntry<"number">>
 }
 
@@ -176,7 +176,9 @@ export type InjectableOperation =
 	| LocalStorageOperation
 	| SessionStorageOperation
 
-export type LookupOperation = LiteralLookupOperation | TableLookupOperation
+export type LookupOperation =
+	| InjectFromMapOperation
+	| InjectFromLookupTableOperation
 
 export type Operation =
 	| NumericOperation

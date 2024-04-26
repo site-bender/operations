@@ -38,7 +38,7 @@ const lessThan = op => n => {
 
 	const o =
 		typeof operand === "object"
-			? operand.operation === "fromParam"
+			? operand.operation === "injectFromArgument"
 				? n
 				: composeOperations(operand)(n)
 			: operand
@@ -54,7 +54,7 @@ const moreThan = op => n => {
 
 	const o =
 		typeof operand === "object"
-			? operand.operation === "fromParam"
+			? operand.operation === "injectFromArgument"
 				? n
 				: composeOperations(operand)(n)
 			: operand
