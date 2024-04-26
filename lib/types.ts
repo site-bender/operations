@@ -2,7 +2,7 @@ export type ElementOf<T extends readonly unknown[]> =
 	T extends readonly (infer ET)[] ? ET : never
 
 export interface FromParamOperation {
-	readonly operation: "fromParam"
+	readonly operation: "getFromArgument"
 }
 
 export interface OperationBase {
@@ -112,8 +112,8 @@ export const CastableValues = [
 
 export type CastableValue = ElementOf<typeof CastableValues>
 
-export interface LiteralLookupOperation extends OperationBase {
-	operation: "literalLookup"
+export interface GetFromMapOperation extends OperationBase {
+	operation: "getFromMap"
 	operand: FromParamOperation | InjectableOperation
 	test: { [key: string]: Reify<CastableValue> }
 }
@@ -125,8 +125,8 @@ export interface TableLookupEntry<T extends CastableValue> {
 	value: Reify<T>
 }
 
-export interface TableLookupOperation extends OperationBase {
-	operation: "tableLookup"
+export interface GetFromLookupTableOperation extends OperationBase {
+	operation: "getFromLookupTable"
 	operand: FromParamOperation | InjectableOperation
 	test: Array<TableLookupEntry<"number">>
 }
@@ -176,7 +176,7 @@ export type InjectableOperation =
 	| LocalStorageOperation
 	| SessionStorageOperation
 
-export type LookupOperation = LiteralLookupOperation | TableLookupOperation
+export type LookupOperation = GetFromMapOperation | GetFromLookupTableOperation
 
 export type Operation =
 	| NumericOperation
