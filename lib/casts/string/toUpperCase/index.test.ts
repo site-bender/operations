@@ -5,14 +5,14 @@ import some from "@sitebender/fp/lib/option/some"
 
 import toUpperCase from "."
 
-test("[toArray] (casts::vector) casts string to Some(UpperCase)", () => {
+test("[toUpperCase] (casts::string) casts string to Some(UpperCase)", () => {
 	const s = "oh noes!"
 
 	expect(toUpperCase(s)).toEqual(some("OH NOES!"))
 	expect(toUpperCase("")).toEqual(some(""))
 })
 
-test("[toArray] (casts::vector) casts none when argument not a string", () => {
+test("[toUpperCase] (casts::string) casts none when argument not a string", () => {
 	// @ts-expect-error
 	expect(toUpperCase(undefined)).toEqual(none)
 	// @ts-expect-error
