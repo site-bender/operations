@@ -12,7 +12,7 @@ const AddOperation: AddOperationF = config => {
 				...rest,
 				addends,
 				operation: "add",
-				returns: "number",
+				_tag: "numeric-operation",
 			})
 		: none
 }

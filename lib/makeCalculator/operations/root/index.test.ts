@@ -8,14 +8,14 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("gets the indexed root of the radicand correctly", async () => {
 	const success = root({
+		_tag: "numeric-operation",
 		radicand: {
+			_tag: "numeric-operation",
 			addends: [200, 16].map(makeNumericConstant),
 			operation: "add",
-			returns: "number",
 		},
 		index: makeNumericConstant(3),
 		operation: "root",
-		returns: "number",
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -24,12 +24,12 @@ test("gets the indexed root of the radicand correctly", async () => {
 
 test("gets the indexed root of the radicand correctly with an iput param", async () => {
 	const success = root({
+		_tag: "numeric-operation",
 		radicand: {
 			operation: "injectFromArgument",
 		},
 		index: makeNumericConstant(3),
 		operation: "root",
-		returns: "number",
 	})(some(216))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -38,18 +38,18 @@ test("gets the indexed root of the radicand correctly with an iput param", async
 
 test("returns an error when radicand or index is an error", async () => {
 	const failure = root({
+		_tag: "numeric-operation",
 		radicand: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(6),
 			operation: "divide",
-			returns: "number",
 		},
 		index: {
 			operation: "fail",
 			returns: "error",
 		} as unknown as RootOperation,
 		operation: "root",
-		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()

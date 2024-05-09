@@ -8,20 +8,20 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({
+		_tag: "numeric-operation",
 		minuend: {
+			_tag: "numeric-operation",
 			minuend: makeNumericConstant(120),
 			subtrahend: makeNumericConstant(60),
 			operation: "subtract",
-			returns: "number",
 		},
 		subtrahend: {
+			_tag: "numeric-operation",
 			minuend: makeNumericConstant(60),
 			subtrahend: makeNumericConstant(30),
 			operation: "subtract",
-			returns: "number",
 		},
 		operation: "subtract",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(success)).toBeFalsy()
@@ -30,17 +30,17 @@ test("subtracts a subtrahend from a minuend", async () => {
 
 test("subtracts a subtrahend from a minuend with an input", async () => {
 	const success = subtract({
+		_tag: "numeric-operation",
 		minuend: {
 			operation: "injectFromArgument",
 		},
 		subtrahend: {
+			_tag: "numeric-operation",
 			minuend: makeNumericConstant(60),
 			subtrahend: makeNumericConstant(30),
 			operation: "subtract",
-			returns: "number",
 		},
 		operation: "subtract",
-		returns: "number",
 	})(some(120))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -49,18 +49,18 @@ test("subtracts a subtrahend from a minuend with an input", async () => {
 
 test("returns an error when minuend and/or subtrahend is an error", async () => {
 	const failure = subtract({
+		_tag: "numeric-operation",
 		minuend: {
 			operation: "fail",
 			returns: "error",
 		} as unknown as SubtractOperation,
 		subtrahend: {
+			_tag: "numeric-operation",
 			minuend: makeNumericConstant(12),
 			subtrahend: makeNumericConstant(0),
 			operation: "subtract",
-			returns: "number",
 		},
 		operation: "subtract",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(failure)).toBeTruthy()

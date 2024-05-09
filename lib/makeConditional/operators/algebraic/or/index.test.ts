@@ -8,14 +8,14 @@ test("returns a true wrapped in a right when one operation works", async () => {
 	const success = or({
 		operands: [
 			{
+				_tag: "numeric-operation",
 				addends: [7, 8, 9].map(makeNumericConstant),
 				operation: "add",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				addends: [5, 6].map(makeNumericConstant),
 				operation: "add",
-				returns: "number",
 			},
 			{
 				operand: makeNumericConstant(5),

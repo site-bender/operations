@@ -1,22 +1,72 @@
 export type ElementOf<T extends readonly unknown[]> =
 	T extends readonly (infer ET)[] ? ET : never
 
-export interface NumericConstant {
-	_tag: "constant"
+interface NumericBase {
+	_tag: "numeric-operation"
+	precision?: NumericConstant
+}
+
+export interface NumericConstant extends NumericBase {
+	operation: "constant"
 	value: number
 }
 
-export interface StringConstant {
-	_tag: "constant"
-	value: string
+export interface AddOperation extends NumericBase {
+	addends: Array<InjectFromArgumentOperation | NumericOperation>
+	operation: "add"
 }
 
-export interface BooleanConstant {
-	_tag: "constant"
-	value: boolean
+export interface DivideOperation extends NumericBase {
+	dividend: InjectFromArgumentOperation | NumericOperation
+	divisor: InjectFromArgumentOperation | NumericOperation
+	operation: "divide"
 }
 
-export type Constant = NumericConstant | BooleanConstant | StringConstant
+export interface MultiplyOperation extends NumericBase {
+	multipliers: Array<InjectFromArgumentOperation | NumericOperation>
+	operation: "multiply"
+}
+
+export interface NegateOperation extends NumericBase {
+	operand: InjectFromArgumentOperation | NumericOperation
+	operation: "negate"
+}
+
+export interface PowerOperation extends NumericBase {
+	base: InjectFromArgumentOperation | NumericOperation
+	exponent: InjectFromArgumentOperation | NumericOperation
+	operation: "power"
+}
+
+export interface RootOperation extends NumericBase {
+	index: InjectFromArgumentOperation | NumericOperation
+	operation: "root"
+	radicand: InjectFromArgumentOperation | NumericOperation
+}
+
+export interface SubtractOperation extends NumericBase {
+	minuend: InjectFromArgumentOperation | NumericOperation
+	operation: "subtract"
+	subtrahend: InjectFromArgumentOperation | NumericOperation
+}
+
+export interface TruncateOperation extends NumericBase {
+	operation: "truncate"
+	method: "round" | "ceiling" | "floor" | "truncate"
+	precision?: NumericConstant
+	operand: NumericOperation
+}
+
+export type NumericOperation =
+	| NumericConstant
+	| AddOperation
+	| DivideOperation
+	| MultiplyOperation
+	| NegateOperation
+	| PowerOperation
+	| RootOperation
+	| SubtractOperation
+	| TruncateOperation
 
 //=======================================================================
 
@@ -29,71 +79,16 @@ export interface OperationBase {
 	returns: string
 }
 
-export interface NumericalBase extends OperationBase {
-	precision?: NumericConstant | undefined
-	truncation?: "ceiling" | "floor" | "round" | "truncate" | undefined
-}
-
-export interface AddOperation extends NumericalBase {
-	addends: Array<
-		NumericConstant | InjectFromArgumentOperation | NumericOperation
-	>
-	operation: "add"
-	returns: "number"
-}
-
 export interface AndOperation extends OperationBase {
 	operands: Array<Operation>
 	operation: "and"
 	returns: "boolean"
 }
 
-export interface DivideOperation extends NumericalBase {
-	dividend: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	divisor: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	operation: "divide"
-	returns: "number"
-}
-
-export interface MultiplyOperation extends NumericalBase {
-	multipliers: Array<
-		NumericConstant | InjectFromArgumentOperation | NumericOperation
-	>
-	operation: "multiply"
-	returns: "number"
-}
-
-export interface NegateOperation extends NumericalBase {
-	operand: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	operation: "negate"
-	returns: "number"
-}
-
 export interface OrOperation extends OperationBase {
 	operands: Array<Operation>
 	operation: "or"
 	returns: "boolean"
-}
-
-export interface PowerOperation extends NumericalBase {
-	base: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	exponent: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	operation: "power"
-	returns: "number"
-}
-
-export interface RootOperation extends NumericalBase {
-	index: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	operation: "root"
-	radicand: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	returns: "number"
-}
-
-export interface SubtractOperation extends NumericalBase {
-	minuend: NumericConstant | InjectFromArgumentOperation | NumericOperation
-	operation: "subtract"
-	returns: "number"
-	subtrahend: NumericConstant | InjectFromArgumentOperation | NumericOperation
 }
 
 export interface NumericComparisonBase extends OperationBase {
@@ -174,15 +169,6 @@ export interface SessionStorageOperation extends InjectValueOperation {
 	key: string
 	operation: "sessionStorage"
 }
-
-export type NumericOperation =
-	| AddOperation
-	| DivideOperation
-	| MultiplyOperation
-	| NegateOperation
-	| PowerOperation
-	| RootOperation
-	| SubtractOperation
 
 export type LogicalNumericOperation =
 	| LessThanOperation

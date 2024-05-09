@@ -8,29 +8,29 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("adds a set of numbers together", async () => {
 	const success = add({
+		_tag: "numeric-operation",
 		addends: [
 			{
 				addends: [makeNumericConstant(3), makeNumericConstant(4)],
 				operation: "add",
-				returns: "number",
+				_tag: "numeric-operation",
 			},
 			{
+				_tag: "numeric-operation",
 				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				addends: [
 					makeNumericConstant(7),
 					makeNumericConstant(8),
 					makeNumericConstant(9),
 				],
 				operation: "add",
-				returns: "number",
 			},
 		],
 		operation: "add",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(success)).toBeFalsy()
@@ -39,27 +39,27 @@ test("adds a set of numbers together", async () => {
 
 test("adds a set of numbers together with an input", async () => {
 	const success = add({
+		_tag: "numeric-operation",
 		addends: [
 			{
 				operation: "injectFromArgument",
 			},
 			{
+				_tag: "numeric-operation",
 				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				addends: [
 					makeNumericConstant(7),
 					makeNumericConstant(8),
 					makeNumericConstant(9),
 				],
 				operation: "add",
-				returns: "number",
 			},
 		],
 		operation: "add",
-		returns: "number",
 	})(some(3))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -68,15 +68,16 @@ test("adds a set of numbers together with an input", async () => {
 
 test("returns an error when one or more addends is an error", async () => {
 	const failure = add({
+		_tag: "numeric-operation",
 		addends: [
 			{
 				operation: "fail",
 				returns: "error",
 			} as unknown as AddOperation,
 			{
+				_tag: "numeric-operation",
 				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
-				returns: "number",
 			},
 			{
 				operation: "fail",
@@ -84,7 +85,6 @@ test("returns an error when one or more addends is an error", async () => {
 			} as unknown as AddOperation,
 		],
 		operation: "add",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(failure)).toBeTruthy()

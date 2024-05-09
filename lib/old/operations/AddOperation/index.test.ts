@@ -11,24 +11,22 @@ test("creates Some<AddOperation> from a config object", () => {
 	const op2 = AddOperation({
 		addends: [1, 2, 3].map(makeNumericConstant),
 		precision: makeNumericConstant(2),
-		truncation: "round",
 	})
 
 	expect(op1).toStrictEqual(
 		some({
+			_tag: "numeric-operation",
 			addends: [1, 2, 3].map(makeNumericConstant),
 			operation: "add",
-			returns: "number",
 		}),
 	)
 
 	expect(op2).toStrictEqual(
 		some({
+			_tag: "numeric-operation",
 			addends: [1, 2, 3].map(makeNumericConstant),
 			operation: "add",
 			precision: makeNumericConstant(2),
-			returns: "number",
-			truncation: "round",
 		}),
 	)
 })

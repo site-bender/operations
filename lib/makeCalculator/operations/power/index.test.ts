@@ -8,15 +8,15 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({
+		_tag: "numeric-operation",
 		base: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(20),
 			operation: "divide",
-			returns: "number",
 		},
 		exponent: makeNumericConstant(3),
 		operation: "power",
-		returns: "number",
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -25,17 +25,17 @@ test("raises a base to an exponent correctly", async () => {
 
 test("raises a base to an exponent correctly from an input", async () => {
 	const success = power({
+		_tag: "numeric-operation",
 		base: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(20),
 			operation: "divide",
-			returns: "number",
 		},
 		exponent: {
 			operation: "injectFromArgument",
 		},
 		operation: "power",
-		returns: "number",
 	})(some(3))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -44,18 +44,18 @@ test("raises a base to an exponent correctly from an input", async () => {
 
 test("returns an error when base or exponent is an error", async () => {
 	const failure = power({
+		_tag: "numeric-operation",
 		base: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(0),
 			operation: "divide",
-			returns: "number",
 		},
 		exponent: {
 			operation: "fail",
 			returns: "error",
 		} as unknown as PowerOperation,
 		operation: "power",
-		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()

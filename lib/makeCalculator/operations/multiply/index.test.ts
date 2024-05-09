@@ -8,25 +8,25 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({
+		_tag: "numeric-operation",
 		multipliers: [
 			{
+				_tag: "numeric-operation",
 				multipliers: [3, 4].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				multipliers: [7, 8, 9].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 		],
 		operation: "multiply",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(success)).toBeFalsy()
@@ -35,23 +35,23 @@ test("multiplies a set of numbers together", async () => {
 
 test("multiplies a set of numbers together with an input param", async () => {
 	const success = multiply({
+		_tag: "numeric-operation",
 		multipliers: [
 			{
 				operation: "injectFromArgument",
 			},
 			{
+				_tag: "numeric-operation",
 				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 			{
+				_tag: "numeric-operation",
 				multipliers: [7, 8, 9].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 		],
 		operation: "multiply",
-		returns: "number",
 	})(some(3))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -60,15 +60,16 @@ test("multiplies a set of numbers together with an input param", async () => {
 
 test("returns an error when one or more multipliers is an error", async () => {
 	const failure = multiply({
+		_tag: "numeric-operation",
 		multipliers: [
 			{
 				operation: "fail",
 				returns: "error",
 			} as unknown as MultiplyOperation,
 			{
+				_tag: "numeric-operation",
 				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
-				returns: "number",
 			},
 			{
 				operation: "fail",
@@ -76,7 +77,6 @@ test("returns an error when one or more multipliers is an error", async () => {
 			} as unknown as MultiplyOperation,
 		],
 		operation: "multiply",
-		returns: "number",
 	})(none)
 
 	expect(isLeft(failure)).toBeTruthy()

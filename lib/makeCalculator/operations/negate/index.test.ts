@@ -8,9 +8,9 @@ import makeNumericConstant from "../../../constants/numericConstant"
 
 test("negates a positive number", async () => {
 	const success = negate({
+		_tag: "numeric-operation",
 		operand: makeNumericConstant(99),
 		operation: "negate",
-		returns: "number",
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -19,11 +19,11 @@ test("negates a positive number", async () => {
 
 test("negates a positive number from an input", async () => {
 	const success = negate({
+		_tag: "numeric-operation",
 		operand: {
 			operation: "injectFromArgument",
 		},
 		operation: "negate",
-		returns: "number",
 	})(some(99))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -32,9 +32,9 @@ test("negates a positive number from an input", async () => {
 
 test("returns a positive number when the operand is negative", async () => {
 	const success = negate({
+		_tag: "numeric-operation",
 		operand: makeNumericConstant(-99),
 		operation: "negate",
-		returns: "number",
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -43,12 +43,12 @@ test("returns a positive number when the operand is negative", async () => {
 
 test("returns an error when the operand is an error", async () => {
 	const failure = negate({
+		_tag: "numeric-operation",
 		operand: {
 			operation: "fail",
 			returns: "error",
 		} as unknown as NegateOperation,
 		operation: "negate",
-		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()

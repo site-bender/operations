@@ -1,7 +1,8 @@
-import { type NumericConstant as makeNumericConstant } from "../../types"
+import { type NumericConstant } from "../../types"
 
-const makeNumericConstant = (value: number): makeNumericConstant => ({
-	_tag: "constant",
+const makeNumericConstant = (value: number): NumericConstant => ({
+	_tag: "numeric-operation",
+	operation: "constant",
 	value,
 })
 

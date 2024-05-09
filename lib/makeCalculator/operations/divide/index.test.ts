@@ -7,20 +7,20 @@ import { DivideOperation } from "../../../types"
 
 test("divides a divisor into a dividend", async () => {
 	const success = divide({
+		_tag: "numeric-operation",
 		dividend: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(5),
 			operation: "divide",
-			returns: "number",
 		},
 		divisor: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(12),
 			divisor: makeNumericConstant(2),
 			operation: "divide",
-			returns: "number",
 		},
 		operation: "divide",
-		returns: "number",
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -29,17 +29,17 @@ test("divides a divisor into a dividend", async () => {
 
 test("divides a divisor into a dividend with an input", async () => {
 	const success = divide({
+		_tag: "numeric-operation",
 		divisor: {
 			operation: "injectFromArgument",
 		},
 		dividend: {
+			_tag: "numeric-operation",
 			dividend: makeNumericConstant(120),
 			divisor: makeNumericConstant(20),
 			operation: "divide",
-			returns: "number",
 		},
 		operation: "divide",
-		returns: "number",
 	})(some(2))
 
 	expect(isLeft(success)).toBeFalsy()
@@ -48,6 +48,7 @@ test("divides a divisor into a dividend with an input", async () => {
 
 test("returns an error when dividend and/or divisor is an error", async () => {
 	const failure = divide({
+		_tag: "numeric-operation",
 		dividend: {
 			operation: "fail",
 			returns: "error",
@@ -57,7 +58,6 @@ test("returns an error when dividend and/or divisor is an error", async () => {
 			returns: "error",
 		} as unknown as DivideOperation,
 		operation: "divide",
-		returns: "number",
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()

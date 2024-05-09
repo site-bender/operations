@@ -1,7 +1,7 @@
 import type { NumericOperation } from "../../../../types"
 
-import { Either, left } from "@sitebender/fp/lib/either"
-import { Option } from "@sitebender/fp/lib/option"
+import { Either, left, right } from "@sitebender/fp/lib/either"
+import { Option, some } from "@sitebender/fp/lib/option"
 import add from "../../../../makeCalculator/operations/add"
 import divide from "../../../../makeCalculator/operations/divide"
 import multiply from "../../../../makeCalculator/operations/multiply"
@@ -9,6 +9,7 @@ import negate from "../../../../makeCalculator/operations/negate"
 import power from "../../../../makeCalculator/operations/power"
 import root from "../../../../makeCalculator/operations/root"
 import subtract from "../../../../makeCalculator/operations/subtract"
+import { truncate } from "../../../utilities"
 
 export type EvaluateNumericOperation = (
 	OperationMultiply: NumericOperation,
@@ -34,6 +35,10 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 			return root(op)
 		case "subtract":
 			return subtract(op)
+		case "truncate":
+			return () => truncate(op)
+		case "constant":
+			return () => right(some(op.value))
 		default:
 			return error(op)
 	}
