@@ -1,25 +1,30 @@
-import type { AddOperation } from "../../../types"
+import { type AddOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import add from "."
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("adds a set of numbers together", async () => {
 	const success = add({
 		addends: [
 			{
-				addends: [3, 4],
+				addends: [makeNumericConstant(3), makeNumericConstant(4)],
 				operation: "add",
 				returns: "number",
 			},
 			{
-				addends: [5, 6],
+				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
 				returns: "number",
 			},
 			{
-				addends: [7, 8, 9],
+				addends: [
+					makeNumericConstant(7),
+					makeNumericConstant(8),
+					makeNumericConstant(9),
+				],
 				operation: "add",
 				returns: "number",
 			},
@@ -39,12 +44,16 @@ test("adds a set of numbers together with an input", async () => {
 				operation: "injectFromArgument",
 			},
 			{
-				addends: [5, 6],
+				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
 				returns: "number",
 			},
 			{
-				addends: [7, 8, 9],
+				addends: [
+					makeNumericConstant(7),
+					makeNumericConstant(8),
+					makeNumericConstant(9),
+				],
 				operation: "add",
 				returns: "number",
 			},
@@ -65,7 +74,7 @@ test("returns an error when one or more addends is an error", async () => {
 				returns: "error",
 			} as unknown as AddOperation,
 			{
-				addends: [5, 6],
+				addends: [makeNumericConstant(5), makeNumericConstant(6)],
 				operation: "add",
 				returns: "number",
 			},

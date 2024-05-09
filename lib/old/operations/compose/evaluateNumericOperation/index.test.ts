@@ -3,10 +3,11 @@ import { expect, test } from "vitest"
 
 import evaluateNumericOperation from "."
 import { some } from "@sitebender/fp/lib/option"
+import makeNumericConstant from "../../../../constants/numericConstant"
 
 test("works for add operations", async () => {
 	const result = evaluateNumericOperation({
-		addends: [2, 3],
+		addends: [makeNumericConstant(2), makeNumericConstant(3)],
 		operation: "add",
 		returns: "number",
 	})
@@ -16,8 +17,8 @@ test("works for add operations", async () => {
 
 test("works for divide operations", async () => {
 	const result = evaluateNumericOperation({
-		dividend: 12,
-		divisor: 6,
+		dividend: makeNumericConstant(12),
+		divisor: makeNumericConstant(6),
 		operation: "divide",
 		returns: "number",
 	})
@@ -27,7 +28,11 @@ test("works for divide operations", async () => {
 
 test("works for multiply operations", async () => {
 	const result = evaluateNumericOperation({
-		multipliers: [2, 3, 4],
+		multipliers: [
+			makeNumericConstant(2),
+			makeNumericConstant(3),
+			makeNumericConstant(4),
+		],
 		operation: "multiply",
 		returns: "number",
 	})
@@ -37,7 +42,7 @@ test("works for multiply operations", async () => {
 
 test("works for negate operations", async () => {
 	const result = evaluateNumericOperation({
-		operand: 5,
+		operand: makeNumericConstant(5),
 		operation: "negate",
 		returns: "number",
 	})
@@ -47,8 +52,8 @@ test("works for negate operations", async () => {
 
 test("works for power operations", async () => {
 	const result = evaluateNumericOperation({
-		base: 2,
-		exponent: 5,
+		base: makeNumericConstant(2),
+		exponent: makeNumericConstant(5),
 		operation: "power",
 		returns: "number",
 	})
@@ -58,9 +63,9 @@ test("works for power operations", async () => {
 
 test("works for root operations", async () => {
 	const result = evaluateNumericOperation({
-		index: 3,
+		index: makeNumericConstant(3),
 		operation: "root",
-		radicand: 64,
+		radicand: makeNumericConstant(64),
 		returns: "number",
 		truncation: "round",
 	})
@@ -70,10 +75,10 @@ test("works for root operations", async () => {
 
 test("works for subtract operations", async () => {
 	const result = evaluateNumericOperation({
-		minuend: 10,
+		minuend: makeNumericConstant(10),
 		operation: "subtract",
 		returns: "number",
-		subtrahend: 18,
+		subtrahend: makeNumericConstant(18),
 	})
 
 	expect(result()).toStrictEqual(right(some(-8)))
@@ -81,7 +86,7 @@ test("works for subtract operations", async () => {
 
 test("works for unrecognized operations", async () => {
 	const result = evaluateNumericOperation({
-		addends: [2, 3],
+		addends: [makeNumericConstant(2), makeNumericConstant(3)],
 		// @ts-expect-error
 		operation: "other",
 		returns: "number",

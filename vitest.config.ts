@@ -10,6 +10,8 @@ export default defineConfig({
 				"lib/constants.ts",
 				"lib/test**",
 				"lib/makeConditional/operators/algebraic/index.ts",
+				"lib/makeCalculator/index.ts",
+				"lib/makeInjector/index.ts",
 				"lib/old/**",
 			],
 			include: ["lib/**"],

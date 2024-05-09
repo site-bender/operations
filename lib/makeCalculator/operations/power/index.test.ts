@@ -1,19 +1,20 @@
-import type { PowerOperation } from "../../../types"
+import { type PowerOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import power from "."
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({
 		base: {
-			dividend: 120,
-			divisor: 20,
+			dividend: makeNumericConstant(120),
+			divisor: makeNumericConstant(20),
 			operation: "divide",
 			returns: "number",
 		},
-		exponent: 3,
+		exponent: makeNumericConstant(3),
 		operation: "power",
 		returns: "number",
 	})()
@@ -25,8 +26,8 @@ test("raises a base to an exponent correctly", async () => {
 test("raises a base to an exponent correctly from an input", async () => {
 	const success = power({
 		base: {
-			dividend: 120,
-			divisor: 20,
+			dividend: makeNumericConstant(120),
+			divisor: makeNumericConstant(20),
 			operation: "divide",
 			returns: "number",
 		},
@@ -44,8 +45,8 @@ test("raises a base to an exponent correctly from an input", async () => {
 test("returns an error when base or exponent is an error", async () => {
 	const failure = power({
 		base: {
-			dividend: 120,
-			divisor: 0,
+			dividend: makeNumericConstant(120),
+			divisor: makeNumericConstant(0),
 			operation: "divide",
 			returns: "number",
 		},

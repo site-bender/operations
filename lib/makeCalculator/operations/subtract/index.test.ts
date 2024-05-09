@@ -1,21 +1,22 @@
-import type { SubtractOperation } from "../../../types"
+import { type SubtractOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import subtract from "."
 import { none, some } from "@sitebender/fp/lib/option"
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({
 		minuend: {
-			minuend: 120,
-			subtrahend: 60,
+			minuend: makeNumericConstant(120),
+			subtrahend: makeNumericConstant(60),
 			operation: "subtract",
 			returns: "number",
 		},
 		subtrahend: {
-			minuend: 60,
-			subtrahend: 30,
+			minuend: makeNumericConstant(60),
+			subtrahend: makeNumericConstant(30),
 			operation: "subtract",
 			returns: "number",
 		},
@@ -33,8 +34,8 @@ test("subtracts a subtrahend from a minuend with an input", async () => {
 			operation: "injectFromArgument",
 		},
 		subtrahend: {
-			minuend: 60,
-			subtrahend: 30,
+			minuend: makeNumericConstant(60),
+			subtrahend: makeNumericConstant(30),
 			operation: "subtract",
 			returns: "number",
 		},
@@ -53,8 +54,8 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 			returns: "error",
 		} as unknown as SubtractOperation,
 		subtrahend: {
-			minuend: 12,
-			subtrahend: 0,
+			minuend: makeNumericConstant(12),
+			subtrahend: makeNumericConstant(0),
 			operation: "subtract",
 			returns: "number",
 		},

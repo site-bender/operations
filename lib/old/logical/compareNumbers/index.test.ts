@@ -3,13 +3,14 @@ import { expect, test } from "vitest"
 
 import compareNumbers from "."
 import { Some } from "@sitebender/fp/lib/option"
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("lessThan returns the value when it is less than the test", async () => {
 	const success = compareNumbers({
-		operand: 5,
+		operand: makeNumericConstant(5),
 		operation: "lessThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -18,10 +19,10 @@ test("lessThan returns the value when it is less than the test", async () => {
 
 test("lessThan returns an error when it is not less than the test", async () => {
 	const failure = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "lessThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
@@ -32,10 +33,10 @@ test("lessThan returns an error when it is not less than the test", async () => 
 
 test("moreThan returns the value when it is greater than the test", async () => {
 	const success = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "moreThan",
 		returns: "boolean",
-		test: 5,
+		test: makeNumericConstant(5),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -44,10 +45,10 @@ test("moreThan returns the value when it is greater than the test", async () => 
 
 test("moreThan returns an error when it is not greater than the test", async () => {
 	const failure = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "moreThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
@@ -58,10 +59,10 @@ test("moreThan returns an error when it is not greater than the test", async () 
 
 test("noMoreThan returns the value when it is no more than the test", async () => {
 	const success = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "noMoreThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -70,10 +71,10 @@ test("noMoreThan returns the value when it is no more than the test", async () =
 
 test("noMoreThan returns an error when it is not no more than the test", async () => {
 	const failure = compareNumbers({
-		operand: 7,
+		operand: makeNumericConstant(7),
 		operation: "noMoreThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
@@ -84,10 +85,10 @@ test("noMoreThan returns an error when it is not no more than the test", async (
 
 test("noLessThan returns the value when it is no less than the test", async () => {
 	const success = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "noLessThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -96,10 +97,10 @@ test("noLessThan returns the value when it is no less than the test", async () =
 
 test("noLessThan returns an error when it is not no less than the test", async () => {
 	const failure = compareNumbers({
-		operand: 5,
+		operand: makeNumericConstant(5),
 		operation: "noLessThan",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
@@ -110,10 +111,10 @@ test("noLessThan returns an error when it is not no less than the test", async (
 
 test("equalTo returns the value when it is equal to the test", async () => {
 	const success = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "equalTo",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -122,10 +123,10 @@ test("equalTo returns the value when it is equal to the test", async () => {
 
 test("equalTo returns an error when it is not equal to the test", async () => {
 	const failure = compareNumbers({
-		operand: 5,
+		operand: makeNumericConstant(5),
 		operation: "equalTo",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()
@@ -134,10 +135,10 @@ test("equalTo returns an error when it is not equal to the test", async () => {
 
 test("unequalTo returns the value when it is unequal to the test", async () => {
 	const success = compareNumbers({
-		operand: 5,
+		operand: makeNumericConstant(5),
 		operation: "unequalTo",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(success)).toBeFalsy()
@@ -146,10 +147,10 @@ test("unequalTo returns the value when it is unequal to the test", async () => {
 
 test("unequalTo returns an error when it is not unequal to the test", async () => {
 	const failure = compareNumbers({
-		operand: 6,
+		operand: makeNumericConstant(6),
 		operation: "unequalTo",
 		returns: "boolean",
-		test: 6,
+		test: makeNumericConstant(6),
 	})()
 
 	expect(isLeft(failure)).toBeTruthy()

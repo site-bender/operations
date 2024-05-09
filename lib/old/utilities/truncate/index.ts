@@ -1,12 +1,13 @@
-import type { NumericalBase } from "../../../types"
+import makeNumericConstant from "../../../constants/numericConstant"
+import { type NumericalBase } from "../../../types"
 
 export type Truncation = Omit<NumericalBase, "operation">
 
 export type TruncateF = (op: Truncation) => (value: number) => number
 
 const truncate: TruncateF = trunc => value => {
-	const { truncation = "round", precision = 0 } = trunc
-	const multiplier = Math.pow(10, precision)
+	const { truncation = "round", precision = makeNumericConstant(0) } = trunc
+	const multiplier = Math.pow(10, precision.value)
 	const val = value * multiplier
 
 	switch (truncation) {

@@ -1,21 +1,21 @@
-import type { DivideOperation } from "../../../types"
-
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import divide from "."
+import makeNumericConstant from "../../../constants/numericConstant"
+import { DivideOperation } from "../../../types"
 
 test("divides a divisor into a dividend", async () => {
 	const success = divide({
 		dividend: {
-			dividend: 120,
-			divisor: 5,
+			dividend: makeNumericConstant(120),
+			divisor: makeNumericConstant(5),
 			operation: "divide",
 			returns: "number",
 		},
 		divisor: {
-			dividend: 12,
-			divisor: 2,
+			dividend: makeNumericConstant(12),
+			divisor: makeNumericConstant(2),
 			operation: "divide",
 			returns: "number",
 		},
@@ -33,8 +33,8 @@ test("divides a divisor into a dividend with an input", async () => {
 			operation: "injectFromArgument",
 		},
 		dividend: {
-			dividend: 12,
-			divisor: 2,
+			dividend: makeNumericConstant(120),
+			divisor: makeNumericConstant(20),
 			operation: "divide",
 			returns: "number",
 		},

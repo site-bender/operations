@@ -1,13 +1,14 @@
-import type { NegateOperation } from "../../../types"
+import { type NegateOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import negate from "."
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("negates a positive number", async () => {
 	const success = negate({
-		operand: 99,
+		operand: makeNumericConstant(99),
 		operation: "negate",
 		returns: "number",
 	})()
@@ -31,7 +32,7 @@ test("negates a positive number from an input", async () => {
 
 test("returns a positive number when the operand is negative", async () => {
 	const success = negate({
-		operand: -99,
+		operand: makeNumericConstant(-99),
 		operation: "negate",
 		returns: "number",
 	})()

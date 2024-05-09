@@ -1,25 +1,26 @@
-import type { MultiplyOperation } from "../../../types"
+import { type MultiplyOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import multiply from "."
+import makeNumericConstant from "../../../constants/numericConstant"
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({
 		multipliers: [
 			{
-				multipliers: [3, 4],
+				multipliers: [3, 4].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
 			{
-				multipliers: [5, 6],
+				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
 			{
-				multipliers: [7, 8, 9],
+				multipliers: [7, 8, 9].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
@@ -39,12 +40,12 @@ test("multiplies a set of numbers together with an input param", async () => {
 				operation: "injectFromArgument",
 			},
 			{
-				multipliers: [5, 6],
+				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
 			{
-				multipliers: [7, 8, 9],
+				multipliers: [7, 8, 9].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
@@ -65,7 +66,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 				returns: "error",
 			} as unknown as MultiplyOperation,
 			{
-				multipliers: [5, 6],
+				multipliers: [5, 6].map(makeNumericConstant),
 				operation: "multiply",
 				returns: "number",
 			},
