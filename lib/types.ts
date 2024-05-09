@@ -1,57 +1,72 @@
-export type ElementOf<T extends readonly unknown[]> =
-	T extends readonly (infer ET)[] ? ET : never
+export type ElementOf<T extends readonly unknown[]> = T[number]
+
+export const OperationTags = {
+	numeric: "numeric-operation",
+} as const
+
+export const NumericOperations = {
+	constant: "constant",
+	add: "add",
+	divide: "divide",
+	multiply: "multiply",
+	negate: "negate",
+	power: "power",
+	root: "root",
+	subtract: "subtract",
+	truncate: "truncate",
+} as const
 
 interface NumericBase {
-	_tag: "numeric-operation"
+	_tag: typeof OperationTags.numeric
 	precision?: NumericConstant
 }
 
 export interface NumericConstant extends NumericBase {
-	operation: "constant"
+	operation: typeof NumericOperations.constant
 	value: number
 }
 
 export interface AddOperation extends NumericBase {
 	addends: Array<InjectFromArgumentOperation | NumericOperation>
-	operation: "add"
+	operation: typeof NumericOperations.add
 }
 
 export interface DivideOperation extends NumericBase {
 	dividend: InjectFromArgumentOperation | NumericOperation
 	divisor: InjectFromArgumentOperation | NumericOperation
-	operation: "divide"
+	operation: typeof NumericOperations.divide
 }
 
 export interface MultiplyOperation extends NumericBase {
 	multipliers: Array<InjectFromArgumentOperation | NumericOperation>
-	operation: "multiply"
+	operation: typeof NumericOperations.multiply
 }
 
 export interface NegateOperation extends NumericBase {
 	operand: InjectFromArgumentOperation | NumericOperation
-	operation: "negate"
+	operation: typeof NumericOperations.negate
 }
 
 export interface PowerOperation extends NumericBase {
 	base: InjectFromArgumentOperation | NumericOperation
 	exponent: InjectFromArgumentOperation | NumericOperation
-	operation: "power"
+	operation: typeof NumericOperations.power
 }
 
 export interface RootOperation extends NumericBase {
 	index: InjectFromArgumentOperation | NumericOperation
-	operation: "root"
+	operation: typeof NumericOperations.root
 	radicand: InjectFromArgumentOperation | NumericOperation
 }
 
 export interface SubtractOperation extends NumericBase {
 	minuend: InjectFromArgumentOperation | NumericOperation
-	operation: "subtract"
+	operation: typeof NumericOperations.subtract
 	subtrahend: InjectFromArgumentOperation | NumericOperation
 }
 
 export interface TruncateOperation extends NumericBase {
-	operation: "truncate"
+	operation: typeof NumericOperations.truncate
 	method: "round" | "ceiling" | "floor" | "truncate"
 	precision?: NumericConstant
 	operand: NumericOperation

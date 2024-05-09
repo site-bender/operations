@@ -1,4 +1,8 @@
-import type { AddOperation as AO } from "../../../types"
+import {
+	NumericOperations,
+	OperationTags,
+	type AddOperation as AO,
+} from "../../../types"
 
 import { Option, none, some } from "@sitebender/fp/lib/option"
 
@@ -11,8 +15,8 @@ const AddOperation: AddOperationF = config => {
 		? some({
 				...rest,
 				addends,
-				operation: "add",
-				_tag: "numeric-operation",
+				operation: NumericOperations.add,
+				_tag: OperationTags.numeric,
 			})
 		: none
 }
