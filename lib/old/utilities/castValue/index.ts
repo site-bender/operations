@@ -1,23 +1,36 @@
 import type { CastableValue, Reify } from "../../../types"
 
 import isBoolean from "./isBoolean"
-import { Either, flatMap, map } from "@sitebender/fp/lib/either"
-import { pipe } from "@sitebender/fp/lib/functions"
+import { Either, left, right } from "@sitebender/fp/lib/either"
 
 export type CastValue = <T extends CastableValue>(
 	type: T,
-) => (value: Either<string[], any>) => Either<string[], Reify<T>>
+) => (value: any) => Either<string[], Reify<T>>
 
 const castValue: CastValue = type => value => {
 	switch (type) {
 		case "integer":
-			return pipe(value, map(parseInt))
+			try {
+				const parsed = parseInt(value)
+				return Number.isNaN(parsed)
+					? left([`Failed to parse ${value} to integer`])
+					: right(parsed)
+			} catch (e) {
+				return left([`Failed to parse ${value} to integer : ${String(e)}`])
+			}
 		case "number":
-			return pipe(value, map(Number))
+			try {
+				const parsed = Number(value)
+				return Number.isNaN(parsed)
+					? left([`Failed to parse ${value} to number`])
+					: right(parsed)
+			} catch (e) {
+				return left([`Failed to parse ${value} to number : ${String(e)}`])
+			}
 		case "string":
-			return pipe(value, map(String))
+			return right(String(value))
 		case "boolean":
-			return pipe(value, flatMap(isBoolean))
+			return isBoolean(value)
 		default:
 			return value
 	}

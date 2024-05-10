@@ -10,13 +10,10 @@ export const InjectorSource = {
 	constant: "constant",
 	argument: "argument",
 	form: "form",
-	session: "session-storage",
-	local: "local-storage",
-} as const
-
-export const InjectorOperations = {
-	number: "inject-number",
-	string: "inject-string",
+	session: "session",
+	local: "local",
+	map: "map",
+	table: "table",
 } as const
 
 interface InjectValueBase {
@@ -38,18 +35,69 @@ export interface InjectArgument<Operation extends CastableValue>
 	source: typeof InjectorSource.argument
 }
 
-export interface InjectNumeric extends InjectValueBase {
-	operation: typeof InjectorOperations.number
+export interface InjectFromForm<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.form
+	field: string
 }
 
-export interface InjectString extends InjectValueBase {
-	operation: typeof InjectorOperations.string
+export interface InjectFromSession<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.session
+	key: string
 }
 
-export type InjectorOperation =
+export interface InjectFromLocal<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.local
+	key: string
+}
+
+export interface InjectFromMap<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.map
+	operand: InjectableOperationOfType<"string">
+	test: { [key: string]: Reify<Operation> }
+}
+
+export interface TableLookupEntry<T extends CastableValue> {
+	operands: LogicalNumericOperation
+	returns: T
+	value: Reify<T>
+}
+
+export interface InjectFromLookupTable<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.table
+	operand: Exclude<
+		InjectableOperationOfType<Operation>,
+		InjectFromLookupTable<Operation>
+	>
+	test: Array<TableLookupEntry<Operation>>
+}
+
+export type InjectableOperationOfType<T extends CastableValue> =
+	| InjectConstant<T>
+	| InjectArgument<T>
+	| InjectFromForm<T>
+	| InjectFromSession<T>
+	| InjectFromLocal<T>
+	| InjectFromMap<T>
+	| InjectFromLookupTable<T>
+
+export type InjectableOperation =
 	| InjectConstant<CastableValue>
-	| InjectNumeric
-	| InjectString
+	| InjectArgument<CastableValue>
+	| InjectFromForm<CastableValue>
+	| InjectFromSession<CastableValue>
+	| InjectFromLocal<CastableValue>
+	| InjectFromMap<CastableValue>
+	| InjectFromLookupTable<CastableValue>
 
 export const NumericOperations = {
 	add: "add",
@@ -151,9 +199,9 @@ export interface OrOperation extends OperationBase {
 }
 
 export interface NumericComparisonBase extends OperationBase {
-	operand: InjectFromArgumentOperation | NumericOperation
+	operand: AllowedNumericOperands
 	returns: "boolean"
-	test: InjectFromArgumentOperation | NumericOperation
+	test: AllowedNumericOperands
 }
 
 export interface UnequalToOperation extends NumericComparisonBase {
@@ -189,44 +237,9 @@ export const CastableValues = [
 
 export type CastableValue = ElementOf<typeof CastableValues>
 
-export interface InjectFromMapOperation extends OperationBase {
-	operation: "injectFromMap"
-	operand: InjectFromArgumentOperation | InjectableOperation
-	test: { [key: string]: Reify<CastableValue> }
-}
-
-export interface TableLookupEntry<T extends CastableValue> {
-	operation: "tableValue"
-	operands: LogicalNumericOperation
-	returns: T
-	value: Reify<T>
-}
-
-export interface InjectFromLookupTableOperation extends OperationBase {
-	operation: "injectFromLookupTable"
-	operand: InjectFromArgumentOperation | InjectableOperation
-	test: Array<TableLookupEntry<"number">>
-}
-
 export interface InjectValueOperation extends OperationBase {
 	returns: CastableValue
 	eager?: boolean | undefined
-	parse?: boolean | undefined
-}
-
-export interface FormInputOperation extends InjectValueOperation {
-	name: string
-	operation: "formInput"
-}
-
-export interface LocalStorageOperation extends InjectValueOperation {
-	key: string
-	operation: "localStorage"
-}
-
-export interface SessionStorageOperation extends InjectValueOperation {
-	key: string
-	operation: "sessionStorage"
 }
 
 export type LogicalNumericOperation =
@@ -239,21 +252,10 @@ export type LogicalNumericOperation =
 
 export type BooleanOperation = AndOperation | OrOperation
 
-export type InjectableOperation =
-	| FormInputOperation
-	| LocalStorageOperation
-	| SessionStorageOperation
-
-export type LookupOperation =
-	| InjectFromMapOperation
-	| InjectFromLookupTableOperation
-
 export type Operation =
 	| NumericOperation
 	| LogicalNumericOperation
 	| BooleanOperation
-	| InjectableOperation
-	| LookupOperation
 
 export type Reify<T extends CastableValue> = T extends "integer" | "number"
 	? number

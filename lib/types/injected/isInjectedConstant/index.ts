@@ -5,9 +5,9 @@ import {
 	OperationTags,
 } from "../../../types"
 
-const isInjectedArgument = (o: any): o is InjectConstant<CastableValue> =>
+const isInjectedConstant = (o: any): o is InjectConstant<CastableValue> =>
 	typeof o === "object" &&
 	o._tag === OperationTags.injector &&
 	o.source === InjectorSource.constant
 
-export default isInjectedArgument
+export default isInjectedConstant

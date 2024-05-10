@@ -1,7 +1,7 @@
 import type { NumericOperation } from "../../../../types"
 
-import { Either, left, right } from "@sitebender/fp/lib/either"
-import { Option, some } from "@sitebender/fp/lib/option"
+import { Either, left } from "@sitebender/fp/lib/either"
+import { Option } from "@sitebender/fp/lib/option"
 import add from "../../../../makeCalculator/operations/add"
 import divide from "../../../../makeCalculator/operations/divide"
 import multiply from "../../../../makeCalculator/operations/multiply"
