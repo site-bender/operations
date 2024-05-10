@@ -2,24 +2,25 @@ import { Left, Right, isLeft } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import and from "."
+import makeNumericConstant from "../../../../constants/numericConstant"
 
 test("returns a true wrapped in a right when all operations work", async () => {
 	const success = and({
 		operands: [
 			{
-				addends: [3, 4],
+				_tag: "numeric-operation",
+				addends: [3, 4].map(makeNumericConstant),
 				operation: "add",
-				returns: "number",
 			},
 			{
-				addends: [5, 6],
+				_tag: "numeric-operation",
+				addends: [5, 6].map(makeNumericConstant),
 				operation: "add",
-				returns: "number",
 			},
 			{
-				addends: [7, 8, 9],
+				_tag: "numeric-operation",
+				addends: [7, 8, 9].map(makeNumericConstant),
 				operation: "add",
-				returns: "number",
 			},
 		],
 		operation: "and",
@@ -34,16 +35,16 @@ test("returns an error when one or more operands is an error", async () => {
 	const failure = and({
 		operands: [
 			{
-				operand: 5,
+				operand: makeNumericConstant(5),
 				operation: "lessThan",
 				returns: "boolean",
-				test: 3,
+				test: makeNumericConstant(3),
 			},
 			{
-				operand: 10,
+				operand: makeNumericConstant(10),
 				operation: "moreThan",
 				returns: "boolean",
-				test: 5,
+				test: makeNumericConstant(5),
 			},
 		],
 		operation: "and",

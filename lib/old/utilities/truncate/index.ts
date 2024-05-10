@@ -1,24 +1,34 @@
-import type { NumericalBase } from "../../../types"
+import { pipe } from "@sitebender/fp/lib/functions"
+import makeNumericConstant from "../../../constants/numericConstant"
+import { type TruncateOperation } from "../../../types"
+import liftNumeric from "../../operations/liftNumerical"
+import { none } from "@sitebender/fp/lib/option"
+import { map } from "../../operations/operationResult"
+import { OperationResult } from "../../operations/operationResult/types"
 
-export type Truncation = Omit<NumericalBase, "operation">
+export type TruncateF = (op: TruncateOperation) => OperationResult<number>
 
-export type TruncateF = (op: Truncation) => (value: number) => number
+const truncate: TruncateF = trunc => {
+	return pipe(
+		trunc.operand,
+		liftNumeric(none),
+		map(value => {
+			const { method = "round", precision = makeNumericConstant(0) } = trunc
+			const multiplier = Math.pow(10, precision.value)
+			const val = value * multiplier
 
-const truncate: TruncateF = trunc => value => {
-	const { truncation = "round", precision = 0 } = trunc
-	const multiplier = Math.pow(10, precision)
-	const val = value * multiplier
-
-	switch (truncation) {
-		case "ceiling":
-			return Math.ceil(val) / multiplier
-		case "round":
-			return Math.round(val) / multiplier
-		case "floor":
-			return Math.floor(val) / multiplier
-		default:
-			return Math.trunc(val) / multiplier
-	}
+			switch (method) {
+				case "ceiling":
+					return Math.ceil(val) / multiplier
+				case "round":
+					return Math.round(val) / multiplier
+				case "floor":
+					return Math.floor(val) / multiplier
+				default:
+					return Math.trunc(val) / multiplier
+			}
+		}),
+	)
 }
 
 export default truncate
