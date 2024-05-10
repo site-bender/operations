@@ -4,28 +4,29 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import add from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("adds a set of numbers together", async () => {
 	const success = add({
 		_tag: "numeric-operation",
 		addends: [
 			{
-				addends: [makeNumericConstant(3), makeNumericConstant(4)],
+				addends: [makeInjectedNumber(3), makeInjectedNumber(4)],
 				operation: "add",
 				_tag: "numeric-operation",
 			},
 			{
 				_tag: "numeric-operation",
-				addends: [makeNumericConstant(5), makeNumericConstant(6)],
+				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},
 			{
 				_tag: "numeric-operation",
 				addends: [
-					makeNumericConstant(7),
-					makeNumericConstant(8),
-					makeNumericConstant(9),
+					makeInjectedNumber(7),
+					makeInjectedNumber(8),
+					makeInjectedNumber(9),
 				],
 				operation: "add",
 			},
@@ -41,20 +42,18 @@ test("adds a set of numbers together with an input", async () => {
 	const success = add({
 		_tag: "numeric-operation",
 		addends: [
-			{
-				operation: "injectFromArgument",
-			},
+			injectedNumberArg,
 			{
 				_tag: "numeric-operation",
-				addends: [makeNumericConstant(5), makeNumericConstant(6)],
+				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},
 			{
 				_tag: "numeric-operation",
 				addends: [
-					makeNumericConstant(7),
-					makeNumericConstant(8),
-					makeNumericConstant(9),
+					makeInjectedNumber(7),
+					makeInjectedNumber(8),
+					makeInjectedNumber(9),
 				],
 				operation: "add",
 			},
@@ -76,7 +75,7 @@ test("returns an error when one or more addends is an error", async () => {
 			} as unknown as AddOperation,
 			{
 				_tag: "numeric-operation",
-				addends: [makeNumericConstant(5), makeNumericConstant(6)],
+				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},
 			{

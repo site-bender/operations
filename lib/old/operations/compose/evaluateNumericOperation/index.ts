@@ -12,7 +12,7 @@ import subtract from "../../../../makeCalculator/operations/subtract"
 import { truncate } from "../../../utilities"
 
 export type EvaluateNumericOperation = (
-	OperationMultiply: NumericOperation,
+	op: NumericOperation,
 ) => (input?: Option<number>) => Either<Array<string>, Option<number>>
 
 const evaluateNumericOperation: EvaluateNumericOperation = op => {
@@ -37,8 +37,6 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 			return subtract(op)
 		case "truncate":
 			return () => truncate(op)
-		case "constant":
-			return () => right(some(op.value))
 		default:
 			return error(op)
 	}

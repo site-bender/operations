@@ -4,21 +4,22 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import subtract from "."
 import { none, some } from "@sitebender/fp/lib/option"
-import makeNumericConstant from "../../../constants/numericConstant"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({
 		_tag: "numeric-operation",
 		minuend: {
 			_tag: "numeric-operation",
-			minuend: makeNumericConstant(120),
-			subtrahend: makeNumericConstant(60),
+			minuend: makeInjectedNumber(120),
+			subtrahend: makeInjectedNumber(60),
 			operation: "subtract",
 		},
 		subtrahend: {
 			_tag: "numeric-operation",
-			minuend: makeNumericConstant(60),
-			subtrahend: makeNumericConstant(30),
+			minuend: makeInjectedNumber(60),
+			subtrahend: makeInjectedNumber(30),
 			operation: "subtract",
 		},
 		operation: "subtract",
@@ -31,13 +32,11 @@ test("subtracts a subtrahend from a minuend", async () => {
 test("subtracts a subtrahend from a minuend with an input", async () => {
 	const success = subtract({
 		_tag: "numeric-operation",
-		minuend: {
-			operation: "injectFromArgument",
-		},
+		minuend: injectedNumberArg,
 		subtrahend: {
 			_tag: "numeric-operation",
-			minuend: makeNumericConstant(60),
-			subtrahend: makeNumericConstant(30),
+			minuend: makeInjectedNumber(60),
+			subtrahend: makeInjectedNumber(30),
 			operation: "subtract",
 		},
 		operation: "subtract",
@@ -56,8 +55,8 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 		} as unknown as SubtractOperation,
 		subtrahend: {
 			_tag: "numeric-operation",
-			minuend: makeNumericConstant(12),
-			subtrahend: makeNumericConstant(0),
+			minuend: makeInjectedNumber(12),
+			subtrahend: makeInjectedNumber(0),
 			operation: "subtract",
 		},
 		operation: "subtract",

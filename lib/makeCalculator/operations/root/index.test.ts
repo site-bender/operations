@@ -4,17 +4,18 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import root from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("gets the indexed root of the radicand correctly", async () => {
 	const success = root({
 		_tag: "numeric-operation",
 		radicand: {
 			_tag: "numeric-operation",
-			addends: [200, 16].map(makeNumericConstant),
+			addends: [200, 16].map(makeInjectedNumber),
 			operation: "add",
 		},
-		index: makeNumericConstant(3),
+		index: makeInjectedNumber(3),
 		operation: "root",
 	})()
 
@@ -25,10 +26,8 @@ test("gets the indexed root of the radicand correctly", async () => {
 test("gets the indexed root of the radicand correctly with an iput param", async () => {
 	const success = root({
 		_tag: "numeric-operation",
-		radicand: {
-			operation: "injectFromArgument",
-		},
-		index: makeNumericConstant(3),
+		radicand: injectedNumberArg,
+		index: makeInjectedNumber(3),
 		operation: "root",
 	})(some(216))
 
@@ -41,8 +40,8 @@ test("returns an error when radicand or index is an error", async () => {
 		_tag: "numeric-operation",
 		radicand: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(6),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(6),
 			operation: "divide",
 		},
 		index: {

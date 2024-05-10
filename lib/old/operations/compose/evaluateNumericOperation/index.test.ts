@@ -3,12 +3,12 @@ import { expect, test } from "vitest"
 
 import evaluateNumericOperation from "."
 import { some } from "@sitebender/fp/lib/option"
-import makeNumericConstant from "../../../../constants/numericConstant"
+import makeInjectedNumber from "../../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("works for add operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		addends: [makeNumericConstant(2), makeNumericConstant(3)],
+		addends: [makeInjectedNumber(2), makeInjectedNumber(3)],
 		operation: "add",
 	})
 
@@ -18,8 +18,8 @@ test("works for add operations", async () => {
 test("works for divide operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		dividend: makeNumericConstant(12),
-		divisor: makeNumericConstant(6),
+		dividend: makeInjectedNumber(12),
+		divisor: makeInjectedNumber(6),
 		operation: "divide",
 	})
 
@@ -30,9 +30,9 @@ test("works for multiply operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
 		multipliers: [
-			makeNumericConstant(2),
-			makeNumericConstant(3),
-			makeNumericConstant(4),
+			makeInjectedNumber(2),
+			makeInjectedNumber(3),
+			makeInjectedNumber(4),
 		],
 		operation: "multiply",
 	})
@@ -43,7 +43,7 @@ test("works for multiply operations", async () => {
 test("works for negate operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		operand: makeNumericConstant(5),
+		operand: makeInjectedNumber(5),
 		operation: "negate",
 	})
 
@@ -53,8 +53,8 @@ test("works for negate operations", async () => {
 test("works for power operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		base: makeNumericConstant(2),
-		exponent: makeNumericConstant(5),
+		base: makeInjectedNumber(2),
+		exponent: makeInjectedNumber(5),
 		operation: "power",
 	})
 
@@ -68,9 +68,9 @@ test("works for root operations", async () => {
 		method: "round",
 		operand: {
 			_tag: "numeric-operation",
-			index: makeNumericConstant(3),
+			index: makeInjectedNumber(3),
 			operation: "root",
-			radicand: makeNumericConstant(64),
+			radicand: makeInjectedNumber(64),
 		},
 	})
 
@@ -80,9 +80,9 @@ test("works for root operations", async () => {
 test("works for subtract operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		minuend: makeNumericConstant(10),
+		minuend: makeInjectedNumber(10),
 		operation: "subtract",
-		subtrahend: makeNumericConstant(18),
+		subtrahend: makeInjectedNumber(18),
 	})
 
 	expect(result()).toStrictEqual(right(some(-8)))
@@ -91,7 +91,7 @@ test("works for subtract operations", async () => {
 test("works for unrecognized operations", async () => {
 	const result = evaluateNumericOperation({
 		_tag: "numeric-operation",
-		addends: [makeNumericConstant(2), makeNumericConstant(3)],
+		addends: [makeInjectedNumber(2), makeInjectedNumber(3)],
 		// @ts-expect-error
 		operation: "other",
 	})

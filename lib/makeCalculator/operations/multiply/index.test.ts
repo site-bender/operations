@@ -4,7 +4,8 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import multiply from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({
@@ -12,17 +13,17 @@ test("multiplies a set of numbers together", async () => {
 		multipliers: [
 			{
 				_tag: "numeric-operation",
-				multipliers: [3, 4].map(makeNumericConstant),
+				multipliers: [3, 4].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
 				_tag: "numeric-operation",
-				multipliers: [5, 6].map(makeNumericConstant),
+				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
 				_tag: "numeric-operation",
-				multipliers: [7, 8, 9].map(makeNumericConstant),
+				multipliers: [7, 8, 9].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 		],
@@ -37,17 +38,15 @@ test("multiplies a set of numbers together with an input param", async () => {
 	const success = multiply({
 		_tag: "numeric-operation",
 		multipliers: [
-			{
-				operation: "injectFromArgument",
-			},
+			injectedNumberArg,
 			{
 				_tag: "numeric-operation",
-				multipliers: [5, 6].map(makeNumericConstant),
+				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
 				_tag: "numeric-operation",
-				multipliers: [7, 8, 9].map(makeNumericConstant),
+				multipliers: [7, 8, 9].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 		],
@@ -68,7 +67,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 			} as unknown as MultiplyOperation,
 			{
 				_tag: "numeric-operation",
-				multipliers: [5, 6].map(makeNumericConstant),
+				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{

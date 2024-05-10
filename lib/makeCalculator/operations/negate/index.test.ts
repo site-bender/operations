@@ -4,12 +4,13 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import negate from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("negates a positive number", async () => {
 	const success = negate({
 		_tag: "numeric-operation",
-		operand: makeNumericConstant(99),
+		operand: makeInjectedNumber(99),
 		operation: "negate",
 	})()
 
@@ -20,9 +21,7 @@ test("negates a positive number", async () => {
 test("negates a positive number from an input", async () => {
 	const success = negate({
 		_tag: "numeric-operation",
-		operand: {
-			operation: "injectFromArgument",
-		},
+		operand: injectedNumberArg,
 		operation: "negate",
 	})(some(99))
 
@@ -33,7 +32,7 @@ test("negates a positive number from an input", async () => {
 test("returns a positive number when the operand is negative", async () => {
 	const success = negate({
 		_tag: "numeric-operation",
-		operand: makeNumericConstant(-99),
+		operand: makeInjectedNumber(-99),
 		operation: "negate",
 	})()
 

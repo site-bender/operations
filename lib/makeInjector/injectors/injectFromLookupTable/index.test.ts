@@ -8,7 +8,7 @@ import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromLookupTable from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 
 const operation: InjectFromLookupTableOperation = {
 	operation: "injectFromLookupTable",
@@ -24,8 +24,8 @@ const operation: InjectFromLookupTableOperation = {
 				operation: "lessThan",
 				//TODO this operand isn't used in this calc; need to refactor the lessThan implementation to
 				// product a function
-				operand: makeNumericConstant(1),
-				test: makeNumericConstant(10),
+				operand: makeInjectedNumber(1),
+				test: makeInjectedNumber(10),
 				returns: "boolean",
 			},
 			returns: "number",
@@ -35,8 +35,8 @@ const operation: InjectFromLookupTableOperation = {
 			operation: "tableValue",
 			operands: {
 				operation: "lessThan",
-				operand: makeNumericConstant(1),
-				test: makeNumericConstant(500),
+				operand: makeInjectedNumber(1),
+				test: makeInjectedNumber(500),
 				returns: "boolean",
 			},
 			returns: "number",
