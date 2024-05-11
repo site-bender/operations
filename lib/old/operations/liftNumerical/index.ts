@@ -1,26 +1,20 @@
-import {
-	type InjectFromArgumentOperation,
-	type NumericConstant,
-	type NumericOperation,
-} from "../../../types"
+import { AllowedNumericOperands } from "../../../types"
 
 import { right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
 import evaluateNumericOperation from "../compose/evaluateNumericOperation"
-import isInjectFromArgumentOperation from "../../utilities/isInjectFromArgumentOperation"
 import { OperationResult } from "../operationResult/types"
-import isNumericConstant from "../../../constants/numericConstant/isNumericConstant"
+import isInjectedNumber from "../../../types/injected/isInjectedConstant/isInjectedNumber"
+import isInjectedNumberArg from "../../../types/injected/isInjectedArgument/isInjectedNumberArg"
 
 export type LiftNumericF = (
 	input: Option<number>,
-) => (
-	operand: NumericConstant | InjectFromArgumentOperation | NumericOperation,
-) => OperationResult<number>
+) => (operand: AllowedNumericOperands) => OperationResult<number>
 
 const liftNumeric: LiftNumericF = input => action => {
-	return isNumericConstant(action)
+	return isInjectedNumber(action)
 		? right(some(action.value))
-		: isInjectFromArgumentOperation(action)
+		: isInjectedNumberArg(action)
 			? right(input)
 			: evaluateNumericOperation(action)(input)
 }

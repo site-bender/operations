@@ -2,22 +2,23 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import divide from "."
-import makeNumericConstant from "../../../constants/numericConstant"
 import { DivideOperation } from "../../../types"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("divides a divisor into a dividend", async () => {
 	const success = divide({
 		_tag: "numeric-operation",
 		dividend: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(5),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(5),
 			operation: "divide",
 		},
 		divisor: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(12),
-			divisor: makeNumericConstant(2),
+			dividend: makeInjectedNumber(12),
+			divisor: makeInjectedNumber(2),
 			operation: "divide",
 		},
 		operation: "divide",
@@ -30,13 +31,11 @@ test("divides a divisor into a dividend", async () => {
 test("divides a divisor into a dividend with an input", async () => {
 	const success = divide({
 		_tag: "numeric-operation",
-		divisor: {
-			operation: "injectFromArgument",
-		},
+		divisor: injectedNumberArg,
 		dividend: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(20),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(20),
 			operation: "divide",
 		},
 		operation: "divide",

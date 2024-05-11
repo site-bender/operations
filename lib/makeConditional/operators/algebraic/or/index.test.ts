@@ -2,26 +2,26 @@ import { right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import or from "."
-import makeNumericConstant from "../../../../constants/numericConstant"
+import makeInjectedNumber from "../../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("returns a true wrapped in a right when one operation works", async () => {
 	const success = or({
 		operands: [
 			{
 				_tag: "numeric-operation",
-				addends: [7, 8, 9].map(makeNumericConstant),
+				addends: [7, 8, 9].map(makeInjectedNumber),
 				operation: "add",
 			},
 			{
 				_tag: "numeric-operation",
-				addends: [5, 6].map(makeNumericConstant),
+				addends: [5, 6].map(makeInjectedNumber),
 				operation: "add",
 			},
 			{
-				operand: makeNumericConstant(5),
+				operand: makeInjectedNumber(5),
 				operation: "lessThan",
 				returns: "boolean",
-				test: makeNumericConstant(3),
+				test: makeInjectedNumber(3),
 			},
 		],
 		operation: "or",
@@ -35,16 +35,16 @@ test("returns false wrapped in a right when all operands fail", async () => {
 	const failure = or({
 		operands: [
 			{
-				operand: makeNumericConstant(5),
+				operand: makeInjectedNumber(5),
 				operation: "lessThan",
 				returns: "boolean",
-				test: makeNumericConstant(3),
+				test: makeInjectedNumber(3),
 			},
 			{
-				operand: makeNumericConstant(10),
+				operand: makeInjectedNumber(10),
 				operation: "moreThan",
 				returns: "boolean",
-				test: makeNumericConstant(5),
+				test: makeInjectedNumber(5),
 			},
 		],
 		operation: "or",

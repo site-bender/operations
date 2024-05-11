@@ -2,21 +2,21 @@ import { expect, test } from "vitest"
 import { none, some } from "@sitebender/fp/lib/option"
 
 import AddOperation from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("creates Some<AddOperation> from a config object", () => {
 	const op1 = AddOperation({
-		addends: [1, 2, 3].map(makeNumericConstant),
+		addends: [1, 2, 3].map(makeInjectedNumber),
 	})
 	const op2 = AddOperation({
-		addends: [1, 2, 3].map(makeNumericConstant),
-		precision: makeNumericConstant(2),
+		addends: [1, 2, 3].map(makeInjectedNumber),
+		precision: makeInjectedNumber(2),
 	})
 
 	expect(op1).toStrictEqual(
 		some({
 			_tag: "numeric-operation",
-			addends: [1, 2, 3].map(makeNumericConstant),
+			addends: [1, 2, 3].map(makeInjectedNumber),
 			operation: "add",
 		}),
 	)
@@ -24,9 +24,9 @@ test("creates Some<AddOperation> from a config object", () => {
 	expect(op2).toStrictEqual(
 		some({
 			_tag: "numeric-operation",
-			addends: [1, 2, 3].map(makeNumericConstant),
+			addends: [1, 2, 3].map(makeInjectedNumber),
 			operation: "add",
-			precision: makeNumericConstant(2),
+			precision: makeInjectedNumber(2),
 		}),
 	)
 })

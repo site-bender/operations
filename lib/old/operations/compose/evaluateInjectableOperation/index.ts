@@ -1,11 +1,12 @@
-import type {
-	CastableValue,
-	InjectableOperation,
-	Reify,
+import {
+	InjectorSource,
+	type CastableValue,
+	type InjectableOperation,
+	type Reify,
 } from "../../../../types"
 
-import { left } from "@sitebender/fp/lib/either"
-import { Option } from "@sitebender/fp/lib/option"
+import { left, right } from "@sitebender/fp/lib/either"
+import { Option, some } from "@sitebender/fp/lib/option"
 import injectFromFormInput from "../../../../makeInjector/injectors/injectFromFormInput"
 import { OperationResult } from "../../operationResult/types"
 
@@ -16,8 +17,10 @@ export type EvaluateInjectableOperation = (
 ) => OperationResult<Reify<CastableValue>>
 
 const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
-	switch (op.operation) {
-		case "formInput":
+	switch (op.source) {
+		case InjectorSource.constant:
+			return () => right(some(op.value))
+		case InjectorSource.form:
 			return injectFromFormInput(op)()
 		default:
 			return () => left([`Invalid unit operation ${op}`])

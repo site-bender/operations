@@ -1,4 +1,8 @@
-import type { InjectFromMapOperation } from "../../../types"
+import {
+	InjectorSource,
+	OperationTags,
+	type InjectFromMap,
+} from "../../../types"
 
 import { expect, test } from "vitest"
 import { JSDOM } from "jsdom"
@@ -8,21 +12,23 @@ import none from "@sitebender/fp/lib/option/none"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromMap from "."
+import makeInjectedStringArg from "../../../types/injected/makeInjectedArgument/makeInjectedStringArg"
 
-const operation: InjectFromMapOperation = {
-	operation: "injectFromMap",
+const operation: InjectFromMap<"string"> = {
+	_tag: OperationTags.injector,
+	operation: "string",
 	operand: {
-		operation: "formInput",
-		name: "foo",
-		returns: "string",
+		_tag: OperationTags.injector,
+		operation: "string",
+		source: InjectorSource.form,
+		field: "foo",
 	},
-
+	source: InjectorSource.map,
 	test: {
 		red: "#f00",
 		green: "#0f0",
 		blue: "#00f",
 	},
-	returns: "string",
 }
 
 const dom = new JSDOM(
@@ -47,11 +53,9 @@ test("[injectFromMap] (injectors) returns a value for a mapped key", () => {
 })
 
 test("[injectFromMap] (injectors) returns a value for a mapped key from an input", () => {
-	const withParam: InjectFromMapOperation = {
+	const withParam: InjectFromMap<"string"> = {
 		...operation,
-		operand: {
-			operation: "injectFromArgument",
-		},
+		operand: makeInjectedStringArg,
 	}
 	expect(injectFromMap(withParam)(some("red"))).toEqual(right(some("#f00")))
 })

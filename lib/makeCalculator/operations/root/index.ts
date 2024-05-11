@@ -14,15 +14,12 @@ export type RootF = (
 const root: RootF =
 	operation =>
 	(input = none) => {
-		//const doTruncation = (n: number) =>
-		//	operation.truncation ? truncate(operation)(n) : n
 
 		return pipe(
 			[operation.radicand, operation.index],
 			map(liftNumeric(input)),
 			OpResult.sequence,
 			OpResult.map(([radicand, index]) => Math.pow(radicand, 1 / index)),
-			//OpResult.map(doTruncation),
 		)
 	}
 

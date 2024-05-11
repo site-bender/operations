@@ -4,18 +4,19 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import power from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({
 		_tag: "numeric-operation",
 		base: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(20),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(20),
 			operation: "divide",
 		},
-		exponent: makeNumericConstant(3),
+		exponent: makeInjectedNumber(3),
 		operation: "power",
 	})()
 
@@ -28,13 +29,11 @@ test("raises a base to an exponent correctly from an input", async () => {
 		_tag: "numeric-operation",
 		base: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(20),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(20),
 			operation: "divide",
 		},
-		exponent: {
-			operation: "injectFromArgument",
-		},
+		exponent: injectedNumberArg,
 		operation: "power",
 	})(some(3))
 
@@ -47,8 +46,8 @@ test("returns an error when base or exponent is an error", async () => {
 		_tag: "numeric-operation",
 		base: {
 			_tag: "numeric-operation",
-			dividend: makeNumericConstant(120),
-			divisor: makeNumericConstant(0),
+			dividend: makeInjectedNumber(120),
+			divisor: makeInjectedNumber(0),
 			operation: "divide",
 		},
 		exponent: {

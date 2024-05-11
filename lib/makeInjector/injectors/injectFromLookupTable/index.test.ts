@@ -1,4 +1,8 @@
-import { type InjectFromLookupTableOperation } from "../../../types"
+import {
+	InjectorSource,
+	OperationTags,
+	type InjectFromLookupTable,
+} from "../../../types"
 
 import { expect, test } from "vitest"
 import { JSDOM } from "jsdom"
@@ -8,42 +12,43 @@ import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromLookupTable from "."
-import makeNumericConstant from "../../../constants/numericConstant"
+import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
 
-const operation: InjectFromLookupTableOperation = {
-	operation: "injectFromLookupTable",
+const operation: InjectFromLookupTable<"number"> = {
+	_tag: OperationTags.injector,
+	operation: "number",
+	source: InjectorSource.table,
 	operand: {
-		operation: "formInput",
-		name: "foo",
-		returns: "string",
+		_tag: OperationTags.injector,
+		operation: "number",
+		source: InjectorSource.form,
+		field: "foo",
 	},
 	test: [
 		{
-			operation: "tableValue",
 			operands: {
 				operation: "lessThan",
 				//TODO this operand isn't used in this calc; need to refactor the lessThan implementation to
 				// product a function
-				operand: makeNumericConstant(1),
-				test: makeNumericConstant(10),
+				operand: makeInjectedNumber(1),
+				test: makeInjectedNumber(10),
 				returns: "boolean",
 			},
 			returns: "number",
 			value: 1,
 		},
 		{
-			operation: "tableValue",
 			operands: {
 				operation: "lessThan",
-				operand: makeNumericConstant(1),
-				test: makeNumericConstant(500),
+				operand: makeInjectedNumber(1),
+				test: makeInjectedNumber(500),
 				returns: "boolean",
 			},
 			returns: "number",
 			value: 0.5,
 		},
 	],
-	returns: "string",
 }
 
 test("[injectFromLookupTable] (injectors) returns a value for a mapped key", () => {
@@ -81,11 +86,9 @@ test("[injectFromLookupTable] (injectors) returns a value for a mapped key from 
 
 	globalThis.document = dom.window.document
 
-	const withParam: InjectFromLookupTableOperation = {
+	const withParam: InjectFromLookupTable<"number"> = {
 		...operation,
-		operand: {
-			operation: "injectFromArgument",
-		},
+		operand: makeInjectedNumberArg,
 	}
 
 	expect(injectFromLookupTable(withParam)(some(100))).toEqual(right(some(0.5)))

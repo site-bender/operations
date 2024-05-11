@@ -1,11 +1,105 @@
 export type ElementOf<T extends readonly unknown[]> = T[number]
 
 export const OperationTags = {
+	constant: "constant-operation",
 	numeric: "numeric-operation",
+	injector: "injector-operation",
 } as const
 
-export const NumericOperations = {
+export const InjectorSource = {
 	constant: "constant",
+	argument: "argument",
+	form: "form",
+	session: "session",
+	local: "local",
+	map: "map",
+	table: "table",
+} as const
+
+interface InjectValueBase {
+	_tag: typeof OperationTags.injector
+	source: keyof typeof InjectorSource
+	eager?: boolean
+}
+
+export interface InjectConstant<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.constant
+	value: Reify<Operation>
+}
+
+export interface InjectArgument<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.argument
+}
+
+export interface InjectFromForm<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.form
+	field: string
+}
+
+export interface InjectFromSession<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.session
+	key: string
+}
+
+export interface InjectFromLocal<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.local
+	key: string
+}
+
+export interface InjectFromMap<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.map
+	operand: InjectableOperationOfType<"string">
+	test: { [key: string]: Reify<Operation> }
+}
+
+export interface TableLookupEntry<T extends CastableValue> {
+	operands: LogicalNumericOperation
+	returns: T
+	value: Reify<T>
+}
+
+export interface InjectFromLookupTable<Operation extends CastableValue>
+	extends InjectValueBase {
+	operation: Operation
+	source: typeof InjectorSource.table
+	operand: Exclude<
+		InjectableOperationOfType<Operation>,
+		InjectFromLookupTable<Operation>
+	>
+	test: Array<TableLookupEntry<Operation>>
+}
+
+export type InjectableOperationOfType<T extends CastableValue> =
+	| InjectConstant<T>
+	| InjectArgument<T>
+	| InjectFromForm<T>
+	| InjectFromSession<T>
+	| InjectFromLocal<T>
+	| InjectFromMap<T>
+	| InjectFromLookupTable<T>
+
+export type InjectableOperation =
+	| InjectConstant<CastableValue>
+	| InjectArgument<CastableValue>
+	| InjectFromForm<CastableValue>
+	| InjectFromSession<CastableValue>
+	| InjectFromLocal<CastableValue>
+	| InjectFromMap<CastableValue>
+	| InjectFromLookupTable<CastableValue>
+
+export const NumericOperations = {
 	add: "add",
 	divide: "divide",
 	multiply: "multiply",
@@ -18,62 +112,60 @@ export const NumericOperations = {
 
 interface NumericBase {
 	_tag: typeof OperationTags.numeric
-	precision?: NumericConstant
+	precision?: InjectConstant<"number">
 }
 
-export interface NumericConstant extends NumericBase {
-	operation: typeof NumericOperations.constant
-	value: number
-}
+export type AllowedNumericOperands =
+	| InjectArgument<"number">
+	| InjectConstant<"number">
+	| NumericOperation
 
 export interface AddOperation extends NumericBase {
-	addends: Array<InjectFromArgumentOperation | NumericOperation>
+	addends: Array<AllowedNumericOperands>
 	operation: typeof NumericOperations.add
 }
 
 export interface DivideOperation extends NumericBase {
-	dividend: InjectFromArgumentOperation | NumericOperation
-	divisor: InjectFromArgumentOperation | NumericOperation
+	dividend: AllowedNumericOperands
+	divisor: AllowedNumericOperands
 	operation: typeof NumericOperations.divide
 }
 
 export interface MultiplyOperation extends NumericBase {
-	multipliers: Array<InjectFromArgumentOperation | NumericOperation>
+	multipliers: Array<AllowedNumericOperands>
 	operation: typeof NumericOperations.multiply
 }
 
 export interface NegateOperation extends NumericBase {
-	operand: InjectFromArgumentOperation | NumericOperation
+	operand: AllowedNumericOperands
 	operation: typeof NumericOperations.negate
 }
 
 export interface PowerOperation extends NumericBase {
-	base: InjectFromArgumentOperation | NumericOperation
-	exponent: InjectFromArgumentOperation | NumericOperation
+	base: AllowedNumericOperands
+	exponent: AllowedNumericOperands
 	operation: typeof NumericOperations.power
 }
 
 export interface RootOperation extends NumericBase {
-	index: InjectFromArgumentOperation | NumericOperation
+	index: AllowedNumericOperands
 	operation: typeof NumericOperations.root
-	radicand: InjectFromArgumentOperation | NumericOperation
+	radicand: AllowedNumericOperands
 }
 
 export interface SubtractOperation extends NumericBase {
-	minuend: InjectFromArgumentOperation | NumericOperation
+	minuend: AllowedNumericOperands
 	operation: typeof NumericOperations.subtract
-	subtrahend: InjectFromArgumentOperation | NumericOperation
+	subtrahend: AllowedNumericOperands
 }
 
 export interface TruncateOperation extends NumericBase {
 	operation: typeof NumericOperations.truncate
 	method: "round" | "ceiling" | "floor" | "truncate"
-	precision?: NumericConstant
-	operand: NumericOperation
+	operand: AllowedNumericOperands
 }
 
 export type NumericOperation =
-	| NumericConstant
 	| AddOperation
 	| DivideOperation
 	| MultiplyOperation
@@ -107,9 +199,9 @@ export interface OrOperation extends OperationBase {
 }
 
 export interface NumericComparisonBase extends OperationBase {
-	operand: NumericConstant | InjectFromArgumentOperation | NumericOperation
+	operand: AllowedNumericOperands
 	returns: "boolean"
-	test: NumericConstant | InjectFromArgumentOperation | NumericOperation
+	test: AllowedNumericOperands
 }
 
 export interface UnequalToOperation extends NumericComparisonBase {
@@ -145,44 +237,9 @@ export const CastableValues = [
 
 export type CastableValue = ElementOf<typeof CastableValues>
 
-export interface InjectFromMapOperation extends OperationBase {
-	operation: "injectFromMap"
-	operand: InjectFromArgumentOperation | InjectableOperation
-	test: { [key: string]: Reify<CastableValue> }
-}
-
-export interface TableLookupEntry<T extends CastableValue> {
-	operation: "tableValue"
-	operands: LogicalNumericOperation
-	returns: T
-	value: Reify<T>
-}
-
-export interface InjectFromLookupTableOperation extends OperationBase {
-	operation: "injectFromLookupTable"
-	operand: InjectFromArgumentOperation | InjectableOperation
-	test: Array<TableLookupEntry<"number">>
-}
-
 export interface InjectValueOperation extends OperationBase {
 	returns: CastableValue
 	eager?: boolean | undefined
-	parse?: boolean | undefined
-}
-
-export interface FormInputOperation extends InjectValueOperation {
-	name: string
-	operation: "formInput"
-}
-
-export interface LocalStorageOperation extends InjectValueOperation {
-	key: string
-	operation: "localStorage"
-}
-
-export interface SessionStorageOperation extends InjectValueOperation {
-	key: string
-	operation: "sessionStorage"
 }
 
 export type LogicalNumericOperation =
@@ -195,21 +252,10 @@ export type LogicalNumericOperation =
 
 export type BooleanOperation = AndOperation | OrOperation
 
-export type InjectableOperation =
-	| FormInputOperation
-	| LocalStorageOperation
-	| SessionStorageOperation
-
-export type LookupOperation =
-	| InjectFromMapOperation
-	| InjectFromLookupTableOperation
-
 export type Operation =
 	| NumericOperation
 	| LogicalNumericOperation
 	| BooleanOperation
-	| InjectableOperation
-	| LookupOperation
 
 export type Reify<T extends CastableValue> = T extends "integer" | "number"
 	? number
