@@ -4,26 +4,32 @@ import { expect, test } from "vitest"
 import compareNumbers from "."
 import { Some } from "@sitebender/fp/lib/option"
 import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import makeLessThan from "../../../types/conditional/lessThan/makelessThan"
+import makeMoreThan from "../../../types/conditional/moreThan/makeMoreThan"
+import makeNoMoreThan from "../../../types/conditional/noMoreThan/makeNoMoreThan"
+import makeNoLessThan from "../../../types/conditional/noLessThan/makeNoLessThan"
+import makeEqualTo from "../../../types/conditional/equalTo/makeEqualTo"
+import makeUnequalTo from "../../../types/conditional/unequalTo/makeUnequalTo"
 
 test("lessThan returns the value when it is less than the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(5),
-		operation: "lessThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const success = compareNumbers(
+		makeLessThan({
+			operand: makeInjectedNumber(5),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(5)
 })
 
 test("lessThan returns an error when it is not less than the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "lessThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeLessThan({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
@@ -32,24 +38,24 @@ test("lessThan returns an error when it is not less than the test", async () => 
 })
 
 test("moreThan returns the value when it is greater than the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "moreThan",
-		returns: "boolean",
-		test: makeInjectedNumber(5),
-	})()
+	const success = compareNumbers(
+		makeMoreThan({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(5),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("moreThan returns an error when it is not greater than the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "moreThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeMoreThan({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
@@ -58,24 +64,24 @@ test("moreThan returns an error when it is not greater than the test", async () 
 })
 
 test("noMoreThan returns the value when it is no more than the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "noMoreThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const success = compareNumbers(
+		makeNoMoreThan({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("noMoreThan returns an error when it is not no more than the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(7),
-		operation: "noMoreThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeNoMoreThan({
+			operand: makeInjectedNumber(7),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
@@ -84,24 +90,24 @@ test("noMoreThan returns an error when it is not no more than the test", async (
 })
 
 test("noLessThan returns the value when it is no less than the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "noLessThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const success = compareNumbers(
+		makeNoLessThan({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("noLessThan returns an error when it is not no less than the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(5),
-		operation: "noLessThan",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeNoLessThan({
+			operand: makeInjectedNumber(5),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
@@ -110,48 +116,48 @@ test("noLessThan returns an error when it is not no less than the test", async (
 })
 
 test("equalTo returns the value when it is equal to the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "equalTo",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const success = compareNumbers(
+		makeEqualTo({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(6)
 })
 
 test("equalTo returns an error when it is not equal to the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(5),
-		operation: "equalTo",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeEqualTo({
+			operand: makeInjectedNumber(5),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual(["5 is not equalTo 6."])
 })
 
 test("unequalTo returns the value when it is unequal to the test", async () => {
-	const success = compareNumbers({
-		operand: makeInjectedNumber(5),
-		operation: "unequalTo",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const success = compareNumbers(
+		makeUnequalTo({
+			operand: makeInjectedNumber(5),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(success)).toBeFalsy()
 	expect((success as Right<Some<number>>).right.value).toEqual(5)
 })
 
 test("unequalTo returns an error when it is not unequal to the test", async () => {
-	const failure = compareNumbers({
-		operand: makeInjectedNumber(6),
-		operation: "unequalTo",
-		returns: "boolean",
-		test: makeInjectedNumber(6),
-	})()
+	const failure = compareNumbers(
+		makeUnequalTo({
+			operand: makeInjectedNumber(6),
+			test: makeInjectedNumber(6),
+		}),
+	)()
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([

@@ -9,11 +9,12 @@ import { left, right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
 import injectFromFormInput from "../../../../makeInjector/injectors/injectFromFormInput"
 import { OperationResult } from "../../operationResult/types"
+import injectFromMap from "../../../../makeInjector/injectors/injectFromMap"
 
 export type EvaluateInjectableOperation = (
 	op: InjectableOperation,
 ) => (
-	input?: Option<Reify<CastableValue>>,
+	input: Option<Reify<CastableValue>>,
 ) => OperationResult<Reify<CastableValue>>
 
 const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
@@ -22,8 +23,12 @@ const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
 			return () => right(some(op.value))
 		case InjectorSource.form:
 			return injectFromFormInput(op)()
+		case InjectorSource.map:
+			return injectFromMap(op)
+		case InjectorSource.argument:
+			return (input: Option<Reify<CastableValue>>) => right(input)
 		default:
-			return () => left([`Invalid unit operation ${op}`])
+			return () => left([`Invalid injectable operation ${op.source}`])
 	}
 }
 

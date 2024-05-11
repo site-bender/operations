@@ -5,9 +5,10 @@ import moreThan from "../../../../makeConditional/operators/number/isMoreThan"
 import noLessThan from "../../../../makeConditional/operators/number/isAtLeast"
 import noMoreThan from "../../../../makeConditional/operators/number/isAtMost"
 import unequalTo from "../../../../makeConditional/operators/number/isNotEqualTo"
+import { ConditionalOperation } from "../../../../types"
 
 export type GetComparatorF = (
-	operation: string,
+	operation: ConditionalOperation["operation"],
 ) => Either<string[], (x: number) => (y: number) => boolean>
 
 const getComparator: GetComparatorF = operation => {

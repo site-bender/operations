@@ -2,13 +2,13 @@ import { Option, none, some } from "@sitebender/fp/lib/option"
 import evaluateBooleanOperation from "./evaluateBooleanOperation"
 import evaluateInjectableOperation from "./evaluateInjectableOperation"
 import evaluateNumericOperation from "./evaluateNumericOperation"
-import isBooleanOperation from "../../utilities/isBooleanOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
-import evaluateLookupOperation from "./evaluateLookupOperation"
 import { CastableValue, Operation, Reify } from "../../../types"
 import { pipe } from "@sitebender/fp/lib/functions"
 import { OperationResult } from "../operationResult/types"
 import { left, map } from "@sitebender/fp/lib/either"
+import isAlgebraicOperation from "../../../types/algebraic/isAlgebraicOperation"
+import isInjectedOperation from "../../../types/injected/isInjectedOperation"
 
 export type ComposeOperations = (
 	o: Operation,
@@ -20,17 +20,13 @@ const composeOperations: ComposeOperations =
 	(input = none) => {
 		if (isNumericOperation(op)) {
 			return evaluateNumericOperation(op)(input as Option<number>)
-		} else if (isBooleanOperation(op)) {
-			return pipe(evaluateBooleanOperation(op)(), map(some)) as OperationResult<
-				Reify<CastableValue>
-			>
-		} else if (isInjectableOperation(op)) {
+		} else if (isAlgebraicOperation(op)) {
+			return pipe(evaluateBooleanOperation(op)(), map(some))
+		} else if (isInjectedOperation(op)) {
 			return evaluateInjectableOperation(op)(input)
-		} else if (isLookupOperation(op)) {
-			return evaluateLookupOperation(op)(input)
 		}
 
-		return left([`Unknown operation: ${op}.`])
+		return left([`Unknown operation: ${op.operation}.`])
 	}
 
 export default composeOperations

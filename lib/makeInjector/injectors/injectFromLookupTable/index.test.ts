@@ -14,6 +14,7 @@ import some from "@sitebender/fp/lib/option/some"
 import injectFromLookupTable from "."
 import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
 import makeInjectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeLessThan from "../../../types/conditional/lessThan/makelessThan"
 
 const operation: InjectFromLookupTable<"number"> = {
 	_tag: OperationTags.injector,
@@ -27,24 +28,20 @@ const operation: InjectFromLookupTable<"number"> = {
 	},
 	test: [
 		{
-			operands: {
-				operation: "lessThan",
+			operands: makeLessThan({
 				//TODO this operand isn't used in this calc; need to refactor the lessThan implementation to
 				// product a function
 				operand: makeInjectedNumber(1),
 				test: makeInjectedNumber(10),
-				returns: "boolean",
-			},
+			}),
 			returns: "number",
 			value: 1,
 		},
 		{
-			operands: {
-				operation: "lessThan",
+			operands: makeLessThan({
 				operand: makeInjectedNumber(1),
 				test: makeInjectedNumber(500),
-				returns: "boolean",
-			},
+			}),
 			returns: "number",
 			value: 0.5,
 		},
