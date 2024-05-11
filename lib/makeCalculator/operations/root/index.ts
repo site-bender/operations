@@ -14,7 +14,6 @@ export type RootF = (
 const root: RootF =
 	operation =>
 	(input = none) => {
-
 		return pipe(
 			[operation.radicand, operation.index],
 			map(liftNumeric(input)),
