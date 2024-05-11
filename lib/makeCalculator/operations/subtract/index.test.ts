@@ -67,3 +67,17 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 		"Invalid numeric operation: fail.",
 	])
 })
+
+test("returns an error when minuend and/or subtrahend is NaN", async () => {
+	const failure = subtract({
+		_tag: "numeric-operation",
+		minuend: makeInjectedNumber(Number.MIN_SAFE_INTEGER),
+		subtrahend: makeInjectedNumber(Number.NaN),
+		operation: "subtract",
+	})(none)
+
+	expect(isLeft(failure)).toBeTruthy()
+	expect((failure as Left<Array<string>>).left).toEqual([
+		"Invalid numeric operation: divide.",
+	])
+})
