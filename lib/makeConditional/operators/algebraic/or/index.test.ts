@@ -38,8 +38,8 @@ test("returns false wrapped in a right when all operands fail", async () => {
 				test: makeInjectedNumber(3),
 			}),
 			makeMoreThan({
-				operand: makeInjectedNumber(10),
-				test: makeInjectedNumber(5),
+				operand: makeInjectedNumber(5),
+				test: makeInjectedNumber(10),
 			}),
 		]),
 	)()

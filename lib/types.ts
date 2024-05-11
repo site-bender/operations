@@ -248,7 +248,7 @@ export const AlgebraicOperations = {
 
 interface AlgebraicBase {
 	_tag: typeof OperationTags.algebraic
-	operands: Array<any>
+	operands: Array<Operation>
 }
 
 export interface AndOperation extends AlgebraicBase {

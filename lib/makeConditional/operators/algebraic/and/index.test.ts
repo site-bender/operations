@@ -48,7 +48,7 @@ test("returns an error when one or more operands is an error", async () => {
 
 	expect(isLeft(failure)).toBeTruthy()
 	expect((failure as Left<Array<string>>).left).toEqual([
-		"Invalid boolean operation: lessThan.",
-		"Invalid boolean operation: moreThan.",
+		"5 is not less than 3",
+		"10 is not less than 5",
 	])
 })

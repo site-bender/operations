@@ -9,6 +9,8 @@ import { OperationResult } from "../operationResult/types"
 import { left, map } from "@sitebender/fp/lib/either"
 import isAlgebraicOperation from "../../../types/algebraic/isAlgebraicOperation"
 import isInjectedOperation from "../../../types/injected/isInjectedOperation"
+import isConditionalOperation from "../../../types/conditional/isConditionalOperation";
+import evaluateConditionalNumericOperation from "./evaluateConditionalOperation";
 
 export type ComposeOperations = (
 	o: Operation,
@@ -20,13 +22,15 @@ const composeOperations: ComposeOperations =
 	(input = none) => {
 		if (isNumericOperation(op)) {
 			return evaluateNumericOperation(op)(input as Option<number>)
+		} else if (isConditionalOperation(op)) {
+			return evaluateConditionalNumericOperation(op)(input as Option<number>)
 		} else if (isAlgebraicOperation(op)) {
 			return pipe(evaluateBooleanOperation(op)(), map(some))
 		} else if (isInjectedOperation(op)) {
 			return evaluateInjectableOperation(op)(input)
 		}
 
-		return left([`Unknown operation: ${op.operation}.`])
+		return left([`Unknown operation: ${op}.`])
 	}
 
 export default composeOperations

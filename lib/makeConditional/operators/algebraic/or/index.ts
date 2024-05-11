@@ -13,7 +13,7 @@ const or: Or = op => {
 			op.operands,
 			map(_ => composeOperations(_)()),
 		),
-		some(isRight),
+some(isRight),
 		right<boolean, Array<string>>,
 		r => () => r,
 	)
