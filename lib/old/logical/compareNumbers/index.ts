@@ -1,4 +1,4 @@
-import type { LogicalNumericOperation } from "../../../types"
+import type { ConditionalOperation } from "../../../types"
 
 import { flatMap, left, right } from "@sitebender/fp/lib/either"
 import { Option, none } from "@sitebender/fp/lib/option"
@@ -10,7 +10,7 @@ import * as OpResult from "../../operations/operationResult"
 import { OperationResult } from "../../operations/operationResult/types"
 
 export type CompareNumbers = (
-	operation: LogicalNumericOperation,
+	operation: ConditionalOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const compareNumbers: CompareNumbers =

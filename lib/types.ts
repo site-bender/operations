@@ -1,9 +1,27 @@
 export type ElementOf<T extends readonly unknown[]> = T[number]
 
+export const CastableValues = [
+	"integer",
+	"number",
+	"string",
+	"boolean",
+] as const
+
+export type CastableValue = ElementOf<typeof CastableValues>
+
+export type Reify<T extends CastableValue> = T extends "integer" | "number"
+	? number
+	: T extends "string"
+		? string
+		: T extends "boolean"
+			? boolean
+			: never
+
 export const OperationTags = {
-	constant: "constant-operation",
 	numeric: "numeric-operation",
 	injector: "injector-operation",
+	conditional: "conditional-operation",
+	algebraic: "algebraic-operation",
 } as const
 
 export const InjectorSource = {
@@ -65,7 +83,7 @@ export interface InjectFromMap<Operation extends CastableValue>
 }
 
 export interface TableLookupEntry<T extends CastableValue> {
-	operands: LogicalNumericOperation
+	operands: ConditionalOperation
 	returns: T
 	value: Reify<T>
 }
@@ -175,92 +193,76 @@ export type NumericOperation =
 	| SubtractOperation
 	| TruncateOperation
 
-//=======================================================================
+export const ConditionalOperations = {
+	equalTo: "equalTo",
+	unequalTo: "unequalTo",
+	lessThan: "lessThan",
+	noLessThan: "noLessThan",
+	moreThan: "moreThan",
+	noMoreThan: "noMoreThan",
+} as const
 
-export interface InjectFromArgumentOperation {
-	readonly operation: "injectFromArgument"
-}
-
-export interface OperationBase {
-	operation: string
-	returns: string
-}
-
-export interface AndOperation extends OperationBase {
-	operands: Array<Operation>
-	operation: "and"
-	returns: "boolean"
-}
-
-export interface OrOperation extends OperationBase {
-	operands: Array<Operation>
-	operation: "or"
-	returns: "boolean"
-}
-
-export interface NumericComparisonBase extends OperationBase {
+interface ConditionalBase {
+	_tag: typeof OperationTags.conditional
 	operand: AllowedNumericOperands
-	returns: "boolean"
 	test: AllowedNumericOperands
 }
 
-export interface UnequalToOperation extends NumericComparisonBase {
-	operation: "unequalTo"
+export interface EqualTo extends ConditionalBase {
+	operation: typeof ConditionalOperations.equalTo
 }
 
-export interface EqualToOperation extends NumericComparisonBase {
-	operation: "equalTo"
+export interface UnequalTo extends ConditionalBase {
+	operation: typeof ConditionalOperations.unequalTo
 }
 
-export interface LessThanOperation extends NumericComparisonBase {
-	operation: "lessThan"
+export interface LessThan extends ConditionalBase {
+	operation: typeof ConditionalOperations.lessThan
 }
 
-export interface MoreThanOperation extends NumericComparisonBase {
-	operation: "moreThan"
+export interface MoreThan extends ConditionalBase {
+	operation: typeof ConditionalOperations.moreThan
 }
 
-export interface NoLessThanOperation extends NumericComparisonBase {
-	operation: "noLessThan"
+export interface NoLessThan extends ConditionalBase {
+	operation: typeof ConditionalOperations.noLessThan
 }
 
-export interface NoMoreThanOperation extends NumericComparisonBase {
-	operation: "noMoreThan"
+export interface NoMoreThan extends ConditionalBase {
+	operation: typeof ConditionalOperations.noMoreThan
 }
 
-export const CastableValues = [
-	"integer",
-	"number",
-	"string",
-	"boolean",
-] as const
+export type ConditionalOperation =
+	| EqualTo
+	| UnequalTo
+	| LessThan
+	| MoreThan
+	| NoLessThan
+	| NoMoreThan
 
-export type CastableValue = ElementOf<typeof CastableValues>
+export const AlgebraicOperations = {
+	and: "and",
+	or: "or",
+	xor: "xor",
+} as const
 
-export interface InjectValueOperation extends OperationBase {
-	returns: CastableValue
-	eager?: boolean | undefined
+interface AlgebraicBase {
+	_tag: typeof OperationTags.algebraic
+	operands: Array<Operation>
 }
 
-export type LogicalNumericOperation =
-	| LessThanOperation
-	| NoLessThanOperation
-	| MoreThanOperation
-	| NoMoreThanOperation
-	| EqualToOperation
-	| UnequalToOperation
+export interface AndOperation extends AlgebraicBase {
+	operation: typeof AlgebraicOperations.and
+}
 
-export type BooleanOperation = AndOperation | OrOperation
+export interface OrOperation extends AlgebraicBase {
+	operation: typeof AlgebraicOperations.or
+}
+
+export type AlgebraicOperation = AndOperation | OrOperation
 
 export type Operation =
+	| AlgebraicOperation
+	| ConditionalOperation
+	| InjectableOperation
 	| NumericOperation
-	| LogicalNumericOperation
-	| BooleanOperation
-
-export type Reify<T extends CastableValue> = T extends "integer" | "number"
-	? number
-	: T extends "string"
-		? string
-		: T extends "boolean"
-			? boolean
-			: never
