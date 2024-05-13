@@ -4,8 +4,8 @@ import { right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
 import evaluateNumericOperation from "../compose/evaluateNumericOperation"
 import { OperationResult } from "../operationResult/types"
-import isInjectedNumber from "../../../types/injected/isInjectedConstant/isInjectedNumber"
-import isInjectedNumberArg from "../../../types/injected/isInjectedArgument/isInjectedNumberArg"
+import isInjectedNumber from "../../../operations/injected/isInjectedConstant/isInjectedNumber"
+import isInjectedNumberArg from "../../../operations/injected/isInjectedArgument/isInjectedNumberArg"
 
 export type LiftNumericF = (
 	input: Option<number>,

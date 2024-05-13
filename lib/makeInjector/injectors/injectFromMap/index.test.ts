@@ -12,7 +12,7 @@ import none from "@sitebender/fp/lib/option/none"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromMap from "."
-import makeInjectedStringArg from "../../../types/injected/makeInjectedArgument/makeInjectedStringArg"
+import makeInjectedStringArg from "../../../operations/injected/makeInjectedArgument/makeInjectedStringArg"
 
 const operation: InjectFromMap<"string"> = {
 	_tag: OperationTags.injector,

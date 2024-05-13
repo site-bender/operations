@@ -3,7 +3,7 @@ import { expect, test } from "vitest"
 import truncate from "."
 import { right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("rounds number properly to precision 2", () => {
 	expect(

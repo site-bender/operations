@@ -3,13 +3,13 @@ import { expect, test } from "vitest"
 
 import compareNumbers from "."
 import { Some } from "@sitebender/fp/lib/option"
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import makeLessThan from "../../../types/conditional/lessThan/makelessThan"
-import makeMoreThan from "../../../types/conditional/moreThan/makeMoreThan"
-import makeNoMoreThan from "../../../types/conditional/noMoreThan/makeNoMoreThan"
-import makeNoLessThan from "../../../types/conditional/noLessThan/makeNoLessThan"
-import makeEqualTo from "../../../types/conditional/equalTo/makeEqualTo"
-import makeUnequalTo from "../../../types/conditional/unequalTo/makeUnequalTo"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
+import makeMoreThan from "../../../operations/conditional/moreThan/makeMoreThan"
+import makeNoMoreThan from "../../../operations/conditional/noMoreThan/makeNoMoreThan"
+import makeNoLessThan from "../../../operations/conditional/noLessThan/makeNoLessThan"
+import makeEqualTo from "../../../operations/conditional/equalTo/makeEqualTo"
+import makeUnequalTo from "../../../operations/conditional/unequalTo/makeUnequalTo"
 
 test("lessThan returns the value when it is less than the test", async () => {
 	const success = compareNumbers(

@@ -2,9 +2,9 @@ import { Left, Right, isLeft } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import and from "."
-import makeInjectedNumber from "../../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import makeLessThan from "../../../../types/conditional/lessThan/makelessThan"
-import makeAndOperation from "../../../../types/algebraic/and/makeAndOperation"
+import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeLessThan from "../../../../operations/conditional/lessThan/makelessThan"
+import makeAndOperation from "../../../../operations/algebraic/and/makeAndOperation"
 import { OperationTags } from "../../../../types"
 
 test("returns a true wrapped in a right when all operations work", async () => {

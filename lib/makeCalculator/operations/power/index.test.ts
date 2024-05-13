@@ -4,8 +4,8 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import power from "."
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({

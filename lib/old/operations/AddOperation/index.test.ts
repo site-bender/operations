@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 import { none, some } from "@sitebender/fp/lib/option"
 
 import AddOperation from "."
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("creates Some<AddOperation> from a config object", () => {
 	const op1 = AddOperation({

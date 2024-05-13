@@ -7,9 +7,9 @@ import { CastableValue, Operation, Reify } from "../../../types"
 import { pipe } from "@sitebender/fp/lib/functions"
 import { OperationResult } from "../operationResult/types"
 import { left, map } from "@sitebender/fp/lib/either"
-import isAlgebraicOperation from "../../../types/algebraic/isAlgebraicOperation"
-import isInjectedOperation from "../../../types/injected/isInjectedOperation"
-import isConditionalOperation from "../../../types/conditional/isConditionalOperation"
+import isAlgebraicOperation from "../../../operations/algebraic/isAlgebraicOperation"
+import isInjectedOperation from "../../../operations/injected/isInjectedOperation"
+import isConditionalOperation from "../../../operations/conditional/isConditionalOperation"
 import evaluateConditionalNumericOperation from "./evaluateConditionalOperation"
 
 export type ComposeOperations = (

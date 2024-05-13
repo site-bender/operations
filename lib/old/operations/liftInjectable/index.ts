@@ -4,8 +4,8 @@ import { right } from "@sitebender/fp/lib/either"
 import { Option, none, some } from "@sitebender/fp/lib/option"
 import evaluateInjectableOperation from "../compose/evaluateInjectableOperation"
 import { OperationResult } from "../operationResult/types"
-import isInjectedArgument from "../../../types/injected/isInjectedArgument"
-import isInjectedConstant from "../../../types/injected/isInjectedConstant"
+import isInjectedArgument from "../../../operations/injected/isInjectedArgument"
+import isInjectedConstant from "../../../operations/injected/isInjectedConstant"
 
 export type LiftInjectableF = (
 	input?: Option<Reify<CastableValue>>,

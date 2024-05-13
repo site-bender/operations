@@ -1,5 +1,5 @@
 import { test, expect } from "vitest"
-import makeInjectedNumberFromForm from "../../../types/injected/makeInjectedFromForm/makeInjectedNumberFromForm"
+import makeInjectedNumberFromForm from "../../../operations/injected/makeInjectedFromForm/makeInjectedNumberFromForm"
 import { JSDOM } from "jsdom"
 import injectFromFormInput from "."
 import left from "@sitebender/fp/lib/either/left"

@@ -12,9 +12,9 @@ import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromLookupTable from "."
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import makeInjectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
-import makeLessThan from "../../../types/conditional/lessThan/makelessThan"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 
 const operation: InjectFromLookupTable<"number"> = {
 	_tag: OperationTags.injector,

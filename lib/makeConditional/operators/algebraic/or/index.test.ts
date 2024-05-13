@@ -2,10 +2,10 @@ import { right } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import or from "."
-import makeInjectedNumber from "../../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import makeOrOperation from "../../../../types/algebraic/or/makeOrOperation"
-import makeLessThan from "../../../../types/conditional/lessThan/makelessThan"
-import makeMoreThan from "../../../../types/conditional/moreThan/makeMoreThan"
+import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeOrOperation from "../../../../operations/algebraic/or/makeOrOperation"
+import makeLessThan from "../../../../operations/conditional/lessThan/makelessThan"
+import makeMoreThan from "../../../../operations/conditional/moreThan/makeMoreThan"
 
 test("returns a true wrapped in a right when one operation works", async () => {
 	const success = or(

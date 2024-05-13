@@ -4,8 +4,8 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import multiply from "."
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({

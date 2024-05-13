@@ -3,8 +3,8 @@ import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import divide from "."
 import { DivideOperation } from "../../../types"
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
-import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("divides a divisor into a dividend", async () => {
 	const success = divide({

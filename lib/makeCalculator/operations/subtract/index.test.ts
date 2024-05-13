@@ -4,8 +4,8 @@ import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import subtract from "."
 import { none, some } from "@sitebender/fp/lib/option"
-import injectedNumberArg from "../../../types/injected/makeInjectedArgument/makeInjectedNumberArg"
-import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/makeInjectedNumer"
+import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({
