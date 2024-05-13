@@ -1,4 +1,4 @@
-import type { ConditionalOperation } from "../../../../types"
+import type { SbConditionalOperation } from "../../../../types"
 
 import { Lazy } from "@sitebender/fp/lib/lazy"
 import getComparator from "../getComparator"
@@ -6,7 +6,7 @@ import { Either, map } from "@sitebender/fp/lib/either"
 import { pipe } from "@sitebender/fp/lib/functions"
 
 export type MakeCompareF = (
-	operation: ConditionalOperation["operation"],
+	operation: SbConditionalOperation["operation"],
 ) => (operand: number) => (test: number) => Lazy<Either<string[], boolean>>
 
 const makeCompare: MakeCompareF = operation => operand => test => {

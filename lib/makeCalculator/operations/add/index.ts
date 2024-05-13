@@ -1,4 +1,4 @@
-import type { AddOperation } from "../../../types"
+import type { SbAddOperation } from "../../../types"
 
 import map from "@sitebender/fp/lib/array/map"
 import { Option, none } from "@sitebender/fp/lib/option"
@@ -10,7 +10,7 @@ import liftNumeric from "../../../old/operations/liftNumerical"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type AddF = (
-	op: AddOperation,
+	op: SbAddOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const add: AddF =

@@ -1,7 +1,7 @@
 import {
-	InjectorSource,
-	OperationTags,
-	type InjectFromLookupTable,
+	SbInjectorSource,
+	SbOperationTags,
+	type SbInjectFromLookupTable,
 } from "../../../types"
 
 import { expect, test } from "vitest"
@@ -16,14 +16,14 @@ import makeInjectedNumber from "../../../operations/injected/makeInjectedConstan
 import makeInjectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 
-const operation: InjectFromLookupTable<"number"> = {
-	_tag: OperationTags.injector,
+const operation: SbInjectFromLookupTable<"number"> = {
+	_tag: SbOperationTags.injector,
 	operation: "number",
-	source: InjectorSource.table,
+	source: SbInjectorSource.table,
 	operand: {
-		_tag: OperationTags.injector,
+		_tag: SbOperationTags.injector,
 		injectedDataType: "number",
-		source: InjectorSource.form,
+		source: SbInjectorSource.form,
 		field: "foo",
 	},
 	test: [
@@ -83,7 +83,7 @@ test("[injectFromLookupTable] (injectors) returns a value for a mapped key from 
 
 	globalThis.document = dom.window.document
 
-	const withParam: InjectFromLookupTable<"number"> = {
+	const withParam: SbInjectFromLookupTable<"number"> = {
 		...operation,
 		operand: makeInjectedNumberArg,
 	}

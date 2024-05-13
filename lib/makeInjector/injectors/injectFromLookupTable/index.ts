@@ -7,10 +7,10 @@ import liftNumeric from "../../../old/operations/liftNumerical"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 import * as OpResult from "../../../old/operations/operationResult"
 import liftInjectable from "../../../old/operations/liftInjectable"
-import { InjectFromLookupTable } from "../../../types"
+import { SbInjectFromLookupTable } from "../../../types"
 
 type TableLookup = (
-	op: InjectFromLookupTable<"number">,
+	op: SbInjectFromLookupTable<"number">,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const injectFromLookupTable: TableLookup =

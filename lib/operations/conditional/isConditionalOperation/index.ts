@@ -1,12 +1,12 @@
 import {
-	ConditionalOperation,
-	ConditionalOperations,
-	OperationTags,
+	SbConditionalOperation,
+	SbConditionalOperations,
+	SbOperationTags,
 } from "../../../types"
 
-const isConditionalOperation = (o: any): o is ConditionalOperation =>
+const isConditionalOperation = (o: any): o is SbConditionalOperation =>
 	typeof o === "object" &&
-	o._tag === OperationTags.conditional &&
-	Object.keys(ConditionalOperations).includes(o.operation)
+	o._tag === SbOperationTags.conditional &&
+	Object.keys(SbConditionalOperations).includes(o.operation)
 
 export default isConditionalOperation

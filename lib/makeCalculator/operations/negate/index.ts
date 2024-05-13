@@ -1,4 +1,4 @@
-import { type NegateOperation } from "../../../types"
+import { type SbNegateOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import pipe from "@sitebender/fp/lib/functions/pipe"
@@ -7,7 +7,7 @@ import { OperationResult } from "../../../old/operations/operationResult/types"
 import liftNumeric from "../../../old/operations/liftNumerical"
 
 export type Negate = (
-	operation: NegateOperation,
+	operation: SbNegateOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const negate: Negate =

@@ -1,16 +1,16 @@
 import {
-	AllowedNumericOperands,
-	ConditionalOperations,
-	LessThan,
-	OperationTags,
+	SbAllowedNumericOperands,
+	SbConditionalOperations,
+	SbLessThan,
+	SbOperationTags,
 } from "../../../../types"
 
 const makeLessThan = (o: {
-	operand: AllowedNumericOperands
-	test: AllowedNumericOperands
-}): LessThan => ({
-	operation: ConditionalOperations.lessThan,
-	_tag: OperationTags.conditional,
+	operand: SbAllowedNumericOperands
+	test: SbAllowedNumericOperands
+}): SbLessThan => ({
+	operation: SbConditionalOperations.lessThan,
+	_tag: SbOperationTags.conditional,
 	operand: o.operand,
 	test: o.test,
 })

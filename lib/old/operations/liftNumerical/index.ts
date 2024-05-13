@@ -1,4 +1,4 @@
-import { AllowedNumericOperands } from "../../../types"
+import { SbAllowedNumericOperands } from "../../../types"
 
 import { right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
@@ -9,7 +9,7 @@ import isInjectedNumberArg from "../../../operations/injected/isInjectedArgument
 
 export type LiftNumericF = (
 	input: Option<number>,
-) => (operand: AllowedNumericOperands) => OperationResult<number>
+) => (operand: SbAllowedNumericOperands) => OperationResult<number>
 
 const liftNumeric: LiftNumericF = input => action => {
 	return isInjectedNumber(action)

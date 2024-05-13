@@ -1,11 +1,11 @@
-import type { AlgebraicOperation } from "../../../../types"
+import type { SbAlgebraicOperation } from "../../../../types"
 
 import { Either, left } from "@sitebender/fp/lib/either"
 import and from "../../../../makeConditional/operators/algebraic/and"
 import or from "../../../../makeConditional/operators/algebraic/or"
 
 export type EvaluateBooleanOperations = (
-	o: AlgebraicOperation,
+	o: SbAlgebraicOperation,
 ) => () => Either<Array<string>, boolean>
 
 const evaluateBooleanOperation: EvaluateBooleanOperations = op => {

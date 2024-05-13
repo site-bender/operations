@@ -1,4 +1,4 @@
-import { type AddOperation } from "../../../types"
+import { type SbAddOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
@@ -72,7 +72,7 @@ test("returns an error when one or more addends is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as unknown as AddOperation,
+			} as unknown as SbAddOperation,
 			{
 				_tag: "numericOperation",
 				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
@@ -81,7 +81,7 @@ test("returns an error when one or more addends is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as unknown as AddOperation,
+			} as unknown as SbAddOperation,
 		],
 		operation: "add",
 	})(none)

@@ -1,4 +1,4 @@
-import type { ConditionalOperation } from "../../../../types"
+import type { SbConditionalOperation } from "../../../../types"
 
 import { Either, left, right } from "@sitebender/fp/lib/either"
 import { Option, none } from "@sitebender/fp/lib/option"
@@ -16,7 +16,7 @@ import liftNumeric from "../../liftNumerical"
 import { map } from "@sitebender/fp/lib/array"
 
 export type EvaluateConditionalNumericOperation = (
-	op: ConditionalOperation,
+	op: SbConditionalOperation,
 ) => (input: Option<number>) => Either<Array<string>, Option<number>>
 
 const evaluateConditionalNumericOperation: EvaluateConditionalNumericOperation =

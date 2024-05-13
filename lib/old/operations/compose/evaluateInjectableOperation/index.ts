@@ -1,7 +1,7 @@
 import {
-	InjectorSource,
-	type CastableValue,
-	type InjectableOperation,
+	SbInjectorSource,
+	type SbCastableValue,
+	type SbInjectableOperation,
 	type Reify,
 } from "../../../../types"
 
@@ -12,21 +12,21 @@ import { OperationResult } from "../../operationResult/types"
 import injectFromMap from "../../../../makeInjector/injectors/injectFromMap"
 
 export type EvaluateInjectableOperation = (
-	op: InjectableOperation,
+	op: SbInjectableOperation,
 ) => (
-	input: Option<Reify<CastableValue>>,
-) => OperationResult<Reify<CastableValue>>
+	input: Option<Reify<SbCastableValue>>,
+) => OperationResult<Reify<SbCastableValue>>
 
 const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
 	switch (op.source) {
-		case InjectorSource.constant:
+		case SbInjectorSource.constant:
 			return () => right(some(op.value))
-		case InjectorSource.form:
+		case SbInjectorSource.form:
 			return injectFromFormInput(op)()
-		case InjectorSource.map:
+		case SbInjectorSource.map:
 			return injectFromMap(op)
-		case InjectorSource.argument:
-			return (input: Option<Reify<CastableValue>>) => right(input)
+		case SbInjectorSource.argument:
+			return (input: Option<Reify<SbCastableValue>>) => right(input)
 		default:
 			return () => left([`Invalid injectable operation ${op.source}`])
 	}

@@ -1,4 +1,4 @@
-import type { DivideOperation } from "../../../types"
+import type { SbDivideOperation } from "../../../types"
 
 import { Option, none, some } from "@sitebender/fp/lib/option"
 import { left, right } from "@sitebender/fp/lib/either"
@@ -9,7 +9,7 @@ import { map } from "@sitebender/fp/lib/array"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type Divide = (
-	operation: DivideOperation,
+	operation: SbDivideOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const divide: Divide =

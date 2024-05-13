@@ -1,4 +1,4 @@
-import { type NegateOperation } from "../../../types"
+import { type SbNegateOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
@@ -46,7 +46,7 @@ test("returns an error when the operand is an error", async () => {
 		operand: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as NegateOperation,
+		} as unknown as SbNegateOperation,
 		operation: "negate",
 	})()
 

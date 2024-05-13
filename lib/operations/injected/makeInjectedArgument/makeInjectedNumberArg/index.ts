@@ -1,13 +1,13 @@
 import {
-	InjectArgument,
-	InjectorSource,
-	OperationTags,
+	SbInjectArgument,
+	SbInjectorSource,
+	SbOperationTags,
 } from "../../../../types"
 
-const injectedNumberArg: InjectArgument<"number"> = {
+const injectedNumberArg: SbInjectArgument<"number"> = {
 	injectedDataType: "number",
-	source: InjectorSource.argument,
-	_tag: OperationTags.injector,
+	source: SbInjectorSource.argument,
+	_tag: SbOperationTags.injector,
 }
 
 export default injectedNumberArg

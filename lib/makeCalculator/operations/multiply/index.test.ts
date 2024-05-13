@@ -1,4 +1,4 @@
-import { type MultiplyOperation } from "../../../types"
+import { type SbMultiplyOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
@@ -64,7 +64,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as unknown as MultiplyOperation,
+			} as unknown as SbMultiplyOperation,
 			{
 				_tag: "numericOperation",
 				multipliers: [5, 6].map(makeInjectedNumber),
@@ -73,7 +73,7 @@ test("returns an error when one or more multipliers is an error", async () => {
 			{
 				operation: "fail",
 				returns: "error",
-			} as unknown as MultiplyOperation,
+			} as unknown as SbMultiplyOperation,
 		],
 		operation: "multiply",
 	})(none)

@@ -3,7 +3,7 @@ import evaluateBooleanOperation from "./evaluateBooleanOperation"
 import evaluateInjectableOperation from "./evaluateInjectableOperation"
 import evaluateNumericOperation from "./evaluateNumericOperation"
 import isNumericOperation from "../../utilities/isNumericOperation"
-import { CastableValue, Operation, Reify } from "../../../types"
+import { SbCastableValue, SbOperation, Reify } from "../../../types"
 import { pipe } from "@sitebender/fp/lib/functions"
 import { OperationResult } from "../operationResult/types"
 import { left, map } from "@sitebender/fp/lib/either"
@@ -13,10 +13,10 @@ import isConditionalOperation from "../../../operations/conditional/isConditiona
 import evaluateConditionalNumericOperation from "./evaluateConditionalOperation"
 
 export type ComposeOperations = (
-	o: Operation,
+	o: SbOperation,
 ) => (
-	input?: Option<Reify<CastableValue>>,
-) => OperationResult<Reify<CastableValue>>
+	input?: Option<Reify<SbCastableValue>>,
+) => OperationResult<Reify<SbCastableValue>>
 const composeOperations: ComposeOperations =
 	op =>
 	(input = none) => {

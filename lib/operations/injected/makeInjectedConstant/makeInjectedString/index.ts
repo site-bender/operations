@@ -1,6 +1,6 @@
-import { InjectConstant } from "../../../../types"
+import { SbInjectConstant } from "../../../../types"
 
-const makeInjectedString = (value: string): InjectConstant<"string"> => ({
+const makeInjectedString = (value: string): SbInjectConstant<"string"> => ({
 	injectedDataType: "string",
 	source: "constant",
 	value,

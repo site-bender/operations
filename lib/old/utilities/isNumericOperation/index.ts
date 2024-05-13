@@ -1,16 +1,16 @@
 import {
-	OperationTags,
+	SbOperationTags,
 	type NumericOperation,
-	type Operation,
+	type SbOperation,
 } from "../../../types"
 
 import isNotNullish from "@sitebender/fp/lib/predicates/isNotNullish"
 
 const isNumericOperation = (
-	operation: Operation,
+	operation: SbOperation,
 ): operation is NumericOperation =>
 	isNotNullish(operation) &&
 	"_tag" in operation &&
-	operation._tag === OperationTags.numeric
+	operation._tag === SbOperationTags.numeric
 
 export default isNumericOperation

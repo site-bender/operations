@@ -1,16 +1,16 @@
 import {
-	AllowedNumericOperands,
-	ConditionalOperations,
-	EqualTo,
-	OperationTags,
+	SbAllowedNumericOperands,
+	SbConditionalOperations,
+	SbEqualTo,
+	SbOperationTags,
 } from "../../../../types"
 
 const makeEqualTo = (o: {
-	operand: AllowedNumericOperands
-	test: AllowedNumericOperands
-}): EqualTo => ({
-	operation: ConditionalOperations.equalTo,
-	_tag: OperationTags.conditional,
+	operand: SbAllowedNumericOperands
+	test: SbAllowedNumericOperands
+}): SbEqualTo => ({
+	operation: SbConditionalOperations.equalTo,
+	_tag: SbOperationTags.conditional,
 	operand: o.operand,
 	test: o.test,
 })

@@ -1,4 +1,4 @@
-import type { PowerOperation } from "../../../types"
+import type { SbPowerOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import liftNumeric from "../../../old/operations/liftNumerical"
@@ -8,7 +8,7 @@ import * as OpResult from "../../../old/operations/operationResult"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type PowerF = (
-	operation: PowerOperation,
+	operation: SbPowerOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const power: PowerF =

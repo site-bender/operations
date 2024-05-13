@@ -1,12 +1,12 @@
 import {
-	AlgebraicOperations,
-	OrOperation,
-	OperationTags,
+	SbAlgebraicOperations,
+	SbOrOperation,
+	SbOperationTags,
 } from "../../../../types"
 
-const isOrOperation = (o: any): o is OrOperation =>
+const isOrOperation = (o: any): o is SbOrOperation =>
 	typeof o === "object" &&
-	o._tag === OperationTags.algebraic &&
-	o.operation === AlgebraicOperations.or
+	o._tag === SbOperationTags.algebraic &&
+	o.operation === SbAlgebraicOperations.or
 
 export default isOrOperation

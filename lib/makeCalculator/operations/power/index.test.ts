@@ -1,4 +1,4 @@
-import { type PowerOperation } from "../../../types"
+import { type SbPowerOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
@@ -53,7 +53,7 @@ test("returns an error when base or exponent is an error", async () => {
 		exponent: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as PowerOperation,
+		} as unknown as SbPowerOperation,
 		operation: "power",
 	})()
 

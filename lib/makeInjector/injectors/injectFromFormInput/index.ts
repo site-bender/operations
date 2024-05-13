@@ -1,4 +1,4 @@
-import type { CastableValue, InjectFromForm, Reify } from "../../../types"
+import type { SbCastableValue, SbInjectFromForm, Reify } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import castValue from "../../../old/utilities/castValue"
@@ -8,8 +8,8 @@ import { OperationResult } from "../../../old/operations/operationResult/types"
 import { mapEither } from "../../../old/operations/operationResult"
 import { Lazy } from "@sitebender/fp/lib/lazy"
 
-export type FromFormInput = <T extends CastableValue>(
-	op: InjectFromForm<T>,
+export type FromFormInput = <T extends SbCastableValue>(
+	op: SbInjectFromForm<T>,
 ) => (input?: Option<Reify<T>>) => Lazy<OperationResult<Reify<T>>>
 
 const injectFromFormInput: FromFormInput =

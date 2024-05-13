@@ -1,12 +1,12 @@
 import {
-	InjectableOperation,
-	InjectorSource,
-	OperationTags,
+	SbInjectableOperation,
+	SbInjectorSource,
+	SbOperationTags,
 } from "../../../types"
 
-const isInjectedOperation = (o: any): o is InjectableOperation =>
+const isInjectedOperation = (o: any): o is SbInjectableOperation =>
 	typeof o === "object" &&
-	o._tag === OperationTags.injector &&
-	Object.keys(InjectorSource).includes(o.source)
+	o._tag === SbOperationTags.injector &&
+	Object.keys(SbInjectorSource).includes(o.source)
 
 export default isInjectedOperation

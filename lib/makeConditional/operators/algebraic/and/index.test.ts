@@ -5,23 +5,23 @@ import and from "."
 import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 import makeLessThan from "../../../../operations/conditional/lessThan/makelessThan"
 import makeAndOperation from "../../../../operations/algebraic/and/makeAndOperation"
-import { OperationTags } from "../../../../types"
+import { SbOperationTags } from "../../../../types"
 
 test("returns a true wrapped in a right when all operations work", async () => {
 	const success = and(
 		makeAndOperation([
 			{
-				_tag: OperationTags.numeric,
+				_tag: SbOperationTags.numeric,
 				addends: [3, 4].map(makeInjectedNumber),
 				operation: "add",
 			},
 			{
-				_tag: OperationTags.numeric,
+				_tag: SbOperationTags.numeric,
 				addends: [5, 6].map(makeInjectedNumber),
 				operation: "add",
 			},
 			{
-				_tag: OperationTags.numeric,
+				_tag: SbOperationTags.numeric,
 				addends: [7, 8, 9].map(makeInjectedNumber),
 				operation: "add",
 			},

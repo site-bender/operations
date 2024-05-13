@@ -1,15 +1,15 @@
 export type ElementOf<T extends readonly unknown[]> = T[number]
 
-export const CastableValues = [
+export const SbCastableValues = [
 	"integer",
 	"number",
 	"string",
 	"boolean",
 ] as const
 
-export type CastableValue = ElementOf<typeof CastableValues>
+export type SbCastableValue = ElementOf<typeof SbCastableValues>
 
-export type Reify<T extends CastableValue> = T extends "integer" | "number"
+export type Reify<T extends SbCastableValue> = T extends "integer" | "number"
 	? number
 	: T extends "string"
 		? string
@@ -17,14 +17,14 @@ export type Reify<T extends CastableValue> = T extends "integer" | "number"
 			? boolean
 			: never
 
-export const OperationTags = {
+export const SbOperationTags = {
 	numeric: "numericOperation",
 	injector: "injectorOperation",
 	conditional: "conditionalOperation",
 	algebraic: "algebraicOperation",
 } as const
 
-export const InjectorSource = {
+export const SbInjectorSource = {
 	constant: "constant",
 	argument: "argument",
 	form: "form",
@@ -34,90 +34,90 @@ export const InjectorSource = {
 	table: "table",
 } as const
 
-interface InjectValueBase {
-	_tag: typeof OperationTags.injector
-	source: keyof typeof InjectorSource
+interface SbInjectValueBase {
+	_tag: typeof SbOperationTags.injector
+	source: keyof typeof SbInjectorSource
 	eager?: boolean
 }
 
-export interface InjectConstant<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectConstant<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.constant
+	source: typeof SbInjectorSource.constant
 	value: Reify<Type>
 }
 
-export interface InjectArgument<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectArgument<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.argument
+	source: typeof SbInjectorSource.argument
 }
 
-export interface InjectFromForm<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectFromForm<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.form
+	source: typeof SbInjectorSource.form
 	field: string
 }
 
-export interface InjectFromSession<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectFromSession<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.session
+	source: typeof SbInjectorSource.session
 	key: string
 }
 
-export interface InjectFromLocal<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectFromLocal<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.local
+	source: typeof SbInjectorSource.local
 	key: string
 }
 
-export interface InjectFromMap<Type extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectFromMap<Type extends SbCastableValue>
+	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof InjectorSource.map
-	operand: InjectableOperationOfType<"string">
+	source: typeof SbInjectorSource.map
+	operand: SbInjectableOperationOfType<"string">
 	test: { [key: string]: Reify<Type> }
 }
 
-export interface TableLookupEntry<T extends CastableValue> {
-	operands: ConditionalOperation
+export interface SbTableLookupEntry<T extends SbCastableValue> {
+	operands: SbConditionalOperation
 	returns: T
 	value: Reify<T>
 }
 
-export interface InjectFromLookupTable<Operation extends CastableValue>
-	extends InjectValueBase {
+export interface SbInjectFromLookupTable<Operation extends SbCastableValue>
+	extends SbInjectValueBase {
 	operation: Operation
-	source: typeof InjectorSource.table
+	source: typeof SbInjectorSource.table
 	operand: Exclude<
-		InjectableOperationOfType<Operation>,
-		InjectFromLookupTable<Operation>
+		SbInjectableOperationOfType<Operation>,
+		SbInjectFromLookupTable<Operation>
 	>
-	test: Array<TableLookupEntry<Operation>>
+	test: Array<SbTableLookupEntry<Operation>>
 }
 
-export type InjectableOperationOfType<T extends CastableValue> =
-	| InjectConstant<T>
-	| InjectArgument<T>
-	| InjectFromForm<T>
-	| InjectFromSession<T>
-	| InjectFromLocal<T>
-	| InjectFromMap<T>
-	| InjectFromLookupTable<T>
+export type SbInjectableOperationOfType<T extends SbCastableValue> =
+	| SbInjectConstant<T>
+	| SbInjectArgument<T>
+	| SbInjectFromForm<T>
+	| SbInjectFromSession<T>
+	| SbInjectFromLocal<T>
+	| SbInjectFromMap<T>
+	| SbInjectFromLookupTable<T>
 
-export type InjectableOperation =
-	| InjectConstant<CastableValue>
-	| InjectArgument<CastableValue>
-	| InjectFromForm<CastableValue>
-	| InjectFromSession<CastableValue>
-	| InjectFromLocal<CastableValue>
-	| InjectFromMap<CastableValue>
-	| InjectFromLookupTable<CastableValue>
+export type SbInjectableOperation =
+	| SbInjectConstant<SbCastableValue>
+	| SbInjectArgument<SbCastableValue>
+	| SbInjectFromForm<SbCastableValue>
+	| SbInjectFromSession<SbCastableValue>
+	| SbInjectFromLocal<SbCastableValue>
+	| SbInjectFromMap<SbCastableValue>
+	| SbInjectFromLookupTable<SbCastableValue>
 
-export const NumericOperations = {
+export const SbNumericOperations = {
 	add: "add",
 	divide: "divide",
 	multiply: "multiply",
@@ -128,72 +128,72 @@ export const NumericOperations = {
 	truncate: "truncate",
 } as const
 
-interface NumericBase {
-	_tag: typeof OperationTags.numeric
-	precision?: InjectConstant<"number">
+interface SbNumericBase {
+	_tag: typeof SbOperationTags.numeric
+	precision?: SbInjectConstant<"number">
 }
 
-export type AllowedNumericOperands =
-	| InjectArgument<"number">
-	| InjectConstant<"number">
-	| NumericOperation
+export type SbAllowedNumericOperands =
+	| SbInjectArgument<"number">
+	| SbInjectConstant<"number">
+	| SbNumericOperation
 
-export interface AddOperation extends NumericBase {
-	addends: Array<AllowedNumericOperands>
-	operation: typeof NumericOperations.add
+export interface SbAddOperation extends SbNumericBase {
+	addends: Array<SbAllowedNumericOperands>
+	operation: typeof SbNumericOperations.add
 }
 
-export interface DivideOperation extends NumericBase {
-	dividend: AllowedNumericOperands
-	divisor: AllowedNumericOperands
-	operation: typeof NumericOperations.divide
+export interface SbDivideOperation extends SbNumericBase {
+	dividend: SbAllowedNumericOperands
+	divisor: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.divide
 }
 
-export interface MultiplyOperation extends NumericBase {
-	multipliers: Array<AllowedNumericOperands>
-	operation: typeof NumericOperations.multiply
+export interface SbMultiplyOperation extends SbNumericBase {
+	multipliers: Array<SbAllowedNumericOperands>
+	operation: typeof SbNumericOperations.multiply
 }
 
-export interface NegateOperation extends NumericBase {
-	operand: AllowedNumericOperands
-	operation: typeof NumericOperations.negate
+export interface SbNegateOperation extends SbNumericBase {
+	operand: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.negate
 }
 
-export interface PowerOperation extends NumericBase {
-	base: AllowedNumericOperands
-	exponent: AllowedNumericOperands
-	operation: typeof NumericOperations.power
+export interface SbPowerOperation extends SbNumericBase {
+	base: SbAllowedNumericOperands
+	exponent: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.power
 }
 
-export interface RootOperation extends NumericBase {
-	index: AllowedNumericOperands
-	operation: typeof NumericOperations.root
-	radicand: AllowedNumericOperands
+export interface SbRootOperation extends SbNumericBase {
+	index: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.root
+	radicand: SbAllowedNumericOperands
 }
 
-export interface SubtractOperation extends NumericBase {
-	minuend: AllowedNumericOperands
-	operation: typeof NumericOperations.subtract
-	subtrahend: AllowedNumericOperands
+export interface SbSubtractOperation extends SbNumericBase {
+	minuend: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.subtract
+	subtrahend: SbAllowedNumericOperands
 }
 
-export interface TruncateOperation extends NumericBase {
-	operation: typeof NumericOperations.truncate
+export interface SbTruncateOperation extends SbNumericBase {
+	operation: typeof SbNumericOperations.truncate
 	method: "round" | "ceiling" | "floor" | "truncate"
-	operand: AllowedNumericOperands
+	operand: SbAllowedNumericOperands
 }
 
-export type NumericOperation =
-	| AddOperation
-	| DivideOperation
-	| MultiplyOperation
-	| NegateOperation
-	| PowerOperation
-	| RootOperation
-	| SubtractOperation
-	| TruncateOperation
+export type SbNumericOperation =
+	| SbAddOperation
+	| SbDivideOperation
+	| SbMultiplyOperation
+	| SbNegateOperation
+	| SbPowerOperation
+	| SbRootOperation
+	| SbSubtractOperation
+	| SbTruncateOperation
 
-export const ConditionalOperations = {
+export const SbConditionalOperations = {
 	equalTo: "equalTo",
 	unequalTo: "unequalTo",
 	lessThan: "lessThan",
@@ -202,67 +202,67 @@ export const ConditionalOperations = {
 	noMoreThan: "noMoreThan",
 } as const
 
-interface ConditionalBase {
-	_tag: typeof OperationTags.conditional
-	operand: AllowedNumericOperands
-	test: AllowedNumericOperands
+interface SbConditionalBase {
+	_tag: typeof SbOperationTags.conditional
+	operand: SbAllowedNumericOperands
+	test: SbAllowedNumericOperands
 }
 
-export interface EqualTo extends ConditionalBase {
-	operation: typeof ConditionalOperations.equalTo
+export interface SbEqualTo extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.equalTo
 }
 
-export interface UnequalTo extends ConditionalBase {
-	operation: typeof ConditionalOperations.unequalTo
+export interface SbUnequalTo extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.unequalTo
 }
 
-export interface LessThan extends ConditionalBase {
-	operation: typeof ConditionalOperations.lessThan
+export interface SbLessThan extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.lessThan
 }
 
-export interface MoreThan extends ConditionalBase {
-	operation: typeof ConditionalOperations.moreThan
+export interface SbMoreThan extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.moreThan
 }
 
-export interface NoLessThan extends ConditionalBase {
-	operation: typeof ConditionalOperations.noLessThan
+export interface SbNoLessThan extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.noLessThan
 }
 
-export interface NoMoreThan extends ConditionalBase {
-	operation: typeof ConditionalOperations.noMoreThan
+export interface SbNoMoreThan extends SbConditionalBase {
+	operation: typeof SbConditionalOperations.noMoreThan
 }
 
-export type ConditionalOperation =
-	| EqualTo
-	| UnequalTo
-	| LessThan
-	| MoreThan
-	| NoLessThan
-	| NoMoreThan
+export type SbConditionalOperation =
+	| SbEqualTo
+	| SbUnequalTo
+	| SbLessThan
+	| SbMoreThan
+	| SbNoLessThan
+	| SbNoMoreThan
 
-export const AlgebraicOperations = {
+export const SbAlgebraicOperations = {
 	and: "and",
 	or: "or",
 	xor: "xor",
 } as const
 
-interface AlgebraicBase {
-	_tag: typeof OperationTags.algebraic
-	operands: Array<Operation>
+interface SbAlgebraicBase {
+	_tag: typeof SbOperationTags.algebraic
+	operands: Array<SbOperation>
 }
 
-export interface AndOperation extends AlgebraicBase {
-	operation: typeof AlgebraicOperations.and
+export interface SbAndOperation extends SbAlgebraicBase {
+	operation: typeof SbAlgebraicOperations.and
 }
 
-export interface OrOperation extends AlgebraicBase {
-	operation: typeof AlgebraicOperations.or
+export interface SbOrOperation extends SbAlgebraicBase {
+	operation: typeof SbAlgebraicOperations.or
 }
 
-export type AlgebraicOperation = AndOperation | OrOperation
+export type SbAlgebraicOperation = SbAndOperation | SbOrOperation
 
-export type Operation =
-	| AlgebraicOperation
-	| ConditionalOperation
-	| InjectableOperation
-	| NumericOperation
+export type SbOperation =
+	| SbAlgebraicOperation
+	| SbConditionalOperation
+	| SbInjectableOperation
+	| SbNumericOperation

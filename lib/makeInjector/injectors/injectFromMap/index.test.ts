@@ -1,7 +1,7 @@
 import {
-	InjectorSource,
-	OperationTags,
-	type InjectFromMap,
+	SbInjectorSource,
+	SbOperationTags,
+	type SbInjectFromMap,
 } from "../../../types"
 
 import { expect, test } from "vitest"
@@ -14,16 +14,16 @@ import some from "@sitebender/fp/lib/option/some"
 import injectFromMap from "."
 import makeInjectedStringArg from "../../../operations/injected/makeInjectedArgument/makeInjectedStringArg"
 
-const operation: InjectFromMap<"string"> = {
-	_tag: OperationTags.injector,
+const operation: SbInjectFromMap<"string"> = {
+	_tag: SbOperationTags.injector,
 	injectedDataType: "string",
 	operand: {
-		_tag: OperationTags.injector,
+		_tag: SbOperationTags.injector,
 		injectedDataType: "string",
-		source: InjectorSource.form,
+		source: SbInjectorSource.form,
 		field: "foo",
 	},
-	source: InjectorSource.map,
+	source: SbInjectorSource.map,
 	test: {
 		red: "#f00",
 		green: "#0f0",
@@ -53,7 +53,7 @@ test("[injectFromMap] (injectors) returns a value for a mapped key", () => {
 })
 
 test("[injectFromMap] (injectors) returns a value for a mapped key from an input", () => {
-	const withParam: InjectFromMap<"string"> = {
+	const withParam: SbInjectFromMap<"string"> = {
 		...operation,
 		operand: makeInjectedStringArg,
 	}

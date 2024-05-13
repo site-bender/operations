@@ -1,7 +1,7 @@
 import {
-	InjectorSource,
-	type CastableValue,
-	type InjectFromMap,
+	SbInjectorSource,
+	type SbCastableValue,
+	type SbInjectFromMap,
 	type Reify,
 } from "../../../../types"
 
@@ -10,14 +10,14 @@ import { Either, left } from "@sitebender/fp/lib/either"
 import lookup from "../../../../makeInjector/injectors/injectFromMap"
 
 export type EvaluateLookupOperation = (
-	op: InjectFromMap<CastableValue>,
+	op: SbInjectFromMap<SbCastableValue>,
 ) => (
-	input: Option<Reify<CastableValue>>,
-) => Either<Array<string>, Option<Reify<CastableValue>>>
+	input: Option<Reify<SbCastableValue>>,
+) => Either<Array<string>, Option<Reify<SbCastableValue>>>
 
 const evaluateLookupOperation: EvaluateLookupOperation = op => input => {
 	switch (op.source) {
-		case InjectorSource.map:
+		case SbInjectorSource.map:
 			return lookup(op)(input)
 		default:
 			return left([`Invalid numeric operation: ${op.injectedDataType}.`])

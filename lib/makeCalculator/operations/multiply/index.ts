@@ -1,4 +1,4 @@
-import type { MultiplyOperation } from "../../../types"
+import type { SbMultiplyOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import { Either } from "@sitebender/fp/lib/either"
@@ -9,7 +9,7 @@ import * as OpResult from "../../../old/operations/operationResult"
 import liftNumeric from "../../../old/operations/liftNumerical"
 
 export type MultiplyF = (
-	op: MultiplyOperation,
+	op: SbMultiplyOperation,
 ) => (input?: Option<number>) => Either<Array<string>, Option<number>>
 
 const multiply: MultiplyF =

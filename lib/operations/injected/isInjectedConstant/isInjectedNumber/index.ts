@@ -1,13 +1,13 @@
 import {
-	InjectConstant,
-	InjectorSource,
-	OperationTags,
+	SbInjectConstant,
+	SbInjectorSource,
+	SbOperationTags,
 } from "../../../../types"
 
-const isInjectedNumber = (o: any): o is InjectConstant<"number"> =>
+const isInjectedNumber = (o: any): o is SbInjectConstant<"number"> =>
 	typeof o === "object" &&
-	o._tag === OperationTags.injector &&
-	o.source === InjectorSource.constant &&
+	o._tag === SbOperationTags.injector &&
+	o.source === SbInjectorSource.constant &&
 	typeof o.value === "number"
 
 export default isInjectedNumber

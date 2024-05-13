@@ -1,13 +1,13 @@
 import {
-	AlgebraicOperations,
-	OrOperation,
-	Operation,
-	OperationTags,
+	SbAlgebraicOperations,
+	SbOrOperation,
+	SbOperation,
+	SbOperationTags,
 } from "../../../../types"
 
-const makeOrOperation = (operands: Array<Operation>): OrOperation => ({
-	operation: AlgebraicOperations.or,
-	_tag: OperationTags.algebraic,
+const makeOrOperation = (operands: Array<SbOperation>): SbOrOperation => ({
+	operation: SbAlgebraicOperations.or,
+	_tag: SbOperationTags.algebraic,
 	operands,
 })
 

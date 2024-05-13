@@ -1,12 +1,12 @@
 import {
-	InjectFromForm,
-	InjectorSource,
-	OperationTags,
+	SbInjectFromForm,
+	SbInjectorSource,
+	SbOperationTags,
 } from "../../../../types"
 
-const isInjectedNumberFromForm = (o: any): o is InjectFromForm<"number"> =>
+const isInjectedNumberFromForm = (o: any): o is SbInjectFromForm<"number"> =>
 	typeof o === "object" &&
-	o._tag === OperationTags.injector &&
-	o.source === InjectorSource.form
+	o._tag === SbOperationTags.injector &&
+	o.source === SbInjectorSource.form
 
 export default isInjectedNumberFromForm

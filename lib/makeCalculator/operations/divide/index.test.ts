@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { some } from "@sitebender/fp/lib/option"
 import divide from "."
-import { DivideOperation } from "../../../types"
+import { SbDivideOperation } from "../../../types"
 import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
@@ -51,11 +51,11 @@ test("returns an error when dividend and/or divisor is an error", async () => {
 		dividend: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as DivideOperation,
+		} as unknown as SbDivideOperation,
 		divisor: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as DivideOperation,
+		} as unknown as SbDivideOperation,
 		operation: "divide",
 	})()
 
