@@ -2,7 +2,7 @@ import { SbInjectConstant } from "../../../../types"
 
 const makeInjectedString = (value: string): SbInjectConstant<"string"> => ({
 	injectedDataType: "string",
-	source: "constant",
+	type: "constant",
 	value,
 	_tag: "injectorOperation",
 })

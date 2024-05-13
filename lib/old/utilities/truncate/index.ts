@@ -1,12 +1,12 @@
 import { pipe } from "@sitebender/fp/lib/functions"
-import { type TruncateOperation } from "../../../types"
+import { type SbTruncateOperation } from "../../../types"
 import liftNumeric from "../../operations/liftNumerical"
 import { none } from "@sitebender/fp/lib/option"
 import { map } from "../../operations/operationResult"
 import { OperationResult } from "../../operations/operationResult/types"
 import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
 
-export type TruncateF = (op: TruncateOperation) => OperationResult<number>
+export type TruncateF = (op: SbTruncateOperation) => OperationResult<number>
 
 const truncate: TruncateF = trunc => {
 	return pipe(

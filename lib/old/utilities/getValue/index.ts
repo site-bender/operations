@@ -2,11 +2,11 @@ import getFromCheckbox from "./getFromCheckbox"
 import getFromInput from "./getFromInput"
 import getFromSelect from "./getFromSelect"
 import getFromTextArea from "./getFromTextArea"
-import toLower from "@sitebender/fp/lib/string/toLower"
 import { Lazy } from "@sitebender/fp/lib/lazy"
 import { left, right } from "@sitebender/fp/lib/either"
 import { isNullish } from "@sitebender/fp/lib/predicates"
 import { OperationResult } from "../../operations/operationResult/types"
+import { SbFormInjectorData } from "../../../types"
 
 export type NullableInput =
 	| HTMLInputElement
@@ -14,28 +14,30 @@ export type NullableInput =
 	| HTMLTextAreaElement
 	| null
 
-export type GetValue = (name: string) => Lazy<OperationResult<string>>
+export type GetValue = (
+	source: SbFormInjectorData,
+) => Lazy<OperationResult<string>>
 
-const getValue: GetValue = name => () => {
-	const element: NullableInput = document.querySelector(`[name=${name}]`)
+const getValue: GetValue = source => () => {
+	const element: NullableInput = document.querySelector(`[name=${source.name}]`)
 
 	if (isNullish(element)) {
-		return left([`Form element \`${name}\` not found.`])
+		return left([`Form element \`${source.name}\` not found.`])
 	}
 
-	const tagName = toLower(element.tagName)
-
-	switch (tagName) {
-		case "input":
+	switch (element.tagName) {
+		case "INPUT":
 			return element?.type === "checkbox"
 				? right(getFromCheckbox(element as HTMLInputElement)())
 				: right(getFromInput(element as HTMLInputElement)())
-		case "select":
+		case "SELECT":
 			return right(getFromSelect(element as HTMLSelectElement)())
-		case "textarea":
+		case "TEXTAREA":
 			return right(getFromTextArea(element as HTMLTextAreaElement)())
 		default:
-			return left([`Element \`${name}\` is not a recognized form element`])
+			return left([
+				`Element \`${source.name}\` is not a recognized form element`,
+			])
 	}
 }
 

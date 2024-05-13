@@ -1,5 +1,5 @@
 import {
-	SbInjectorSource,
+	SbInjectorType,
 	SbOperationTags,
 	type SbInjectFromMap,
 } from "../../../types"
@@ -20,10 +20,13 @@ const operation: SbInjectFromMap<"string"> = {
 	operand: {
 		_tag: SbOperationTags.injector,
 		injectedDataType: "string",
-		source: SbInjectorSource.form,
-		field: "foo",
+		type: SbInjectorType.form,
+		source: {
+			name: "foo",
+			tagName: "foo",
+		},
 	},
-	source: SbInjectorSource.map,
+	type: SbInjectorType.map,
 	test: {
 		red: "#f00",
 		green: "#0f0",

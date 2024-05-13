@@ -1,4 +1,4 @@
-import type { NumericOperation } from "../../../../types"
+import type { SbNumericOperation } from "../../../../types"
 
 import { Either, left } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
@@ -12,7 +12,7 @@ import subtract from "../../../../makeCalculator/operations/subtract"
 import { truncate } from "../../../utilities"
 
 export type EvaluateNumericOperation = (
-	op: NumericOperation,
+	op: SbNumericOperation,
 ) => (input?: Option<number>) => Either<Array<string>, Option<number>>
 
 const evaluateNumericOperation: EvaluateNumericOperation = op => {

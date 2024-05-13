@@ -1,5 +1,5 @@
 import {
-	SbInjectorSource,
+	SbInjectorType,
 	type SbCastableValue,
 	type SbInjectFromMap,
 	type Reify,
@@ -16,8 +16,8 @@ export type EvaluateLookupOperation = (
 ) => Either<Array<string>, Option<Reify<SbCastableValue>>>
 
 const evaluateLookupOperation: EvaluateLookupOperation = op => input => {
-	switch (op.source) {
-		case SbInjectorSource.map:
+	switch (op.type) {
+		case SbInjectorType.map:
 			return lookup(op)(input)
 		default:
 			return left([`Invalid numeric operation: ${op.injectedDataType}.`])

@@ -15,17 +15,20 @@ const dom = new JSDOM(
 globalThis.document = dom.window.document
 
 test("[injectFromFormInput] (injectors) returns success", () => {
-	const operation = makeInjectedNumberFromForm("foo")
+	const operation = makeInjectedNumberFromForm({ name: "foo", tagName: "foo" })
 	expect(injectFromFormInput(operation)()()).toEqual(right(some(12)))
 })
 
 test("[injectFromFormInput] (injectors) returns success", () => {
-	const operation = { ...makeInjectedNumberFromForm("foo"), eager: true }
+	const operation = {
+		...makeInjectedNumberFromForm({ name: "foo", tagName: "foo" }),
+		eager: true,
+	}
 	expect(injectFromFormInput(operation)()()).toEqual(right(some(12)))
 })
 
 test("[injectFromFormInput] (injectors) returns a failure for a non-existant key", () => {
-	const operation = makeInjectedNumberFromForm("bar")
+	const operation = makeInjectedNumberFromForm({ name: "bar", tagName: "bar" })
 	expect(injectFromFormInput(operation)()()).toEqual(
 		left(["Form element `bar` not found."]),
 	)

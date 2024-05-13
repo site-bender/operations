@@ -1,5 +1,5 @@
 import {
-	SbInjectorSource,
+	SbInjectorType,
 	type SbCastableValue,
 	type SbInjectableOperation,
 	type Reify,
@@ -18,17 +18,17 @@ export type EvaluateInjectableOperation = (
 ) => OperationResult<Reify<SbCastableValue>>
 
 const evaluateInjectableOperation: EvaluateInjectableOperation = op => {
-	switch (op.source) {
-		case SbInjectorSource.constant:
+	switch (op.type) {
+		case SbInjectorType.constant:
 			return () => right(some(op.value))
-		case SbInjectorSource.form:
+		case SbInjectorType.form:
 			return injectFromFormInput(op)()
-		case SbInjectorSource.map:
+		case SbInjectorType.map:
 			return injectFromMap(op)
-		case SbInjectorSource.argument:
+		case SbInjectorType.argument:
 			return (input: Option<Reify<SbCastableValue>>) => right(input)
 		default:
-			return () => left([`Invalid injectable operation ${op.source}`])
+			return () => left([`Invalid injectable operation ${op.type}`])
 	}
 }
 

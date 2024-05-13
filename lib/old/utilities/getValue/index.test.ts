@@ -38,32 +38,52 @@ const dom = new JSDOM(
 globalThis.document = dom.window.document
 
 test("gets the value from form inputs", () => {
-	expect(getValue("text")()).toStrictEqual(right(some("value")))
-	expect(getValue("nope")()).toStrictEqual(right(none))
-	expect(getValue("bob")()).toStrictEqual(
+	expect(getValue({ name: "text", tagName: "INPUT" })()).toStrictEqual(
+		right(some("value")),
+	)
+	expect(getValue({ name: "nope", tagName: "INPUT" })()).toStrictEqual(
+		right(none),
+	)
+	expect(getValue({ name: "bob", tagName: "UNKNOWN" })()).toStrictEqual(
 		left(["Form element `bob` not found."]),
 	)
 })
 
 test("gets the value from checkboxes", () => {
-	expect(getValue("checkbox")()).toStrictEqual(right(some("checked")))
-	expect(getValue("uncheckbox")()).toStrictEqual(right(none))
+	expect(getValue({ name: "checkbox", tagName: "INPUT" })()).toStrictEqual(
+		right(some("checked")),
+	)
+	expect(getValue({ name: "uncheckbox", tagName: "INPUT" })()).toStrictEqual(
+		right(none),
+	)
 })
 
 test("gets the value from selects", () => {
-	expect(getValue("unselected")()).toStrictEqual(right(none))
-	expect(getValue("select")()).toStrictEqual(right(some("2")))
-	expect(getValue("multiselect")()).toStrictEqual(right(some("yellow")))
+	expect(getValue({ name: "unselected", tagName: "SELECT" })()).toStrictEqual(
+		right(none),
+	)
+	expect(getValue({ name: "select", tagName: "SELECT" })()).toStrictEqual(
+		right(some("2")),
+	)
+	expect(getValue({ name: "multiselect", tagName: "SELECT" })()).toStrictEqual(
+		right(some("yellow")),
+	)
 })
 
 test("gets the value from textareas", () => {
-	expect(getValue("textarea")()).toStrictEqual(right(some("textarea")))
-	expect(getValue("zero")()).toStrictEqual(right(some("0")))
-	expect(getValue("empty")()).toStrictEqual(right(none))
+	expect(getValue({ name: "textarea", tagName: "TEXTAREA" })()).toStrictEqual(
+		right(some("textarea")),
+	)
+	expect(getValue({ name: "zero", tagName: "TEXTAREA" })()).toStrictEqual(
+		right(some("0")),
+	)
+	expect(getValue({ name: "empty", tagName: "TEXTAREA" })()).toStrictEqual(
+		right(none),
+	)
 })
 
 test("returns an error Left<Array<string>> on wrong element type", () => {
-	expect(getValue("button")()).toStrictEqual(
+	expect(getValue({ name: "button", tagName: "BUTTON" })()).toStrictEqual(
 		left(["Element `button` is not a recognized form element"]),
 	)
 })

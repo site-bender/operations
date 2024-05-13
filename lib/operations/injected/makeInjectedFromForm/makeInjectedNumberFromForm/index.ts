@@ -1,16 +1,17 @@
 import {
+	SbFormInjectorData,
 	SbInjectFromForm,
-	SbInjectorSource,
+	SbInjectorType,
 	SbOperationTags,
 } from "../../../../types"
 
 const makeInjectedNumberFromForm = (
-	field: string,
+	source: SbFormInjectorData,
 ): SbInjectFromForm<"number"> => ({
 	injectedDataType: "number",
-	source: SbInjectorSource.form,
+	type: SbInjectorType.form,
 	_tag: SbOperationTags.injector,
-	field,
+	source,
 })
 
 export default makeInjectedNumberFromForm

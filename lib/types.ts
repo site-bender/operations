@@ -24,7 +24,7 @@ export const SbOperationTags = {
 	algebraic: "algebraicOperation",
 } as const
 
-export const SbInjectorSource = {
+export const SbInjectorType = {
 	constant: "constant",
 	argument: "argument",
 	form: "form",
@@ -36,48 +36,56 @@ export const SbInjectorSource = {
 
 interface SbInjectValueBase {
 	_tag: typeof SbOperationTags.injector
-	source: keyof typeof SbInjectorSource
+	type: keyof typeof SbInjectorType
 	eager?: boolean
 }
 
 export interface SbInjectConstant<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.constant
+	type: typeof SbInjectorType.constant
 	value: Reify<Type>
 }
 
 export interface SbInjectArgument<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.argument
+	type: typeof SbInjectorType.argument
+}
+
+export interface SbFormInjectorData {
+	form?: string
+	id?: string
+	name: string
+	selector?: string
+	tagName: string
 }
 
 export interface SbInjectFromForm<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.form
-	field: string
+	type: typeof SbInjectorType.form
+	source: SbFormInjectorData
 }
 
 export interface SbInjectFromSession<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.session
+	type: typeof SbInjectorType.session
 	key: string
 }
 
 export interface SbInjectFromLocal<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.local
+	type: typeof SbInjectorType.local
 	key: string
 }
 
 export interface SbInjectFromMap<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
-	source: typeof SbInjectorSource.map
+	type: typeof SbInjectorType.map
 	operand: SbInjectableOperationOfType<"string">
 	test: { [key: string]: Reify<Type> }
 }
@@ -91,7 +99,7 @@ export interface SbTableLookupEntry<T extends SbCastableValue> {
 export interface SbInjectFromLookupTable<Operation extends SbCastableValue>
 	extends SbInjectValueBase {
 	operation: Operation
-	source: typeof SbInjectorSource.table
+	type: typeof SbInjectorType.table
 	operand: Exclude<
 		SbInjectableOperationOfType<Operation>,
 		SbInjectFromLookupTable<Operation>

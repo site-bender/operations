@@ -3,7 +3,7 @@ import makeInjectedNumberFromForm from "../../makeInjectedFromForm/makeInjectedN
 import isInjectedNumberFromForm from "."
 
 test("isInjectedNumberFromForm returns true for a valid object", () => {
-	const valid = makeInjectedNumberFromForm("field")
+	const valid = makeInjectedNumberFromForm({ name: "field", tagName: "field" })
 	expect(isInjectedNumberFromForm(valid)).toBeTruthy()
 })
 

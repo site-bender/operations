@@ -1,12 +1,12 @@
 import {
 	SbInjectArgument,
-	SbInjectorSource,
+	SbInjectorType,
 	SbOperationTags,
 } from "../../../../types"
 
 const injectedNumberArg: SbInjectArgument<"number"> = {
 	injectedDataType: "number",
-	source: SbInjectorSource.argument,
+	type: SbInjectorType.argument,
 	_tag: SbOperationTags.injector,
 }
 
