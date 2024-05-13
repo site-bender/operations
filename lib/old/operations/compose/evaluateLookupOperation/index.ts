@@ -20,7 +20,7 @@ const evaluateLookupOperation: EvaluateLookupOperation = op => input => {
 		case InjectorSource.map:
 			return lookup(op)(input)
 		default:
-			return left([`Invalid numeric operation: ${op.operation}.`])
+			return left([`Invalid numeric operation: ${op.injectedDataType}.`])
 	}
 }
 

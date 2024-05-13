@@ -9,20 +9,20 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("adds a set of numbers together", async () => {
 	const success = add({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		addends: [
 			{
 				addends: [makeInjectedNumber(3), makeInjectedNumber(4)],
 				operation: "add",
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [
 					makeInjectedNumber(7),
 					makeInjectedNumber(8),
@@ -40,16 +40,16 @@ test("adds a set of numbers together", async () => {
 
 test("adds a set of numbers together with an input", async () => {
 	const success = add({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		addends: [
 			injectedNumberArg,
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [
 					makeInjectedNumber(7),
 					makeInjectedNumber(8),
@@ -67,14 +67,14 @@ test("adds a set of numbers together with an input", async () => {
 
 test("returns an error when one or more addends is an error", async () => {
 	const failure = add({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		addends: [
 			{
 				operation: "fail",
 				returns: "error",
 			} as unknown as AddOperation,
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [makeInjectedNumber(5), makeInjectedNumber(6)],
 				operation: "add",
 			},

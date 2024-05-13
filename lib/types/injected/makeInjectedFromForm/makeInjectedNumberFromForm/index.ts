@@ -7,7 +7,7 @@ import {
 const makeInjectedNumberFromForm = (
 	field: string,
 ): InjectFromForm<"number"> => ({
-	operation: "number",
+	injectedDataType: "number",
 	source: InjectorSource.form,
 	_tag: OperationTags.injector,
 	field,

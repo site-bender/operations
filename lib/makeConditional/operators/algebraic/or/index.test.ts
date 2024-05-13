@@ -11,12 +11,12 @@ test("returns a true wrapped in a right when one operation works", async () => {
 	const success = or(
 		makeOrOperation([
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [7, 8, 9].map(makeInjectedNumber),
 				operation: "add",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				addends: [5, 6].map(makeInjectedNumber),
 				operation: "add",
 			},

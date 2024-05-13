@@ -9,7 +9,7 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("negates a positive number", async () => {
 	const success = negate({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operand: makeInjectedNumber(99),
 		operation: "negate",
 	})()
@@ -20,7 +20,7 @@ test("negates a positive number", async () => {
 
 test("negates a positive number from an input", async () => {
 	const success = negate({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operand: injectedNumberArg,
 		operation: "negate",
 	})(some(99))
@@ -31,7 +31,7 @@ test("negates a positive number from an input", async () => {
 
 test("returns a positive number when the operand is negative", async () => {
 	const success = negate({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operand: makeInjectedNumber(-99),
 		operation: "negate",
 	})()
@@ -42,7 +42,7 @@ test("returns a positive number when the operand is negative", async () => {
 
 test("returns an error when the operand is an error", async () => {
 	const failure = negate({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operand: {
 			operation: "fail",
 			returns: "error",

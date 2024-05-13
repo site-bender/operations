@@ -16,10 +16,10 @@ import makeInjectedStringArg from "../../../types/injected/makeInjectedArgument/
 
 const operation: InjectFromMap<"string"> = {
 	_tag: OperationTags.injector,
-	operation: "string",
+	injectedDataType: "string",
 	operand: {
 		_tag: OperationTags.injector,
-		operation: "string",
+		injectedDataType: "string",
 		source: InjectorSource.form,
 		field: "foo",
 	},

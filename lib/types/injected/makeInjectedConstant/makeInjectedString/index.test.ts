@@ -3,8 +3,8 @@ import makeInjectedString from "."
 
 test("constructs an InjectedConstant<'string'>", () => {
 	expect(makeInjectedString("hello")).toEqual({
-		_tag: "injector-operation",
-		operation: "string",
+		_tag: "injectorOperation",
+		injectedDataType: "string",
 		source: "constant",
 		value: "hello",
 	})

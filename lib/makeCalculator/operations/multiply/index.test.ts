@@ -9,20 +9,20 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("multiplies a set of numbers together", async () => {
 	const success = multiply({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		multipliers: [
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [3, 4].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [7, 8, 9].map(makeInjectedNumber),
 				operation: "multiply",
 			},
@@ -36,16 +36,16 @@ test("multiplies a set of numbers together", async () => {
 
 test("multiplies a set of numbers together with an input param", async () => {
 	const success = multiply({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		multipliers: [
 			injectedNumberArg,
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [7, 8, 9].map(makeInjectedNumber),
 				operation: "multiply",
 			},
@@ -59,14 +59,14 @@ test("multiplies a set of numbers together with an input param", async () => {
 
 test("returns an error when one or more multipliers is an error", async () => {
 	const failure = multiply({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		multipliers: [
 			{
 				operation: "fail",
 				returns: "error",
 			} as unknown as MultiplyOperation,
 			{
-				_tag: "numeric-operation",
+				_tag: "numericOperation",
 				multipliers: [5, 6].map(makeInjectedNumber),
 				operation: "multiply",
 			},

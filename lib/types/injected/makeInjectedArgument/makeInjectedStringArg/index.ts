@@ -5,7 +5,7 @@ import {
 } from "../../../../types"
 
 const makeInjectedStringArg: InjectArgument<"string"> = {
-	operation: "string",
+	injectedDataType: "string",
 	source: InjectorSource.argument,
 	_tag: OperationTags.injector,
 }

@@ -22,7 +22,7 @@ const operation: InjectFromLookupTable<"number"> = {
 	source: InjectorSource.table,
 	operand: {
 		_tag: OperationTags.injector,
-		operation: "number",
+		injectedDataType: "number",
 		source: InjectorSource.form,
 		field: "foo",
 	},

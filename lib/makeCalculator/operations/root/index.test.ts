@@ -9,9 +9,9 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("gets the indexed root of the radicand correctly", async () => {
 	const success = root({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		radicand: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			addends: [200, 16].map(makeInjectedNumber),
 			operation: "add",
 		},
@@ -25,7 +25,7 @@ test("gets the indexed root of the radicand correctly", async () => {
 
 test("gets the indexed root of the radicand correctly with an iput param", async () => {
 	const success = root({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		radicand: injectedNumberArg,
 		index: makeInjectedNumber(3),
 		operation: "root",
@@ -37,9 +37,9 @@ test("gets the indexed root of the radicand correctly with an iput param", async
 
 test("returns an error when radicand or index is an error", async () => {
 	const failure = root({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		radicand: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(6),
 			operation: "divide",

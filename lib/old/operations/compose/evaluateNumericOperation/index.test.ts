@@ -7,7 +7,7 @@ import makeInjectedNumber from "../../../../types/injected/makeInjectedConstant/
 
 test("works for add operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		addends: [makeInjectedNumber(2), makeInjectedNumber(3)],
 		operation: "add",
 	})
@@ -17,7 +17,7 @@ test("works for add operations", async () => {
 
 test("works for divide operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		dividend: makeInjectedNumber(12),
 		divisor: makeInjectedNumber(6),
 		operation: "divide",
@@ -28,7 +28,7 @@ test("works for divide operations", async () => {
 
 test("works for multiply operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		multipliers: [
 			makeInjectedNumber(2),
 			makeInjectedNumber(3),
@@ -42,7 +42,7 @@ test("works for multiply operations", async () => {
 
 test("works for negate operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operand: makeInjectedNumber(5),
 		operation: "negate",
 	})
@@ -52,7 +52,7 @@ test("works for negate operations", async () => {
 
 test("works for power operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		base: makeInjectedNumber(2),
 		exponent: makeInjectedNumber(5),
 		operation: "power",
@@ -63,11 +63,11 @@ test("works for power operations", async () => {
 
 test("works for root operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		operation: "truncate",
 		method: "round",
 		operand: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			index: makeInjectedNumber(3),
 			operation: "root",
 			radicand: makeInjectedNumber(64),
@@ -79,7 +79,7 @@ test("works for root operations", async () => {
 
 test("works for subtract operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		minuend: makeInjectedNumber(10),
 		operation: "subtract",
 		subtrahend: makeInjectedNumber(18),
@@ -90,7 +90,7 @@ test("works for subtract operations", async () => {
 
 test("works for unrecognized operations", async () => {
 	const result = evaluateNumericOperation({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		addends: [makeInjectedNumber(2), makeInjectedNumber(3)],
 		// @ts-expect-error
 		operation: "other",

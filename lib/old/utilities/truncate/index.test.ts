@@ -8,7 +8,7 @@ import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/mak
 test("rounds number properly to precision 2", () => {
 	expect(
 		truncate({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			operation: "truncate",
 			precision: makeInjectedNumber(2),
 			method: "round",
@@ -20,7 +20,7 @@ test("rounds number properly to precision 2", () => {
 test("gets ceiling", () => {
 	expect(
 		truncate({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			operation: "truncate",
 			precision: makeInjectedNumber(0),
 			method: "ceiling",
@@ -32,7 +32,7 @@ test("gets ceiling", () => {
 test("gets floor", () => {
 	expect(
 		truncate({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			operation: "truncate",
 			precision: makeInjectedNumber(0),
 			method: "floor",
@@ -44,7 +44,7 @@ test("gets floor", () => {
 test("truncates", () => {
 	expect(
 		truncate({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			operation: "truncate",
 			precision: makeInjectedNumber(0),
 			method: "truncate",

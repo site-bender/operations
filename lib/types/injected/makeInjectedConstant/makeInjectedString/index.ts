@@ -1,10 +1,10 @@
 import { InjectConstant } from "../../../../types"
 
 const makeInjectedString = (value: string): InjectConstant<"string"> => ({
-	operation: "string",
+	injectedDataType: "string",
 	source: "constant",
 	value,
-	_tag: "injector-operation",
+	_tag: "injectorOperation",
 })
 
 export default makeInjectedString

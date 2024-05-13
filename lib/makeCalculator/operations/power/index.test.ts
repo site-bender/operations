@@ -9,9 +9,9 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("raises a base to an exponent correctly", async () => {
 	const success = power({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		base: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(20),
 			operation: "divide",
@@ -26,9 +26,9 @@ test("raises a base to an exponent correctly", async () => {
 
 test("raises a base to an exponent correctly from an input", async () => {
 	const success = power({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		base: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(20),
 			operation: "divide",
@@ -43,9 +43,9 @@ test("raises a base to an exponent correctly from an input", async () => {
 
 test("returns an error when base or exponent is an error", async () => {
 	const failure = power({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		base: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(0),
 			operation: "divide",

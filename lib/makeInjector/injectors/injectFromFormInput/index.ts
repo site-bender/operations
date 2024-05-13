@@ -18,12 +18,13 @@ const injectFromFormInput: FromFormInput =
 		if (op.eager) {
 			const item = pipe(
 				getValue(op.field)(),
-				mapEither(castValue(op.operation)),
+				mapEither(castValue(op.injectedDataType)),
 			)
 			return () => item
 		}
 
-		return () => pipe(getValue(op.field)(), mapEither(castValue(op.operation)))
+		return () =>
+			pipe(getValue(op.field)(), mapEither(castValue(op.injectedDataType)))
 	}
 
 export default injectFromFormInput

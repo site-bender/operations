@@ -18,10 +18,10 @@ export type Reify<T extends CastableValue> = T extends "integer" | "number"
 			: never
 
 export const OperationTags = {
-	numeric: "numeric-operation",
-	injector: "injector-operation",
-	conditional: "conditional-operation",
-	algebraic: "algebraic-operation",
+	numeric: "numericOperation",
+	injector: "injectorOperation",
+	conditional: "conditionalOperation",
+	algebraic: "algebraicOperation",
 } as const
 
 export const InjectorSource = {
@@ -40,46 +40,46 @@ interface InjectValueBase {
 	eager?: boolean
 }
 
-export interface InjectConstant<Operation extends CastableValue>
+export interface InjectConstant<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.constant
-	value: Reify<Operation>
+	value: Reify<Type>
 }
 
-export interface InjectArgument<Operation extends CastableValue>
+export interface InjectArgument<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.argument
 }
 
-export interface InjectFromForm<Operation extends CastableValue>
+export interface InjectFromForm<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.form
 	field: string
 }
 
-export interface InjectFromSession<Operation extends CastableValue>
+export interface InjectFromSession<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.session
 	key: string
 }
 
-export interface InjectFromLocal<Operation extends CastableValue>
+export interface InjectFromLocal<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.local
 	key: string
 }
 
-export interface InjectFromMap<Operation extends CastableValue>
+export interface InjectFromMap<Type extends CastableValue>
 	extends InjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	source: typeof InjectorSource.map
 	operand: InjectableOperationOfType<"string">
-	test: { [key: string]: Reify<Operation> }
+	test: { [key: string]: Reify<Type> }
 }
 
 export interface TableLookupEntry<T extends CastableValue> {

@@ -19,7 +19,6 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 	const error = (op: never) => () =>
 		left([`Invalid numeric operation: ${op["operation"] ?? "unknown"}.`])
 
-	// TODO handle comparison operatons - lessThan etc
 	switch (op.operation) {
 		case "add":
 			return add(op)

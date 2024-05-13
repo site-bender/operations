@@ -15,7 +15,7 @@ test("creates Some<AddOperation> from a config object", () => {
 
 	expect(op1).toStrictEqual(
 		some({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			addends: [1, 2, 3].map(makeInjectedNumber),
 			operation: "add",
 		}),
@@ -23,7 +23,7 @@ test("creates Some<AddOperation> from a config object", () => {
 
 	expect(op2).toStrictEqual(
 		some({
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			addends: [1, 2, 3].map(makeInjectedNumber),
 			operation: "add",
 			precision: makeInjectedNumber(2),

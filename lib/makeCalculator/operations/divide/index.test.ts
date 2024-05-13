@@ -8,15 +8,15 @@ import injectedNumberArg from "../../../types/injected/makeInjectedArgument/make
 
 test("divides a divisor into a dividend", async () => {
 	const success = divide({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		dividend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(5),
 			operation: "divide",
 		},
 		divisor: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(12),
 			divisor: makeInjectedNumber(2),
 			operation: "divide",
@@ -30,10 +30,10 @@ test("divides a divisor into a dividend", async () => {
 
 test("divides a divisor into a dividend with an input", async () => {
 	const success = divide({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		divisor: injectedNumberArg,
 		dividend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			dividend: makeInjectedNumber(120),
 			divisor: makeInjectedNumber(20),
 			operation: "divide",
@@ -47,7 +47,7 @@ test("divides a divisor into a dividend with an input", async () => {
 
 test("returns an error when dividend and/or divisor is an error", async () => {
 	const failure = divide({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		dividend: {
 			operation: "fail",
 			returns: "error",

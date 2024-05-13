@@ -9,15 +9,15 @@ import makeInjectedNumber from "../../../types/injected/makeInjectedConstant/mak
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		minuend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			minuend: makeInjectedNumber(120),
 			subtrahend: makeInjectedNumber(60),
 			operation: "subtract",
 		},
 		subtrahend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			minuend: makeInjectedNumber(60),
 			subtrahend: makeInjectedNumber(30),
 			operation: "subtract",
@@ -31,10 +31,10 @@ test("subtracts a subtrahend from a minuend", async () => {
 
 test("subtracts a subtrahend from a minuend with an input", async () => {
 	const success = subtract({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		minuend: injectedNumberArg,
 		subtrahend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			minuend: makeInjectedNumber(60),
 			subtrahend: makeInjectedNumber(30),
 			operation: "subtract",
@@ -48,13 +48,13 @@ test("subtracts a subtrahend from a minuend with an input", async () => {
 
 test("returns an error when minuend and/or subtrahend is an error", async () => {
 	const failure = subtract({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		minuend: {
 			operation: "fail",
 			returns: "error",
 		} as unknown as SubtractOperation,
 		subtrahend: {
-			_tag: "numeric-operation",
+			_tag: "numericOperation",
 			minuend: makeInjectedNumber(12),
 			subtrahend: makeInjectedNumber(0),
 			operation: "subtract",
@@ -70,7 +70,7 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 
 test("returns an error when minuend and/or subtrahend is NaN", async () => {
 	const failure = subtract({
-		_tag: "numeric-operation",
+		_tag: "numericOperation",
 		minuend: makeInjectedNumber(Number.MIN_SAFE_INTEGER),
 		subtrahend: makeInjectedNumber(Number.NaN),
 		operation: "subtract",
