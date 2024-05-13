@@ -1,5 +1,5 @@
 import {
-	SbInjectorSource,
+	SbInjectorType,
 	SbOperationTags,
 	type SbInjectFromLookupTable,
 } from "../../../types"
@@ -19,12 +19,15 @@ import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 const operation: SbInjectFromLookupTable<"number"> = {
 	_tag: SbOperationTags.injector,
 	operation: "number",
-	source: SbInjectorSource.table,
+	type: SbInjectorType.table,
 	operand: {
 		_tag: SbOperationTags.injector,
 		injectedDataType: "number",
-		source: SbInjectorSource.form,
-		field: "foo",
+		type: SbInjectorType.form,
+		source: {
+			name: "foo",
+			tagName: "foo",
+		},
 	},
 	test: [
 		{

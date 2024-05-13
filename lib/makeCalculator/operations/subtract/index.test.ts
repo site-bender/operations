@@ -1,4 +1,4 @@
-import { type SubtractOperation } from "../../../types"
+import { type SbSubtractOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
@@ -52,7 +52,7 @@ test("returns an error when minuend and/or subtrahend is an error", async () => 
 		minuend: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as SubtractOperation,
+		} as unknown as SbSubtractOperation,
 		subtrahend: {
 			_tag: "numericOperation",
 			minuend: makeInjectedNumber(12),

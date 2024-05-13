@@ -1,4 +1,4 @@
-import type { RootOperation } from "../../../types"
+import type { SbRootOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import * as OpResult from "../../../old/operations/operationResult"
@@ -8,7 +8,7 @@ import { map } from "@sitebender/fp/lib/array"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type RootF = (
-	operation: RootOperation,
+	operation: SbRootOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const root: RootF =

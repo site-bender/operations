@@ -2,10 +2,15 @@ import { expect, test } from "vitest"
 import makeInjectedNumberFromForm from "."
 
 test("creates an InjcetedFromForm<'number'> object", () => {
-	expect(makeInjectedNumberFromForm("formField")).toEqual({
+	expect(
+		makeInjectedNumberFromForm({ name: "field", tagName: "field" }),
+	).toEqual({
 		_tag: "injectorOperation",
-		field: "formField",
+		source: {
+			name: "field",
+			tagName: "field",
+		},
 		injectedDataType: "number",
-		source: "form",
+		type: "form",
 	})
 })

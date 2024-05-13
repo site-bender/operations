@@ -1,6 +1,6 @@
 import {
 	SbOperationTags,
-	type NumericOperation,
+	type SbNumericOperation,
 	type SbOperation,
 } from "../../../types"
 
@@ -8,7 +8,7 @@ import isNotNullish from "@sitebender/fp/lib/predicates/isNotNullish"
 
 const isNumericOperation = (
 	operation: SbOperation,
-): operation is NumericOperation =>
+): operation is SbNumericOperation =>
 	isNotNullish(operation) &&
 	"_tag" in operation &&
 	operation._tag === SbOperationTags.numeric

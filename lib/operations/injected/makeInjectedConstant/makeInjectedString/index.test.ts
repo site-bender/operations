@@ -5,7 +5,7 @@ test("constructs an InjectedConstant<'string'>", () => {
 	expect(makeInjectedString("hello")).toEqual({
 		_tag: "injectorOperation",
 		injectedDataType: "string",
-		source: "constant",
+		type: "constant",
 		value: "hello",
 	})
 })

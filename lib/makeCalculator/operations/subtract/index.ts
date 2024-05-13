@@ -1,4 +1,4 @@
-import type { SubtractOperation } from "../../../types"
+import type { SbSubtractOperation } from "../../../types"
 
 import { Option, none, some } from "@sitebender/fp/lib/option"
 import { left, right } from "@sitebender/fp/lib/either"
@@ -9,7 +9,7 @@ import liftNumeric from "../../../old/operations/liftNumerical"
 import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type SubtractF = (
-	o: SubtractOperation,
+	o: SbSubtractOperation,
 ) => (input?: Option<number>) => OperationResult<number>
 
 const subtract: SubtractF =

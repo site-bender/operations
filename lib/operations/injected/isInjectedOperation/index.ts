@@ -1,12 +1,12 @@
 import {
 	SbInjectableOperation,
-	SbInjectorSource,
+	SbInjectorType,
 	SbOperationTags,
 } from "../../../types"
 
 const isInjectedOperation = (o: any): o is SbInjectableOperation =>
 	typeof o === "object" &&
 	o._tag === SbOperationTags.injector &&
-	Object.keys(SbInjectorSource).includes(o.source)
+	Object.keys(SbInjectorType).includes(o.source)
 
 export default isInjectedOperation

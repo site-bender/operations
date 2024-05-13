@@ -1,4 +1,4 @@
-import { type RootOperation } from "../../../types"
+import { type SbRootOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import { Left, isLeft, right } from "@sitebender/fp/lib/either"
@@ -47,7 +47,7 @@ test("returns an error when radicand or index is an error", async () => {
 		index: {
 			operation: "fail",
 			returns: "error",
-		} as unknown as RootOperation,
+		} as unknown as SbRootOperation,
 		operation: "root",
 	})()
 
