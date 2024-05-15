@@ -1,7 +1,7 @@
 import type { SbConditionalOperation } from "../../../../types"
 
 import { Either, left, right } from "@sitebender/fp/lib/either"
-import { Option, none } from "@sitebender/fp/lib/option"
+import { Option, none, some } from "@sitebender/fp/lib/option"
 import {
 	equalTo,
 	lessThan,
@@ -13,7 +13,7 @@ import {
 import { pipe } from "@sitebender/fp/lib/functions"
 import * as OpResult from "../../operationResult"
 import liftNumeric from "../../liftNumerical"
-import { map } from "@sitebender/fp/lib/array"
+import {map} from "@sitebender/fp/lib/array"
 
 export type EvaluateConditionalNumericOperation = (
 	op: SbConditionalOperation,
@@ -34,27 +34,27 @@ const evaluateConditionalNumericOperation: EvaluateConditionalNumericOperation =
 					switch (op.operation) {
 						case "equalTo":
 							return equalTo(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not equal to ${test}`])
 						case "unequalTo":
 							return unequalTo(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not unequal to ${test}`])
 						case "lessThan":
 							return lessThan(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not less than ${test}`])
 						case "moreThan":
 							return moreThan(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not more than ${test}`])
 						case "noLessThan":
 							return noLessThan(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not no less than ${test}`])
 						case "noMoreThan":
 							return noMoreThan(operand)(test)
-								? right(input)
+								? right(some(operand))
 								: left([`${operand} is not no more than ${test}`])
 						default:
 							return error(op)
