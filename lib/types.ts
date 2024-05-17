@@ -144,6 +144,7 @@ interface SbNumericBase {
 export type SbAllowedNumericOperands =
 	| SbInjectArgument<"number">
 	| SbInjectConstant<"number">
+	| SbInjectFromForm<"number">
 	| SbNumericOperation
 
 export interface SbAddOperation extends SbNumericBase {
