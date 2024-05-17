@@ -4,7 +4,7 @@ import liftNumeric from "../../operations/liftNumerical"
 import { none } from "@sitebender/fp/lib/option"
 import { map } from "../../operations/operationResult"
 import { OperationResult } from "../../operations/operationResult/types"
-import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 
 export type TruncateF = (op: SbTruncateOperation) => OperationResult<number>
 

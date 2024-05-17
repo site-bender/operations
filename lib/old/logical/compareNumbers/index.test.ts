@@ -3,7 +3,7 @@ import { expect, test } from "vitest"
 
 import compareNumbers from "."
 import { Some } from "@sitebender/fp/lib/option"
-import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 import makeMoreThan from "../../../operations/conditional/moreThan/makeMoreThan"
 import makeNoMoreThan from "../../../operations/conditional/noMoreThan/makeNoMoreThan"

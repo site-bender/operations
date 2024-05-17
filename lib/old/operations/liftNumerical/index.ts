@@ -6,8 +6,8 @@ import evaluateNumericOperation from "../compose/evaluateNumericOperation"
 import { OperationResult } from "../operationResult/types"
 import isInjectedNumber from "../../../operations/injected/isInjectedConstant/isInjectedNumber"
 import isInjectedNumberArg from "../../../operations/injected/isInjectedArgument/isInjectedNumberArg"
-import isInjectedNumberFromForm from "../../../operations/injected/isInjectedFromForm/isInjectedNumberFromForm";
-import evaluateInjectableOperationOfType from "../compose/evaluateInjectableOperationOfType";
+import isInjectedNumberFromForm from "../../../operations/injected/isInjectedFromForm/isInjectedNumberFromForm"
+import evaluateInjectableOperationOfType from "../compose/evaluateInjectableOperationOfType"
 
 export type LiftNumericF = (
 	input: Option<number>,
@@ -19,8 +19,8 @@ const liftNumeric: LiftNumericF = input => action => {
 		: isInjectedNumberArg(action)
 			? right(input)
 			: isInjectedNumberFromForm(action)
-	      ? evaluateInjectableOperationOfType(action)(input)
-			  : evaluateNumericOperation(action)(input)
+				? evaluateInjectableOperationOfType(action)(input)
+				: evaluateNumericOperation(action)(input)
 }
 
 export default liftNumeric

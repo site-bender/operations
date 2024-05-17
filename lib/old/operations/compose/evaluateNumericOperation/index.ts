@@ -9,7 +9,10 @@ import negate from "../../../../makeCalculator/operations/negate"
 import power from "../../../../makeCalculator/operations/power"
 import root from "../../../../makeCalculator/operations/root"
 import subtract from "../../../../makeCalculator/operations/subtract"
-import { truncate } from "../../../utilities"
+import ceiling from "../../../../makeCalculator/operations/ceiling"
+import floor from "../../../../makeCalculator/operations/floor"
+import round from "../../../../makeCalculator/operations/round"
+import truncate from "../../../../makeCalculator/operations/truncate"
 
 export type EvaluateNumericOperation = (
 	op: SbNumericOperation,
@@ -22,8 +25,12 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 	switch (op.operation) {
 		case "add":
 			return add(op)
+		case "ceiling":
+			return ceiling(op)
 		case "divide":
 			return divide(op)
+		case "floor":
+			return floor(op)
 		case "multiply":
 			return multiply(op)
 		case "negate":
@@ -32,10 +39,12 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 			return power(op)
 		case "root":
 			return root(op)
+		case "round":
+			return round(op)
 		case "subtract":
 			return subtract(op)
 		case "truncate":
-			return () => truncate(op)
+			return truncate(op)
 		default:
 			return error(op)
 	}

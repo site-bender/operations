@@ -4,7 +4,7 @@ import { expect, test } from "vitest"
 import { isLeft, left, right } from "@sitebender/fp/lib/either"
 import { none, some } from "@sitebender/fp/lib/option"
 import add from "."
-import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("adds a set of numbers together", async () => {

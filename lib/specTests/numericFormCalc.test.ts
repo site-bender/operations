@@ -1,10 +1,10 @@
-import {SbNumericOperation} from "../types";
-import makeInjectedNumberFromForm from "../operations/injected/makeInjectedFromForm/makeInjectedNumberFromForm";
+import { SbNumericOperation } from "../types"
+import makeInjectedNumberFromForm from "../operations/injected/makeInjectedFromForm/makeInjectedNumberFromForm"
 import { JSDOM } from "jsdom"
-import {expect, test} from "vitest";
-import evaluateNumericOperation from "../old/operations/compose/evaluateNumericOperation";
-import {some} from "@sitebender/fp/lib/option";
-import {right} from "@sitebender/fp/lib/either";
+import { expect, test } from "vitest"
+import evaluateNumericOperation from "../old/operations/compose/evaluateNumericOperation"
+import { some } from "@sitebender/fp/lib/option"
+import { right } from "@sitebender/fp/lib/either"
 const dom = new JSDOM(
 	`<!DOCTYPE html>
 	<input name="inputA" type="text" value="7">
@@ -17,13 +17,13 @@ const dom = new JSDOM(
 
 globalThis.document = dom.window.document
 
-const calculation : SbNumericOperation = {
+const calculation: SbNumericOperation = {
 	_tag: "numericOperation",
 	dividend: {
 		_tag: "numericOperation",
 		addends: [
-			makeInjectedNumberFromForm({name: "inputA", tagName: "INPUT"}),
-			makeInjectedNumberFromForm({name: "inputB", tagName: "INPUT"}),
+			makeInjectedNumberFromForm({ name: "inputA", tagName: "INPUT" }),
+			makeInjectedNumberFromForm({ name: "inputB", tagName: "INPUT" }),
 		],
 		operation: "add",
 	},
@@ -32,13 +32,16 @@ const calculation : SbNumericOperation = {
 		minuend: {
 			_tag: "numericOperation",
 			multipliers: [
-				makeInjectedNumberFromForm({name: "inputC", tagName: "INPUT"}),
-				makeInjectedNumberFromForm({name: "inputD", tagName: "INPUT"}),
+				makeInjectedNumberFromForm({ name: "inputC", tagName: "INPUT" }),
+				makeInjectedNumberFromForm({ name: "inputD", tagName: "INPUT" }),
 			],
 			operation: "multiply",
 		},
 		operation: "subtract",
-		subtrahend: makeInjectedNumberFromForm({name: "inputE", tagName: "INPUT"}),
+		subtrahend: makeInjectedNumberFromForm({
+			name: "inputE",
+			tagName: "INPUT",
+		}),
 	},
 	operation: "divide",
 }

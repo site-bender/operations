@@ -13,7 +13,7 @@ import {
 import { pipe } from "@sitebender/fp/lib/functions"
 import * as OpResult from "../../operationResult"
 import liftNumeric from "../../liftNumerical"
-import {map} from "@sitebender/fp/lib/array"
+import { map } from "@sitebender/fp/lib/array"
 
 export type EvaluateConditionalNumericOperation = (
 	op: SbConditionalOperation,

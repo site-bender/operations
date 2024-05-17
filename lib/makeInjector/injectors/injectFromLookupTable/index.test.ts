@@ -12,7 +12,7 @@ import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
 
 import injectFromLookupTable from "."
-import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import makeInjectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 
