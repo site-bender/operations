@@ -1,4 +1,4 @@
-import type { SbCastableValue, Reify } from "../../../types"
+import type { SbCastableValue, Reify } from "../../types"
 
 import isBoolean from "./isBoolean"
 import { Either, left, right } from "@sitebender/fp/lib/either"

@@ -1,7 +1,7 @@
 import type { SbCastableValue, SbInjectFromForm, Reify } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
-import castValue from "../../../old/utilities/castValue"
+import castValue from "../../../utilities/castValue"
 import getValue from "../../../old/utilities/getValue"
 import { pipe } from "@sitebender/fp/lib/functions"
 import { OperationResult } from "../../../old/operations/operationResult/types"
