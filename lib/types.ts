@@ -127,11 +127,14 @@ export type SbInjectableOperation =
 
 export const SbNumericOperations = {
 	add: "add",
+	ceiling: "ceiling",
 	divide: "divide",
+	floor: "floor",
 	multiply: "multiply",
 	negate: "negate",
 	power: "power",
 	root: "root",
+	round: "round",
 	subtract: "subtract",
 	truncate: "truncate",
 } as const
@@ -152,10 +155,20 @@ export interface SbAddOperation extends SbNumericBase {
 	operation: typeof SbNumericOperations.add
 }
 
+export interface SbCeilingOperation extends SbNumericBase {
+	operand: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.ceiling
+}
+
 export interface SbDivideOperation extends SbNumericBase {
 	dividend: SbAllowedNumericOperands
 	divisor: SbAllowedNumericOperands
 	operation: typeof SbNumericOperations.divide
+}
+
+export interface SbFloorOperation extends SbNumericBase {
+	operand: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.floor
 }
 
 export interface SbMultiplyOperation extends SbNumericBase {
@@ -180,6 +193,12 @@ export interface SbRootOperation extends SbNumericBase {
 	radicand: SbAllowedNumericOperands
 }
 
+export interface SbRoundOperation extends SbNumericBase {
+	decimalPlaces?: number
+	operand: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.round
+}
+
 export interface SbSubtractOperation extends SbNumericBase {
 	minuend: SbAllowedNumericOperands
 	operation: typeof SbNumericOperations.subtract
@@ -187,6 +206,7 @@ export interface SbSubtractOperation extends SbNumericBase {
 }
 
 export interface SbTruncateOperation extends SbNumericBase {
+	decimalPlaces?: number
 	operation: typeof SbNumericOperations.truncate
 	method: "round" | "ceiling" | "floor" | "truncate"
 	operand: SbAllowedNumericOperands
@@ -194,11 +214,14 @@ export interface SbTruncateOperation extends SbNumericBase {
 
 export type SbNumericOperation =
 	| SbAddOperation
+	| SbCeilingOperation
 	| SbDivideOperation
+	| SbFloorOperation
 	| SbMultiplyOperation
 	| SbNegateOperation
 	| SbPowerOperation
 	| SbRootOperation
+	| SbRoundOperation
 	| SbSubtractOperation
 	| SbTruncateOperation
 

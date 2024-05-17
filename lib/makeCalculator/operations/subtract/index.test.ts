@@ -5,7 +5,7 @@ import { Left, isLeft, right } from "@sitebender/fp/lib/either"
 import subtract from "."
 import { none, some } from "@sitebender/fp/lib/option"
 import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
-import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 
 test("subtracts a subtrahend from a minuend", async () => {
 	const success = subtract({

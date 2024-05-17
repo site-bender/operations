@@ -1,11 +1,11 @@
 import { test, expect } from "vitest"
-import makeInjectedNumber from "../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import makeCalculator from "."
 import { none, some } from "@sitebender/fp/lib/option"
 import { right } from "@sitebender/fp/lib/either"
 import makeConditional from "."
 import makeLessThan from "../operations/conditional/lessThan/makelessThan"
-import injectedNumberArg from "../operations/injected/makeInjectedArgument/makeInjectedNumberArg";
+import injectedNumberArg from "../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 
 test("[makeConditional] (no input) creates a conditional function", () => {
 	const op = makeLessThan({

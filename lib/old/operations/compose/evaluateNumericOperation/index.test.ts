@@ -3,7 +3,7 @@ import { expect, test } from "vitest"
 
 import evaluateNumericOperation from "."
 import { some } from "@sitebender/fp/lib/option"
-import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 
 test("works for add operations", async () => {
 	const result = evaluateNumericOperation({

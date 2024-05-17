@@ -11,9 +11,8 @@ export type LiftConditionalF = (
 ) => (operand: SbConditionalOperation) => OperationResult<boolean>
 
 const liftConditional: LiftConditionalF = input => action => {
-	return pipe(
-		evaluateConditionalNumericOperation(action)(input),
-		a => pipe(
+	return pipe(evaluateConditionalNumericOperation(action)(input), a =>
+		pipe(
 			(r: Option<number>) => pipe(map(_ => true)(r), right),
 			match(() => right(some(false))),
 		)(a),

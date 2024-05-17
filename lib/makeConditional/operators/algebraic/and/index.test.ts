@@ -2,7 +2,7 @@ import { Left, Right, isLeft } from "@sitebender/fp/lib/either"
 import { expect, test } from "vitest"
 
 import and from "."
-import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import makeLessThan from "../../../../operations/conditional/lessThan/makelessThan"
 import makeAndOperation from "../../../../operations/algebraic/and/makeAndOperation"
 import { SbOperationTags } from "../../../../types"

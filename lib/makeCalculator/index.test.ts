@@ -1,6 +1,6 @@
 import { test, expect } from "vitest"
 import { AddOperation } from "../old/operations"
-import makeInjectedNumber from "../operations/injected/makeInjectedConstant/makeInjectedNumer"
+import makeInjectedNumber from "../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import makeCalculator from "."
 import { Some, none, some } from "@sitebender/fp/lib/option"
 import { SbAddOperation } from "../types"
