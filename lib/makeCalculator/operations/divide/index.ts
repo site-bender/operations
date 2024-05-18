@@ -3,10 +3,10 @@ import type { SbDivideOperation } from "../../../types"
 import { Option, none, some } from "@sitebender/fp/lib/option"
 import { left, right } from "@sitebender/fp/lib/either"
 import pipe from "@sitebender/fp/lib/functions/pipe"
-import * as OpResult from "../../../old/operations/operationResult"
+import * as OpResult from "../../../operations/operationResult"
 import liftNumeric from "../../../old/operations/liftNumerical"
 import { map } from "@sitebender/fp/lib/array"
-import { OperationResult } from "../../../old/operations/operationResult/types"
+import { OperationResult } from "../../../operations/operationResult/types"
 
 export type Divide = (
 	operation: SbDivideOperation,

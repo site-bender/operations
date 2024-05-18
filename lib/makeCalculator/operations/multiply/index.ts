@@ -5,7 +5,7 @@ import { Either } from "@sitebender/fp/lib/either"
 import { map } from "@sitebender/fp/lib/array"
 import { default as multiplyArray } from "@sitebender/fp/lib/array/reduce/multiply"
 import pipe from "@sitebender/fp/lib/functions/pipe"
-import * as OpResult from "../../../old/operations/operationResult"
+import * as OpResult from "../../../operations/operationResult"
 import liftNumeric from "../../../old/operations/liftNumerical"
 
 export type MultiplyF = (

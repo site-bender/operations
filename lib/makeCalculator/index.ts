@@ -5,7 +5,7 @@ import { default as mapEither } from "@sitebender/fp/lib/either/map"
 import flatMap from "@sitebender/fp/lib/either/flatMap"
 
 import liftNumeric from "../old/operations/liftNumerical"
-import { OperationResult } from "../old/operations/operationResult/types"
+import { OperationResult } from "../operations/operationResult/types"
 import { SbNumericOperation } from "../types"
 import castValue from "../utilities/castValue"
 import pipe from "@sitebender/fp/lib/functions/pipe"

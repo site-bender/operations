@@ -1,19 +1,17 @@
-import type { SbConditionalOperation } from "../../../../types"
+import type { SbConditionalOperation } from "../../../types"
 
 import { Either, left, right } from "@sitebender/fp/lib/either"
 import { Option, none, some } from "@sitebender/fp/lib/option"
-import {
-	equalTo,
-	lessThan,
-	moreThan,
-	noLessThan,
-	noMoreThan,
-	unequalTo,
-} from "../../../logical"
 import { pipe } from "@sitebender/fp/lib/functions"
 import * as OpResult from "../../operationResult"
-import liftNumeric from "../../liftNumerical"
 import { map } from "@sitebender/fp/lib/array"
+import liftNumeric from "../../../old/operations/liftNumerical"
+import isEqualTo from "../../../makeConditional/operators/number/isEqualTo"
+import isNotEqualTo from "../../../makeConditional/operators/number/isNotEqualTo"
+import isLessThan from "../../../makeConditional/operators/number/isLessThan"
+import isMoreThan from "../../../makeConditional/operators/number/isMoreThan"
+import isAtMost from "../../../makeConditional/operators/number/isAtMost"
+import isAtLeast from "../../../makeConditional/operators/number/isAtLeast"
 
 export type EvaluateConditionalNumericOperation = (
 	op: SbConditionalOperation,
@@ -33,27 +31,27 @@ const evaluateConditionalNumericOperation: EvaluateConditionalNumericOperation =
 				OpResult.flatMap(([operand, test]) => {
 					switch (op.operation) {
 						case "equalTo":
-							return equalTo(operand)(test)
+							return isEqualTo(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not equal to ${test}`])
 						case "unequalTo":
-							return unequalTo(operand)(test)
+							return isNotEqualTo(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not unequal to ${test}`])
 						case "lessThan":
-							return lessThan(operand)(test)
+							return isLessThan(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not less than ${test}`])
 						case "moreThan":
-							return moreThan(operand)(test)
+							return isMoreThan(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not more than ${test}`])
 						case "noLessThan":
-							return noLessThan(operand)(test)
+							return isAtLeast(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not no less than ${test}`])
 						case "noMoreThan":
-							return noMoreThan(operand)(test)
+							return isAtMost(operand)(test)
 								? right(some(operand))
 								: left([`${operand} is not no more than ${test}`])
 						default:

@@ -6,8 +6,8 @@ import liftNumeric from "../../operations/liftNumerical"
 import makeCompare from "./makeCompare"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 import { map } from "@sitebender/fp/lib/array"
-import * as OpResult from "../../operations/operationResult"
-import { OperationResult } from "../../operations/operationResult/types"
+import * as OpResult from "../../../operations/operationResult"
+import { OperationResult } from "../../../operations/operationResult/types"
 
 export type CompareNumbers = (
 	operation: SbConditionalOperation,

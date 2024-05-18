@@ -5,8 +5,8 @@ import getFromTextArea from "./getFromTextArea"
 import { Lazy } from "@sitebender/fp/lib/lazy"
 import { left, right } from "@sitebender/fp/lib/either"
 import { isNullish } from "@sitebender/fp/lib/predicates"
-import { OperationResult } from "../../operations/operationResult/types"
 import { SbFormInjectorData } from "../../../types"
+import { OperationResult } from "../../../operations/operationResult/types"
 
 export type NullableInput =
 	| HTMLInputElement

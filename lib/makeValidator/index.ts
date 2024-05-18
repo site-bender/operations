@@ -9,25 +9,20 @@ import castValue from "../utilities/castValue"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 import some from "@sitebender/fp/lib/option/some"
 import { Option, getOrElse, none } from "@sitebender/fp/lib/option"
-import liftConditional from "../operations/conditional/liftConditional"
+import evaluateValidationNumericOperation from "../operations/conditional/evaluateConditionalOperation"
 
-type MakeConditional = (
+type MakeValidator = (
 	op: SbConditionalOperation,
-) => (value?: string) => OperationResult<boolean>
+) => (value?: string) => OperationResult<number>
 
-const makeConditional: MakeConditional = op => input => {
-	const liftedInput = pipe(
+const makeValidator: MakeValidator = op => input =>
+	pipe(
 		input,
 		fromNullable,
 		map(castValue("number")),
 		map(eitherNum => pipe(eitherNum, mapEither(some))),
 		getOrElse(() => right<Option<number>, string[]>(none)),
+		flatMap(evaluateValidationNumericOperation(op)),
 	)
 
-	return pipe(
-		liftedInput,
-		flatMap(inputNum => liftConditional(inputNum)(op)),
-	)
-}
-
-export default makeConditional
+export default makeValidator

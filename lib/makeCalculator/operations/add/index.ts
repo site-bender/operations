@@ -4,10 +4,10 @@ import map from "@sitebender/fp/lib/array/map"
 import { Option, none } from "@sitebender/fp/lib/option"
 import { pipe } from "@sitebender/fp/lib/functions"
 
-import * as OpResult from "../../../old/operations/operationResult"
+import { OperationResult } from "../../../operations/operationResult/types"
+import * as OpResult from "../../../operations/operationResult"
 import sum from "@sitebender/fp/lib/array/reduce/sum"
 import liftNumeric from "../../../old/operations/liftNumerical"
-import { OperationResult } from "../../../old/operations/operationResult/types"
 
 export type AddF = (
 	op: SbAddOperation,

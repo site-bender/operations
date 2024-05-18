@@ -2,8 +2,8 @@ import { type SbNegateOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
 import pipe from "@sitebender/fp/lib/functions/pipe"
-import * as OpResult from "../../../old/operations/operationResult"
-import { OperationResult } from "../../../old/operations/operationResult/types"
+import * as OpResult from "../../../operations/operationResult"
+import { OperationResult } from "../../../operations/operationResult/types"
 import liftNumeric from "../../../old/operations/liftNumerical"
 
 export type Negate = (

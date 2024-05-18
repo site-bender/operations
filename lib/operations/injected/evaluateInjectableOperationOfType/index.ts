@@ -3,13 +3,13 @@ import {
 	type SbCastableValue,
 	type Reify,
 	SbInjectableOperationOfType,
-} from "../../../../types"
+} from "../../../types"
 
 import { left, right } from "@sitebender/fp/lib/either"
 import { Option, some } from "@sitebender/fp/lib/option"
-import injectFromFormInput from "../../../../makeInjector/injectors/injectFromFormInput"
 import { OperationResult } from "../../operationResult/types"
-import injectFromMap from "../../../../makeInjector/injectors/injectFromMap"
+import injectFromFormInput from "../../../makeInjector/injectors/injectFromFormInput"
+import injectFromMap from "../../../makeInjector/injectors/injectFromMap"
 
 export type EvaluateInjectableOperationOfType = <T extends SbCastableValue>(
 	op: SbInjectableOperationOfType<T>,
