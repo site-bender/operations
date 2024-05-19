@@ -33,6 +33,6 @@ test("[injectFromFormInput] (injectors) returns a failure for a non-existent key
 	const operation = makeInjectedNumberFromForm({ name: "bar" })
 
 	expect(injectFromFormInput(operation)()()).toEqual(
-		left(["Form element `bar` not found."]),
+		left(["Form element at `[name=bar]` not found."]),
 	)
 })

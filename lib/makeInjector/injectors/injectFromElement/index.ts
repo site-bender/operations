@@ -8,8 +8,8 @@ import { Option, none } from "@sitebender/fp/lib/option"
 import castValue from "../../../utilities/castValue"
 import getValue from "../../../old/utilities/getValue"
 import { pipe } from "@sitebender/fp/lib/functions"
-import { OperationResult } from "../../../old/operations/operationResult/types"
-import { mapEither } from "../../../old/operations/operationResult"
+import type { OperationResult } from "../../../operations/operationResult/types"
+import { mapEither } from "../../../operations/operationResult"
 import { Lazy } from "@sitebender/fp/lib/lazy"
 
 export type FromElementF = <T extends SbCastableValue>(
