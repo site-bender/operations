@@ -1,5 +1,9 @@
 import type { OperationResult } from "../../../operations/operationResult/types"
-import type { SbInjectFromLookupTable } from "../../../types"
+import type {
+	Reify,
+	SbCastableValue,
+	SbInjectFromLookupTable,
+} from "../../../types"
 import type { Option } from "@sitebender/fp/lib/option/types"
 
 import * as OpResult from "../../../operations/operationResult"
@@ -12,9 +16,9 @@ import none from "@sitebender/fp/lib/option/none"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 import some from "@sitebender/fp/lib/option/some"
 
-type TableLookup = (
-	op: SbInjectFromLookupTable<"number">,
-) => (input?: Option<number>) => OperationResult<number>
+type TableLookup = <T extends SbCastableValue>(
+	op: SbInjectFromLookupTable<T>,
+) => (input?: Option<number>) => OperationResult<Reify<T>>
 
 const injectFromLookupTable: TableLookup =
 	op =>

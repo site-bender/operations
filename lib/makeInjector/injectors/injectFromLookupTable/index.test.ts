@@ -18,7 +18,7 @@ import makeLessThan from "../../../operations/conditional/lessThan/makelessThan"
 
 const operation: SbInjectFromLookupTable<"number"> = {
 	_tag: SbOperationTags.injector,
-	operation: "number",
+	injectedDataType: "number",
 	type: SbInjectorType.table,
 	operand: {
 		_tag: SbOperationTags.injector,

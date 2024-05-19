@@ -8,7 +8,7 @@ test("isInjectedOperation returns false for invalid types", () => {
 	expect(
 		isInjectedOperation({
 			...makeInjectedNumber(1),
-			source: "foo",
+			type: "foo",
 		}),
 	).toBeFalsy()
 })

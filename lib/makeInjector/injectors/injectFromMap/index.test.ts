@@ -13,6 +13,7 @@ import some from "@sitebender/fp/lib/option/some"
 
 import injectFromMap from "."
 import makeInjectedStringArg from "../../../operations/injected/makeInjectedArgument/makeInjectedStringArg"
+import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 
 const operation: SbInjectFromMap<"string"> = {
 	_tag: SbOperationTags.injector,
@@ -25,11 +26,12 @@ const operation: SbInjectFromMap<"string"> = {
 			name: "foo",
 		},
 	},
+	column: makeInjectedNumber(1),
 	type: SbInjectorType.map,
 	test: {
-		red: "#f00",
-		green: "#0f0",
-		blue: "#00f",
+		red: ["#f00"],
+		green: ["#0f0"],
+		blue: ["#00f"],
 	},
 }
 

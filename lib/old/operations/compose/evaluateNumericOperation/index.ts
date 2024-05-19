@@ -4,6 +4,7 @@ import { Either, left } from "@sitebender/fp/lib/either"
 import { Option } from "@sitebender/fp/lib/option"
 import add from "../../../../makeCalculator/operations/add"
 import divide from "../../../../makeCalculator/operations/divide"
+import max from "../../../../makeCalculator/operations/max"
 import multiply from "../../../../makeCalculator/operations/multiply"
 import negate from "../../../../makeCalculator/operations/negate"
 import power from "../../../../makeCalculator/operations/power"
@@ -45,6 +46,8 @@ const evaluateNumericOperation: EvaluateNumericOperation = op => {
 			return subtract(op)
 		case "truncate":
 			return truncate(op)
+		case "max":
+			return max(op)
 		default:
 			return error(op)
 	}
