@@ -26,7 +26,6 @@ const operation: SbInjectFromLookupTable<"number"> = {
 		type: SbInjectorType.form,
 		source: {
 			name: "foo",
-			tagName: "foo",
 		},
 	},
 	test: [
@@ -63,7 +62,7 @@ test("[injectFromLookupTable] (injectors) returns a value for a mapped key", () 
 	expect(injectFromLookupTable(operation)()).toEqual(right(some(0.5)))
 })
 
-test("[injectFromLookupTable] (injectors) returns a failure for a non-existant key", () => {
+test("[injectFromLookupTable] (injectors) returns a failure for a non-existent key", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="foo" type="text" value="1000">

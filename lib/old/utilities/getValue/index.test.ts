@@ -44,8 +44,8 @@ test("gets the value from form inputs", () => {
 	expect(getValue({ name: "nope", tagName: "INPUT" })()).toStrictEqual(
 		right(none),
 	)
-	expect(getValue({ name: "bob", tagName: "UNKNOWN" })()).toStrictEqual(
-		left(["Form element `bob` not found."]),
+	expect(getValue({ name: "bob" })()).toStrictEqual(
+		left(["Form element at `[name=bob]` not found."]),
 	)
 })
 
@@ -82,8 +82,8 @@ test("gets the value from textareas", () => {
 	)
 })
 
-test("returns an error Left<Array<string>> on wrong element type", () => {
-	expect(getValue({ name: "button", tagName: "BUTTON" })()).toStrictEqual(
-		left(["Element `button` is not a recognized form element"]),
+test("returns an error Left<Array<string>> on bad selector", () => {
+	expect(getValue({ name: "button", tagName: "OUTPUT" })()).toStrictEqual(
+		left(["Form element at `OUTPUT[name=button]` not found."]),
 	)
 })
