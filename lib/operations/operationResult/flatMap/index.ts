@@ -1,6 +1,7 @@
-import { isLeft } from "@sitebender/fp/lib/either"
-import { OperationResult } from "../types"
-import { isNone } from "@sitebender/fp/lib/option"
+import type { OperationResult } from "../types"
+
+import isLeft from "@sitebender/fp/lib/either/isLeft"
+import isNone from "@sitebender/fp/lib/option/isNone"
 
 type FlatMap = <A, B>(
 	f: (a: A) => OperationResult<B>,

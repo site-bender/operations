@@ -1,15 +1,18 @@
-import fromNullable from "@sitebender/fp/lib/option/fromNullable"
-import map from "@sitebender/fp/lib/option/map"
-import right from "@sitebender/fp/lib/either/right"
-import { default as mapEither } from "@sitebender/fp/lib/either/map"
-import flatMap from "@sitebender/fp/lib/either/flatMap"
-import { OperationResult } from "../old/operations/operationResult/types"
-import { SbConditionalOperation } from "../types"
+import type { OperationResult } from "../operations/operationResult/types"
+import type { SbConditionalOperation } from "../types"
+import type { Option } from "@sitebender/fp/lib/option"
+
 import castValue from "../utilities/castValue"
-import pipe from "@sitebender/fp/lib/functions/pipe"
-import some from "@sitebender/fp/lib/option/some"
-import { Option, getOrElse, none } from "@sitebender/fp/lib/option"
+import flatMap from "@sitebender/fp/lib/either/flatMap"
+import fromNullable from "@sitebender/fp/lib/option/fromNullable"
+import getOrElse from "@sitebender/fp/lib/option/getOrElse"
 import liftConditional from "../operations/conditional/liftConditional"
+import map from "@sitebender/fp/lib/option/map"
+import none from "@sitebender/fp/lib/option/none"
+import pipe from "@sitebender/fp/lib/functions/pipe"
+import right from "@sitebender/fp/lib/either/right"
+import some from "@sitebender/fp/lib/option/some"
+import { default as mapEither } from "@sitebender/fp/lib/either/map"
 
 type MakeConditional = (
 	op: SbConditionalOperation,

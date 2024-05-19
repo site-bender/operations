@@ -1,11 +1,11 @@
 import type { SbRootOperation } from "../../../types"
 
 import { Option, none } from "@sitebender/fp/lib/option"
-import * as OpResult from "../../../old/operations/operationResult"
+import * as OpResult from "../../../operations/operationResult"
 import liftNumeric from "../../../old/operations/liftNumerical"
 import pipe from "@sitebender/fp/lib/functions/pipe"
 import { map } from "@sitebender/fp/lib/array"
-import { OperationResult } from "../../../old/operations/operationResult/types"
+import { OperationResult } from "../../../operations/operationResult/types"
 
 export type RootF = (
 	operation: SbRootOperation,

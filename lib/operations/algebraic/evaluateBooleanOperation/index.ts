@@ -1,8 +1,8 @@
-import type { SbAlgebraicOperation } from "../../../../types"
+import type { SbAlgebraicOperation } from "../../../types"
 
 import { Either, left } from "@sitebender/fp/lib/either"
-import and from "../../../../makeConditional/operators/algebraic/and"
-import or from "../../../../makeConditional/operators/algebraic/or"
+import and from "../../../makeConditional/operators/algebraic/and"
+import or from "../../../makeConditional/operators/algebraic/or"
 
 export type EvaluateBooleanOperations = (
 	o: SbAlgebraicOperation,

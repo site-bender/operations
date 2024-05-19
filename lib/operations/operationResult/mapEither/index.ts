@@ -1,6 +1,10 @@
-import { Either, isLeft, right } from "@sitebender/fp/lib/either"
-import { OperationResult } from "../types"
-import { isNone, some } from "@sitebender/fp/lib/option"
+import type { OperationResult } from "../types"
+import type { Either } from "@sitebender/fp/lib/either/types"
+
+import isLeft from "@sitebender/fp/lib/either/isLeft"
+import isNone from "@sitebender/fp/lib/option/isNone"
+import right from "@sitebender/fp/lib/either/right"
+import some from "@sitebender/fp/lib/option/some"
 
 type MapEither = <A, B>(
 	f: (a: A) => Either<string[], B>,
