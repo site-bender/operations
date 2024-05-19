@@ -1,4 +1,4 @@
-import { SbNumericOperation, type SbMaxOperation } from "../../../types"
+import { SbNumericOperation } from "../../../types"
 
 import { expect, test } from "vitest"
 import isLeft from "@sitebender/fp/lib/either/isLeft"
@@ -6,7 +6,6 @@ import left from "@sitebender/fp/lib/either/left"
 import right from "@sitebender/fp/lib/either/right"
 import none from "@sitebender/fp/lib/option/none"
 import some from "@sitebender/fp/lib/option/some"
-import add from "."
 import makeInjectedNumber from "../../../operations/injected/makeInjectedConstant/makeInjectedNumber"
 import injectedNumberArg from "../../../operations/injected/makeInjectedArgument/makeInjectedNumberArg"
 import max from "."

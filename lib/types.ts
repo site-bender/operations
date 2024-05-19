@@ -95,7 +95,7 @@ export interface SbInjectFromMap<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
 	type: typeof SbInjectorType.map
-	operand: SbInjectableOperationOfType<"string">
+	operand: Exclude<SbOperation, SbAlgebraicOperation>
 	column: SbInjectConstant<"number">
 	test: { [key: string]: Array<Reify<Type>> }
 }
