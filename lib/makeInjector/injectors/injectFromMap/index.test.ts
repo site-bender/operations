@@ -25,11 +25,12 @@ const operation: SbInjectFromMap<"string"> = {
 			name: "foo",
 		},
 	},
+	column: 1,
 	type: SbInjectorType.map,
 	test: {
-		red: "#f00",
-		green: "#0f0",
-		blue: "#00f",
+		red: ["#f00"],
+		green: ["#0f0"],
+		blue: ["#00f"],
 	},
 }
 

@@ -22,6 +22,7 @@ export const SbOperationTags = {
 	injector: "injectorOperation",
 	conditional: "conditionalOperation",
 	algebraic: "algebraicOperation",
+	ternary: "ternaryOperation",
 } as const
 
 export const SbInjectorType = {
@@ -95,7 +96,8 @@ export interface SbInjectFromMap<Type extends SbCastableValue>
 	injectedDataType: Type
 	type: typeof SbInjectorType.map
 	operand: SbInjectableOperationOfType<"string">
-	test: { [key: string]: Reify<Type> }
+	column: number
+	test: { [key: string]: Array<Reify<Type>> }
 }
 
 export interface SbTableLookupEntry<T extends SbCastableValue> {
@@ -104,15 +106,15 @@ export interface SbTableLookupEntry<T extends SbCastableValue> {
 	value: Reify<T>
 }
 
-export interface SbInjectFromLookupTable<Operation extends SbCastableValue>
+export interface SbInjectFromLookupTable<Type extends SbCastableValue>
 	extends SbInjectValueBase {
-	operation: Operation
+	injectedDataType: Type
 	type: typeof SbInjectorType.table
 	operand: Exclude<
-		SbInjectableOperationOfType<Operation>,
-		SbInjectFromLookupTable<Operation>
+		SbInjectableOperationOfType<Type>,
+		SbInjectFromLookupTable<Type>
 	>
-	test: Array<SbTableLookupEntry<Operation>>
+	test: Array<SbTableLookupEntry<Type>>
 }
 
 export type SbInjectableOperationOfType<T extends SbCastableValue> =
@@ -138,6 +140,7 @@ export const SbNumericOperations = {
 	ceiling: "ceiling",
 	divide: "divide",
 	floor: "floor",
+	max: "max",
 	multiply: "multiply",
 	negate: "negate",
 	power: "power",
@@ -156,7 +159,14 @@ export type SbAllowedNumericOperands =
 	| SbInjectArgument<"number">
 	| SbInjectConstant<"number">
 	| SbInjectFromForm<"number">
+	| SbInjectFromMap<"number">
 	| SbNumericOperation
+
+export interface SbMaxOperation extends SbNumericBase {
+	this: SbAllowedNumericOperands
+	that: SbAllowedNumericOperands
+	operation: typeof SbNumericOperations.max
+}
 
 export interface SbAddOperation extends SbNumericBase {
 	addends: Array<SbAllowedNumericOperands>
@@ -221,6 +231,7 @@ export interface SbTruncateOperation extends SbNumericBase {
 }
 
 export type SbNumericOperation =
+	| SbMaxOperation
 	| SbAddOperation
 	| SbCeilingOperation
 	| SbDivideOperation
@@ -301,8 +312,17 @@ export interface SbOrOperation extends SbAlgebraicBase {
 
 export type SbAlgebraicOperation = SbAndOperation | SbOrOperation
 
+export interface SbTernaryOperation {
+	_tag: typeof SbOperationTags.ternary
+	//injectedDataType: Type
+	condition: SbConditionalOperation
+	onTrue: SbAllowedNumericOperands
+	onFalse: SbAllowedNumericOperands
+}
+
 export type SbOperation =
 	| SbAlgebraicOperation
 	| SbConditionalOperation
 	| SbInjectableOperation
 	| SbNumericOperation
+	| SbTernaryOperation
