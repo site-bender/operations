@@ -2,16 +2,19 @@ import getFromCheckbox from "./getFromCheckbox"
 import getFromInput from "./getFromInput"
 import getFromSelect from "./getFromSelect"
 import getFromTextArea from "./getFromTextArea"
-import { Lazy } from "@sitebender/fp/lib/lazy"
 import { left, right } from "@sitebender/fp/lib/either"
 import { isNullish } from "@sitebender/fp/lib/predicates"
 import { SbFormInjectorData } from "../../../types"
-import { OperationResult } from "../../../operations/operationResult/types"
+import getFromInnerHtml from "./getFromInnerHtml"
+import getSelector from "./getSelector"
+import { Lazy } from "@sitebender/fp/lib/lazy"
+import type { OperationResult } from "../../../operations/operationResult/types"
 
 export type NullableInput =
 	| HTMLInputElement
 	| HTMLSelectElement
 	| HTMLTextAreaElement
+	| HTMLElement
 	| null
 
 export type GetValue = (
@@ -19,15 +22,16 @@ export type GetValue = (
 ) => Lazy<OperationResult<string>>
 
 const getValue: GetValue = source => () => {
-	const element: NullableInput = document.querySelector(`[name=${source.name}]`)
+	const selector = getSelector(source)
+	const element: NullableInput = document.querySelector(selector)
 
 	if (isNullish(element)) {
-		return left([`Form element \`${source.name}\` not found.`])
+		return left([`Form element at \`${selector}\` not found.`])
 	}
 
 	switch (element.tagName) {
 		case "INPUT":
-			return element?.type === "checkbox"
+			return (element as HTMLInputElement)?.type === "checkbox"
 				? right(getFromCheckbox(element as HTMLInputElement)())
 				: right(getFromInput(element as HTMLInputElement)())
 		case "SELECT":
@@ -35,9 +39,10 @@ const getValue: GetValue = source => () => {
 		case "TEXTAREA":
 			return right(getFromTextArea(element as HTMLTextAreaElement)())
 		default:
-			return left([
-				`Element \`${source.name}\` is not a recognized form element`,
-			])
+			return right(getFromInnerHtml(element as HTMLElement)())
+		// return left([
+		// 	`Element \`${source.name}\` is not a recognized form element`,
+		// ])
 	}
 }
 

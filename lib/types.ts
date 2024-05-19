@@ -25,12 +25,13 @@ export const SbOperationTags = {
 } as const
 
 export const SbInjectorType = {
-	constant: "constant",
 	argument: "argument",
+	constant: "constant",
+	element: "element",
 	form: "form",
-	session: "session",
 	local: "local",
 	map: "map",
+	session: "session",
 	table: "table",
 } as const
 
@@ -56,15 +57,22 @@ export interface SbInjectArgument<Type extends SbCastableValue>
 export interface SbFormInjectorData {
 	form?: string
 	id?: string
-	name: string
+	name?: string
 	selector?: string
-	tagName: string
+	tagName?: string
 }
 
 export interface SbInjectFromForm<Type extends SbCastableValue>
 	extends SbInjectValueBase {
 	injectedDataType: Type
 	type: typeof SbInjectorType.form
+	source: SbFormInjectorData
+}
+
+export interface SbInjectFromElement<Type extends SbCastableValue>
+	extends SbInjectValueBase {
+	injectedDataType: Type
+	type: typeof SbInjectorType.element
 	source: SbFormInjectorData
 }
 

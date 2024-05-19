@@ -23,7 +23,6 @@ const operation: SbInjectFromMap<"string"> = {
 		type: SbInjectorType.form,
 		source: {
 			name: "foo",
-			tagName: "foo",
 		},
 	},
 	type: SbInjectorType.map,
