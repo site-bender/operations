@@ -1,13 +1,16 @@
+import type { OperationResult } from "../../../operations/operationResult/types"
+import type { SbInjectFromLookupTable } from "../../../types"
+import type { Option } from "@sitebender/fp/lib/option/types"
+
+import * as OpResult from "../../../operations/operationResult"
 import * as e from "@sitebender/fp/lib/either"
 import * as o from "@sitebender/fp/lib/option"
-import { pipe } from "@sitebender/fp/lib/functions"
-import { Option, none, some } from "@sitebender/fp/lib/option"
 import getComparator from "../../../old/logical/compareNumbers/getComparator"
-import liftNumeric from "../../../old/operations/liftNumerical"
-import { OperationResult } from "../../../operations/operationResult/types"
-import * as OpResult from "../../../operations/operationResult"
 import liftInjectable from "../../../old/operations/liftInjectable"
-import { SbInjectFromLookupTable } from "../../../types"
+import liftNumeric from "../../../old/operations/liftNumerical"
+import none from "@sitebender/fp/lib/option/none"
+import pipe from "@sitebender/fp/lib/functions/pipe"
+import some from "@sitebender/fp/lib/option/some"
 
 type TableLookup = (
 	op: SbInjectFromLookupTable<"number">,

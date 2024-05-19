@@ -1,9 +1,12 @@
-import { Option, fromNullable, none } from "@sitebender/fp/lib/option"
-import { pipe } from "@sitebender/fp/lib/functions"
-import { SbCastableValue, SbInjectFromMap, Reify } from "../../../types"
-import { OperationResult } from "../../../operations/operationResult/types"
+import type { OperationResult } from "../../../operations/operationResult/types"
+import type { Option } from "@sitebender/fp/lib/option/types"
+import type { SbCastableValue, SbInjectFromMap, Reify } from "../../../types"
+
 import * as OpResult from "../../../operations/operationResult"
+import fromNullable from "@sitebender/fp/lib/option/fromNullable"
 import liftInjectable from "../../../old/operations/liftInjectable"
+import none from "@sitebender/fp/lib/option/none"
+import pipe from "@sitebender/fp/lib/functions/pipe"
 
 type InjectFromMapF = <T extends SbCastableValue>(
 	op: SbInjectFromMap<T>,

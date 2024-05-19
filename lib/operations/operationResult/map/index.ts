@@ -1,7 +1,8 @@
-import { pipe } from "@sitebender/fp/lib/functions"
-import { map as mapOption } from "@sitebender/fp/lib/option"
-import { map as mapEither } from "@sitebender/fp/lib/either"
-import { OperationResult } from "../types"
+import type { OperationResult } from "../types"
+
+import pipe from "@sitebender/fp/lib/functions/pipe"
+import { default as mapEither } from "@sitebender/fp/lib/either/map"
+import { default as mapOption } from "@sitebender/fp/lib/option/map"
 
 type Map = <A, B>(
 	f: (a: A) => B,

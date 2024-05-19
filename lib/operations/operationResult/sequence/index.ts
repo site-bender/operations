@@ -1,15 +1,18 @@
-import { pipe } from "@sitebender/fp/lib/functions"
-import { OperationResult } from "../types"
-import { e, o } from "@sitebender/fp"
+import type { OperationResult } from "../types"
+
+import pipe from "@sitebender/fp/lib/functions/pipe"
+import { default as sequenceOption } from "@sitebender/fp/lib/option/sequence"
+import map from "@sitebender/fp/lib/either/map"
+import traverseAccumulate from "@sitebender/fp/lib/either/traverseAccumulate"
 
 const sequence = <A>(rs: Array<OperationResult<A>>) => {
 	return pipe(
 		rs,
 		pipe(
-			(a: e.Either<string[], o.Option<A>>) => a,
-			e.traverseAccumulate<string[]>((a, b) => [...a, ...b]),
+			(a: OperationResult<A>) => a,
+			traverseAccumulate<string[]>((a, b) => [...a, ...b]),
 		),
-		e.map(o.sequence),
+		map(sequenceOption),
 	)
 }
 

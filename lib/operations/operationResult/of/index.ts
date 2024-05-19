@@ -1,6 +1,6 @@
-import { right } from "@sitebender/fp/lib/either"
-import { OperationResult } from "../types"
-import { some } from "@sitebender/fp/lib/option"
+import type { OperationResult } from "../types"
+import right from "@sitebender/fp/lib/either/right"
+import some from "@sitebender/fp/lib/option/some"
 
 type Of = <A>(a: A) => OperationResult<A>
 
