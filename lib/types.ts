@@ -96,7 +96,7 @@ export interface SbInjectFromMap<Type extends SbCastableValue>
 	injectedDataType: Type
 	type: typeof SbInjectorType.map
 	operand: SbInjectableOperationOfType<"string">
-	column: number
+	column: SbInjectConstant<"number">
 	test: { [key: string]: Array<Reify<Type>> }
 }
 
@@ -314,7 +314,6 @@ export type SbAlgebraicOperation = SbAndOperation | SbOrOperation
 
 export interface SbTernaryOperation {
 	_tag: typeof SbOperationTags.ternary
-	//injectedDataType: Type
 	condition: SbConditionalOperation
 	onTrue: SbAllowedNumericOperands
 	onFalse: SbAllowedNumericOperands

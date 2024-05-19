@@ -13,19 +13,19 @@ const castValue: CastValue = type => value => {
 			try {
 				const parsed = parseInt(value)
 				return Number.isNaN(parsed)
-					? left([`Failed to parse ${value} to integer`])
+					? left([`Failed to parse ${value} to an integer`])
 					: right(parsed)
 			} catch (e) {
-				return left([`Failed to parse ${value} to integer : ${String(e)}`])
+				return left([`Failed to parse ${value} to an integer : ${String(e)}`])
 			}
 		case "number":
 			try {
 				const parsed = Number(value)
 				return Number.isNaN(parsed)
-					? left([`Failed to parse ${value} to number`])
+					? left([`Failed to parse ${value} to a number`])
 					: right(parsed)
 			} catch (e) {
-				return left([`Failed to parse ${value} to number : ${String(e)}`])
+				return left([`Failed to parse ${value} to a number : ${String(e)}`])
 			}
 		case "string":
 			return right(String(value))

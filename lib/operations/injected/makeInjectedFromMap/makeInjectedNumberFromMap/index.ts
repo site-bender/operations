@@ -1,4 +1,5 @@
 import {
+	SbInjectConstant,
 	SbInjectFromMap,
 	SbInjectableOperationOfType,
 	SbInjectorType,
@@ -6,7 +7,7 @@ import {
 } from "../../../../types"
 
 const injectedNumberFromMap = (o: {
-	column: number
+	column: SbInjectConstant<"number">
 	operand: SbInjectableOperationOfType<"string">
 	test: { [key: string]: Array<number> }
 }): SbInjectFromMap<"number"> => ({
