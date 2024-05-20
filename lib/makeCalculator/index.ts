@@ -1,5 +1,5 @@
 import { type OperationResult } from "../operations/operationResult/types"
-import { type SbNumericOperation } from "../types"
+import {type SbNumericOperation, SbTernaryOperation} from "../types"
 import { type Option } from "@sitebender/fp/lib/option/types"
 
 import castValue from "../utilities/castValue"
@@ -15,7 +15,7 @@ import some from "@sitebender/fp/lib/option/some"
 import { default as mapEither } from "@sitebender/fp/lib/either/map"
 
 type MakeCalculator = (
-	op: SbNumericOperation,
+	op: SbNumericOperation | SbTernaryOperation,
 ) => (value?: string) => OperationResult<number>
 
 const makeCalculator: MakeCalculator = op => input => {

@@ -10,6 +10,8 @@ import isInjectedNumberFromForm from "../../../operations/injected/isInjectedFro
 import evaluateInjectableOperationOfType from "../../../operations/injected/evaluateInjectableOperationOfType"
 import evaluateLookupOperation from "../compose/evaluateLookupOperation"
 import isInjectedNumberFromMap from "../../../operations/injected/isInjectedFromLookup/isInjectedNumberFromMap"
+import isTernaryOperation from "../../../operations/ternary/isTernaryOperation";
+import evaluateTernaryOperation from "../../../operations/ternary/evaluateTernaryOperation";
 
 export type LiftNumericF = (
 	input: Option<number>,
@@ -25,6 +27,9 @@ const liftNumeric: LiftNumericF = input => action => {
 
 	if (isInjectedNumberFromMap(action))
 		return evaluateLookupOperation(action)(input)
+
+	if (isTernaryOperation(action))
+		return evaluateTernaryOperation(action)(input)
 
 	return evaluateNumericOperation(action)(input)
 }
