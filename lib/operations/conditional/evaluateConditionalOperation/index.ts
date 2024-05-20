@@ -51,8 +51,8 @@ const evaluateConditionalNumericOperation: EvaluateConditionalNumericOperation =
 								? right(some(operand))
 								: left([`${operand} is not no less than ${test}`])
 						case "noMoreThan":
-							return isAtMost(operand)(test)
-								? right(some(operand))
+							const a = isAtMost(operand)(test)
+								return a ? right(some(operand))
 								: left([`${operand} is not no more than ${test}`])
 						default:
 							return error(op)

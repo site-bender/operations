@@ -18,10 +18,10 @@ const evaluateTernaryOperation: EvaluateTernaryOperation =
 		pipe(
 			input,
 			evaluateConditionalNumericOperation(op.condition),
-			pipe(
+			a => pipe(
 				() => op.onTrue,
 				match(() => op.onFalse),
-			),
+			)(a),
 			liftNumeric(input),
 		)
 

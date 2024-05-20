@@ -1,5 +1,6 @@
 import {
 	type SbInjectFromMap,
+	SbInjectorType,
 	SbNumericOperations,
 	SbOperationTags,
 	SbTernaryOperation,
@@ -16,10 +17,11 @@ import { JSDOM } from "jsdom"
 import { expect, test } from "vitest"
 import evaluateInjectableOperation from "../operations/injected/evaluateInjectableOperation"
 import { none } from "@sitebender/fp/lib/option"
-import makeLessThan from "../operations/conditional/lessThan/makelessThan";
-import makeCalculator from "../makeCalculator";
+import makeCalculator from "../makeCalculator"
+import makeNoMoreThan from "../operations/conditional/noMoreThan/makeNoMoreThan"
+import makeInjectedNumberFromMap from "../operations/injected/makeInjectedFromMap/makeInjectedNumberFromMap"
 
-test.skip("x > 0 ? max(y * x * j * k, 150) : 0", () => {
+test("x > 0 ? max(y * x * j * k, 150) : 0", () => {
 	const op = makeTernaryOperation({
 		condition: makeMoreThan({
 			operand: makeInjectedNumber(1),
@@ -47,11 +49,12 @@ test.skip("x > 0 ? max(y * x * j * k, 150) : 0", () => {
 	expect(result).toEqual(right(some(150)))
 })
 
-test.skip("publicLiabilityLookup", () => {
-	const formula = "lookup(publicLiabilityLimit <= 1_000_000 ? 1_000_000 : publicLiabilityLimit), PublicLiabilityTable, col2))"
+test("publicLiabilityLookup", () => {
+	const formula =
+		"lookup(publicLiabilityLimit <= 1_000_000 ? 1_000_000 : publicLiabilityLimit), PublicLiabilityTable, col2))"
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
-	<input name="publicLiabilityLimit" type="text" value="50000">
+	<input name="publicLiabilityLimit" type="text" value="5000000">
 `,
 	)
 
@@ -61,19 +64,14 @@ test.skip("publicLiabilityLookup", () => {
 		_tag: "injectorOperation",
 		injectedDataType: "number",
 		type: "map",
-		column: makeInjectedNumber(2),
+		column: makeInjectedNumber(0),
 		operand: makeTernaryOperation({
-			condition: makeLessThan({
+			condition: makeNoMoreThan({
 				operand: makeInjectedNumberFromForm({ name: "publicLiabilityLimit" }),
 				test: makeInjectedNumber(1_000_000),
 			}),
-			onTrue: {
-				_tag: SbOperationTags.numeric,
-				operation: SbNumericOperations.subtract,
-				minuend: makeInjectedNumberFromForm({ name: "publicLiabilityLimit" }),
-				subtrahend: makeInjectedNumber(1_000_000),
-			},
-			onFalse: makeInjectedNumber(0),
+			onTrue: makeInjectedNumber(1_000_000),
+			onFalse: makeInjectedNumberFromForm({ name: "publicLiabilityLimit" }),
 		}),
 		test: {
 			"0": [0],
@@ -93,10 +91,10 @@ test.skip("publicLiabilityLookup", () => {
 	console.log(formula)
 	console.log(JSON.stringify(op, null, 2))
 	const result = evaluateInjectableOperation(op)(none)
-	expect(result).toEqual(right(some(2)))
+	expect(result).toEqual(right(some(500)))
 })
 
-test.skip("ternary", () => {
+test("ternary", () => {
 	const dom = new JSDOM(
 		`<!DOCTYPE html>
 	<input name="publicLiabilityLimit" type="text" value="50000">
@@ -142,3 +140,43 @@ test.skip("ternary", () => {
 
 	expect(makeCalculator(calculation)()).toEqual(right(some(50_000)))
 })
+
+test("limitMultiplier", () => {
+	const formula =
+		"lookup(professionalIndemnityLimit, LimitOfIndemnityTable, col2)"
+	const dom = new JSDOM(
+		`<!DOCTYPE html>
+	<input name="publicLiabilityLimit" type="text" value="1000000">
+`,
+	)
+
+	globalThis.document = dom.window.document
+
+	const operation = makeInjectedNumberFromMap({
+		column: makeInjectedNumber(0),
+		operand: {
+			_tag: SbOperationTags.injector,
+			type: SbInjectorType.form,
+			injectedDataType: "string",
+			source: {
+				name: "publicLiabilityLimit",
+			},
+		},
+		test: {
+			"0": [0],
+			"250000": [375],
+			"500000": [750],
+			"1000000": [1500],
+			"2000000": [2250],
+			"3000000": [3000],
+			"4000000": [3750],
+		},
+	})
+
+	console.log(formula)
+	console.log(JSON.stringify(operation, null, 2))
+	const result = evaluateInjectableOperation(operation)(none)
+	expect(result).toEqual(right(some(1500)))
+})
+
+test("excessMultiplier", () => {})
