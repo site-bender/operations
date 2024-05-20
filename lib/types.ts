@@ -161,6 +161,7 @@ export type SbAllowedNumericOperands =
 	| SbInjectFromForm<"number">
 	| SbInjectFromMap<"number">
 	| SbNumericOperation
+  | SbTernaryOperation
 
 export interface SbMaxOperation extends SbNumericBase {
 	this: SbAllowedNumericOperands
