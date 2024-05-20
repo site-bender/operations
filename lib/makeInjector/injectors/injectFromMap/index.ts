@@ -40,7 +40,7 @@ const injectFromMap: InjectFromMapF =
 				OpResult.fromOption(
 					pipe(
 						fromNullable(op.test[String(key)]),
-						flatMap(row => fromNullable(row[(column as number) - 1])),
+						flatMap(row => fromNullable(row[column as number])),
 					),
 				),
 			),

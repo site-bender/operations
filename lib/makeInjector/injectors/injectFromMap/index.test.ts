@@ -26,7 +26,7 @@ const operation: SbInjectFromMap<"string"> = {
 			name: "foo",
 		},
 	},
-	column: makeInjectedNumber(1),
+	column: makeInjectedNumber(0),
 	type: SbInjectorType.map,
 	test: {
 		red: ["#f00"],
